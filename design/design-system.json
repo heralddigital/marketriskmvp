@@ -911,6 +911,237 @@
       "Use percentage-based coordinates for responsive scaling of SVG decorations."
     ]
   },
+  "analyticsBackendOverview": {
+    "intent": "Analytics page is a comprehensive backend dashboard that combines key metrics, revenue data, traffic analysis, and recent activity. Uses the same editorial layout as the rest of the app with max-w-[1200px] container and 48px padding.",
+    "pageStructure": {
+      "container": {
+        "classes": "bg-surface-paper min-h-[calc(100vh-72px)]",
+        "innerClasses": "max-w-[1200px] mx-auto",
+        "padding": "48px (p-12 equivalent)"
+      },
+      "sections": [
+        {
+          "name": "Welcome Header",
+          "spacing": "mb-8 (32px)",
+          "components": ["title", "subtitle", "timeRange selector", "export button"]
+        },
+        {
+          "name": "KPI Cards",
+          "layout": "4-column grid (grid-cols-4)",
+          "gap": "16px",
+          "spacing": "mb-6 (24px)"
+        },
+        {
+          "name": "Main Content",
+          "layout": "2-column grid (2fr 1fr)",
+          "gap": "20px",
+          "spacing": "mb-5 (20px)"
+        },
+        {
+          "name": "Secondary Row",
+          "layout": "3-column grid (grid-cols-3)",
+          "gap": "20px",
+          "spacing": "mb-5 (20px)"
+        },
+        {
+          "name": "Bottom Row",
+          "layout": "2-column grid (grid-cols-2)",
+          "gap": "20px"
+        }
+      ]
+    },
+    "components": {
+      "WelcomeHeader": {
+        "description": "Dashboard header with greeting, title, time range selector, and export button.",
+        "kicker": {
+          "text": "Welcome back",
+          "classes": "text-sm text-text-muted mb-1"
+        },
+        "title": {
+          "text": "Overview Dashboard",
+          "classes": "text-[32px] font-semibold text-text-primary",
+          "inlineStyle": { "letterSpacing": "-0.5px" }
+        },
+        "subtitle": {
+          "classes": "text-sm text-text-secondary"
+        },
+        "actions": {
+          "container": { "classes": "flex items-center gap-3" },
+          "timeRangeSelect": {
+            "classes": "text-sm bg-white border border-border-subtle rounded-lg px-3.5 py-2.5 text-text-primary cursor-pointer"
+          },
+          "exportButton": {
+            "classes": "px-4.5 py-2.5 bg-brand-mughal-green text-white rounded-lg font-medium text-sm border-none cursor-pointer",
+            "hover": "bg-brand-mughal-green-2"
+          }
+        }
+      },
+      "BackendMetricCard": {
+        "description": "Large prominent KPI card for top-level metrics (revenue, users, conversion, session time).",
+        "container": {
+          "classes": "bg-white rounded-xl p-5 border border-border-subtle cursor-pointer",
+          "hover": "translateY(-4px) shadow-lg",
+          "transition": "all 0.4s cubic-bezier(0.2, 0, 0, 1)"
+        },
+        "header": {
+          "classes": "flex items-start justify-between mb-3",
+          "label": {
+            "classes": "text-[13px] text-text-muted font-medium"
+          },
+          "badge": {
+            "classes": "text-xs font-semibold px-2 py-1 rounded-md",
+            "variants": {
+              "up": "bg-state-success-soft text-state-success",
+              "down": "bg-state-danger-soft text-state-danger"
+            }
+          }
+        },
+        "value": {
+          "classes": "text-[28px] font-semibold text-text-primary",
+          "inlineStyle": { "letterSpacing": "-0.5px" }
+        },
+        "usageExample": [
+          { "label": "Total Revenue", "value": "$24,580", "change": "+12.5%", "isUp": true },
+          { "label": "Active Users", "value": "8,249", "change": "+8.2%", "isUp": true },
+          { "label": "Conversion Rate", "value": "3.24%", "change": "+0.8%", "isUp": true },
+          { "label": "Avg. Session", "value": "4m 12s", "change": "-0.3%", "isUp": false }
+        ]
+      },
+      "QuickStatRow": {
+        "description": "Compact stat row with label, value, and trend indicator. Used in Quick Stats panel.",
+        "container": {
+          "classes": "flex items-center justify-between py-2.5 border-b border-border-subtle"
+        },
+        "label": {
+          "classes": "text-[13px] text-text-secondary flex-1"
+        },
+        "right": {
+          "classes": "flex items-center gap-3",
+          "value": {
+            "classes": "text-base font-semibold text-text-primary"
+          },
+          "trend": {
+            "classes": "text-xs font-medium",
+            "variants": {
+              "up": "text-state-success",
+              "down": "text-state-danger"
+            }
+          }
+        },
+        "usageExample": [
+          { "label": "Page Views", "value": "124.5K", "trend": "+18%", "isUp": true },
+          { "label": "Unique Visitors", "value": "42.1K", "trend": "+12%", "isUp": true },
+          { "label": "Bounce Rate", "value": "32.8%", "trend": "-5%", "isUp": true },
+          { "label": "Avg. Order Value", "value": "$84.50", "trend": "+7%", "isUp": true }
+        ]
+      },
+      "ProductRow": {
+        "description": "Product performance row showing name, sales count, and revenue.",
+        "container": {
+          "classes": "flex items-center justify-between px-3 py-2.5 bg-surface-bone rounded-lg"
+        },
+        "name": {
+          "classes": "text-[13px] font-medium text-text-primary flex-1"
+        },
+        "stats": {
+          "classes": "flex items-center gap-4",
+          "sales": {
+            "classes": "text-xs text-text-secondary"
+          },
+          "revenue": {
+            "classes": "text-sm font-semibold text-brand-mughal-green"
+          }
+        },
+        "usageExample": [
+          { "name": "Premium Plan", "sales": "1,234", "revenue": "$37K" },
+          { "name": "Starter Plan", "sales": "892", "revenue": "$18K" },
+          { "name": "Enterprise Plan", "sales": "234", "revenue": "$47K" },
+          { "name": "Add-on Services", "sales": "456", "revenue": "$9K" }
+        ]
+      },
+      "ActivityItem": {
+        "description": "Activity feed item with status indicator dot, action text, and timestamp.",
+        "container": {
+          "classes": "flex items-start gap-2.5"
+        },
+        "indicator": {
+          "classes": "w-2 h-2 rounded-full mt-1.5 flex-shrink-0",
+          "variants": {
+            "success": "bg-state-success",
+            "warning": "bg-[#F59E0B]",
+            "info": "bg-[#3B82F6]",
+            "default": "bg-text-muted"
+          }
+        },
+        "content": {
+          "action": {
+            "classes": "text-[13px] text-text-primary mb-0.5"
+          },
+          "timestamp": {
+            "classes": "text-xs text-text-muted"
+          }
+        },
+        "usageExample": [
+          { "action": "New user signup", "time": "2 min ago", "type": "success" },
+          { "action": "Payment received", "time": "12 min ago", "type": "success" },
+          { "action": "Support ticket opened", "time": "28 min ago", "type": "warning" },
+          { "action": "Plan upgraded", "time": "1 hour ago", "type": "success" },
+          { "action": "Invoice generated", "time": "2 hours ago", "type": "info" }
+        ]
+      },
+      "SystemStatusIndicator": {
+        "description": "Small status panel showing live system health with indicator dot.",
+        "container": {
+          "classes": "mt-5 px-4 py-4 bg-surface-bone rounded-lg"
+        },
+        "header": {
+          "classes": "flex items-center gap-2 mb-2",
+          "dot": {
+            "classes": "w-2 h-2 bg-brand-pistachio rounded-full"
+          },
+          "label": {
+            "classes": "text-xs font-medium text-text-secondary"
+          }
+        },
+        "status": {
+          "classes": "text-[13px] text-text-primary"
+        }
+      }
+    },
+    "layoutPatterns": {
+      "kpiGrid": {
+        "description": "4-column grid for top-level KPI cards",
+        "classes": "grid grid-cols-4 gap-4 mb-6"
+      },
+      "mainContentGrid": {
+        "description": "Asymmetric 2-column grid: wider chart on left, stats panel on right",
+        "classes": "grid grid-cols-[2fr_1fr] gap-5 mb-5"
+      },
+      "secondaryGrid": {
+        "description": "3-column grid for products, traffic, activity",
+        "classes": "grid grid-cols-3 gap-5 mb-5"
+      },
+      "bottomGrid": {
+        "description": "Equal 2-column grid for user growth and top pages",
+        "classes": "grid grid-cols-2 gap-5"
+      }
+    },
+    "aiRules": {
+      "buildChecklist": [
+        "Use standard container (max-w-[1200px] mx-auto) with 48px padding",
+        "Maintain generous spacing between sections (20-32px gaps)",
+        "Use BackendMetricCard for top KPIs with hover animations",
+        "Keep all corners at 4px (rounded-xl, rounded-lg)",
+        "Use token colors only; no ad-hoc hex values",
+        "Ensure proper hierarchy: large header → KPI cards → detailed sections"
+      ],
+      "responsiveness": [
+        "KPI grid collapses to 2 columns on tablet, 1 on mobile",
+        "Main content grid stacks vertically on mobile",
+        "Secondary 3-column grid becomes 1 column on mobile"
+      ]
+    }
+  },
   "blog": {
     "intent": "Blog UI should feel like an extension of the app: editorial, spacious, token-driven, and calm. Use the same container width, paper canvas, subtle borders, and 4px corners.",
     "entryPoints": [

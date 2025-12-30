@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "meta": {
     "name": "MarketRisk — Editorial Green Brand System",
-    "version": "1.0.0",
-    "lastUpdated": "2025-12-29",
+    "version": "1.1.0",
+    "lastUpdated": "2025-12-30",
     "intent": "High-level design system guidelines that allow an AI (and humans) to reliably recreate the visual style shown in the attached brand guideline screenshots across web + mobile UI.",
     "brandName": "MarketRisk",
     "styleSummary": [
@@ -613,6 +613,58 @@
           "mobile": 24
         }
       }
+    },
+    "backendOverviewDashboard": {
+      "notes": "Analytics/backend overview page: a comprehensive dashboard combining metrics, charts, and activity feeds in a single-page layout. No sidebar navigation; uses standard container width.",
+      "container": {
+        "maxWidthPx": 1200,
+        "paddingPx": 48,
+        "bg": "brand.paper"
+      },
+      "structure": [
+        {
+          "section": "Welcome Header",
+          "purpose": "Greet user, show page title, provide time range controls",
+          "spacing": "marginBottomPx: 32"
+        },
+        {
+          "section": "KPI Cards (4-column)",
+          "purpose": "Top-level business metrics at a glance",
+          "layout": "grid, 4 equal columns",
+          "spacing": "gapPx: 16, marginBottomPx: 24",
+          "metrics": ["Total Revenue", "Active Users", "Conversion Rate", "Avg. Session"]
+        },
+        {
+          "section": "Main Content (2-column asymmetric)",
+          "purpose": "Primary chart + quick stats panel",
+          "layout": "grid, 2fr + 1fr columns",
+          "spacing": "gapPx: 20, marginBottomPx: 20",
+          "components": ["Revenue Overview Chart", "Quick Stats + System Status"]
+        },
+        {
+          "section": "Secondary Row (3-column)",
+          "purpose": "Product performance, traffic sources, recent activity",
+          "layout": "grid, 3 equal columns",
+          "spacing": "gapPx: 20, marginBottomPx: 20",
+          "components": ["Top Products", "Traffic Sources Donut", "Activity Feed"]
+        },
+        {
+          "section": "Bottom Row (2-column)",
+          "purpose": "User growth trends and top pages",
+          "layout": "grid, 2 equal columns",
+          "spacing": "gapPx: 20",
+          "components": ["User Growth Bars", "Top Pages Table"]
+        }
+      ],
+      "designRules": [
+        "Use white cards for all content sections (no dark panels on this page)",
+        "Maintain consistent 16-20px card padding",
+        "All cards use border-subtle, no shadows by default",
+        "Hover states on cards: subtle lift + soft shadow",
+        "Use existing chart components (SimpleBarChart, DonutChart, PerformanceBar)",
+        "Status indicators use green (success), amber (warning), blue (info)",
+        "Keep text hierarchy: 32px page title, 18px section titles, 16px card titles"
+      ]
     }
   },
   "brand": {
@@ -736,6 +788,74 @@
         "Prefer clean bars/lines with rounded ends.",
         "Use mughal green for primary series; pistachio for secondary; bone for background tracks.",
         "Avoid heavy gridlines; if needed, use very subtle lines (`border.subtle`)."
+      ]
+    },
+    "BackendMetricCard": {
+      "description": "Large KPI card for backend overview dashboard. More prominent than standard metric cards with hover animations.",
+      "style": {
+        "bg": "surface.primary",
+        "radius": "radii.tokensPx.xl",
+        "paddingPx": 20,
+        "border": "border.subtle",
+        "shadow": "none (hover: elevation.shadowTokens.lg)"
+      },
+      "content": [
+        "Label: text 13px, color text.muted, medium weight",
+        "Value: text 28px, color text.primary, semibold weight, -0.5px letter-spacing",
+        "Badge: small pill showing change percentage, success/danger colors"
+      ],
+      "animation": {
+        "hover": "translateY(-4px), add shadow",
+        "duration": "0.4s",
+        "easing": "cubic-bezier(0.2, 0, 0, 1)"
+      }
+    },
+    "QuickStatRow": {
+      "description": "Compact stat row for Quick Stats panel. Label + value + trend in a single row.",
+      "style": {
+        "paddingPx": { "y": 10, "x": 0 },
+        "border": "bottom border-subtle (except last item)"
+      },
+      "content": [
+        "Label: text 13px, color text.secondary",
+        "Value: text 16px, color text.primary, semibold",
+        "Trend: text 12px, color based on direction (success/danger)"
+      ]
+    },
+    "ProductRow": {
+      "description": "Product performance row showing name, sales, and revenue on bone background.",
+      "style": {
+        "bg": "surface.bone",
+        "radius": "radii.tokensPx.lg",
+        "paddingPx": { "y": 10, "x": 12 }
+      },
+      "content": [
+        "Name: text 13px, color text.primary, medium weight",
+        "Sales: text 12px, color text.secondary (e.g., '1,234 sales')",
+        "Revenue: text 14px, color brand.mughalGreen, semibold (e.g., '$37K')"
+      ]
+    },
+    "ActivityItem": {
+      "description": "Activity feed item with status indicator dot and timestamp.",
+      "style": {
+        "gap": "10px between dot and text"
+      },
+      "content": [
+        "Indicator dot: 8px circle, colors: success (green), warning (amber), info (blue)",
+        "Action text: text 13px, color text.primary",
+        "Timestamp: text 12px, color text.muted"
+      ]
+    },
+    "SystemStatusIndicator": {
+      "description": "Small panel showing system operational status with live indicator.",
+      "style": {
+        "bg": "surface.bone",
+        "radius": "radii.tokensPx.lg",
+        "paddingPx": 16
+      },
+      "content": [
+        "Header with live dot (pistachio green) + label",
+        "Status text: 'All systems operational'"
       ]
     }
   },
