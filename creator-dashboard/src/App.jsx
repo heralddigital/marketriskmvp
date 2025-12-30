@@ -1396,6 +1396,9 @@ function SettingsPage({ colorTheme, onChangeColorTheme }) {
                         { value: 'risk-red', label: 'Risk Red' },
                         { value: 'mint-citrus', label: 'Mint Citrus' },
                         { value: 'sage-forest', label: 'Sage Forest' },
+                        { value: 'ocean-blue', label: 'Ocean Blue' },
+                        { value: 'lavender-purple', label: 'Lavender Purple' },
+                        { value: 'crimson-rose', label: 'Crimson Rose' },
                       ]}
                     />
                   </div>

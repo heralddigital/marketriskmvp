@@ -162,6 +162,126 @@
   --accent-soft-weak: rgba(163, 177, 138, 0.06);
 }
 
+/* Color theme: Ocean Blue */
+[data-theme="ocean-blue"] {
+  /* Brand */
+  --brand-mughal-green: #175676;    /* baltic_blue DEFAULT */
+  --brand-mughal-green-2: #13465f;  /* baltic_blue 400 */
+  --brand-pistachio: #4ba3c3;       /* turquoise_surf DEFAULT */
+  --brand-pistachio-2: #3685a2;     /* turquoise_surf 400 */
+  --brand-bone: #c2e2f3;            /* baltic_blue 900 */
+  --brand-paper: #f5fafd;           /* pale_sky 900 */
+
+  /* Surfaces */
+  --surface-paper: var(--brand-paper);
+  --surface-bone: var(--brand-bone);
+  --surface-green-panel: var(--brand-mughal-green);
+  --surface-pistachio-panel: var(--brand-pistachio);
+
+  /* Text */
+  --text-primary: #051118;                 /* baltic_blue 100 */
+  --text-secondary: rgba(5, 17, 24, 0.70);
+  --text-muted: rgba(5, 17, 24, 0.52);
+  --text-link: var(--brand-mughal-green);
+
+  /* Borders */
+  --border-subtle: rgba(5, 17, 24, 0.08);
+  --border-default: rgba(5, 17, 24, 0.12);
+  --border-strong: rgba(5, 17, 24, 0.18);
+
+  /* Focus */
+  --focus-ring: rgba(75, 163, 195, 0.38);
+  --focus-ring-strong: rgba(75, 163, 195, 0.55);
+
+  /* Decorative motif */
+  --pattern-line-on-green: rgba(194, 226, 243, 0.28);
+  --pattern-line-on-bone: rgba(23, 86, 118, 0.16);
+
+  /* Misc UI tints */
+  --accent-soft: rgba(75, 163, 195, 0.12);
+  --accent-soft-weak: rgba(75, 163, 195, 0.06);
+}
+
+/* Color theme: Lavender Purple */
+[data-theme="lavender-purple"] {
+  /* Brand */
+  --brand-mughal-green: #6B5B95;    /* primary purple */
+  --brand-mughal-green-2: #524377;  /* primary darker */
+  --brand-pistachio: #B19CD9;       /* lavender accent */
+  --brand-pistachio-2: #9980C4;     /* lavender stronger */
+  --brand-bone: #E8E4F3;            /* pale lavender */
+  --brand-paper: #F7F5FB;           /* lightest lavender */
+
+  /* Surfaces */
+  --surface-paper: var(--brand-paper);
+  --surface-bone: var(--brand-bone);
+  --surface-green-panel: var(--brand-mughal-green);
+  --surface-pistachio-panel: var(--brand-pistachio);
+
+  /* Text */
+  --text-primary: #2D2640;
+  --text-secondary: rgba(45, 38, 64, 0.70);
+  --text-muted: rgba(45, 38, 64, 0.52);
+  --text-link: var(--brand-mughal-green);
+
+  /* Borders */
+  --border-subtle: rgba(45, 38, 64, 0.08);
+  --border-default: rgba(45, 38, 64, 0.12);
+  --border-strong: rgba(45, 38, 64, 0.18);
+
+  /* Focus */
+  --focus-ring: rgba(177, 156, 217, 0.38);
+  --focus-ring-strong: rgba(177, 156, 217, 0.55);
+
+  /* Decorative motif */
+  --pattern-line-on-green: rgba(232, 228, 243, 0.28);
+  --pattern-line-on-bone: rgba(107, 91, 149, 0.16);
+
+  /* Misc UI tints */
+  --accent-soft: rgba(177, 156, 217, 0.12);
+  --accent-soft-weak: rgba(177, 156, 217, 0.06);
+}
+
+/* Color theme: Crimson Rose */
+[data-theme="crimson-rose"] {
+  /* Brand */
+  --brand-mughal-green: #d62839;    /* classic_crimson DEFAULT */
+  --brand-mughal-green-2: #ac202e;  /* classic_crimson 400 */
+  --brand-pistachio: #ba324f;       /* rosewood DEFAULT */
+  --brand-pistachio-2: #94273f;     /* rosewood 400 */
+  --brand-bone: #f7d4d7;            /* classic_crimson 900 */
+  --brand-paper: #fef5f6;           /* lightest crimson */
+
+  /* Surfaces */
+  --surface-paper: var(--brand-paper);
+  --surface-bone: var(--brand-bone);
+  --surface-green-panel: var(--brand-mughal-green);
+  --surface-pistachio-panel: var(--brand-pistachio);
+
+  /* Text */
+  --text-primary: #2b080b;                 /* classic_crimson 100 */
+  --text-secondary: rgba(43, 8, 11, 0.70);
+  --text-muted: rgba(43, 8, 11, 0.52);
+  --text-link: var(--brand-mughal-green);
+
+  /* Borders */
+  --border-subtle: rgba(43, 8, 11, 0.08);
+  --border-default: rgba(43, 8, 11, 0.12);
+  --border-strong: rgba(43, 8, 11, 0.18);
+
+  /* Focus */
+  --focus-ring: rgba(186, 50, 79, 0.38);
+  --focus-ring-strong: rgba(186, 50, 79, 0.55);
+
+  /* Decorative motif */
+  --pattern-line-on-green: rgba(247, 212, 215, 0.28);
+  --pattern-line-on-bone: rgba(214, 40, 57, 0.16);
+
+  /* Misc UI tints */
+  --accent-soft: rgba(186, 50, 79, 0.12);
+  --accent-soft-weak: rgba(186, 50, 79, 0.06);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
