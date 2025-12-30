@@ -184,6 +184,7 @@ function App() {
     { key: 'home', label: 'Home' },
     { key: 'dashboard', label: 'Dashboard' },
     { key: 'analytics', label: 'Analytics' },
+    { key: 'blogIndex', label: 'Blog' },
     { key: 'settings', label: 'Settings' },
   ]
 
