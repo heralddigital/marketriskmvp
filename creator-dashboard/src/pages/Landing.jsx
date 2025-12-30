@@ -3,6 +3,7 @@ import SEO from '../components/SEO.jsx'
 import HeroV1 from '../components/HeroV1.jsx'
 import HeroV2 from '../components/HeroV2.jsx'
 import HeroV3 from '../components/HeroV3.jsx'
+import HeroV4 from '../components/HeroV4.jsx'
 
 function isValidEmail(email) {
   // Intentionally simple: enough for client-side validation without being overly strict.
@@ -205,6 +206,8 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1 
         return <HeroV2 {...commonProps} />
       case 3:
         return <HeroV3 {...commonProps} />
+      case 4:
+        return <HeroV4 {...commonProps} />
       default:
         return <HeroV1 {...commonProps} waitlistForm={<WaitlistForm />} />
     }
@@ -221,7 +224,7 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1 
         {/* Hero Version Selector - Always visible for testing */}
         <div className="flex gap-2 p-4 bg-surface-paper rounded-lg border border-border-subtle">
           <span className="text-sm text-text-secondary mr-2">Hero Version:</span>
-          {[1, 2, 3].map((v) => (
+          {[1, 2, 3, 4].map((v) => (
             <button
               key={v}
               onClick={() => setCurrentHeroVersion(v)}
@@ -239,7 +242,7 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1 
         {/* Hero Section */}
         {renderHero()}
 
-        {/* Waitlist Section (shown below hero for V2 and V3, V1 has it inline) */}
+        {/* Waitlist Section (shown below hero for V2, V3, and V4, V1 has it inline) */}
         {currentHeroVersion !== 1 && (
           <section id="waitlist" className="bg-brand-mughal-green rounded-2xl p-8">
             <div className="max-w-2xl mx-auto">
