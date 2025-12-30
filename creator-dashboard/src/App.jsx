@@ -979,7 +979,7 @@ function TestimonialCard({ quote, name, role }) {
 function PricingCard({ highlight, name, price, period, description, features, cta, onCta }) {
   return (
     <div
-      className={`p-6 rounded-xl border relative ${
+      className={`p-6 rounded-xl border relative flex flex-col h-full ${
         highlight ? 'bg-brand-mughal-green text-white border-border-inverse-subtle' : 'bg-white border-border-subtle'
       }`}
     >
@@ -1003,7 +1003,7 @@ function PricingCard({ highlight, name, price, period, description, features, ct
         </div>
       </div>
 
-      <ul className="space-y-2 mb-6">
+      <ul className="space-y-2 mb-6 flex-grow">
         {features.map((f) => (
           <li key={f} className={`text-sm flex items-start gap-2 ${highlight ? 'text-text-inverse-muted' : 'text-text-secondary'}`}>
             <span className={`${highlight ? 'text-brand-pistachio' : 'text-brand-mughal-green'} mt-[2px]`}>•</span>
@@ -1015,7 +1015,7 @@ function PricingCard({ highlight, name, price, period, description, features, ct
       <button
         type="button"
         onClick={onCta}
-        className={`w-full px-6 py-3 rounded-lg font-medium text-sm transition-all duration-normal ${
+        className={`w-full px-6 py-3 rounded-lg font-medium text-sm transition-all duration-normal mt-auto ${
           highlight
             ? 'bg-white text-brand-mughal-green hover:shadow-sm'
             : 'bg-brand-mughal-green text-white hover:bg-brand-mughal-green-2'
