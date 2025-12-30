@@ -155,7 +155,7 @@ function App() {
       // ignore storage failures
     }
 
-    if (colorTheme === 'risk-red' || colorTheme === 'mint-citrus' || colorTheme === 'sage-forest') {
+    if (colorTheme === 'risk-red' || colorTheme === 'mint-citrus' || colorTheme === 'sage-forest' || colorTheme === 'ocean-blue' || colorTheme === 'lavender-purple' || colorTheme === 'crimson-rose') {
       document.documentElement.setAttribute('data-theme', colorTheme)
       document.body?.setAttribute?.('data-theme', colorTheme)
     } else {
