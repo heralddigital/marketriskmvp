@@ -288,6 +288,7 @@ function NavItem({ active, onClick, children }) {
 }
 
 function LandingPage({ onPrimaryCta }) {
+  const [isYearly, setIsYearly] = React.useState(false)
   
   return (
     <div className="space-y-12">
@@ -490,15 +491,46 @@ function LandingPage({ onPrimaryCta }) {
 
       {/* Pricing */}
       <section>
-        <div className="mb-6">
-          <p className="text-xs text-text-muted mb-2">Pricing</p>
-          <h2 className="text-2xl font-semibold text-text-primary" style={{ letterSpacing: '-0.3px' }}>
-            Simple plans that scale with you.
-          </h2>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+          <div>
+            <p className="text-xs text-text-muted mb-2">Pricing</p>
+            <h2 className="text-2xl font-semibold text-text-primary" style={{ letterSpacing: '-0.3px' }}>
+              Simple plans that scale with you.
+            </h2>
+          </div>
+          
+          {/* Billing Toggle */}
+          <div className="flex items-center gap-3 bg-surface-bone p-1.5 rounded-xl">
+            <button
+              type="button"
+              onClick={() => setIsYearly(false)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-normal ${
+                !isYearly
+                  ? 'bg-white text-text-primary shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary'
+              }`}
+            >
+              Monthly
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsYearly(true)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-normal flex items-center gap-2 ${
+                isYearly
+                  ? 'bg-white text-text-primary shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary'
+              }`}
+            >
+              Yearly
+              <span className="text-xs bg-brand-mughal-green text-white px-2 py-0.5 rounded-pill">
+                2 months free
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <PricingCard
             name="Free"
             price="€0"
@@ -510,8 +542,8 @@ function LandingPage({ onPrimaryCta }) {
           />
           <PricingCard
             name="Starter"
-            price="€39"
-            period="per month"
+            price={isYearly ? '€390' : '€39'}
+            period={isYearly ? 'per year' : 'per month'}
             description="For small portfolios."
             features={['20 CUI lookups / month', '10 CUI watchlist', 'Insolvency alerts', '5 PDF exports / month', '5 team users']}
             cta="Start Starter"
@@ -520,8 +552,8 @@ function LandingPage({ onPrimaryCta }) {
           <PricingCard
             highlight
             name="PRO"
-            price="€99"
-            period="per month"
+            price={isYearly ? '€990' : '€99'}
+            period={isYearly ? 'per year' : 'per month'}
             description="For active B2B sales."
             features={['Unlimited CUI lookups', '250 CUI watchlist', 'Real-time alerts', 'Court cases & tax debts', 'Unlimited exports', 'Custom team users']}
             cta="Start PRO"
@@ -537,13 +569,15 @@ function LandingPage({ onPrimaryCta }) {
             onCta={onPrimaryCta}
           />
         </div>
+      </section>
 
-        {/* Full Comparison Table */}
+      {/* Feature Comparison Table */}
+      <section>
         <div className="mb-6">
           <p className="text-xs text-text-muted mb-2">Feature Comparison</p>
-          <h3 className="text-xl font-semibold text-text-primary mb-4" style={{ letterSpacing: '-0.3px' }}>
+          <h2 className="text-2xl font-semibold text-text-primary" style={{ letterSpacing: '-0.3px' }}>
             Compare all features
-          </h3>
+          </h2>
         </div>
 
         <div className="overflow-x-auto">
