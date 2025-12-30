@@ -277,7 +277,7 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1 
           <BenefitCard
             title="Simple, transparent pricing"
             description="Self-serve upgrades, no credits, no “contact sales to see price”."
-            bullets={['Free plan to try', '€39 Starter for most teams', '€149 Pro for scale']}
+            bullets={['Free plan to try', '€39 Starter for small portfolios', '€99 PRO for active sales', 'Enterprise for high volume']}
           />
           <BenefitCard
             title="Mobile-first by default"

@@ -81,9 +81,9 @@ export default function HeroV1({ onViewDashboard, onScrollToWaitlist, waitlistFo
             </PrimaryButton>
             <SecondaryButton onClick={onViewDashboard}>View the product UI</SecondaryButton>
           </div>
-          <p className="text-text-inverse-muted text-xs mt-4">
-            Launching soon. Transparent pricing: Free / €39 / €149.
-          </p>
+            <p className="text-text-inverse-muted text-xs mt-4">
+              Launching soon. Transparent pricing: Free / €39 / €99 / Enterprise.
+            </p>
         </div>
 
         {/* Waitlist card */}

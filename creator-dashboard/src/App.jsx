@@ -491,73 +491,150 @@ function LandingPage({ onPrimaryCta }) {
 
       {/* Pricing */}
       <section>
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
-          <div>
-            <p className="text-xs text-text-muted mb-2">Pricing</p>
-            <h2 className="text-2xl font-semibold text-text-primary" style={{ letterSpacing: '-0.3px' }}>
-              Simple plans that scale with you.
-            </h2>
-          </div>
-          
-          {/* Billing Toggle */}
-          <div className="flex items-center gap-3 bg-surface-bone p-1.5 rounded-xl">
-            <button
-              type="button"
-              onClick={() => setIsYearly(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-normal ${
-                !isYearly
-                  ? 'bg-white text-text-primary shadow-sm'
-                  : 'text-text-secondary hover:text-text-primary'
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              type="button"
-              onClick={() => setIsYearly(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-normal flex items-center gap-2 ${
-                isYearly
-                  ? 'bg-white text-text-primary shadow-sm'
-                  : 'text-text-secondary hover:text-text-primary'
-              }`}
-            >
-              Yearly
-              <span className="text-xs bg-brand-mughal-green text-white px-2 py-0.5 rounded-pill">
-                2 months free
-              </span>
-            </button>
-          </div>
+        <div className="mb-6">
+          <p className="text-xs text-text-muted mb-2">Pricing</p>
+          <h2 className="text-2xl font-semibold text-text-primary" style={{ letterSpacing: '-0.3px' }}>
+            Simple plans that scale with you.
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <PricingCard
-            name="Starter"
-            price="Free"
-            period=""
-            description="For small teams getting clarity fast."
-            features={['Core dashboard', 'Exports', 'Email support']}
-            cta="Get started"
-            onCta={onPrimaryCta}
-          />
-          <PricingCard
-            highlight
-            name="Pro"
-            price={isYearly ? '€390' : '€39'}
-            period={isYearly ? 'per year' : 'per month'}
-            description="For teams that report weekly."
-            features={['Everything in Starter', 'Custom views', 'Priority support']}
-            cta="Start Pro"
-            onCta={onPrimaryCta}
-          />
-          <PricingCard
-            name="Enterprise"
-            price={isYearly ? '€1,490' : '€149'}
-            period={isYearly ? 'per year' : 'per month'}
-            description="For complex orgs and workflows."
-            features={['SSO/SAML', 'Dedicated onboarding', 'Security review']}
-            cta="Talk to sales"
-            onCta={onPrimaryCta}
-          />
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="text-left p-4 bg-surface-paper border-b border-border-subtle text-sm font-semibold text-text-primary">Feature</th>
+                <th className="text-center p-4 bg-white border-b border-border-subtle text-sm font-semibold text-text-primary">Free</th>
+                <th className="text-center p-4 bg-white border-b border-border-subtle text-sm font-semibold text-text-primary">Starter</th>
+                <th className="text-center p-4 bg-brand-mughal-green border-b border-border-subtle text-sm font-semibold text-text-inverse relative">
+                  <span className="absolute -top-3 left-1/2 transform -translate-x-1/2 text-[11px] font-semibold bg-brand-pistachio text-brand-mughal-green px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
+                    ★ Best Value
+                  </span>
+                  PRO
+                </th>
+                <th className="text-center p-4 bg-white border-b border-border-subtle text-sm font-semibold text-text-primary">Enterprise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">Monthly Price</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-primary">€0</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-primary">€39</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse font-semibold">€99</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-primary">Contact Us</td>
+              </tr>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">Best For</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">One-off checks</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Small Portfolios</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse-muted">Active B2B Sales</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">High Volume/Banks</td>
+              </tr>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">CUI Credit Lookups</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">3 / month</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">20 / month</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse-muted">Unlimited</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Unlimited</td>
+              </tr>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">Monitoring (Watchlist)</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">10 CUIs</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse-muted">250 CUIs</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Unlimited</td>
+              </tr>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">Insolvency (BPI) Alerts</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Included</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse-muted">Real-Time</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Real-Time</td>
+              </tr>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">Court Cases (Dosare)</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse-muted">Included</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Included</td>
+              </tr>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">Tax Debts (ANAF)</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse-muted">Included</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Included</td>
+              </tr>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">PDF Report Exports</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">5 / month</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse-muted">Unlimited</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Unlimited</td>
+              </tr>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">Team Users</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">1</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">5 Included</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse-muted">Custom</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Custom</td>
+              </tr>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">Admin</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse-muted">—</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Included</td>
+              </tr>
+              <tr>
+                <td className="p-4 bg-surface-paper border-b border-border-subtle text-sm text-text-primary font-medium">API Access</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-muted">—</td>
+                <td className="p-4 bg-brand-mughal-green border-b border-border-subtle text-center text-sm text-text-inverse-muted">—</td>
+                <td className="p-4 bg-white border-b border-border-subtle text-center text-sm text-text-secondary">Full Integration</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td className="p-4 bg-surface-paper"></td>
+                <td className="p-4 bg-white text-center">
+                  <button
+                    type="button"
+                    onClick={onPrimaryCta}
+                    className="px-6 py-3 bg-brand-mughal-green text-white rounded-lg font-medium text-sm hover:bg-brand-mughal-green-2 transition-all duration-normal"
+                  >
+                    Get started
+                  </button>
+                </td>
+                <td className="p-4 bg-white text-center">
+                  <button
+                    type="button"
+                    onClick={onPrimaryCta}
+                    className="px-6 py-3 bg-brand-mughal-green text-white rounded-lg font-medium text-sm hover:bg-brand-mughal-green-2 transition-all duration-normal"
+                  >
+                    Start Starter
+                  </button>
+                </td>
+                <td className="p-4 bg-brand-mughal-green text-center">
+                  <button
+                    type="button"
+                    onClick={onPrimaryCta}
+                    className="px-6 py-3 bg-white text-brand-mughal-green rounded-lg font-medium text-sm hover:shadow-sm transition-all duration-normal"
+                  >
+                    Start PRO
+                  </button>
+                </td>
+                <td className="p-4 bg-white text-center">
+                  <button
+                    type="button"
+                    onClick={onPrimaryCta}
+                    className="px-6 py-3 bg-white text-brand-mughal-green border border-brand-mughal-green rounded-lg font-medium text-sm hover:bg-surface-paper transition-all duration-normal"
+                  >
+                    Contact Us
+                  </button>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </section>
 

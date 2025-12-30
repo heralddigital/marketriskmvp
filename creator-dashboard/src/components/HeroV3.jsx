@@ -70,7 +70,7 @@ export default function HeroV3({ onViewDashboard, onScrollToWaitlist }) {
               </div>
               <div>
                 <p className="text-text-inverse font-medium text-sm">Simple pricing</p>
-                <p className="text-text-inverse-muted text-xs">Free, €39, or €149—no hidden fees</p>
+                <p className="text-text-inverse-muted text-xs">Free, €39, €99, or Enterprise—no hidden fees</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
