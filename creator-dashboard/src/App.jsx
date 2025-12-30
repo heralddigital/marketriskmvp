@@ -588,7 +588,10 @@ function LandingPage({ onPrimaryCta }) {
                 <th className="text-center p-4 bg-white border-b border-border-subtle text-sm font-semibold text-text-primary">Free</th>
                 <th className="text-center p-4 bg-white border-b border-border-subtle text-sm font-semibold text-text-primary">Starter</th>
                 <th className="text-center p-4 bg-brand-mughal-green border-b border-border-subtle text-sm font-semibold text-text-inverse relative">
-                  <span className="absolute -top-3 left-1/2 transform -translate-x-1/2 text-[11px] font-semibold bg-brand-pistachio text-brand-mughal-green px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
+                  <span 
+                    className="absolute -top-3 right-4 text-[11px] font-semibold bg-brand-pistachio text-brand-mughal-green px-3 py-1 rounded-full shadow-sm"
+                    style={{ whiteSpace: 'nowrap', display: 'inline-block', minWidth: 'max-content' }}
+                  >
                     ★ Best Value
                   </span>
                   PRO
