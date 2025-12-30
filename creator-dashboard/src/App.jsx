@@ -498,6 +498,55 @@ function LandingPage({ onPrimaryCta }) {
           </h2>
         </div>
 
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <PricingCard
+            name="Free"
+            price="€0"
+            period=""
+            description="For one-off checks."
+            features={['3 CUI lookups / month', 'Basic credit checks', 'Email support']}
+            cta="Get started"
+            onCta={onPrimaryCta}
+          />
+          <PricingCard
+            name="Starter"
+            price="€39"
+            period="per month"
+            description="For small portfolios."
+            features={['20 CUI lookups / month', '10 CUI watchlist', 'Insolvency alerts', '5 PDF exports / month', '5 team users']}
+            cta="Start Starter"
+            onCta={onPrimaryCta}
+          />
+          <PricingCard
+            highlight
+            name="PRO"
+            price="€99"
+            period="per month"
+            description="For active B2B sales."
+            features={['Unlimited CUI lookups', '250 CUI watchlist', 'Real-time alerts', 'Court cases & tax debts', 'Unlimited exports', 'Custom team users']}
+            cta="Start PRO"
+            onCta={onPrimaryCta}
+          />
+          <PricingCard
+            name="Enterprise"
+            price="Contact Us"
+            period=""
+            description="For high volume and banks."
+            features={['Everything in PRO', 'Unlimited watchlist', 'Admin access', 'Full API integration', 'Dedicated support']}
+            cta="Talk to sales"
+            onCta={onPrimaryCta}
+          />
+        </div>
+
+        {/* Full Comparison Table */}
+        <div className="mb-6">
+          <p className="text-xs text-text-muted mb-2">Feature Comparison</p>
+          <h3 className="text-xl font-semibold text-text-primary mb-4" style={{ letterSpacing: '-0.3px' }}>
+            Compare all features
+          </h3>
+        </div>
+
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
