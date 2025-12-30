@@ -119,9 +119,9 @@ function AnalyticsMockup() {
 
 export default function HeroV4({ onViewDashboard, onScrollToWaitlist }) {
   return (
-    <section className="bg-gradient-to-br from-brand-mughal-green via-brand-mughal-green-2 to-brand-mughal-green rounded-2xl p-8 md:p-12 relative overflow-hidden">
+    <section className="bg-gradient-to-br from-brand-mughal-green via-brand-mughal-green-2 to-brand-mughal-green rounded-2xl p-8 md:p-12 relative overflow-visible pb-24 md:pb-32">
       {/* Background pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-10" style={{ zIndex: 5 }}>
+      <div className="absolute inset-0 pointer-events-none opacity-10 overflow-hidden rounded-2xl" style={{ zIndex: 5 }}>
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid-v4" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -169,11 +169,11 @@ export default function HeroV4({ onViewDashboard, onScrollToWaitlist }) {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Analytics Dashboard Mockup */}
-        <div className="mt-12">
-          <AnalyticsMockup />
-        </div>
+      {/* Analytics Dashboard Mockup - Positioned 50% inside, 50% outside */}
+      <div className="relative z-20 max-w-6xl mx-auto" style={{ transform: 'translateY(50%)' }}>
+        <AnalyticsMockup />
       </div>
     </section>
   )
