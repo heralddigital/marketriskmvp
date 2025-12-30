@@ -154,7 +154,7 @@ export default function HeroV4({ onViewDashboard, onScrollToWaitlist }) {
             </PrimaryButton>
             <SecondaryButton onClick={onViewDashboard}>See how it works</SecondaryButton>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-text-inverse-muted mb-8">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-text-inverse-muted">
             <div className="flex items-center gap-2">
               <span className="text-brand-pistachio">✓</span>
               <span>Free plan available</span>
@@ -172,7 +172,7 @@ export default function HeroV4({ onViewDashboard, onScrollToWaitlist }) {
       </div>
 
       {/* Analytics Dashboard Mockup - Positioned 50% inside, 50% outside */}
-      <div className="relative z-20 max-w-6xl mx-auto" style={{ marginTop: '2rem', transform: 'translateY(50%)' }}>
+      <div className="relative z-20 max-w-6xl mx-auto" style={{ transform: 'translateY(50%)' }}>
         <AnalyticsMockup />
       </div>
     </section>
