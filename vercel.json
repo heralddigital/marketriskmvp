@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd creator-dashboard && npm install && npm run build",
+  "outputDirectory": "creator-dashboard/dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
