@@ -1,4 +1,8 @@
 import React from 'react'
+import SEO from '../components/SEO.jsx'
+import HeroV1 from '../components/HeroV1.jsx'
+import HeroV2 from '../components/HeroV2.jsx'
+import HeroV3 from '../components/HeroV3.jsx'
 
 function isValidEmail(email) {
   // Intentionally simple: enough for client-side validation without being overly strict.
@@ -181,76 +185,73 @@ function WaitlistForm() {
   )
 }
 
-export default function LandingMarketingPage({ onViewDashboard }) {
+export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1 }) {
+  const [currentHeroVersion, setCurrentHeroVersion] = React.useState(heroVersion)
+  
+  const handleScrollToWaitlist = () => {
+    document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const renderHero = () => {
+    const commonProps = {
+      onViewDashboard,
+      onScrollToWaitlist: handleScrollToWaitlist,
+    }
+
+    switch (currentHeroVersion) {
+      case 1:
+        return <HeroV1 {...commonProps} waitlistForm={<WaitlistForm />} />
+      case 2:
+        return <HeroV2 {...commonProps} />
+      case 3:
+        return <HeroV3 {...commonProps} />
+      default:
+        return <HeroV1 {...commonProps} waitlistForm={<WaitlistForm />} />
+    }
+  }
+
   return (
-    <div className="space-y-12">
-      {/* Hero */}
-      <section className="bg-brand-mughal-green rounded-2xl p-8 relative overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 5 }}>
-          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            {/* Curvy line in bottom right */}
-            <path
-              d="M 70% 70% Q 80% 75%, 85% 85% T 95% 95% Q 98% 98%, 100% 100%"
-              stroke="var(--brand-pistachio)"
-              strokeWidth="25"
-              strokeLinecap="round"
-              fill="none"
-              opacity="0.5"
-            />
-            
-            {/* Rectangle decorations */}
-            <rect
-              x="62%"
-              y="-12%"
-              width="360"
-              height="220"
-              rx="4"
-              fill="none"
-              stroke="var(--pattern-line-on-green)"
-              strokeWidth="1"
-            />
-            <rect
-              x="70%"
-              y="62%"
-              width="420"
-              height="260"
-              rx="4"
-              fill="none"
-              stroke="var(--pattern-line-on-green)"
-              strokeWidth="1"
-            />
-          </svg>
-        </div>
+    <>
+      <SEO 
+        title="MarketRisk - Credit Risk Monitoring for Romanian SMEs"
+        description="Simple credit risk monitoring for Romanian SMEs: build a watchlist, get actionable alerts, and avoid bad debt before it hits cashflow."
+        keywords="credit risk monitoring, Romanian SMEs, risk alerts, insolvency monitoring, debt management, business credit check"
+      />
+      <div className="space-y-12">
+        {/* Hero Version Selector (for testing - can be removed in production) */}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="flex gap-2 p-4 bg-surface-paper rounded-lg border border-border-subtle">
+            <span className="text-sm text-text-secondary mr-2">Hero Version:</span>
+            {[1, 2, 3].map((v) => (
+              <button
+                key={v}
+                onClick={() => setCurrentHeroVersion(v)}
+                className={`px-3 py-1 text-xs rounded ${
+                  currentHeroVersion === v
+                    ? 'bg-brand-mughal-green text-white'
+                    : 'bg-white text-text-primary border border-border-subtle hover:bg-surface-paper'
+                }`}
+              >
+                Version {v}
+              </button>
+            ))}
+          </div>
+        )}
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          <div>
-            <p className="text-text-inverse-muted text-sm mb-2">MarketRisk</p>
-            <h1 className="text-4xl font-semibold text-text-inverse mb-4" style={{ letterSpacing: '-0.8px' }}>
-              Termene gives you data. We tell you when to worry.
-            </h1>
-            <p className="text-text-inverse-muted text-md max-w-xl mb-6">
-              Simple credit risk monitoring for Romanian SMEs: build a watchlist, get actionable alerts, and avoid bad debt
-              before it hits cashflow.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <PrimaryButton onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}>
-                Join the waitlist
-              </PrimaryButton>
-              <SecondaryButton onClick={onViewDashboard}>View the product UI</SecondaryButton>
+        {/* Hero Section */}
+        {renderHero()}
+
+        {/* Waitlist Section (shown below hero for V2 and V3, V1 has it inline) */}
+        {currentHeroVersion !== 1 && (
+          <section id="waitlist" className="bg-brand-mughal-green rounded-2xl p-8">
+            <div className="max-w-2xl mx-auto">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+                <p className="text-text-inverse text-lg font-medium mb-4">Stay in the know</p>
+                <WaitlistForm />
+              </div>
             </div>
-            <p className="text-text-inverse-muted text-xs mt-4">
-              Launching soon. Transparent pricing: Free / €39 / €149.
-            </p>
-          </div>
-
-          {/* Waitlist card */}
-          <div id="waitlist" className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-            <p className="text-text-inverse text-sm font-medium mb-4">Stay in the know</p>
-            <WaitlistForm />
-          </div>
-        </div>
-      </section>
+          </section>
+        )}
 
       {/* Benefits */}
       <section>
