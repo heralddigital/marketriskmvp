@@ -1564,19 +1564,19 @@ function AnalyticsPage() {
   return (
     <div style={{ display: 'flex', minHeight: 'calc(100vh - 72px)' }}>
       {/* Dark Sidebar */}
-      <aside style={{ 
-        width: '256px', 
-        backgroundColor: 'var(--brand-mughal-green-2)', 
-        flexShrink: 0, 
-        display: 'flex', 
-        flexDirection: 'column' 
+      <aside style={{
+        width: '220px',
+        backgroundColor: 'var(--brand-mughal-green-2)',
+        flexShrink: 0,
+        display: 'flex',
+        flexDirection: 'column'
       }}>
-        <div style={{ padding: '24px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          <h2 style={{ fontSize: '18px', fontWeight: 600, color: '#fff', margin: 0 }}>Analytics</h2>
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.66)', marginTop: '4px' }}>Performance insights</p>
+        <div style={{ padding: '20px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+          <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#fff', margin: 0 }}>Analytics</h2>
+          <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.66)', marginTop: '4px' }}>Performance insights</p>
         </div>
-        
-        <nav style={{ flex: 1, padding: '16px' }}>
+
+        <nav style={{ flex: 1, padding: '12px' }}>
           {sidebarItems.map((item, index) => (
             <SidebarNavItem
               key={item.key}
@@ -1589,36 +1589,36 @@ function AnalyticsPage() {
         </nav>
 
         {/* Sidebar Footer */}
-        <div style={{ padding: '16px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          <div style={{ backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '8px', padding: '16px' }}>
-            <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.66)', marginBottom: '8px' }}>Data freshness</p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ width: '8px', height: '8px', backgroundColor: 'var(--brand-pistachio)', borderRadius: '50%' }} />
-              <span style={{ fontSize: '14px', color: '#fff' }}>Live — updated now</span>
+        <div style={{ padding: '12px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <div style={{ backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '8px', padding: '12px' }}>
+            <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.66)', marginBottom: '6px' }}>Data freshness</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ width: '6px', height: '6px', backgroundColor: 'var(--brand-pistachio)', borderRadius: '50%' }} />
+              <span style={{ fontSize: '12px', color: '#fff' }}>Live — updated now</span>
             </div>
           </div>
         </div>
       </aside>
 
       {/* Main Content Area */}
-      <main style={{ flex: 1, backgroundColor: 'var(--surface-paper)', padding: '32px', overflowY: 'auto' }}>
+      <main style={{ flex: 1, backgroundColor: 'var(--surface-paper)', padding: '24px', overflowY: 'auto' }}>
         {/* Page Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
           <div>
-            <h1 style={{ fontSize: '28px', fontWeight: 600, color: '#0B0F0C', letterSpacing: '-0.3px', margin: 0 }}>
+            <h1 style={{ fontSize: '24px', fontWeight: 600, color: '#0B0F0C', letterSpacing: '-0.3px', margin: 0 }}>
               {sidebarItems.find(i => i.key === activeSection)?.label || 'Overview'}
             </h1>
-            <p style={{ fontSize: '14px', color: 'rgba(11, 15, 12, 0.70)', marginTop: '4px' }}>
+            <p style={{ fontSize: '13px', color: 'rgba(11, 15, 12, 0.70)', marginTop: '4px' }}>
               Track performance metrics and trends
             </p>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <select style={{ 
-              fontSize: '14px', 
-              backgroundColor: '#fff', 
-              border: '1px solid rgba(11, 15, 12, 0.12)', 
-              borderRadius: '8px', 
-              padding: '10px 16px',
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <select style={{
+              fontSize: '13px',
+              backgroundColor: '#fff',
+              border: '1px solid rgba(11, 15, 12, 0.12)',
+              borderRadius: '8px',
+              padding: '8px 12px',
               color: 'var(--text-primary)'
             }}>
               <option>Last 7 days</option>
@@ -1627,12 +1627,12 @@ function AnalyticsPage() {
               <option>This year</option>
             </select>
             <button type="button" style={{
-              padding: '10px 16px',
+              padding: '8px 14px',
               backgroundColor: 'var(--brand-mughal-green)',
               color: '#fff',
               borderRadius: '8px',
               fontWeight: 500,
-              fontSize: '14px',
+              fontSize: '13px',
               border: 'none',
               cursor: 'pointer'
             }}>
@@ -1642,7 +1642,7 @@ function AnalyticsPage() {
         </div>
 
         {/* KPI Cards Row */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px', marginBottom: '20px' }}>
           <AnalyticsKpiCard label="Total Impressions" value="8.2M" change="+24.5%" isUp delay={100} />
           <AnalyticsKpiCard label="Click-through Rate" value="3.8%" change="+0.6%" isUp delay={200} />
           <AnalyticsKpiCard label="Avg. Session" value="2m 48s" change="-12s" isUp={false} delay={300} />
@@ -1650,19 +1650,19 @@ function AnalyticsPage() {
         </div>
 
         {/* Charts Row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px', marginBottom: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '16px', marginBottom: '20px' }}>
           {/* Main Bar Chart */}
           <AnimatedCard delay={500}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 500, color: '#0B0F0C', margin: 0 }}>Traffic Overview</h3>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ width: '12px', height: '12px', backgroundColor: 'var(--brand-mughal-green)', borderRadius: '2px' }} />
-                  <span style={{ fontSize: '12px', color: 'rgba(11, 15, 12, 0.52)' }}>Views</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#0B0F0C', margin: 0 }}>Traffic Overview</h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ width: '10px', height: '10px', backgroundColor: 'var(--brand-mughal-green)', borderRadius: '2px' }} />
+                  <span style={{ fontSize: '11px', color: 'rgba(11, 15, 12, 0.52)' }}>Views</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ width: '12px', height: '12px', backgroundColor: 'var(--brand-pistachio)', borderRadius: '2px' }} />
-                  <span style={{ fontSize: '12px', color: 'rgba(11, 15, 12, 0.52)' }}>Visitors</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ width: '10px', height: '10px', backgroundColor: 'var(--brand-pistachio)', borderRadius: '2px' }} />
+                  <span style={{ fontSize: '11px', color: 'rgba(11, 15, 12, 0.52)' }}>Visitors</span>
                 </div>
               </div>
             </div>
@@ -1671,9 +1671,9 @@ function AnalyticsPage() {
 
           {/* Donut Chart */}
           <AnimatedCard delay={600}>
-            <h3 style={{ fontSize: '18px', fontWeight: 500, color: '#0B0F0C', margin: 0, marginBottom: '24px' }}>Traffic Sources</h3>
+            <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#0B0F0C', margin: 0, marginBottom: '16px' }}>Traffic Sources</h3>
             <DonutChart />
-            <div style={{ marginTop: '24px' }}>
+            <div style={{ marginTop: '16px' }}>
               <SourceRow label="Organic Search" value="42%" color="var(--brand-mughal-green)" />
               <SourceRow label="Direct" value="28%" color="var(--brand-pistachio)" />
               <SourceRow label="Social Media" value="18%" color="var(--brand-bone)" />
@@ -1683,16 +1683,16 @@ function AnalyticsPage() {
         </div>
 
         {/* Bottom Row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
           {/* Performance Bars */}
           <AnimatedCard delay={700}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 500, color: '#0B0F0C', margin: 0 }}>Content Performance</h3>
-              <button type="button" style={{ 
-                fontSize: '14px', 
-                color: 'var(--brand-mughal-green)', 
-                background: 'none', 
-                border: 'none', 
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#0B0F0C', margin: 0 }}>Content Performance</h3>
+              <button type="button" style={{
+                fontSize: '13px',
+                color: 'var(--brand-mughal-green)',
+                background: 'none',
+                border: 'none',
                 cursor: 'pointer',
                 transition: 'color 0.2s ease'
               }}
@@ -1711,15 +1711,15 @@ function AnalyticsPage() {
 
           {/* Top Pages Table */}
           <AnimatedCard delay={750}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 500, color: '#0B0F0C', margin: 0 }}>Top Pages</h3>
-              <span style={{ fontSize: '12px', color: 'rgba(11, 15, 12, 0.52)', backgroundColor: 'var(--brand-bone)', padding: '6px 12px', borderRadius: '4px' }}>Last 7 days</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#0B0F0C', margin: 0 }}>Top Pages</h3>
+              <span style={{ fontSize: '11px', color: 'rgba(11, 15, 12, 0.52)', backgroundColor: 'var(--brand-bone)', padding: '4px 10px', borderRadius: '4px' }}>Last 7 days</span>
             </div>
-            <div style={{ display: 'flex', padding: '8px 0', borderBottom: '1px solid rgba(11, 15, 12, 0.08)', marginBottom: '4px' }}>
-              <span style={{ flex: 1, fontSize: '12px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)' }}>Page</span>
-              <span style={{ width: '80px', fontSize: '12px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Views</span>
-              <span style={{ width: '64px', fontSize: '12px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Bounce</span>
-              <span style={{ width: '64px', fontSize: '12px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Time</span>
+            <div style={{ display: 'flex', padding: '6px 0', borderBottom: '1px solid rgba(11, 15, 12, 0.08)', marginBottom: '4px' }}>
+              <span style={{ flex: 1, fontSize: '11px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)' }}>Page</span>
+              <span style={{ width: '70px', fontSize: '11px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Views</span>
+              <span style={{ width: '56px', fontSize: '11px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Bounce</span>
+              <span style={{ width: '56px', fontSize: '11px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Time</span>
             </div>
             <PageRow page="/dashboard" views="24,521" bounce="32%" time="3:42" />
             <PageRow page="/analytics" views="18,234" bounce="28%" time="4:15" />
@@ -1730,7 +1730,7 @@ function AnalyticsPage() {
         </div>
 
         {/* Trend Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
           <InsightCard title="Peak Hours" description="Most activity occurs between 2-4 PM" metric="3:12 PM" metricLabel="Avg. peak time" delay={800} />
           <InsightCard title="Device Split" description="Mobile traffic continues to grow" metric="64%" metricLabel="Mobile users" delay={900} />
           <InsightCard title="Geo Distribution" description="US leads with highest engagement" metric="38%" metricLabel="From United States" delay={1000} />
@@ -1744,24 +1744,24 @@ function AnalyticsPage() {
 function AnimatedCard({ children, delay = 0 }) {
   const [isVisible, setIsVisible] = React.useState(false)
   const [isHovered, setIsHovered] = React.useState(false)
-  
+
   React.useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), delay)
     return () => clearTimeout(timer)
   }, [delay])
-  
+
   return (
-    <div 
+    <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ 
-        backgroundColor: '#fff', 
-        borderRadius: '8px', 
-        padding: '24px', 
+      style={{
+        backgroundColor: '#fff',
+        borderRadius: '8px',
+        padding: '16px',
         border: '1px solid rgba(11, 15, 12, 0.08)',
         transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
         opacity: isVisible ? 1 : 0,
-        boxShadow: isHovered ? '0 12px 32px rgba(11, 15, 12, 0.1)' : 'none',
+        boxShadow: isHovered ? '0 8px 20px rgba(11, 15, 12, 0.08)' : 'none',
         transition: 'all 0.5s cubic-bezier(0.2, 0, 0, 1)'
       }}
     >
@@ -1774,48 +1774,48 @@ function AnimatedCard({ children, delay = 0 }) {
 function AnalyticsKpiCard({ label, value, change, isUp, delay = 0 }) {
   const [isHovered, setIsHovered] = React.useState(false)
   const [isVisible, setIsVisible] = React.useState(false)
-  
+
   React.useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), delay)
     return () => clearTimeout(timer)
   }, [delay])
-  
+
   return (
-    <div 
+    <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ 
-        backgroundColor: '#fff', 
-        borderRadius: '8px', 
-        padding: '20px', 
+      style={{
+        backgroundColor: '#fff',
+        borderRadius: '8px',
+        padding: '14px',
         border: '1px solid rgba(11, 15, 12, 0.08)',
         transform: isVisible ? (isHovered ? 'translateY(-4px)' : 'translateY(0)') : 'translateY(20px)',
         opacity: isVisible ? 1 : 0,
-        boxShadow: isHovered ? '0 8px 24px rgba(11, 15, 12, 0.12)' : 'none',
+        boxShadow: isHovered ? '0 6px 18px rgba(11, 15, 12, 0.1)' : 'none',
         transition: 'all 0.3s cubic-bezier(0.2, 0, 0, 1)',
         cursor: 'pointer'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '12px' }}>
-        <p style={{ fontSize: '12px', color: 'rgba(11, 15, 12, 0.52)', margin: 0 }}>{label}</p>
-        <span style={{ 
-          fontSize: '12px', 
-          fontWeight: 500, 
-          padding: '2px 8px', 
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '8px' }}>
+        <p style={{ fontSize: '11px', color: 'rgba(11, 15, 12, 0.52)', margin: 0 }}>{label}</p>
+        <span style={{
+          fontSize: '11px',
+          fontWeight: 500,
+          padding: '2px 6px',
           borderRadius: '4px',
           backgroundColor: isUp ? 'var(--state-success-soft)' : 'var(--state-danger-soft)',
           color: isUp ? 'var(--state-success)' : 'var(--state-danger)',
-          transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+          transform: isHovered ? 'scale(1.05)' : 'scale(1)',
           transition: 'transform 0.2s ease'
         }}>
           {change}
         </span>
       </div>
-      <p style={{ 
-        fontSize: '24px', 
-        fontWeight: 600, 
-        color: '#0B0F0C', 
-        margin: 0, 
+      <p style={{
+        fontSize: '20px',
+        fontWeight: 600,
+        color: '#0B0F0C',
+        margin: 0,
         letterSpacing: '-0.3px',
         transform: isHovered ? 'scale(1.02)' : 'scale(1)',
         transformOrigin: 'left center',
