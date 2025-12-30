@@ -1555,7 +1555,7 @@ function AnalyticsPage() {
 
   return (
     <div style={{ backgroundColor: 'var(--surface-paper)', minHeight: 'calc(100vh - 72px)' }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '32px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '48px' }}>
         {/* Welcome Header */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
