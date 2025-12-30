@@ -1549,193 +1549,232 @@ function SettingsToggle({ label, description, checked, onChange }) {
   )
 }
 
-// Analytics Page with Application Shell
+// Analytics Page - Backend Overview (Dashboard + Analytics Hybrid)
 function AnalyticsPage() {
-  const [activeSection, setActiveSection] = React.useState('overview')
-
-  const sidebarItems = [
-    { key: 'overview', label: 'Overview', icon: 'grid' },
-    { key: 'engagement', label: 'Engagement', icon: 'activity' },
-    { key: 'audience', label: 'Audience', icon: 'users' },
-    { key: 'content', label: 'Content', icon: 'file' },
-    { key: 'revenue', label: 'Revenue', icon: 'dollar' },
-  ]
+  const [timeRange, setTimeRange] = React.useState('7d')
 
   return (
-    <div style={{ display: 'flex', minHeight: 'calc(100vh - 72px)' }}>
-      {/* Dark Sidebar */}
-      <aside style={{
-        width: '220px',
-        backgroundColor: 'var(--brand-mughal-green-2)',
-        flexShrink: 0,
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-        <div style={{ padding: '20px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#fff', margin: 0 }}>Analytics</h2>
-          <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.66)', marginTop: '4px' }}>Performance insights</p>
-        </div>
-
-        <nav style={{ flex: 1, padding: '12px' }}>
-          {sidebarItems.map((item, index) => (
-            <SidebarNavItem
-              key={item.key}
-              item={item}
-              isActive={activeSection === item.key}
-              onClick={() => setActiveSection(item.key)}
-              delay={index * 50}
-            />
-          ))}
-        </nav>
-
-        {/* Sidebar Footer */}
-        <div style={{ padding: '12px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          <div style={{ backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '8px', padding: '12px' }}>
-            <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.66)', marginBottom: '6px' }}>Data freshness</p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: '6px', height: '6px', backgroundColor: 'var(--brand-pistachio)', borderRadius: '50%' }} />
-              <span style={{ fontSize: '12px', color: '#fff' }}>Live — updated now</span>
+    <div style={{ backgroundColor: 'var(--surface-paper)', minHeight: 'calc(100vh - 72px)' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '32px' }}>
+        {/* Welcome Header */}
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+            <div>
+              <p style={{ fontSize: '14px', color: 'rgba(11, 15, 12, 0.52)', margin: 0, marginBottom: '4px' }}>
+                Welcome back
+              </p>
+              <h1 style={{ fontSize: '32px', fontWeight: 600, color: '#0B0F0C', letterSpacing: '-0.5px', margin: 0 }}>
+                Overview Dashboard
+              </h1>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <select
+                value={timeRange}
+                onChange={(e) => setTimeRange(e.target.value)}
+                style={{
+                  fontSize: '14px',
+                  backgroundColor: '#fff',
+                  border: '1px solid rgba(11, 15, 12, 0.12)',
+                  borderRadius: '8px',
+                  padding: '10px 14px',
+                  color: 'var(--text-primary)',
+                  cursor: 'pointer'
+                }}>
+                <option value="24h">Last 24 hours</option>
+                <option value="7d">Last 7 days</option>
+                <option value="30d">Last 30 days</option>
+                <option value="90d">Last 90 days</option>
+              </select>
+              <button type="button" style={{
+                padding: '10px 18px',
+                backgroundColor: 'var(--brand-mughal-green)',
+                color: '#fff',
+                borderRadius: '8px',
+                fontWeight: 500,
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--brand-mughal-green-2)'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--brand-mughal-green)'}
+              >
+                Export Report
+              </button>
             </div>
           </div>
-        </div>
-      </aside>
-
-      {/* Main Content Area */}
-      <main style={{ flex: 1, backgroundColor: 'var(--surface-paper)', padding: '24px', overflowY: 'auto' }}>
-        {/* Page Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
-          <div>
-            <h1 style={{ fontSize: '24px', fontWeight: 600, color: '#0B0F0C', letterSpacing: '-0.3px', margin: 0 }}>
-              {sidebarItems.find(i => i.key === activeSection)?.label || 'Overview'}
-            </h1>
-            <p style={{ fontSize: '13px', color: 'rgba(11, 15, 12, 0.70)', marginTop: '4px' }}>
-              Track performance metrics and trends
-            </p>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <select style={{
-              fontSize: '13px',
-              backgroundColor: '#fff',
-              border: '1px solid rgba(11, 15, 12, 0.12)',
-              borderRadius: '8px',
-              padding: '8px 12px',
-              color: 'var(--text-primary)'
-            }}>
-              <option>Last 7 days</option>
-              <option>Last 30 days</option>
-              <option>Last 90 days</option>
-              <option>This year</option>
-            </select>
-            <button type="button" style={{
-              padding: '8px 14px',
-              backgroundColor: 'var(--brand-mughal-green)',
-              color: '#fff',
-              borderRadius: '8px',
-              fontWeight: 500,
-              fontSize: '13px',
-              border: 'none',
-              cursor: 'pointer'
-            }}>
-              Export
-            </button>
-          </div>
+          <p style={{ fontSize: '14px', color: 'rgba(11, 15, 12, 0.66)', margin: 0 }}>
+            Here's what's happening with your platform today
+          </p>
         </div>
 
-        {/* KPI Cards Row */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px', marginBottom: '20px' }}>
-          <AnalyticsKpiCard label="Total Impressions" value="8.2M" change="+24.5%" isUp delay={100} />
-          <AnalyticsKpiCard label="Click-through Rate" value="3.8%" change="+0.6%" isUp delay={200} />
-          <AnalyticsKpiCard label="Avg. Session" value="2m 48s" change="-12s" isUp={false} delay={300} />
-          <AnalyticsKpiCard label="Conversion Rate" value="2.1%" change="+0.3%" isUp delay={400} />
+        {/* Key Metrics - 4 Column Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
+          <BackendMetricCard
+            label="Total Revenue"
+            value="$24,580"
+            change="+12.5%"
+            isUp={true}
+            icon="dollar"
+            delay={0}
+          />
+          <BackendMetricCard
+            label="Active Users"
+            value="8,249"
+            change="+8.2%"
+            isUp={true}
+            icon="users"
+            delay={50}
+          />
+          <BackendMetricCard
+            label="Conversion Rate"
+            value="3.24%"
+            change="+0.8%"
+            isUp={true}
+            icon="trending"
+            delay={100}
+          />
+          <BackendMetricCard
+            label="Avg. Session"
+            value="4m 12s"
+            change="-0.3%"
+            isUp={false}
+            icon="clock"
+            delay={150}
+          />
         </div>
 
-        {/* Charts Row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '16px', marginBottom: '20px' }}>
-          {/* Main Bar Chart */}
-          <AnimatedCard delay={500}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#0B0F0C', margin: 0 }}>Traffic Overview</h3>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Main Content Grid - 2 Column */}
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px', marginBottom: '20px' }}>
+          {/* Revenue Chart */}
+          <AnimatedCard delay={200}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+              <div>
+                <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#0B0F0C', margin: 0, marginBottom: '4px' }}>Revenue Overview</h3>
+                <p style={{ fontSize: '13px', color: 'rgba(11, 15, 12, 0.52)', margin: 0 }}>Daily revenue and transactions</p>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ width: '10px', height: '10px', backgroundColor: 'var(--brand-mughal-green)', borderRadius: '2px' }} />
-                  <span style={{ fontSize: '11px', color: 'rgba(11, 15, 12, 0.52)' }}>Views</span>
+                  <span style={{ width: '12px', height: '12px', backgroundColor: 'var(--brand-mughal-green)', borderRadius: '2px' }} />
+                  <span style={{ fontSize: '12px', color: 'rgba(11, 15, 12, 0.52)' }}>Revenue</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ width: '10px', height: '10px', backgroundColor: 'var(--brand-pistachio)', borderRadius: '2px' }} />
-                  <span style={{ fontSize: '11px', color: 'rgba(11, 15, 12, 0.52)' }}>Visitors</span>
+                  <span style={{ width: '12px', height: '12px', backgroundColor: 'var(--brand-pistachio)', borderRadius: '2px' }} />
+                  <span style={{ fontSize: '12px', color: 'rgba(11, 15, 12, 0.52)' }}>Transactions</span>
                 </div>
               </div>
             </div>
             <SimpleBarChart />
           </AnimatedCard>
 
-          {/* Donut Chart */}
-          <AnimatedCard delay={600}>
-            <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#0B0F0C', margin: 0, marginBottom: '16px' }}>Traffic Sources</h3>
+          {/* Quick Stats */}
+          <AnimatedCard delay={250}>
+            <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#0B0F0C', margin: 0, marginBottom: '20px' }}>Quick Stats</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <QuickStatRow label="Page Views" value="124.5K" trend="+18%" isUp={true} />
+              <QuickStatRow label="Unique Visitors" value="42.1K" trend="+12%" isUp={true} />
+              <QuickStatRow label="Bounce Rate" value="32.8%" trend="-5%" isUp={true} />
+              <QuickStatRow label="Avg. Order Value" value="$84.50" trend="+7%" isUp={true} />
+            </div>
+            <div style={{ marginTop: '20px', padding: '16px', backgroundColor: 'var(--brand-bone)', borderRadius: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <span style={{ width: '8px', height: '8px', backgroundColor: 'var(--brand-pistachio)', borderRadius: '50%' }} />
+                <p style={{ fontSize: '12px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.66)', margin: 0 }}>System Status</p>
+              </div>
+              <p style={{ fontSize: '13px', color: '#0B0F0C', margin: 0 }}>All systems operational</p>
+            </div>
+          </AnimatedCard>
+        </div>
+
+        {/* Secondary Row - 3 Columns */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginBottom: '20px' }}>
+          {/* Top Products */}
+          <AnimatedCard delay={300}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#0B0F0C', margin: 0 }}>Top Products</h3>
+              <button type="button" style={{
+                fontSize: '12px',
+                color: 'var(--brand-mughal-green)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 500
+              }}>
+                View all →
+              </button>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <ProductRow name="Premium Plan" sales="1,234" revenue="$37K" />
+              <ProductRow name="Starter Plan" sales="892" revenue="$18K" />
+              <ProductRow name="Enterprise Plan" sales="234" revenue="$47K" />
+              <ProductRow name="Add-on Services" sales="456" revenue="$9K" />
+            </div>
+          </AnimatedCard>
+
+          {/* Traffic Sources */}
+          <AnimatedCard delay={350}>
+            <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#0B0F0C', margin: 0, marginBottom: '16px' }}>Traffic Sources</h3>
             <DonutChart />
-            <div style={{ marginTop: '16px' }}>
+            <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <SourceRow label="Organic Search" value="42%" color="var(--brand-mughal-green)" />
               <SourceRow label="Direct" value="28%" color="var(--brand-pistachio)" />
               <SourceRow label="Social Media" value="18%" color="var(--brand-bone)" />
               <SourceRow label="Referral" value="12%" color="#2C6B57" />
             </div>
           </AnimatedCard>
-        </div>
 
-        {/* Bottom Row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
-          {/* Performance Bars */}
-          <AnimatedCard delay={700}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#0B0F0C', margin: 0 }}>Content Performance</h3>
-              <button type="button" style={{
-                fontSize: '13px',
-                color: 'var(--brand-mughal-green)',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                transition: 'color 0.2s ease'
-              }}
-              onMouseEnter={(e) => (e.target.style.color = 'var(--brand-pistachio)')}
-              onMouseLeave={(e) => (e.target.style.color = 'var(--brand-mughal-green)')}
-              >
-                View all →
-              </button>
+          {/* Recent Activity */}
+          <AnimatedCard delay={400}>
+            <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#0B0F0C', margin: 0, marginBottom: '16px' }}>Recent Activity</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <ActivityItem action="New user signup" time="2 min ago" type="success" />
+              <ActivityItem action="Payment received" time="12 min ago" type="success" />
+              <ActivityItem action="Support ticket opened" time="28 min ago" type="warning" />
+              <ActivityItem action="Plan upgraded" time="1 hour ago" type="success" />
+              <ActivityItem action="Invoice generated" time="2 hours ago" type="info" />
             </div>
-            <PerformanceBar label="Blog Posts" value={85} index={0} />
-            <PerformanceBar label="Videos" value={72} index={1} />
-            <PerformanceBar label="Podcasts" value={58} index={2} />
-            <PerformanceBar label="Tutorials" value={45} index={3} />
-            <PerformanceBar label="Case Studies" value={38} index={4} />
-          </AnimatedCard>
-
-          {/* Top Pages Table */}
-          <AnimatedCard delay={750}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#0B0F0C', margin: 0 }}>Top Pages</h3>
-              <span style={{ fontSize: '11px', color: 'rgba(11, 15, 12, 0.52)', backgroundColor: 'var(--brand-bone)', padding: '4px 10px', borderRadius: '4px' }}>Last 7 days</span>
-            </div>
-            <div style={{ display: 'flex', padding: '6px 0', borderBottom: '1px solid rgba(11, 15, 12, 0.08)', marginBottom: '4px' }}>
-              <span style={{ flex: 1, fontSize: '11px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)' }}>Page</span>
-              <span style={{ width: '70px', fontSize: '11px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Views</span>
-              <span style={{ width: '56px', fontSize: '11px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Bounce</span>
-              <span style={{ width: '56px', fontSize: '11px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Time</span>
-            </div>
-            <PageRow page="/dashboard" views="24,521" bounce="32%" time="3:42" />
-            <PageRow page="/analytics" views="18,234" bounce="28%" time="4:15" />
-            <PageRow page="/settings" views="12,087" bounce="45%" time="2:08" />
-            <PageRow page="/profile" views="9,456" bounce="38%" time="2:54" />
-            <PageRow page="/reports" views="7,823" bounce="41%" time="3:21" />
           </AnimatedCard>
         </div>
 
-        {/* Trend Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-          <InsightCard title="Peak Hours" description="Most activity occurs between 2-4 PM" metric="3:12 PM" metricLabel="Avg. peak time" delay={800} />
-          <InsightCard title="Device Split" description="Mobile traffic continues to grow" metric="64%" metricLabel="Mobile users" delay={900} />
-          <InsightCard title="Geo Distribution" description="US leads with highest engagement" metric="38%" metricLabel="From United States" delay={1000} />
+        {/* Bottom Row - Full Width */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          {/* User Growth */}
+          <AnimatedCard delay={450}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#0B0F0C', margin: 0 }}>User Growth</h3>
+              <span style={{ fontSize: '12px', color: 'rgba(11, 15, 12, 0.52)', backgroundColor: 'var(--brand-bone)', padding: '6px 12px', borderRadius: '6px' }}>Last 30 days</span>
+            </div>
+            <div style={{ marginBottom: '16px' }}>
+              <p style={{ fontSize: '28px', fontWeight: 600, color: '#0B0F0C', margin: 0, letterSpacing: '-0.5px' }}>8,249</p>
+              <p style={{ fontSize: '13px', color: 'rgba(11, 15, 12, 0.66)', margin: 0, marginTop: '4px' }}>Active users this month</p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <PerformanceBar label="Week 1" value={68} index={0} />
+              <PerformanceBar label="Week 2" value={82} index={1} />
+              <PerformanceBar label="Week 3" value={91} index={2} />
+              <PerformanceBar label="Week 4" value={100} index={3} />
+            </div>
+          </AnimatedCard>
+
+          {/* Top Pages */}
+          <AnimatedCard delay={500}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#0B0F0C', margin: 0 }}>Top Pages</h3>
+              <span style={{ fontSize: '12px', color: 'rgba(11, 15, 12, 0.52)', backgroundColor: 'var(--brand-bone)', padding: '6px 12px', borderRadius: '6px' }}>Last 7 days</span>
+            </div>
+            <div style={{ display: 'flex', padding: '8px 0', borderBottom: '1px solid rgba(11, 15, 12, 0.08)', marginBottom: '8px' }}>
+              <span style={{ flex: 1, fontSize: '12px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)' }}>Page</span>
+              <span style={{ width: '80px', fontSize: '12px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Views</span>
+              <span style={{ width: '70px', fontSize: '12px', fontWeight: 500, color: 'rgba(11, 15, 12, 0.52)', textAlign: 'right' }}>Unique</span>
+            </div>
+            <PageRow page="/dashboard" views="24,521" bounce="18.2K" time="" />
+            <PageRow page="/pricing" views="18,234" bounce="12.8K" time="" />
+            <PageRow page="/features" views="12,087" bounce="8.4K" time="" />
+            <PageRow page="/about" views="9,456" bounce="6.2K" time="" />
+            <PageRow page="/contact" views="7,823" bounce="5.1K" time="" />
+          </AnimatedCard>
         </div>
-      </main>
+      </div>
     </div>
   )
 }
@@ -1770,8 +1809,8 @@ function AnimatedCard({ children, delay = 0 }) {
   )
 }
 
-// Simple KPI Card for Analytics with hover animation
-function AnalyticsKpiCard({ label, value, change, isUp, delay = 0 }) {
+// Backend Metric Card - More prominent design for main KPIs
+function BackendMetricCard({ label, value, change, isUp, icon, delay = 0 }) {
   const [isHovered, setIsHovered] = React.useState(false)
   const [isVisible, setIsVisible] = React.useState(false)
 
@@ -1786,41 +1825,99 @@ function AnalyticsKpiCard({ label, value, change, isUp, delay = 0 }) {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         backgroundColor: '#fff',
-        borderRadius: '8px',
-        padding: '14px',
+        borderRadius: '12px',
+        padding: '20px',
         border: '1px solid rgba(11, 15, 12, 0.08)',
         transform: isVisible ? (isHovered ? 'translateY(-4px)' : 'translateY(0)') : 'translateY(20px)',
         opacity: isVisible ? 1 : 0,
-        boxShadow: isHovered ? '0 6px 18px rgba(11, 15, 12, 0.1)' : 'none',
-        transition: 'all 0.3s cubic-bezier(0.2, 0, 0, 1)',
+        boxShadow: isHovered ? '0 8px 24px rgba(11, 15, 12, 0.1)' : 'none',
+        transition: 'all 0.4s cubic-bezier(0.2, 0, 0, 1)',
         cursor: 'pointer'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '8px' }}>
-        <p style={{ fontSize: '11px', color: 'rgba(11, 15, 12, 0.52)', margin: 0 }}>{label}</p>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '12px' }}>
+        <p style={{ fontSize: '13px', color: 'rgba(11, 15, 12, 0.52)', margin: 0, fontWeight: 500 }}>{label}</p>
         <span style={{
-          fontSize: '11px',
-          fontWeight: 500,
-          padding: '2px 6px',
-          borderRadius: '4px',
+          fontSize: '12px',
+          fontWeight: 600,
+          padding: '4px 8px',
+          borderRadius: '6px',
           backgroundColor: isUp ? 'var(--state-success-soft)' : 'var(--state-danger-soft)',
-          color: isUp ? 'var(--state-success)' : 'var(--state-danger)',
-          transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-          transition: 'transform 0.2s ease'
+          color: isUp ? 'var(--state-success)' : 'var(--state-danger)'
         }}>
           {change}
         </span>
       </div>
       <p style={{
-        fontSize: '20px',
+        fontSize: '28px',
         fontWeight: 600,
         color: '#0B0F0C',
         margin: 0,
-        letterSpacing: '-0.3px',
-        transform: isHovered ? 'scale(1.02)' : 'scale(1)',
-        transformOrigin: 'left center',
-        transition: 'transform 0.2s ease'
+        letterSpacing: '-0.5px'
       }}>{value}</p>
+    </div>
+  )
+}
+
+// Quick Stat Row Component
+function QuickStatRow({ label, value, trend, isUp }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid rgba(11, 15, 12, 0.06)' }}>
+      <div style={{ flex: 1 }}>
+        <p style={{ fontSize: '13px', color: 'rgba(11, 15, 12, 0.66)', margin: 0 }}>{label}</p>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <p style={{ fontSize: '16px', fontWeight: 600, color: '#0B0F0C', margin: 0 }}>{value}</p>
+        <span style={{
+          fontSize: '12px',
+          fontWeight: 500,
+          color: isUp ? 'var(--state-success)' : 'var(--state-danger)'
+        }}>
+          {trend}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+// Product Row Component
+function ProductRow({ name, sales, revenue }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 12px', backgroundColor: 'var(--brand-bone)', borderRadius: '8px' }}>
+      <p style={{ fontSize: '13px', fontWeight: 500, color: '#0B0F0C', margin: 0, flex: 1 }}>{name}</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <p style={{ fontSize: '12px', color: 'rgba(11, 15, 12, 0.66)', margin: 0 }}>{sales} sales</p>
+        <p style={{ fontSize: '14px', fontWeight: 600, color: 'var(--brand-mughal-green)', margin: 0 }}>{revenue}</p>
+      </div>
+    </div>
+  )
+}
+
+// Activity Item Component
+function ActivityItem({ action, time, type }) {
+  const getColor = () => {
+    switch (type) {
+      case 'success': return 'var(--state-success)'
+      case 'warning': return '#F59E0B'
+      case 'info': return '#3B82F6'
+      default: return 'rgba(11, 15, 12, 0.52)'
+    }
+  }
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+      <span style={{
+        width: '8px',
+        height: '8px',
+        backgroundColor: getColor(),
+        borderRadius: '50%',
+        marginTop: '6px',
+        flexShrink: 0
+      }} />
+      <div style={{ flex: 1 }}>
+        <p style={{ fontSize: '13px', color: '#0B0F0C', margin: 0, marginBottom: '2px' }}>{action}</p>
+        <p style={{ fontSize: '12px', color: 'rgba(11, 15, 12, 0.52)', margin: 0 }}>{time}</p>
+      </div>
     </div>
   )
 }
