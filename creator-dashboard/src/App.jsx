@@ -256,7 +256,7 @@ function App() {
               onAllArticles={() => navigate('blogIndex')}
             />
           )}
-          {page === 'about' && <AboutPage />}
+          {page === 'about' && <AboutPage onNavigate={navigate} />}
           {page === 'contact' && <ContactPage />}
           {page === 'privacy' && <PrivacyPage />}
           {page === 'terms' && <TermsPage />}
