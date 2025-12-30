@@ -1,0 +1,799 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "meta": {
+    "name": "MarketRisk — Editorial Green Brand System",
+    "version": "1.0.0",
+    "lastUpdated": "2025-12-29",
+    "intent": "High-level design system guidelines that allow an AI (and humans) to reliably recreate the visual style shown in the attached brand guideline screenshots across web + mobile UI.",
+    "brandName": "MarketRisk",
+    "styleSummary": [
+      "Modern editorial layout: large, confident type; generous negative space; strong left-aligned hierarchy.",
+      "A calm, trustworthy color story: deep heritage green as the anchor, pistachio as the optimistic accent, bone/off-white as the paper base.",
+      "Geometric-but-soft motif: rounded rectangles, layered panels, and subtle linework patterns used as quiet brand texture—not decoration."
+    ],
+    "doNotDo": [
+      "Do not introduce loud, saturated colors outside the core palette; avoid neon and heavy gradients.",
+      "Do not use dense UI, tight line-heights, or cramped spacing—this system breathes.",
+      "Do not use hard black UI chrome (pure black borders everywhere). Keep borders subtle and surfaces calm.",
+      "Do not overuse shadows; the look is primarily flat blocks with occasional soft elevation.",
+      "Do not introduce playful visual noise (stickers, doodles, loud illustrations). Keep it premium and restrained."
+    ]
+  },
+  "designPrinciples": {
+    "primary": [
+      {
+        "name": "Editorial clarity",
+        "guideline": "Use a strong typographic hierarchy (big headline, soft subtitle, short body). Layout should read like a magazine spread: deliberate alignment, calm whitespace, and clear sequencing.",
+        "why": "Establishes trust and makes complex topics feel understandable."
+      },
+      {
+        "name": "Calm authority",
+        "guideline": "Let deep green be the anchor. Use pistachio as highlight and bone as the paper base. Keep contrast high for primary copy, lower for supporting copy.",
+        "why": "Signals credibility and stability while still feeling modern and friendly."
+      },
+      {
+        "name": "Geometry with softness",
+        "guideline": "Prefer rectangles with rounded corners and layered panels. Use subtle line patterns and large color blocks as brand texture.",
+        "why": "Creates a recognizable system that feels designed, not templated."
+      },
+      {
+        "name": "One idea per panel",
+        "guideline": "Each card/panel should communicate a single job: summary, metric, chart, action, or explanation. Avoid stuffing multiple concepts into one surface.",
+        "why": "Keeps the UI scalable as features grow."
+      },
+      {
+        "name": "Restraint over effects",
+        "guideline": "Minimize heavy shadows, glows, and complex gradients. Use simple, high-quality composition instead.",
+        "why": "Maintains premium feel and prevents style drift."
+      }
+    ],
+    "interaction": [
+      {
+        "name": "Soft feedback",
+        "guideline": "Hover/focus states should be subtle: slight lift, gentle tint, or a quiet ring. Motion is calm and short."
+      },
+      {
+        "name": "Clear hierarchy of actions",
+        "guideline": "Primary actions are filled deep green with light text. Secondary actions are bone/white with subtle border. Tertiary actions are text-only."
+      }
+    ]
+  },
+  "foundations": {
+    "color": {
+      "notes": "Core palette is a deep green anchor, pistachio accent, and bone paper base. Neutrals are warm and slightly desaturated to match the editorial brand pages.",
+      "tokens": {
+        "brand": {
+          "mughalGreen": "#2F5232",
+          "mughalGreen2": "#244228",
+          "pistachio": "#8ACA74",
+          "pistachio2": "#73B95B",
+          "bone": "#DCDEC5",
+          "paper": "#F4F4EE"
+        },
+        "surface": {
+          "primary": "#FFFFFF",
+          "paper": "#F4F4EE",
+          "bone": "#DCDEC5",
+          "greenPanel": "#2F5232",
+          "pistachioPanel": "#8ACA74",
+          "overlay": "rgba(11, 15, 12, 0.40)"
+        },
+        "text": {
+          "primary": "#0B0F0C",
+          "secondary": "rgba(11, 15, 12, 0.70)",
+          "muted": "rgba(11, 15, 12, 0.52)",
+          "inverse": "#FFFFFF",
+          "inverseMuted": "rgba(255, 255, 255, 0.66)",
+          "onGreen": "#FFFFFF",
+          "onBone": "#0B0F0C",
+          "link": "#2F5232"
+        },
+        "border": {
+          "subtle": "rgba(11, 15, 12, 0.08)",
+          "default": "rgba(11, 15, 12, 0.12)",
+          "strong": "rgba(11, 15, 12, 0.18)",
+          "inverseSubtle": "rgba(255, 255, 255, 0.18)"
+        },
+        "state": {
+          "success": "#2F5232",
+          "successSoft": "rgba(47, 82, 50, 0.14)",
+          "warning": "#B78A2A",
+          "warningSoft": "rgba(183, 138, 42, 0.16)",
+          "danger": "#B23A3A",
+          "dangerSoft": "rgba(178, 58, 58, 0.14)",
+          "info": "#2C6B57",
+          "infoSoft": "rgba(44, 107, 87, 0.14)"
+        },
+        "focus": {
+          "ring": "rgba(138, 202, 116, 0.38)",
+          "ringStrong": "rgba(138, 202, 116, 0.55)"
+        },
+        "pattern": {
+          "lineOnGreen": "rgba(220, 222, 197, 0.28)",
+          "lineOnBone": "rgba(47, 82, 50, 0.16)"
+        }
+      },
+      "usage": {
+        "canvas": "Use `brand.paper` or `surface.paper` as the default app background (the 'page').",
+        "heroPanels": "Use `brand.mughalGreen` for hero/section panels with `text.inverse`.",
+        "accentPanels": "Use `brand.pistachio` for secondary panels, highlights, and supporting data emphasis.",
+        "bodyCopy": "Use `text.secondary` for paragraphs and `text.muted` for captions/meta.",
+        "borders": "Use subtle borders sparingly; avoid outlining every card."
+      },
+      "themeSwatches": {
+        "riskRed": {
+          "name": "Risk Red (sample palette)",
+          "notes": "A red-forward theme ramp with neutral ramps. Includes 100–700 stops + base tokens.",
+          "tokens": {
+            "primary": {
+              "100": "#FDD8D8",
+              "200": "#FBA1A2",
+              "300": "#F95E61",
+              "400": "#D91B24",
+              "500": "#991016",
+              "600": "#5E0609",
+              "700": "#2B0102",
+              "base": "#D91B24"
+            },
+            "secondary": {
+              "100": "#FBEEEE",
+              "200": "#F3C6C7",
+              "300": "#EA9192",
+              "400": "#E55053",
+              "500": "#B03335",
+              "600": "#761F21",
+              "700": "#410D0E",
+              "base": "#761F21"
+            },
+            "tertiary": {
+              "100": "#ECECEC",
+              "200": "#C4C4C4",
+              "300": "#9D9D9D",
+              "400": "#787878",
+              "500": "#555555",
+              "600": "#353535",
+              "700": "#171717",
+              "base": "#C4C4C4"
+            },
+            "quaternary": {
+              "100": "#DCD7D7",
+              "200": "#B9AEAE",
+              "300": "#9B8585",
+              "400": "#776161",
+              "500": "#504141",
+              "600": "#2C2323",
+              "700": "#151010",
+              "base": "#504141"
+            },
+            "grey": {
+              "100": "#E2E0E0",
+              "200": "#BDB7B7",
+              "300": "#9B9090",
+              "400": "#786B6B",
+              "500": "#534949",
+              "600": "#302A2A",
+              "700": "#131010",
+              "base": "#534949"
+            }
+          }
+        },
+        "mintCitrus": {
+          "name": "Mint Citrus",
+          "notes": "Soft stone neutrals + mint ramp + cool greys + citrus ramp. Includes 100–700 stops + base tokens.",
+          "tokens": {
+            "primary": {
+              "100": "#EBEBDC",
+              "200": "#C3C3B6",
+              "300": "#9C9C92",
+              "400": "#77776F",
+              "500": "#54544E",
+              "600": "#33332F",
+              "700": "#161613",
+              "base": "#EBEBDC"
+            },
+            "secondary": {
+              "100": "#C9FCE0",
+              "200": "#60E5A8",
+              "300": "#4DBA87",
+              "400": "#3A9068",
+              "500": "#28694B",
+              "600": "#17442F",
+              "700": "#082216",
+              "base": "#28694B"
+            },
+            "tertiary": {
+              "100": "#E1E1E2",
+              "200": "#B9B9BB",
+              "300": "#939396",
+              "400": "#6E6E73",
+              "500": "#4C4C51",
+              "600": "#2C2C2F",
+              "700": "#111113",
+              "base": "#6E6E73"
+            },
+            "quaternary": {
+              "100": "#FFDAD6",
+              "200": "#FFA294",
+              "300": "#FF5F2D",
+              "400": "#C84100",
+              "500": "#8D2B00",
+              "600": "#571700",
+              "700": "#270600",
+              "base": "#FF5F2D"
+            },
+            "grey": {
+              "100": "#EAEAE4",
+              "200": "#C2C2BD",
+              "300": "#9B9B97",
+              "400": "#767673",
+              "500": "#535351",
+              "600": "#333331",
+              "700": "#151514",
+              "base": "#535351"
+            }
+          }
+        },
+        "sageForest": {
+          "name": "Sage Forest",
+          "notes": "Dusty warm neutrals + layered greens. Source ramps include 100–900 + DEFAULT.",
+          "tokens": {
+            "dust_grey": {
+              "DEFAULT": "#DAD7CD",
+              "100": "#312E24",
+              "200": "#615B48",
+              "300": "#92896C",
+              "400": "#B6B09C",
+              "500": "#DAD7CD",
+              "600": "#E2DFD7",
+              "700": "#E9E7E1",
+              "800": "#F0EFEB",
+              "900": "#F8F7F5"
+            },
+            "dry_sage": {
+              "DEFAULT": "#A3B18A",
+              "100": "#212619",
+              "200": "#434C33",
+              "300": "#64724C",
+              "400": "#859865",
+              "500": "#A3B18A",
+              "600": "#B6C1A2",
+              "700": "#C8D0B9",
+              "800": "#DAE0D0",
+              "900": "#EDEFE8"
+            },
+            "fern": {
+              "DEFAULT": "#588157",
+              "100": "#111911",
+              "200": "#233323",
+              "300": "#344C34",
+              "400": "#466645",
+              "500": "#588157",
+              "600": "#739F72",
+              "700": "#96B795",
+              "800": "#B9CFB9",
+              "900": "#DCE7DC"
+            },
+            "hunter_green": {
+              "DEFAULT": "#3A5A40",
+              "100": "#0C120D",
+              "200": "#172419",
+              "300": "#233626",
+              "400": "#2E4833",
+              "500": "#3A5A40",
+              "600": "#56865F",
+              "700": "#7AAA83",
+              "800": "#A7C7AC",
+              "900": "#D3E3D6"
+            },
+            "pine_teal": {
+              "DEFAULT": "#344E41",
+              "100": "#0A0F0D",
+              "200": "#141F1A",
+              "300": "#1F2E26",
+              "400": "#293D33",
+              "500": "#344E41",
+              "600": "#527A66",
+              "700": "#75A38C",
+              "800": "#A3C2B3",
+              "900": "#D1E0D9"
+            }
+          }
+        }
+      }
+    },
+    "typography": {
+      "notes": "Project override: use Sora as the primary font family for the app UI. It’s geometric, modern, and pairs well with the editorial layout. Keep Inter as fallback.",
+      "families": {
+        "ui": [
+          "Sora",
+          "Inter",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica",
+          "Arial",
+          "sans-serif"
+        ],
+        "mono": [
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "Liberation Mono",
+          "Courier New",
+          "monospace"
+        ]
+      },
+      "weights": {
+        "light": 300,
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      },
+      "letterSpacing": {
+        "displayTight": -0.8,
+        "headlineTight": -0.5,
+        "default": 0,
+        "capsWide": 0.8
+      },
+      "scale": {
+        "xs": {
+          "fontSize": 12,
+          "lineHeight": 16,
+          "letterSpacing": 0
+        },
+        "sm": {
+          "fontSize": 14,
+          "lineHeight": 20,
+          "letterSpacing": 0
+        },
+        "md": {
+          "fontSize": 16,
+          "lineHeight": 24,
+          "letterSpacing": 0
+        },
+        "lg": {
+          "fontSize": 18,
+          "lineHeight": 26,
+          "letterSpacing": -0.1
+        },
+        "xl": {
+          "fontSize": 22,
+          "lineHeight": 30,
+          "letterSpacing": -0.2
+        },
+        "2xl": {
+          "fontSize": 28,
+          "lineHeight": 36,
+          "letterSpacing": -0.3
+        },
+        "3xl": {
+          "fontSize": 40,
+          "lineHeight": 48,
+          "letterSpacing": -0.5
+        },
+        "4xl": {
+          "fontSize": 56,
+          "lineHeight": 62,
+          "letterSpacing": -0.8
+        },
+        "5xl": {
+          "fontSize": 72,
+          "lineHeight": 78,
+          "letterSpacing": -1.0
+        }
+      },
+      "usage": {
+        "displayHeadline": {
+          "size": "5xl",
+          "weight": "semibold",
+          "letterSpacing": "displayTight"
+        },
+        "pageTitle": {
+          "size": "4xl",
+          "weight": "semibold",
+          "letterSpacing": "headlineTight"
+        },
+        "sectionTitle": {
+          "size": "2xl",
+          "weight": "semibold",
+          "letterSpacing": "headlineTight"
+        },
+        "cardTitle": {
+          "size": "lg",
+          "weight": "medium",
+          "letterSpacing": "default"
+        },
+        "body": {
+          "size": "sm",
+          "weight": "regular",
+          "letterSpacing": "default"
+        },
+        "caption": {
+          "size": "xs",
+          "weight": "regular",
+          "letterSpacing": "default"
+        },
+        "numeralDisplay": {
+          "size": "5xl",
+          "weight": "light",
+          "letterSpacing": "displayTight"
+        }
+      }
+    },
+    "spacing": {
+      "notes": "This system is whitespace-forward. Use a 4px base scale but default to larger steps (12–40) for breathing room. Editorial layouts should feel intentionally spacious.",
+      "scalePx": {
+        "0": 0,
+        "1": 4,
+        "2": 8,
+        "3": 12,
+        "4": 16,
+        "5": 20,
+        "6": 24,
+        "7": 28,
+        "8": 32,
+        "9": 40,
+        "10": 48,
+        "11": 56,
+        "12": 64,
+        "13": 80,
+        "14": 96,
+        "15": 120
+      },
+      "layoutDefaults": {
+        "pagePaddingDesktop": 64,
+        "pagePaddingTablet": 40,
+        "pagePaddingMobile": 24,
+        "sectionGap": 64,
+        "stackGap": 24,
+        "denseGap": 12,
+        "cardPadding": 24,
+        "cardGap": 20
+      }
+    },
+    "radii": {
+      "notes": "Project override: all corners are 4px across the UI (no mixed radii, no pill-only shapes).",
+      "tokensPx": {
+        "xs": 4,
+        "sm": 4,
+        "md": 4,
+        "lg": 4,
+        "xl": 4,
+        "2xl": 4,
+        "pill": 4
+      },
+      "usage": {
+        "card": "md",
+        "panel": "md",
+        "button": "md",
+        "input": "md",
+        "chip": "md",
+        "modal": "md",
+        "brandShape": "md"
+      }
+    },
+    "elevation": {
+      "notes": "Primarily flat surfaces. Use elevation only when necessary for layering (menus, modals, floating panels). Keep shadows soft and wide.",
+      "shadowTokens": {
+        "none": "none",
+        "sm": "0 1px 1px rgba(11, 15, 12, 0.06), 0 8px 18px rgba(11, 15, 12, 0.08)",
+        "md": "0 2px 10px rgba(11, 15, 12, 0.10), 0 18px 40px rgba(11, 15, 12, 0.12)",
+        "lg": "0 8px 22px rgba(11, 15, 12, 0.12), 0 28px 70px rgba(11, 15, 12, 0.16)"
+      },
+      "usage": {
+        "card": "none",
+        "floatingPanel": "sm",
+        "dropdown": "sm",
+        "modal": "md"
+      }
+    },
+    "stroke": {
+      "notes": "Use borders as separators, not as the main way to define cards. Prefer whitespace + color blocks.",
+      "widthPx": {
+        "hairline": 1,
+        "strong": 2
+      }
+    },
+    "motion": {
+      "notes": "Quiet, product-like motion. No bouncy easing. Keep durations short and transitions subtle.",
+      "durationsMs": {
+        "fast": 120,
+        "normal": 180,
+        "slow": 260
+      },
+      "easing": {
+        "standard": "cubic-bezier(0.2, 0.0, 0.0, 1.0)",
+        "decelerate": "cubic-bezier(0.0, 0.0, 0.0, 1.0)",
+        "accelerate": "cubic-bezier(0.4, 0.0, 1.0, 1.0)"
+      },
+      "patterns": [
+        "Hover: translateY(-1px) or subtle tint shift (2–4% change), never both heavily.",
+        "Press: remove lift; slightly reduce opacity or shadow.",
+        "Panels: fade + scale from 0.99 (barely perceptible)."
+      ]
+    },
+    "iconography": {
+      "notes": "Iconography is minimal and geometric. Prefer rounded corners, 1.5–2px strokes, and avoid overly detailed icons.",
+      "sizesPx": {
+        "sm": 16,
+        "md": 20,
+        "lg": 24,
+        "xl": 32
+      },
+      "strokeWidthPx": 1.75,
+      "styleRules": [
+        "Use rounded line caps and joins.",
+        "Prefer single-color icons that inherit from text color.",
+        "When using icon containers, use rounded-square backplates in bone or pistachio at low saturation."
+      ]
+    },
+    "imagery": {
+      "notes": "Photography is candid, workplace/productivity oriented, and used as cropped blocks within a grid. Avoid overly staged stock photos.",
+      "artDirection": [
+        "Warm neutrals and soft daylight; avoid harsh flash or extreme contrast.",
+        "Crop images into simple rectangles; let grid do the design.",
+        "When needed, apply a very subtle green-tinted overlay to harmonize imagery with the palette (5–10%)."
+      ]
+    },
+    "backgroundMotifs": {
+      "notes": "Use subtle rounded-rectangle linework as a quiet brand texture on deep green panels—thin strokes, low opacity, no strong contrast.",
+      "patternSpec": {
+        "strokeColor": "foundations.color.tokens.pattern.lineOnGreen",
+        "strokeWidthPx": 1,
+        "opacity": 0.28,
+        "shapeLanguage": "Large rounded rectangles and arcs that drift off-canvas; never centered or symmetrical.",
+        "density": "Low density: 2–6 strokes per hero panel.",
+        "doNotDo": [
+          "Do not create busy patterns or high-contrast line art.",
+          "Do not use small noisy shapes; keep strokes large and calm."
+        ]
+      }
+    }
+  },
+  "layout": {
+    "grid": {
+      "notes": "Layout should feel like a brand guideline page: strong alignment, large margins, and a consistent left text column.",
+      "desktop": {
+        "columns": 12,
+        "gutterPx": 24,
+        "maxWidthPx": 1200,
+        "outerPaddingPx": 64
+      },
+      "tablet": {
+        "columns": 8,
+        "gutterPx": 20,
+        "outerPaddingPx": 40
+      },
+      "mobile": {
+        "columns": 4,
+        "gutterPx": 16,
+        "outerPaddingPx": 24
+      }
+    },
+    "pageTemplates": {
+      "brandGuidelineSpread": {
+        "description": "Left column for text (title + paragraph), right area for visuals (logo lockup, image blocks, color panels).",
+        "proportions": {
+          "leftTextColumnPct": 34,
+          "rightVisualColumnPct": 66
+        },
+        "rules": [
+          "Left column: big title, then short paragraph, then optional small footer meta.",
+          "Right column: 1–3 strong blocks (image, logo, color panels) aligned to the grid.",
+          "Use big whitespace above and between sections—do not fill every area."
+        ]
+      },
+      "sectionCover": {
+        "description": "Deep green panel with subtle line motif, large title, and a thin numeral in the top-right.",
+        "rules": [
+          "Top-left: brand lockup (icon + wordmark).",
+          "Top-right: section number in a thin weight, very large size.",
+          "Bottom-left: small meta line (e.g., 'MarketRisk × Studio' or URL)."
+        ]
+      }
+    },
+    "appShell": {
+      "notes": "For the product UI, keep the same calm editorial vibe: paper canvas, green headers for emphasis, and card/panel surfaces with rounded rectangles.",
+      "header": {
+        "heightPx": 72,
+        "bg": "brand.paper",
+        "titlePlacement": "left aligned",
+        "actionsPlacement": "right aligned"
+      },
+      "contentWidth": {
+        "maxWidthPx": 1200,
+        "align": "center",
+        "sidePaddingPx": {
+          "desktop": 64,
+          "tablet": 40,
+          "mobile": 24
+        }
+      }
+    }
+  },
+  "brand": {
+    "logo": {
+      "primaryLockup": "Rounded-square icon + wordmark to the right.",
+      "wordmark": {
+        "text": "MarketRisk",
+        "case": "Title case",
+        "style": "Clean sans, medium/semibold weight, tight-ish tracking."
+      },
+      "icon": {
+        "shape": "Rounded square container with an inset rounded square and a checkmark motif.",
+        "cornerRadius": "foundations.radii.usage.brandShape",
+        "recommendedColors": {
+          "container": "brand.bone",
+          "inset": "brand.mughalGreen",
+          "check": "brand.pistachio"
+        }
+      },
+      "colorUsage": [
+        "On deep green backgrounds: wordmark and icon details should be light (white/bone).",
+        "On bone/paper backgrounds: wordmark can be mughal green; avoid pure black for the logo."
+      ],
+      "clearSpaceRule": "Maintain at least 1× icon height of clear space around the full lockup.",
+      "doNotDo": [
+        "Do not stretch the logo or change corner radii.",
+        "Do not add outlines/shadows to the logo.",
+        "Do not place the dark logo on dark green; use inverse."
+      ]
+    }
+  },
+  "components": {
+    "Panel": {
+      "description": "The primary composition unit (like the big blocks in the brand pages). Used for hero sections, key summaries, and feature blocks.",
+      "style": {
+        "bgDefault": "surface.primary",
+        "bgBrand": "brand.mughalGreen",
+        "bgAccent": "brand.pistachio",
+        "radius": "radii.tokensPx.2xl",
+        "paddingPx": 32,
+        "border": "none",
+        "shadow": "elevation.shadowTokens.none"
+      },
+      "rules": [
+        "Use panels to create large, confident blocks of meaning.",
+        "Use very little internal clutter: title, short text, and one key visual element."
+      ]
+    },
+    "Card": {
+      "description": "Smaller surface for UI elements (lists, forms, charts).",
+      "style": {
+        "bg": "surface.primary",
+        "radius": "radii.tokensPx.xl",
+        "paddingPx": 24,
+        "border": "border.subtle",
+        "shadow": "elevation.shadowTokens.none"
+      },
+      "variants": {
+        "outlined": {
+          "border": "border.default",
+          "shadow": "none"
+        },
+        "bone": {
+          "bg": "surface.bone",
+          "border": "none"
+        },
+        "green": {
+          "bg": "surface.greenPanel",
+          "text": "text.inverse",
+          "border": "border.inverseSubtle"
+        }
+      }
+    },
+    "Button": {
+      "description": "Rectangular-with-rounding buttons. Primary buttons are deep green; avoid overly pill-shaped buttons unless intentionally used for small chips.",
+      "sizes": {
+        "sm": { "heightPx": 36, "px": 14 },
+        "md": { "heightPx": 44, "px": 18 },
+        "lg": { "heightPx": 52, "px": 22 }
+      },
+      "style": {
+        "radius": "radii.tokensPx.lg",
+        "font": "typography.usage.body",
+        "gapPx": 10,
+        "focusRing": "focus.ring"
+      },
+      "variants": {
+        "primary": {
+          "bg": "brand.mughalGreen",
+          "text": "text.inverse"
+        },
+        "secondary": {
+          "bg": "surface.primary",
+          "text": "text.primary",
+          "border": "border.default"
+        },
+        "tertiary": {
+          "bg": "transparent",
+          "text": "brand.mughalGreen"
+        }
+      }
+    },
+    "Tag": {
+      "description": "Small chips used for status/category; these can be pill-shaped.",
+      "style": {
+        "radius": "radii.tokensPx.pill",
+        "px": 10,
+        "py": 6,
+        "font": "typography.scale.xs"
+      },
+      "variants": {
+        "neutral": { "bg": "surface.bone", "text": "text.secondary" },
+        "success": { "bg": "state.successSoft", "text": "brand.mughalGreen" },
+        "warning": { "bg": "state.warningSoft", "text": "state.warning" },
+        "danger": { "bg": "state.dangerSoft", "text": "state.danger" }
+      }
+    },
+    "DataViz": {
+      "description": "Charts should be simple, rounded, and quiet—matching the editorial tone.",
+      "rules": [
+        "Prefer clean bars/lines with rounded ends.",
+        "Use mughal green for primary series; pistachio for secondary; bone for background tracks.",
+        "Avoid heavy gridlines; if needed, use very subtle lines (`border.subtle`)."
+      ]
+    }
+  },
+  "contentGuidelines": {
+    "tone": [
+      "Confident, calm, and direct",
+      "Avoid hype language; focus on clarity and trust",
+      "Short sentences; one idea per paragraph"
+    ],
+    "headlines": [
+      "Use simple, declarative headlines ('Risk Overview', 'Exposure Trends').",
+      "Avoid long marketing taglines in-product; keep marketing copy on landing pages."
+    ],
+    "numbers": [
+      "Use clear formatting (grouping separators, consistent decimals).",
+      "Prefer highlighting deltas with subtle color and short labels rather than heavy iconography."
+    ]
+  },
+  "accessibility": {
+    "focus": {
+      "rule": "Every interactive element must have a visible focus ring.",
+      "ring": "foundations.color.tokens.focus.ring",
+      "ringOffsetPx": 2
+    },
+    "contrast": {
+      "rule": "Ensure WCAG AA contrast where practical. On green panels, default to white text. Avoid muted text on pistachio when readability suffers—use darker text."
+    },
+    "hitTargets": {
+      "minSizePx": 44,
+      "rule": "All tap targets should be at least 44px in either dimension."
+    }
+  },
+  "aiBuildRules": {
+    "priorityOrderWhenBuilding": [
+      "Establish the canvas: `paper` background, wide margins, editorial spacing.",
+      "Set type hierarchy: big titles, softer subtitles, restrained body copy.",
+      "Use large panels (green/pistachio/bone blocks) to structure the page before adding fine UI components.",
+      "Keep corners rounded-rectangle (not sharp, not overly pillowy).",
+      "Add subtle line motif only as background texture on green panels (low opacity)."
+    ],
+    "compositionChecklist": [
+      "Is there a clear left-to-right hierarchy (text column vs visual column) when appropriate?",
+      "Are margins generous (desktop padding ~64px) and sections well separated (~64px gap)?",
+      "Is deep green used as an anchor, not everywhere?",
+      "Are there 1–3 strong blocks per view (not 10 small boxes)?",
+      "Are borders and shadows restrained?"
+    ],
+    "allowedCustomization": [
+      "Small adjustments to spacing for responsiveness.",
+      "Adding new component variants only if they reuse the same tokens and shape language.",
+      "Data viz colors may introduce 1–2 muted supportive tones derived from pistachio/bone if needed, but keep the system cohesive."
+    ],
+    "avoidStyleDrift": [
+      "Do not introduce new font families.",
+      "Do not introduce saturated blues/pinks/purples for UI chrome.",
+      "Do not switch to dense, table-heavy layouts without panels and whitespace."
+    ]
+  }
+}
+
+

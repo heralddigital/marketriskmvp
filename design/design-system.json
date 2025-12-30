@@ -1,0 +1,1021 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "meta": {
+    "name": "Creator Dashboard — App Design System (Tailwind-first)",
+    "brandName": "MarketRisk",
+    "version": "1.1.0",
+    "lastUpdated": "2025-12-30",
+    "goal": "A comprehensive, app-specific style guide for AI (and humans) to build new features with consistent visuals. This document reflects the exact Tailwind tokens and component class recipes currently used in the app.",
+    "sourceOfTruth": [
+      {
+        "type": "tailwind_config",
+        "path": "creator-dashboard/tailwind.config.js"
+      },
+      {
+        "type": "global_css",
+        "path": "creator-dashboard/src/index.css"
+      },
+      {
+        "type": "reference_ui",
+        "path": "creator-dashboard/src/App.jsx"
+      },
+      {
+        "type": "brand_guidelines",
+        "path": "design.json"
+      }
+    ]
+  },
+  "highLevelGuidelines": {
+    "styleSummary": [
+      "Modern editorial layout: large, confident type; generous negative space; strong left-aligned hierarchy.",
+      "Calm, trustworthy palette: deep heritage green as the anchor, pistachio as optimistic accent, bone/paper as the base.",
+      "Geometry with softness: rounded rectangles, layered panels, subtle linework patterns as quiet texture (not decoration).",
+      "Restraint over effects: minimal heavy shadows/glows; rely on composition and spacing."
+    ],
+    "doNotDo": [
+      "Do not introduce new saturated UI colors outside the token palette (avoid neon, loud gradients).",
+      "Do not compress spacing or reduce line-heights to fit more content—this system breathes.",
+      "Do not outline everything with strong borders; use subtle separators and whitespace.",
+      "Do not overuse shadows; keep most surfaces flat and clean.",
+      "Do not introduce new font families without updating the global font import and Tailwind config."
+    ]
+  },
+  "implementationConventions": {
+    "framework": "React + Vite",
+    "styling": {
+      "primary": "Tailwind CSS utility classes",
+      "tokenClasses": [
+        "bg-brand-*",
+        "bg-surface-*",
+        "text-text-*",
+        "border-border-*",
+        "text-state-*",
+        "bg-state-*-soft",
+        "duration-fast|duration-normal|duration-slow",
+        "ease-standard|ease-decelerate|ease-accelerate"
+      ],
+      "rule": "Prefer token classes from Tailwind theme for color, typography, spacing, radius, and motion. Use arbitrary values only when a token does not exist and document it here."
+    },
+    "fileOrganization": {
+      "current": "All UI is currently in creator-dashboard/src/App.jsx (including inline components).",
+      "recommended": "As the app grows, extract reusable components into creator-dashboard/src/components/ (e.g., Button.jsx, Card.jsx) while keeping styling aligned to this document."
+    },
+    "responsiveness": {
+      "rule": "Use Tailwind responsive prefixes and the existing layout patterns (single column on mobile; 2 columns at md; 3 metric cards at md). Avoid bespoke breakpoints unless absolutely necessary.",
+      "currentBreakpoints": "Tailwind defaults (sm, md, lg, xl, 2xl)."
+    }
+  },
+  "foundations": {
+    "globalStyles": {
+      "body": {
+        "source": "creator-dashboard/src/index.css",
+        "styles": {
+          "background": "#F4F4EE",
+          "color": "#0B0F0C",
+          "fontFamily": "Sora (loaded via Google Fonts import) with system-ui fallback",
+          "fontSmoothing": "antialiased (webkit + moz)"
+        },
+        "tailwindEquivalent": [
+          "bg-surface-paper",
+          "text-text-primary",
+          "font-sans"
+        ]
+      }
+    },
+    "colors": {
+      "tailwindThemeKeys": {
+        "brand": {
+          "mughal-green": "#2F5232",
+          "mughal-green-2": "#244228",
+          "pistachio": "#8ACA74",
+          "pistachio-2": "#73B95B",
+          "bone": "#DCDEC5",
+          "paper": "#F4F4EE"
+        },
+        "surface": {
+          "primary": "#FFFFFF",
+          "paper": "#F4F4EE",
+          "bone": "#DCDEC5",
+          "green-panel": "#2F5232",
+          "pistachio-panel": "#8ACA74"
+        },
+        "text": {
+          "primary": "#0B0F0C",
+          "secondary": "rgba(11, 15, 12, 0.70)",
+          "muted": "rgba(11, 15, 12, 0.52)",
+          "inverse": "#FFFFFF",
+          "inverse-muted": "rgba(255, 255, 255, 0.66)",
+          "on-green": "#FFFFFF",
+          "on-bone": "#0B0F0C",
+          "link": "#2F5232"
+        },
+        "border": {
+          "subtle": "rgba(11, 15, 12, 0.08)",
+          "DEFAULT": "rgba(11, 15, 12, 0.12)",
+          "strong": "rgba(11, 15, 12, 0.18)",
+          "inverse-subtle": "rgba(255, 255, 255, 0.18)"
+        },
+        "state": {
+          "success": "#2F5232",
+          "success-soft": "rgba(47, 82, 50, 0.14)",
+          "warning": "#B78A2A",
+          "warning-soft": "rgba(183, 138, 42, 0.16)",
+          "danger": "#B23A3A",
+          "danger-soft": "rgba(178, 58, 58, 0.14)",
+          "info": "#2C6B57",
+          "info-soft": "rgba(44, 107, 87, 0.14)"
+        },
+        "focus": {
+          "ring": "rgba(138, 202, 116, 0.38)",
+          "ring-strong": "rgba(138, 202, 116, 0.55)"
+        }
+      },
+      "usageRules": [
+        "Canvas background: bg-surface-paper (paper tone).",
+        "Primary emphasis panels: bg-brand-mughal-green with text-text-inverse.",
+        "Accent panels: bg-brand-pistachio with dark text (text-text-on-bone / text-text-primary).",
+        "Cards: bg-surface-primary (currently implemented as bg-white).",
+        "Borders: border-border-subtle for dividers and card outlines."
+      ],
+      "themeSwatches": {
+        "riskRed": {
+          "name": "Risk Red (sample palette)",
+          "ramps": {
+            "primary": {
+              "100": "#FDD8D8",
+              "200": "#FBA1A2",
+              "300": "#F95E61",
+              "400": "#D91B24",
+              "500": "#991016",
+              "600": "#5E0609",
+              "700": "#2B0102",
+              "base": "#D91B24"
+            },
+            "secondary": {
+              "100": "#FBEEEE",
+              "200": "#F3C6C7",
+              "300": "#EA9192",
+              "400": "#E55053",
+              "500": "#B03335",
+              "600": "#761F21",
+              "700": "#410D0E",
+              "base": "#761F21"
+            },
+            "tertiary": {
+              "100": "#ECECEC",
+              "200": "#C4C4C4",
+              "300": "#9D9D9D",
+              "400": "#787878",
+              "500": "#555555",
+              "600": "#353535",
+              "700": "#171717",
+              "base": "#C4C4C4"
+            },
+            "quaternary": {
+              "100": "#DCD7D7",
+              "200": "#B9AEAE",
+              "300": "#9B8585",
+              "400": "#776161",
+              "500": "#504141",
+              "600": "#2C2323",
+              "700": "#151010",
+              "base": "#504141"
+            },
+            "grey": {
+              "100": "#E2E0E0",
+              "200": "#BDB7B7",
+              "300": "#9B9090",
+              "400": "#786B6B",
+              "500": "#534949",
+              "600": "#302A2A",
+              "700": "#131010",
+              "base": "#534949"
+            }
+          }
+        },
+        "mintCitrus": {
+          "name": "Mint Citrus",
+          "ramps": {
+            "primary": {
+              "100": "#EBEBDC",
+              "200": "#C3C3B6",
+              "300": "#9C9C92",
+              "400": "#77776F",
+              "500": "#54544E",
+              "600": "#33332F",
+              "700": "#161613",
+              "base": "#EBEBDC"
+            },
+            "secondary": {
+              "100": "#C9FCE0",
+              "200": "#60E5A8",
+              "300": "#4DBA87",
+              "400": "#3A9068",
+              "500": "#28694B",
+              "600": "#17442F",
+              "700": "#082216",
+              "base": "#28694B"
+            },
+            "tertiary": {
+              "100": "#E1E1E2",
+              "200": "#B9B9BB",
+              "300": "#939396",
+              "400": "#6E6E73",
+              "500": "#4C4C51",
+              "600": "#2C2C2F",
+              "700": "#111113",
+              "base": "#6E6E73"
+            },
+            "quaternary": {
+              "100": "#FFDAD6",
+              "200": "#FFA294",
+              "300": "#FF5F2D",
+              "400": "#C84100",
+              "500": "#8D2B00",
+              "600": "#571700",
+              "700": "#270600",
+              "base": "#FF5F2D"
+            },
+            "grey": {
+              "100": "#EAEAE4",
+              "200": "#C2C2BD",
+              "300": "#9B9B97",
+              "400": "#767673",
+              "500": "#535351",
+              "600": "#333331",
+              "700": "#151514",
+              "base": "#535351"
+            }
+          }
+        },
+        "sageForest": {
+          "name": "Sage Forest",
+          "ramps": {
+            "dust_grey": {
+              "DEFAULT": "#DAD7CD",
+              "100": "#312E24",
+              "200": "#615B48",
+              "300": "#92896C",
+              "400": "#B6B09C",
+              "500": "#DAD7CD",
+              "600": "#E2DFD7",
+              "700": "#E9E7E1",
+              "800": "#F0EFEB",
+              "900": "#F8F7F5"
+            },
+            "dry_sage": {
+              "DEFAULT": "#A3B18A",
+              "100": "#212619",
+              "200": "#434C33",
+              "300": "#64724C",
+              "400": "#859865",
+              "500": "#A3B18A",
+              "600": "#B6C1A2",
+              "700": "#C8D0B9",
+              "800": "#DAE0D0",
+              "900": "#EDEFE8"
+            },
+            "fern": {
+              "DEFAULT": "#588157",
+              "100": "#111911",
+              "200": "#233323",
+              "300": "#344C34",
+              "400": "#466645",
+              "500": "#588157",
+              "600": "#739F72",
+              "700": "#96B795",
+              "800": "#B9CFB9",
+              "900": "#DCE7DC"
+            },
+            "hunter_green": {
+              "DEFAULT": "#3A5A40",
+              "100": "#0C120D",
+              "200": "#172419",
+              "300": "#233626",
+              "400": "#2E4833",
+              "500": "#3A5A40",
+              "600": "#56865F",
+              "700": "#7AAA83",
+              "800": "#A7C7AC",
+              "900": "#D3E3D6"
+            },
+            "pine_teal": {
+              "DEFAULT": "#344E41",
+              "100": "#0A0F0D",
+              "200": "#141F1A",
+              "300": "#1F2E26",
+              "400": "#293D33",
+              "500": "#344E41",
+              "600": "#527A66",
+              "700": "#75A38C",
+              "800": "#A3C2B3",
+              "900": "#D1E0D9"
+            }
+          }
+        }
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "tailwind": {
+          "sans": [
+            "Sora",
+            "Inter",
+            "system-ui",
+            "-apple-system",
+            "Segoe UI",
+            "Roboto",
+            "Helvetica",
+            "Arial",
+            "sans-serif"
+          ],
+          "mono": [
+            "ui-monospace",
+            "SFMono-Regular",
+            "Menlo",
+            "Monaco",
+            "Consolas",
+            "Liberation Mono",
+            "Courier New",
+            "monospace"
+          ]
+        },
+        "note": "Sora is the primary font and is imported via Google Fonts in creator-dashboard/src/index.css. Inter remains as a fallback."
+      },
+      "typeScale": {
+        "tailwindFontSize": {
+          "text-xs": { "fontSize": "12px", "lineHeight": "16px", "letterSpacing": "0" },
+          "text-sm": { "fontSize": "14px", "lineHeight": "20px", "letterSpacing": "0" },
+          "text-md": { "fontSize": "16px", "lineHeight": "24px", "letterSpacing": "0" },
+          "text-lg": { "fontSize": "18px", "lineHeight": "26px", "letterSpacing": "-0.1px" },
+          "text-xl": { "fontSize": "22px", "lineHeight": "30px", "letterSpacing": "-0.2px" },
+          "text-2xl": { "fontSize": "28px", "lineHeight": "36px", "letterSpacing": "-0.3px" },
+          "text-3xl": { "fontSize": "40px", "lineHeight": "48px", "letterSpacing": "-0.5px" },
+          "text-4xl": { "fontSize": "56px", "lineHeight": "62px", "letterSpacing": "-0.8px" },
+          "text-5xl": { "fontSize": "72px", "lineHeight": "78px", "letterSpacing": "-1.0px" }
+        }
+      },
+      "commonHierarchy": {
+        "appBrand": { "classes": "text-lg font-semibold text-text-primary" },
+        "panelKicker": { "classes": "text-sm text-text-inverse-muted" },
+        "heroTitle": {
+          "classes": "text-4xl font-semibold text-text-inverse",
+          "inlineStyle": { "letterSpacing": "-0.8px" }
+        },
+        "heroBody": { "classes": "text-md text-text-inverse-muted" },
+        "cardTitle": { "classes": "text-lg font-medium text-text-primary" },
+        "bigNumber": {
+          "classes": "text-3xl font-light text-text-primary",
+          "inlineStyle": { "letterSpacing": "-0.5px" }
+        },
+        "meta": { "classes": "text-xs text-text-muted" }
+      }
+    },
+    "spacing": {
+      "tailwindSpacingPx": {
+        "0": 0,
+        "1": 4,
+        "2": 8,
+        "3": 12,
+        "4": 16,
+        "5": 20,
+        "6": 24,
+        "7": 28,
+        "8": 32,
+        "9": 40,
+        "10": 48,
+        "11": 56,
+        "12": 64,
+        "13": 80,
+        "14": 96,
+        "15": 120
+      },
+      "layoutDefaultsUsedInApp": {
+        "containerMaxWidth": "max-w-[1200px]",
+        "containerPaddingX": "px-12 (64px)",
+        "pagePaddingY": "py-12 (64px)",
+        "panelPadding": "p-8 (32px)",
+        "cardPadding": "p-6 (24px)",
+        "gridGap": "gap-6 (24px)",
+        "sectionMarginBottom": "mb-12 (64px)"
+      }
+    },
+    "radii": {
+      "note": "Project rule: all corner radii resolve to 4px (including chips/tags). The class names (rounded-xl, rounded-pill, etc.) may still appear in code, but they all map to 4px via Tailwind tokens.",
+      "tailwindBorderRadiusPx": {
+        "rounded-xs": 4,
+        "rounded-sm": 4,
+        "rounded-md": 4,
+        "rounded-lg": 4,
+        "rounded-xl": 4,
+        "rounded-2xl": 4,
+        "rounded-pill": 4
+      },
+      "usage": {
+        "headerLogoOuter": "rounded-xl",
+        "headerLogoInner": "rounded-md",
+        "heroPanel": "rounded-2xl",
+        "cards": "rounded-xl",
+        "metricCard": "rounded-lg",
+        "chips": "rounded-pill"
+      }
+    },
+    "elevation": {
+      "tailwindShadows": {
+        "shadow-sm": "0 1px 1px rgba(11, 15, 12, 0.06), 0 8px 18px rgba(11, 15, 12, 0.08)",
+        "shadow-md": "0 2px 10px rgba(11, 15, 12, 0.10), 0 18px 40px rgba(11, 15, 12, 0.12)",
+        "shadow-lg": "0 8px 22px rgba(11, 15, 12, 0.12), 0 28px 70px rgba(11, 15, 12, 0.16)"
+      },
+      "usageInApp": [
+        "Most cards are flat (no shadow).",
+        "Secondary button uses hover:shadow-sm."
+      ]
+    },
+    "motion": {
+      "durations": {
+        "duration-fast": "120ms",
+        "duration-normal": "180ms",
+        "duration-slow": "260ms"
+      },
+      "timingFunctions": {
+        "ease-standard": "cubic-bezier(0.2, 0.0, 0.0, 1.0)",
+        "ease-decelerate": "cubic-bezier(0.0, 0.0, 0.0, 1.0)",
+        "ease-accelerate": "cubic-bezier(0.4, 0.0, 1.0, 1.0)"
+      },
+      "usageInApp": [
+        "Nav links: transition-colors duration-normal",
+        "Buttons: transition-all duration-normal",
+        "Chart fill: transition-all duration-slow"
+      ]
+    }
+  },
+  "layout": {
+    "appCanvas": {
+      "wrapperClasses": "min-h-screen bg-surface-paper",
+      "contentContainerClasses": "max-w-[1200px] mx-auto px-12"
+    },
+    "appHeader": {
+      "heightPx": 72,
+      "classes": "h-[72px] bg-surface-paper border-b border-border-subtle",
+      "innerClasses": "max-w-[1200px] mx-auto px-12 h-full flex items-center justify-between"
+    },
+    "contentArea": {
+      "classes": "max-w-[1200px] mx-auto px-12 py-12"
+    },
+    "grids": {
+      "heroMetrics": {
+        "classes": "grid grid-cols-1 md:grid-cols-3 gap-6"
+      },
+      "mainCards": {
+        "classes": "grid grid-cols-1 md:grid-cols-2 gap-6"
+      }
+    }
+  },
+  "components": {
+    "AppShell": {
+      "description": "Overall page shell: paper background, header with subtle border, centered 1200px content.",
+      "anatomy": ["Canvas", "Header", "Main"],
+      "canvas": { "classes": "min-h-screen bg-surface-paper" },
+      "header": {
+        "classes": "h-[72px] bg-surface-paper border-b border-border-subtle",
+        "inner": { "classes": "max-w-[1200px] mx-auto px-12 h-full flex items-center justify-between" }
+      },
+      "main": { "classes": "max-w-[1200px] mx-auto px-12 py-12" }
+    },
+    "LogoMark": {
+      "description": "Rounded-square brand mark used in header. Bone container + green inset + pistachio check.",
+      "container": { "classes": "w-8 h-8 bg-brand-bone rounded-xl flex items-center justify-center" },
+      "inset": { "classes": "w-5 h-5 bg-brand-mughal-green rounded-md flex items-center justify-center" },
+      "icon": { "classes": "w-3 h-3 text-brand-pistachio", "type": "inline_svg", "fill": "currentColor" }
+    },
+    "NavLink": {
+      "description": "Header navigation links (tertiary action style).",
+      "base": {
+        "element": "a",
+        "classes": "text-sm text-text-secondary hover:text-text-primary transition-colors duration-normal"
+      }
+    },
+    "HeroPanel": {
+      "description": "Primary hero panel. Deep green surface, subtle linework motif, inverse typography, metric cards inside.",
+      "container": {
+        "element": "section",
+        "classes": "bg-brand-mughal-green rounded-2xl p-8 mb-12 relative overflow-hidden"
+      },
+      "backgroundMotif": {
+        "containerClasses": "absolute inset-0 opacity-20",
+        "stroke": "rgba(220, 222, 197, 0.28)",
+        "strokeWidthPx": 1,
+        "shapeLanguage": "Large rounded rectangles partially off-canvas"
+      },
+      "kicker": { "classes": "text-text-inverse-muted text-sm mb-2", "example": "Creator Analytics" },
+      "title": {
+        "classes": "text-4xl font-semibold text-text-inverse mb-4",
+        "inlineStyle": { "letterSpacing": "-0.8px" }
+      },
+      "body": { "classes": "text-text-inverse-muted text-md max-w-xl mb-8" },
+      "metricsGrid": { "classes": "grid grid-cols-1 md:grid-cols-3 gap-6" }
+    },
+    "MetricCard": {
+      "description": "Glass card used inside the hero panel.",
+      "container": { "classes": "bg-white/10 backdrop-blur-sm rounded-lg p-5 border border-white/20" },
+      "label": { "classes": "text-text-inverse-muted text-xs mb-2" },
+      "row": { "classes": "flex items-baseline gap-3" },
+      "value": {
+        "classes": "text-3xl font-light text-text-inverse",
+        "inlineStyle": { "letterSpacing": "-0.5px" }
+      },
+      "change": {
+        "classes": "text-sm font-medium",
+        "variants": {
+          "up": "text-brand-pistachio",
+          "down": "text-red-300"
+        },
+        "note": "Down trend currently uses Tailwind default red-300. Prefer swapping to a tokenized state color (e.g., text-state-danger) if you standardize trend colors."
+      }
+    },
+    "Card": {
+      "description": "Default content card: white surface, subtle border, rounded-xl, flat.",
+      "container": { "classes": "bg-white rounded-xl p-6 border border-border-subtle" },
+      "headerRow": { "classes": "flex items-center justify-between mb-6" },
+      "title": { "classes": "text-lg font-medium text-text-primary" }
+    },
+    "Chip": {
+      "description": "Small label used for time ranges and metric chips (4px radius in this project).",
+      "container": { "classes": "text-xs font-medium bg-surface-bone rounded-pill" },
+      "variantsInApp": [
+        {
+          "name": "timeRange",
+          "classes": "text-xs text-text-muted bg-surface-bone px-3 py-1.5 rounded-pill"
+        },
+        {
+          "name": "engagement",
+          "classes": "text-xs font-medium text-text-primary bg-surface-bone px-2.5 py-1 rounded-pill"
+        }
+      ]
+    },
+    "StatDeltaPill": {
+      "description": "Delta indicator pill (icon + percent) used in Audience Growth card.",
+      "container": { "classes": "flex items-center gap-2 px-3 py-2 bg-state-success-soft rounded-lg" },
+      "icon": { "classes": "w-4 h-4 text-state-success" },
+      "text": { "classes": "text-sm font-medium text-state-success" }
+    },
+    "ChartBar": {
+      "description": "Simple horizontal bar with a bone track and green fill.",
+      "container": { "classes": "flex items-center gap-3" },
+      "label": { "classes": "text-xs text-text-muted w-12 flex-shrink-0" },
+      "track": { "classes": "flex-1 h-2 bg-surface-bone rounded-pill overflow-hidden" },
+      "fill": { "classes": "h-full bg-brand-mughal-green rounded-pill transition-all duration-slow" },
+      "value": { "classes": "text-xs text-text-secondary font-medium w-8 text-right" }
+    },
+    "ContentItem": {
+      "description": "Row item inside Top Performing Content list.",
+      "container": { "classes": "flex items-center justify-between py-3 border-b border-border-subtle last:border-0" },
+      "left": { "classes": "flex-1 min-w-0" },
+      "title": { "classes": "text-sm font-medium text-text-primary mb-1 truncate" },
+      "meta": { "classes": "text-xs text-text-muted" },
+      "right": { "classes": "flex items-center gap-2 ml-4" }
+    },
+    "TextButton": {
+      "description": "Text-only button used in card headers (e.g., View all).",
+      "element": "button",
+      "classes": "text-sm text-brand-mughal-green hover:text-brand-mughal-green-2 transition-colors"
+    },
+    "ActionPanel": {
+      "description": "Accent panel used for end-of-page call-to-action. Pistachio background, dark text, two buttons.",
+      "container": { "classes": "bg-brand-pistachio rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6" },
+      "title": { "classes": "text-2xl font-semibold text-text-on-bone mb-2", "inlineStyle": { "letterSpacing": "-0.3px" } },
+      "body": { "classes": "text-text-on-bone opacity-80 text-md" },
+      "actions": { "classes": "flex gap-3 flex-shrink-0" }
+    },
+    "Button": {
+      "description": "Primary and secondary buttons as currently implemented in the ActionPanel.",
+      "base": {
+        "element": "button",
+        "classes": "px-6 py-3 rounded-lg font-medium text-sm transition-all duration-normal",
+        "focus": {
+          "rule": "Add a visible focus ring for accessibility (not currently in the example UI).",
+          "recommendedClasses": "focus:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-paper"
+        }
+      },
+      "variants": {
+        "secondary": {
+          "classes": "px-6 py-3 bg-white text-brand-mughal-green rounded-lg font-medium text-sm hover:shadow-sm transition-all duration-normal"
+        },
+        "primary": {
+          "classes": "px-6 py-3 bg-brand-mughal-green text-white rounded-lg font-medium text-sm hover:bg-brand-mughal-green-2 transition-all duration-normal"
+        }
+      }
+    },
+    "PricingSection": {
+      "description": "Full pricing section with monthly/yearly toggle and pricing cards. Includes a 'Most popular' badge pattern.",
+      "container": {
+        "element": "section",
+        "headerRow": {
+          "classes": "flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4",
+          "title": {
+            "classes": "text-2xl font-semibold text-text-primary",
+            "inlineStyle": { "letterSpacing": "-0.3px" }
+          },
+          "kicker": { "classes": "text-xs text-text-muted mb-2" }
+        }
+      },
+      "billingToggle": {
+        "description": "A segmented control to switch between monthly and yearly billing. Shows '2 months free' badge on yearly option.",
+        "container": { "classes": "flex items-center gap-3 bg-surface-bone p-1.5 rounded-xl" },
+        "button": {
+          "baseClasses": "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-normal",
+          "activeClasses": "bg-white text-text-primary shadow-sm",
+          "inactiveClasses": "text-text-secondary hover:text-text-primary"
+        },
+        "badge": {
+          "classes": "text-xs bg-brand-mughal-green text-white px-2 py-0.5 rounded-pill",
+          "text": "2 months free"
+        }
+      },
+      "grid": { "classes": "grid grid-cols-1 md:grid-cols-3 gap-6" }
+    },
+    "PricingCard": {
+      "description": "Pricing tier card with optional 'Most popular' badge. Supports highlight variant (green background) and standard variant (white background).",
+      "container": {
+        "element": "div",
+        "baseClasses": "p-6 rounded-xl border relative",
+        "variants": {
+          "highlighted": {
+            "classes": "bg-brand-mughal-green text-white border-border-inverse-subtle",
+            "note": "Used for the most popular or recommended plan"
+          },
+          "standard": {
+            "classes": "bg-white border-border-subtle"
+          }
+        }
+      },
+      "badge": {
+        "description": "Small 'Most popular' badge shown on highlighted pricing cards, positioned absolutely at top-right.",
+        "classes": "absolute -top-3 right-4 text-[11px] font-semibold bg-brand-pistachio text-brand-mughal-green px-3 py-1 rounded-full shadow-sm",
+        "inlineStyle": {
+          "whiteSpace": "nowrap",
+          "display": "inline-block",
+          "minWidth": "max-content"
+        },
+        "positioning": "Floats above the card at -top-3, aligned to right-4. Container must have relative positioning.",
+        "content": "★ Most popular"
+      },
+      "planName": {
+        "classes": "text-sm font-medium",
+        "variants": {
+          "highlighted": "text-text-inverse",
+          "standard": "text-text-primary"
+        }
+      },
+      "planDescription": {
+        "classes": "text-xs",
+        "variants": {
+          "highlighted": "text-text-inverse-muted",
+          "standard": "text-text-muted"
+        }
+      },
+      "price": {
+        "classes": "text-3xl font-light",
+        "variants": {
+          "highlighted": "text-text-inverse",
+          "standard": "text-text-primary"
+        }
+      },
+      "period": {
+        "classes": "text-xs",
+        "variants": {
+          "highlighted": "text-text-inverse-muted",
+          "standard": "text-text-muted"
+        }
+      },
+      "features": {
+        "list": { "classes": "space-y-2 mb-6" },
+        "item": {
+          "baseClasses": "text-sm flex items-start gap-2",
+          "textVariants": {
+            "highlighted": "text-text-inverse-muted",
+            "standard": "text-text-secondary"
+          },
+          "bullet": {
+            "variants": {
+              "highlighted": "text-brand-pistachio",
+              "standard": "text-brand-mughal-green"
+            },
+            "classes": "mt-[2px]"
+          }
+        }
+      },
+      "cta": {
+        "classes": "w-full px-6 py-3 rounded-lg font-medium text-sm transition-all duration-normal",
+        "variants": {
+          "highlighted": "bg-white text-brand-mughal-green hover:shadow-sm",
+          "standard": "bg-brand-mughal-green text-white hover:bg-brand-mughal-green-2"
+        }
+      },
+      "usageExample": {
+        "plans": [
+          {
+            "name": "Starter",
+            "price": "Free",
+            "period": "",
+            "description": "For small teams getting clarity fast.",
+            "features": ["Core dashboard", "Exports", "Email support"],
+            "highlight": false
+          },
+          {
+            "name": "Pro",
+            "priceMonthly": "€39",
+            "priceYearly": "€390",
+            "period": "per month / per year",
+            "description": "For teams that report weekly.",
+            "features": ["Everything in Starter", "Custom views", "Priority support"],
+            "highlight": true,
+            "badge": "★ Most popular"
+          },
+          {
+            "name": "Enterprise",
+            "priceMonthly": "€149",
+            "priceYearly": "€1490",
+            "period": "per month / per year",
+            "description": "For organizations at scale.",
+            "features": ["Everything in Pro", "SSO", "Dedicated support"],
+            "highlight": false
+          }
+        ]
+      }
+    },
+    "LandingMarketingPage": {
+      "description": "Marketing-focused landing page with hero, benefits, and waitlist form. Includes decorative SVG patterns.",
+      "heroSection": {
+        "container": {
+          "classes": "bg-brand-mughal-green rounded-2xl p-8 relative overflow-hidden",
+          "note": "Uses relative positioning and overflow-hidden to contain decorative elements"
+        },
+        "decorations": {
+          "description": "SVG patterns including curvy lines and rectangles as background texture.",
+          "container": {
+            "classes": "absolute inset-0 pointer-events-none",
+            "inlineStyle": { "zIndex": 5 }
+          },
+          "curvyLine": {
+            "description": "A smooth curvy line positioned in the bottom-right corner as a subtle accent.",
+            "element": "path",
+            "attributes": {
+              "d": "M 70% 70% Q 80% 75%, 85% 85% T 95% 95% Q 98% 98%, 100% 100%",
+              "stroke": "#8ACA74",
+              "strokeWidth": "25",
+              "strokeLinecap": "round",
+              "fill": "none",
+              "opacity": "0.5"
+            },
+            "note": "Uses percentage-based coordinates to flow from center towards bottom-right. Pistachio color at 50% opacity."
+          },
+          "rectangles": {
+            "description": "Large rounded rectangles partially off-canvas for geometric texture.",
+            "element": "rect",
+            "attributes": {
+              "rx": "4",
+              "fill": "none",
+              "stroke": "rgba(220, 222, 197, 0.28)",
+              "strokeWidth": "1"
+            },
+            "positions": [
+              { "x": "62%", "y": "-12%", "width": "360", "height": "220" },
+              { "x": "70%", "y": "62%", "width": "420", "height": "260" }
+            ]
+          },
+          "usage": "Place decorative SVG elements in a container with absolute positioning and low z-index (5). Content should have higher z-index (10) to appear above."
+        },
+        "layout": {
+          "classes": "relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start",
+          "note": "Two-column layout on large screens: left for hero content, right for waitlist card"
+        }
+      },
+      "waitlistCard": {
+        "container": {
+          "classes": "bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6",
+          "note": "Glass-morphism effect using white overlay with backdrop blur"
+        },
+        "form": {
+          "input": {
+            "classes": "w-full bg-white/10 text-text-inverse placeholder:text-text-inverse-muted border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring"
+          },
+          "checkbox": {
+            "classes": "mt-1 h-4 w-4 rounded border border-white/30 bg-white/10 text-brand-pistachio focus-visible:ring-2 focus-visible:ring-focus-ring"
+          }
+        }
+      },
+      "benefitsSection": {
+        "grid": { "classes": "grid grid-cols-1 md:grid-cols-2 gap-6" },
+        "card": {
+          "container": { "classes": "bg-white border border-border-subtle p-6 rounded-xl" },
+          "title": { "classes": "text-lg font-medium text-text-primary mb-2" },
+          "description": { "classes": "text-sm text-text-secondary mb-4" },
+          "bullets": {
+            "list": { "classes": "space-y-2" },
+            "item": {
+              "classes": "text-sm text-text-secondary flex items-start gap-2",
+              "bullet": { "classes": "text-brand-mughal-green mt-[2px]", "content": "•" }
+            }
+          }
+        }
+      }
+    },
+    "DecorativePatterns": {
+      "description": "Reusable SVG decoration patterns for hero sections and panels.",
+      "curvyLine": {
+        "usage": "Subtle organic accent in corners",
+        "implementation": {
+          "element": "svg path",
+          "recommendedStroke": "#8ACA74 (pistachio)",
+          "recommendedStrokeWidth": "20-25px",
+          "recommendedOpacity": "0.4-0.6",
+          "positioning": "Use percentage-based coordinates for responsive scaling"
+        },
+        "examplePaths": [
+          {
+            "name": "bottomRightFlow",
+            "d": "M 70% 70% Q 80% 75%, 85% 85% T 95% 95% Q 98% 98%, 100% 100%",
+            "description": "Flows from center-right towards bottom-right corner"
+          }
+        ]
+      },
+      "rectangles": {
+        "usage": "Geometric texture, partially off-canvas",
+        "implementation": {
+          "element": "svg rect",
+          "recommendedStroke": "rgba(220, 222, 197, 0.28) (bone with low opacity)",
+          "recommendedStrokeWidth": "1px",
+          "rx": "4px (consistent with all other radii)",
+          "fill": "none"
+        }
+      },
+      "implementationNotes": [
+        "Always place decorative SVGs in a container with 'absolute inset-0 pointer-events-none'",
+        "Use z-index to layer decorations behind content (decorations: z-5, content: z-10)",
+        "Parent container must have 'relative' and 'overflow-hidden' to contain decorations",
+        "Keep opacity low (0.2-0.6) to maintain text readability",
+        "Prefer pistachio (#8ACA74) or bone (rgba(220, 222, 197, ...)) colors for decorations"
+      ]
+    }
+  },
+  "accessibility": {
+    "focus": {
+      "rule": "Every interactive element must have a visible focus style.",
+      "token": "focus.ring",
+      "recommendedTailwind": "focus:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2"
+    },
+    "contrast": {
+      "rule": "Ensure text contrast is readable on green and pistachio surfaces. On green surfaces, default to text-text-inverse; on pistachio, default to text-text-on-bone or text-text-primary."
+    },
+    "hitTargets": {
+      "minSizePx": 44,
+      "rule": "Ensure buttons and clickable rows meet 44px minimum height on touch devices."
+    }
+  },
+  "aiBuildRules": {
+    "priorityOrderWhenBuilding": [
+      "Start with the canvas: bg-surface-paper, centered 1200px container, generous padding (px-12, py-12).",
+      "Establish hierarchy: one hero/panel (green) + a small set of cards (white) + one accent panel (pistachio) when needed.",
+      "Use tokenized colors (brand/surface/text/border/state) and the existing type scale (text-sm/text-md/text-lg/etc.).",
+      "Keep corners consistent: 4px radius everywhere (no mixed radii, no fully-rounded pills).",
+      "Add subtle motion only (duration-normal; small hover tints or soft shadow)."
+    ],
+    "compositionChecklist": [
+      "Are sections separated by generous spacing (mb-12 / gap-6 / p-8)?",
+      "Is there one clear primary panel/idea per section (avoid 10 small boxes)?",
+      "Are borders subtle (border-border-subtle) and not used as heavy framing?",
+      "Are you reusing existing component recipes (Card, Chip, Button) rather than inventing new styles?"
+    ],
+    "allowedCustomization": [
+      "Add new component variants only if they reuse the same tokens and shape language.",
+      "Use new neutral tints derived from existing tokens only if strictly necessary for data viz; document them here."
+    ],
+    "avoidStyleDrift": [
+      "Do not introduce new random hex colors in className.",
+      "Do not switch to a dense 'SaaS dashboard grid of tiny widgets' look; keep the editorial, spacious rhythm.",
+      "Do not add heavy drop shadows, glossy gradients, or high-contrast borders everywhere."
+    ],
+    "pricingPagePatterns": [
+      "Use the billing toggle pattern (monthly/yearly) with a badge showing savings ('2 months free').",
+      "Apply 'Most popular' badge to the recommended plan using absolute positioning at -top-3 right-4.",
+      "Ensure badge uses whiteSpace: 'nowrap', display: 'inline-block', minWidth: 'max-content' to prevent text wrapping.",
+      "Highlight the recommended plan with bg-brand-mughal-green and inverse text colors.",
+      "Keep pricing cards in a 3-column grid (grid-cols-1 md:grid-cols-3) with consistent gap-6 spacing."
+    ],
+    "decorativePatterns": [
+      "Use curvy line SVGs in corners for organic accents (pistachio color, 20-25px stroke, 0.4-0.6 opacity).",
+      "Use large rounded rectangles partially off-canvas for geometric texture (bone color, 1px stroke, low opacity).",
+      "Always contain decorations in 'absolute inset-0 pointer-events-none' with lower z-index than content.",
+      "Parent must have 'relative' and 'overflow-hidden' to properly contain decorative elements.",
+      "Use percentage-based coordinates for responsive scaling of SVG decorations."
+    ]
+  },
+  "blog": {
+    "intent": "Blog UI should feel like an extension of the app: editorial, spacious, token-driven, and calm. Use the same container width, paper canvas, subtle borders, and 4px corners.",
+    "entryPoints": [
+      "A Blog section can appear at the bottom of dashboard-like pages as a teaser (latest 3 posts).",
+      "A dedicated Blog index page lists posts with search/filter/pagination.",
+      "A Blog post detail page renders the full article with a clear typographic hierarchy."
+    ],
+    "layout": {
+      "container": "max-w-[1200px] mx-auto px-12",
+      "sectionSpacing": {
+        "topMargin": "mt-12",
+        "bottomMargin": "mb-12",
+        "internalPadding": "p-6"
+      },
+      "grid": {
+        "index": "grid grid-cols-1 md:grid-cols-2 gap-6",
+        "teaser": "grid grid-cols-1 md:grid-cols-3 gap-6"
+      }
+    },
+    "components": {
+      "BlogSection": {
+        "description": "A bottom-of-page section that previews the latest posts and links to the full blog.",
+        "containerClasses": "mt-12",
+        "headerRowClasses": "flex items-center justify-between mb-6",
+        "titleClasses": "text-lg font-medium text-text-primary",
+        "ctaClasses": "text-sm text-brand-mughal-green hover:text-brand-mughal-green-2 transition-colors"
+      },
+      "BlogCard": {
+        "description": "A post preview card used in blog teaser and blog index lists.",
+        "containerClasses": "bg-white border border-border-subtle p-6 rounded-xl hover:shadow-sm transition-all duration-normal",
+        "image": {
+          "optional": true,
+          "containerClasses": "mb-4 bg-surface-bone overflow-hidden rounded-xl",
+          "aspect": "aspect-[16/9] (or fixed h-[160px])",
+          "rule": "If image exists, keep it a simple rectangle; no heavy overlays. Avoid noisy imagery."
+        },
+        "metaRowClasses": "flex items-center gap-2 mb-2",
+        "tagClasses": "text-xs font-medium text-text-primary bg-surface-bone px-2.5 py-1 rounded-pill",
+        "dateClasses": "text-xs text-text-muted",
+        "titleClasses": "text-lg font-medium text-text-primary mb-2",
+        "excerptClasses": "text-sm text-text-secondary",
+        "footerRowClasses": "mt-4 flex items-center justify-between",
+        "readMoreClasses": "text-sm text-brand-mughal-green hover:text-brand-mughal-green-2 transition-colors"
+      },
+      "BlogIndexHeader": {
+        "description": "Header area for the blog index page (title + short intro + optional search/filter).",
+        "containerClasses": "bg-brand-mughal-green rounded-2xl p-8 mb-12 relative overflow-hidden",
+        "kickerClasses": "text-text-inverse-muted text-sm mb-2",
+        "titleClasses": "text-4xl font-semibold text-text-inverse mb-4",
+        "bodyClasses": "text-text-inverse-muted text-md max-w-xl",
+        "search": {
+          "containerClasses": "mt-6",
+          "inputClasses": "w-full bg-white/10 text-text-inverse placeholder:text-text-inverse-muted border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring",
+          "note": "Use token colors. Keep borders subtle; avoid bright input backgrounds on the green hero."
+        }
+      },
+      "BlogPostContent": {
+        "description": "Typography rules for the article body (works for Markdown or CMS content).",
+        "containerClasses": "bg-white border border-border-subtle p-6 rounded-xl",
+        "typeRules": {
+          "h1": "text-3xl font-semibold text-text-primary mb-4",
+          "h2": "text-2xl font-semibold text-text-primary mt-8 mb-3",
+          "h3": "text-xl font-semibold text-text-primary mt-6 mb-2",
+          "p": "text-md text-text-secondary leading-relaxed mb-4",
+          "a": "text-brand-mughal-green underline underline-offset-2 hover:text-brand-mughal-green-2 transition-colors",
+          "ul": "list-disc pl-5 space-y-2 text-md text-text-secondary mb-4",
+          "ol": "list-decimal pl-5 space-y-2 text-md text-text-secondary mb-4",
+          "blockquote": "border-l-2 border-border-strong pl-4 text-md text-text-secondary italic my-6",
+          "codeInline": "font-mono text-sm bg-surface-bone px-1.5 py-0.5 rounded-md",
+          "codeBlock": "font-mono text-sm bg-surface-bone p-4 rounded-xl overflow-auto my-6",
+          "hr": "border-t border-border-subtle my-8"
+        }
+      },
+      "Pagination": {
+        "description": "Pagination for blog index list; minimal and calm.",
+        "containerClasses": "mt-8 flex items-center justify-center gap-3",
+        "buttonClasses": "px-4 py-2 bg-white text-text-primary border border-border-subtle rounded-lg text-sm hover:shadow-sm transition-all duration-normal",
+        "activePageClasses": "bg-brand-mughal-green text-white border-transparent"
+      }
+    },
+    "contentGuidelines": {
+      "tone": [
+        "Confident, calm, and direct",
+        "Avoid hype; prioritize clarity",
+        "Short paragraphs; one idea per paragraph"
+      ],
+      "titles": [
+        "Prefer simple, descriptive titles (e.g., 'Exposure Trends', 'Risk Overview').",
+        "Avoid clickbait and overly long titles."
+      ],
+      "metadata": [
+        "Always show publish date and (optionally) reading time.",
+        "Use tags sparingly (1–3 per post) and keep them neutral (bone chip)."
+      ]
+    },
+    "aiRules": {
+      "buildChecklist": [
+        "Use the standard container (max-w-[1200px] mx-auto px-12) and generous spacing (mb-12, gap-6).",
+        "Prefer BlogCard lists in a simple grid; avoid dense tables.",
+        "Keep corners at 4px (tokenized via rounded-* utilities).",
+        "Use token colors only; no ad-hoc hex values.",
+        "Ensure focus styles exist for all blog links, buttons, and inputs."
+      ]
+    }
+  }
+}
+
+
