@@ -286,7 +286,6 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1 
         </div>
       </section>
     </div>
+    </>
   )
 }
-
-
