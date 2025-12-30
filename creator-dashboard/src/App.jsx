@@ -288,7 +288,6 @@ function NavItem({ active, onClick, children }) {
 }
 
 function LandingPage({ onPrimaryCta }) {
-  const [isYearly, setIsYearly] = React.useState(false)
   
   return (
     <div className="space-y-12">
@@ -1099,7 +1098,6 @@ function SettingsPage({ colorTheme, onChangeColorTheme }) {
 
     // basic guardrail (5MB) to keep localStorage safe-ish
     if (file.size > 5 * 1024 * 1024) {
-      // eslint-disable-next-line no-alert
       alert('Please choose an image smaller than 5MB.')
       return
     }
@@ -1936,7 +1934,7 @@ function AnimatedCard({ children, delay = 0 }) {
 }
 
 // Backend Metric Card - More prominent design for main KPIs
-function BackendMetricCard({ label, value, change, isUp, icon, delay = 0 }) {
+function BackendMetricCard({ label, value, change, isUp, delay = 0 }) {
   const [isHovered, setIsHovered] = React.useState(false)
   const [isVisible, setIsVisible] = React.useState(false)
 
@@ -2521,7 +2519,7 @@ function AreaChart() {
       
       {/* Chart area */}
       <div className="ml-12 h-full flex items-end justify-between gap-2 pb-6 border-b border-border-subtle">
-        {data.map((d, i) => (
+        {data.map((d) => (
           <div key={d.label} className="flex-1 flex flex-col items-center gap-1">
             <div className="w-full flex flex-col items-center gap-1" style={{ height: '140px' }}>
               {/* Views bar */}
