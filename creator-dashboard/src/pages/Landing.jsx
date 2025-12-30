@@ -218,25 +218,23 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1 
         keywords="credit risk monitoring, Romanian SMEs, risk alerts, insolvency monitoring, debt management, business credit check"
       />
       <div className="space-y-12">
-        {/* Hero Version Selector (for testing - can be removed in production) */}
-        {process.env.NODE_ENV === 'development' && (
-          <div className="flex gap-2 p-4 bg-surface-paper rounded-lg border border-border-subtle">
-            <span className="text-sm text-text-secondary mr-2">Hero Version:</span>
-            {[1, 2, 3].map((v) => (
-              <button
-                key={v}
-                onClick={() => setCurrentHeroVersion(v)}
-                className={`px-3 py-1 text-xs rounded ${
-                  currentHeroVersion === v
-                    ? 'bg-brand-mughal-green text-white'
-                    : 'bg-white text-text-primary border border-border-subtle hover:bg-surface-paper'
-                }`}
-              >
-                Version {v}
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Hero Version Selector - Always visible for testing */}
+        <div className="flex gap-2 p-4 bg-surface-paper rounded-lg border border-border-subtle">
+          <span className="text-sm text-text-secondary mr-2">Hero Version:</span>
+          {[1, 2, 3].map((v) => (
+            <button
+              key={v}
+              onClick={() => setCurrentHeroVersion(v)}
+              className={`px-3 py-1 text-xs rounded transition-colors ${
+                currentHeroVersion === v
+                  ? 'bg-brand-mughal-green text-white'
+                  : 'bg-white text-text-primary border border-border-subtle hover:bg-surface-paper'
+              }`}
+            >
+              Version {v}
+            </button>
+          ))}
+        </div>
 
         {/* Hero Section */}
         {renderHero()}
