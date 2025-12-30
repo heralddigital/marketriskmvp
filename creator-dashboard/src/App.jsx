@@ -381,21 +381,21 @@ function LandingPage({ onPrimaryCta }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white border border-border-subtle p-6 rounded-xl">
+          <div className="bg-white border border-border-subtle p-6 rounded-xl hover:shadow-sm transition-all duration-normal">
             <p className="text-xs text-text-muted mb-2">Problem</p>
             <h3 className="text-lg font-medium text-text-primary mb-2">Scattered data</h3>
             <p className="text-sm text-text-secondary">
               Risk metrics live in spreadsheets, emails, and dashboards that disagree with each other.
             </p>
           </div>
-          <div className="bg-white border border-border-subtle p-6 rounded-xl">
+          <div className="bg-white border border-border-subtle p-6 rounded-xl hover:shadow-sm transition-all duration-normal">
             <p className="text-xs text-text-muted mb-2">Agitation</p>
             <h3 className="text-lg font-medium text-text-primary mb-2">Slow decisions</h3>
             <p className="text-sm text-text-secondary">
               Teams lose hours reconciling numbers and explaining charts no one trusts.
             </p>
           </div>
-          <div className="bg-white border border-border-subtle p-6 rounded-xl">
+          <div className="bg-white border border-border-subtle p-6 rounded-xl hover:shadow-sm transition-all duration-normal">
             <p className="text-xs text-text-muted mb-2">Solution</p>
             <h3 className="text-lg font-medium text-text-primary mb-2">One calm view</h3>
             <p className="text-sm text-text-secondary">
@@ -938,7 +938,7 @@ function Button({ variant, onClick, children }) {
 
 function FeatureCard({ title, description, bullets }) {
   return (
-    <div className="bg-white border border-border-subtle p-6 rounded-xl">
+    <div className="bg-white border border-border-subtle p-6 rounded-xl hover:shadow-sm transition-all duration-normal">
       <div className="flex items-start gap-4">
         <div className="w-10 h-10 bg-surface-bone flex items-center justify-center rounded-lg flex-shrink-0">
           <div className="w-5 h-5 bg-brand-mughal-green rounded-md" />
@@ -962,7 +962,7 @@ function FeatureCard({ title, description, bullets }) {
 
 function TestimonialCard({ quote, name, role }) {
   return (
-    <div className="bg-white border border-border-subtle p-6 rounded-xl">
+    <div className="bg-white border border-border-subtle p-6 rounded-xl hover:shadow-sm transition-all duration-normal">
       <p className="text-sm text-text-secondary mb-4">{quote}</p>
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 bg-surface-bone rounded-lg flex items-center justify-center flex-shrink-0">
@@ -2504,7 +2504,7 @@ function KpiCard({ label, value, change, trend, sparkData }) {
   const points = sparkData.map((v, i) => `${(i / (sparkData.length - 1)) * 100},${100 - (v / max) * 100}`).join(' ')
   
   return (
-    <div className="bg-white rounded-xl p-5 border border-border-subtle">
+    <div className="bg-white rounded-xl p-5 border border-border-subtle hover:shadow-sm transition-all duration-normal">
       <div className="flex items-start justify-between mb-3">
         <p className="text-xs text-text-muted">{label}</p>
         <span className={`text-xs font-medium px-2 py-0.5 rounded ${
@@ -2722,7 +2722,7 @@ function TableRow({ page, views, bounce, time, isLast }) {
 // Trend Card Component
 function TrendCard({ title, description, metric, metricLabel }) {
   return (
-    <div className="bg-white rounded-xl p-6 border border-border-subtle">
+    <div className="bg-white rounded-xl p-6 border border-border-subtle hover:shadow-sm transition-all duration-normal">
       <h4 className="text-sm font-medium text-text-primary mb-1">{title}</h4>
       <p className="text-xs text-text-muted mb-4">{description}</p>
       <div className="flex items-baseline gap-2">

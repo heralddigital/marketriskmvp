@@ -56,7 +56,7 @@ function SecondaryButton({ children, onClick, type = 'button' }) {
 
 function BenefitCard({ title, description, bullets }) {
   return (
-    <div className="bg-white border border-border-subtle p-6 rounded-xl">
+    <div className="bg-white border border-border-subtle p-6 rounded-xl hover:shadow-sm transition-all duration-normal">
       <h3 className="text-lg font-medium text-text-primary mb-2">{title}</h3>
       <p className="text-sm text-text-secondary mb-4">{description}</p>
       <ul className="space-y-2">
