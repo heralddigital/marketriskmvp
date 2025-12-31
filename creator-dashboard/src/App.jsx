@@ -1,134 +1,17 @@
 import React from 'react'
 import LandingMarketingPage from './pages/Landing.jsx'
+import Homepage1 from './pages/Homepage1.jsx'
+import Homepage2 from './pages/Homepage2.jsx'
 import AboutPage from './pages/About.jsx'
 import ContactPage from './pages/Contact.jsx'
 import PrivacyPage from './pages/Privacy.jsx'
 import TermsPage from './pages/Terms.jsx'
+import PricingPage from './pages/Pricing.jsx'
 import BlogIndexPage from './pages/BlogIndex.jsx'
 import BlogPostPage from './pages/BlogPost.jsx'
+import DocumentationPage from './pages/Documentation.jsx'
+import AdminDashboard from './pages/AdminDashboard.jsx'
 import { BLOG_POSTS, getBlogPostBySlug } from './data/blogPosts.js'
-
-const THEME_SWATCHES = [
-  {
-    id: 'risk-red',
-    name: 'Risk Red',
-    description: 'Primary/secondary ramps plus neutral ramps (100–700) and base tokens.',
-    groups: [
-      {
-        label: 'Primary',
-        base: '#D91B24',
-        stops: ['#FDD8D8', '#FBA1A2', '#F95E61', '#D91B24', '#991016', '#5E0609', '#2B0102'],
-      },
-      {
-        label: 'Secondary',
-        base: '#761F21',
-        stops: ['#FBEEEE', '#F3C6C7', '#EA9192', '#E55053', '#B03335', '#761F21', '#410D0E'],
-      },
-      {
-        label: 'Tertiary',
-        base: '#C4C4C4',
-        stops: ['#ECECEC', '#C4C4C4', '#9D9D9D', '#787878', '#555555', '#353535', '#171717'],
-      },
-      {
-        label: 'Quaternary',
-        base: '#504141',
-        stops: ['#DCD7D7', '#B9AEAE', '#9B8585', '#776161', '#504141', '#2C2323', '#151010'],
-      },
-      {
-        label: 'Grey',
-        base: '#534949',
-        stops: ['#E2E0E0', '#BDB7B7', '#9B9090', '#786B6B', '#534949', '#302A2A', '#131010'],
-      },
-    ],
-  },
-  {
-    id: 'mint-citrus',
-    name: 'Mint Citrus',
-    description: 'Soft stone neutrals + mint ramp + cool greys + citrus ramp (100–700) and base tokens.',
-    groups: [
-      {
-        label: 'Primary',
-        base: '#EBEBDC',
-        stops: ['#EBEBDC', '#C3C3B6', '#9C9C92', '#77776F', '#54544E', '#33332F', '#161613'],
-      },
-      {
-        label: 'Secondary',
-        base: '#28694B',
-        stops: ['#C9FCE0', '#60E5A8', '#4DBA87', '#3A9068', '#28694B', '#17442F', '#082216'],
-      },
-      {
-        label: 'Tertiary',
-        base: '#6E6E73',
-        stops: ['#E1E1E2', '#B9B9BB', '#939396', '#6E6E73', '#4C4C51', '#2C2C2F', '#111113'],
-      },
-      {
-        label: 'Quaternary',
-        base: '#FF5F2D',
-        stops: ['#FFDAD6', '#FFA294', '#FF5F2D', '#C84100', '#8D2B00', '#571700', '#270600'],
-      },
-      {
-        label: 'Grey',
-        base: '#535351',
-        stops: ['#EAEAE4', '#C2C2BD', '#9B9B97', '#767673', '#535351', '#333331', '#151514'],
-      },
-    ],
-  },
-  {
-    id: 'sage-forest',
-    name: 'Sage Forest',
-    description: 'Dusty warm neutrals + layered greens (100–900) and base tokens.',
-    groups: [
-      {
-        label: 'Dust Grey',
-        base: '#DAD7CD',
-        stops: ['#312E24', '#615B48', '#92896C', '#B6B09C', '#DAD7CD', '#E2DFD7', '#E9E7E1', '#F0EFEB', '#F8F7F5'],
-      },
-      {
-        label: 'Dry Sage',
-        base: '#A3B18A',
-        stops: ['#212619', '#434C33', '#64724C', '#859865', '#A3B18A', '#B6C1A2', '#C8D0B9', '#DAE0D0', '#EDEFE8'],
-      },
-      {
-        label: 'Fern',
-        base: '#588157',
-        stops: ['#111911', '#233323', '#344C34', '#466645', '#588157', '#739F72', '#96B795', '#B9CFB9', '#DCE7DC'],
-      },
-      {
-        label: 'Hunter Green',
-        base: '#3A5A40',
-        stops: ['#0C120D', '#172419', '#233626', '#2E4833', '#3A5A40', '#56865F', '#7AAA83', '#A7C7AC', '#D3E3D6'],
-      },
-      {
-        label: 'Pine Teal',
-        base: '#344E41',
-        stops: ['#0A0F0D', '#141F1A', '#1F2E26', '#293D33', '#344E41', '#527A66', '#75A38C', '#A3C2B3', '#D1E0D9'],
-      },
-    ],
-  },
-]
-
-function hexToRgb(hex) {
-  const cleaned = String(hex).trim().replace('#', '')
-  if (cleaned.length !== 6) return null
-  const r = Number.parseInt(cleaned.slice(0, 2), 16)
-  const g = Number.parseInt(cleaned.slice(2, 4), 16)
-  const b = Number.parseInt(cleaned.slice(4, 6), 16)
-  if (Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)) return null
-  return { r, g, b }
-}
-
-function relativeLuminance({ r, g, b }) {
-  const srgb = [r, g, b].map((v) => v / 255)
-  const lin = srgb.map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4))
-  return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2]
-}
-
-function getSwatchTextColor(hex) {
-  const rgb = hexToRgb(hex)
-  if (!rgb) return '#3A2D2D'
-  const lum = relativeLuminance(rgb)
-  return lum < 0.35 ? '#E5E1E2' : '#3A2D2D'
-}
 
 function App() {
   const COLOR_THEME_STORAGE_KEY = 'marketrisk_color_theme_v1'
@@ -155,7 +38,7 @@ function App() {
       // ignore storage failures
     }
 
-    if (colorTheme === 'risk-red' || colorTheme === 'mint-citrus' || colorTheme === 'sage-forest' || colorTheme === 'ocean-blue' || colorTheme === 'lavender-purple' || colorTheme === 'crimson-rose') {
+    if (colorTheme === 'risk-red' || colorTheme === 'mint-citrus' || colorTheme === 'sage-forest' || colorTheme === 'ocean-blue') {
       document.documentElement.setAttribute('data-theme', colorTheme)
       document.body?.setAttribute?.('data-theme', colorTheme)
     } else {
@@ -181,10 +64,13 @@ function App() {
 
   const navItems = [
     { key: 'landing', label: 'Landing' },
+    { key: 'homepage1', label: 'Homepage 1' },
     { key: 'home', label: 'Home' },
     { key: 'dashboard', label: 'Dashboard' },
+    { key: 'pricing', label: 'Pricing' },
     { key: 'analytics', label: 'Analytics' },
     { key: 'blogIndex', label: 'Blog' },
+    { key: 'documentation', label: 'Documentation' },
     { key: 'settings', label: 'Settings' },
   ]
 
@@ -235,8 +121,9 @@ function App() {
         <AnalyticsPage />
       ) : (
         <main className="max-w-[1200px] mx-auto px-12 py-12">
-          {page === 'landing' && <LandingMarketingPage onViewDashboard={() => navigate('dashboard')} />}
-          {page === 'home' && <LandingPage onPrimaryCta={() => navigate('dashboard')} />}
+          {page === 'landing' && <LandingMarketingPage onViewDashboard={() => navigate('dashboard')} onNavigate={navigate} />}
+          {page === 'homepage1' && <LandingPage onPrimaryCta={() => navigate('dashboard')} onNavigate={navigate} initialVersion={1} />}
+          {page === 'home' && <LandingPage onPrimaryCta={() => navigate('dashboard')} onNavigate={navigate} />}
           {page === 'dashboard' && (
             <DashboardPage
               onOpenBlogPost={(slug) => openBlogPost(slug, 'dashboard')}
@@ -247,6 +134,7 @@ function App() {
             <BlogIndexPage
               posts={BLOG_POSTS}
               onOpenPost={(slug) => openBlogPost(slug, 'blogIndex')}
+              onNavigate={navigate}
             />
           )}
           {page === 'blog' && (
@@ -254,12 +142,18 @@ function App() {
               post={getBlogPostBySlug(route.blogSlug)}
               onBack={() => navigate(route.blogBackTarget)}
               onAllArticles={() => navigate('blogIndex')}
+              allPosts={BLOG_POSTS}
+              onOpenPost={(slug) => openBlogPost(slug, 'blog')}
+              onNavigate={navigate}
             />
           )}
           {page === 'about' && <AboutPage onNavigate={navigate} />}
           {page === 'contact' && <ContactPage />}
+          {page === 'pricing' && <PricingPage onNavigate={navigate} />}
           {page === 'privacy' && <PrivacyPage />}
           {page === 'terms' && <TermsPage />}
+          {page === 'documentation' && <DocumentationPage onNavigate={navigate} />}
+          {page === 'admin' && <AdminDashboard onNavigate={navigate} />}
           {page === 'settings' && (
             <SettingsPage
               colorTheme={colorTheme}
@@ -288,7 +182,64 @@ function NavItem({ active, onClick, children }) {
   )
 }
 
-function LandingPage({ onPrimaryCta }) {
+function LandingPage({ onPrimaryCta, onNavigate, initialVersion = 1 }) {
+  const [isYearly, setIsYearly] = React.useState(false)
+  const [homepageVersion, setHomepageVersion] = React.useState(initialVersion)
+  
+  const handleViewDashboard = () => {
+    onPrimaryCta()
+  }
+
+  const renderHomepage = () => {
+    const commonProps = {
+      onViewDashboard: handleViewDashboard,
+      onNavigate: onNavigate || handleViewDashboard,
+    }
+
+    switch (homepageVersion) {
+      case 1:
+        return <Homepage1 {...commonProps} />
+      case 2:
+        return <Homepage2 {...commonProps} />
+      default:
+        return <Homepage1 {...commonProps} />
+    }
+  }
+  
+  return (
+    <div className="space-y-12">
+      {/* Homepage Version Selector */}
+      <div className="flex gap-2 p-4 bg-surface-paper rounded-lg border border-border-subtle">
+        <span className="text-sm text-text-secondary mr-2">Homepage Version:</span>
+        <button
+          onClick={() => setHomepageVersion(1)}
+          className={`px-3 py-1 text-xs rounded transition-colors ${
+            homepageVersion === 1
+              ? 'bg-brand-mughal-green text-white'
+              : 'bg-white text-text-primary border border-border-subtle hover:bg-surface-paper'
+          }`}
+        >
+          Homepage 1
+        </button>
+        <button
+          onClick={() => setHomepageVersion(2)}
+          className={`px-3 py-1 text-xs rounded transition-colors ${
+            homepageVersion === 2
+              ? 'bg-brand-mughal-green text-white'
+              : 'bg-white text-text-primary border border-border-subtle hover:bg-surface-paper'
+          }`}
+        >
+          Homepage 2
+        </button>
+      </div>
+
+      {/* Render selected homepage version */}
+      {renderHomepage()}
+    </div>
+  )
+}
+
+function LandingPageOld({ onPrimaryCta }) {
   const [isYearly, setIsYearly] = React.useState(false)
   
   return (
@@ -800,7 +751,7 @@ function LandingPage({ onPrimaryCta }) {
 }
 
 function AppFooter({ onNavigate }) {
-  const email = 'hello@marketrisk.com'
+  const email = 'hello@marketrisk.ro'
   const phone = '+40 712 345 678'
   const telHref = `tel:${phone.replace(/\s+/g, '')}`
 
@@ -1087,7 +1038,6 @@ function SettingsPage({ colorTheme, onChangeColorTheme }) {
 
   const [preferences, setPreferences] = React.useState({
     twoFactorAuth: false,
-    darkMode: false,
     compactView: false,
     autoRefresh: true,
   })
@@ -1398,90 +1348,6 @@ function SettingsPage({ colorTheme, onChangeColorTheme }) {
             </div>
           </div>
 
-          {/* Theme Swatches */}
-          <div className="bg-white rounded-xl border border-border-subtle overflow-hidden">
-            <div className="p-6 border-b border-border-subtle">
-              <h2 className="text-lg font-medium text-text-primary">Theme swatch</h2>
-              <p className="text-sm text-text-muted mt-1">
-                A preview of a palette ramp (100–700) plus base tokens.
-              </p>
-            </div>
-
-            <div className="p-6 space-y-6">
-              {THEME_SWATCHES.map((theme) => (
-                <div key={theme.id}>
-                  <div className="flex items-baseline justify-between gap-4 mb-3">
-                    <div>
-                      <p className="text-sm font-medium text-text-primary">{theme.name}</p>
-                      <p className="text-xs text-text-muted mt-1">{theme.description}</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-text-muted">Base</span>
-                      <span
-                        className="px-3 py-2 rounded-lg text-xs font-semibold border border-border-subtle"
-                        style={{
-                          background: theme.groups?.[0]?.base || '#FFFFFF',
-                          color: getSwatchTextColor(theme.groups?.[0]?.base || '#FFFFFF'),
-                        }}
-                      >
-                        {(theme.groups?.[0]?.base || '').toUpperCase()}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    {theme.groups.map((group) => (
-                      <div key={group.label}>
-                        <div className="flex items-center justify-between gap-3 mb-2">
-                          <p className="text-xs font-semibold text-text-muted tracking-wide uppercase">
-                            {group.label}
-                          </p>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs text-text-muted">Base</span>
-                            <span
-                              className="px-3 py-2 rounded-lg text-xs font-semibold border border-border-subtle"
-                              style={{
-                                background: group.base,
-                                color: getSwatchTextColor(group.base),
-                              }}
-                            >
-                              {group.base.toUpperCase()}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="overflow-x-auto">
-                          <div
-                            className="overflow-hidden rounded-lg border border-border-subtle grid"
-                            style={{
-                              gridTemplateColumns: `repeat(${group.stops.length}, minmax(96px, 1fr))`,
-                              minWidth: `${group.stops.length * 96}px`,
-                            }}
-                          >
-                            {group.stops.map((hex) => (
-                              <div
-                                key={hex}
-                                className="h-[72px] flex items-end justify-center p-2"
-                                style={{ background: hex }}
-                                title={hex.toUpperCase()}
-                              >
-                                <span
-                                  className="text-[11px] leading-[14px] font-medium uppercase"
-                                  style={{ color: getSwatchTextColor(hex) }}
-                                >
-                                  {hex.toUpperCase()}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Right Column - Plan & Preferences */}
@@ -1559,8 +1425,6 @@ function SettingsPage({ colorTheme, onChangeColorTheme }) {
                         { value: 'mint-citrus', label: 'Mint Citrus' },
                         { value: 'sage-forest', label: 'Sage Forest' },
                         { value: 'ocean-blue', label: 'Ocean Blue' },
-                        { value: 'lavender-purple', label: 'Lavender Purple' },
-                        { value: 'crimson-rose', label: 'Crimson Rose' },
                       ]}
                     />
                   </div>
@@ -1571,12 +1435,6 @@ function SettingsPage({ colorTheme, onChangeColorTheme }) {
                 description="Add an extra layer of security"
                 checked={preferences.twoFactorAuth}
                 onChange={() => togglePreference('twoFactorAuth')}
-              />
-              <SettingsToggle
-                label="Dark mode"
-                description="Switch to a darker color scheme"
-                checked={preferences.darkMode}
-                onChange={() => togglePreference('darkMode')}
               />
               <SettingsToggle
                 label="Compact view"
