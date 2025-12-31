@@ -5,7 +5,7 @@ function isValidEmail(email) {
 }
 
 export default function ContactPage() {
-  const email = 'hello@marketrisk.com'
+  const email = 'hello@marketrisk.ro'
   const phone = '+40 712 345 678'
   const telHref = `tel:${phone.replace(/\s+/g, '')}`
 

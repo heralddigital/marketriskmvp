@@ -5,11 +5,11 @@ import { useEffect } from 'react'
  * Usage: <SEO title="Page Title" description="Page description" />
  */
 export default function SEO({ 
-  title = 'MarketRisk - Credit Risk Monitoring for Romanian SMEs',
+  title = 'marketrisk - Credit Risk Monitoring for Romanian SMEs',
   description = 'Simple credit risk monitoring for Romanian SMEs: build a watchlist, get actionable alerts, and avoid bad debt before it hits cashflow.',
   keywords = 'credit risk monitoring, Romanian SMEs, risk alerts, insolvency monitoring, debt management',
-  image = 'https://marketrisk.app/og-image.jpg',
-  url = 'https://marketrisk.app/',
+  image = 'https://www.marketrisk.ro/og-image.jpg',
+  url = 'https://www.marketrisk.ro/',
   type = 'website'
 }) {
   useEffect(() => {

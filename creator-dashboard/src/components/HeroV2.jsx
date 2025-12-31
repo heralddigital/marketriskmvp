@@ -1,4 +1,5 @@
 import React from 'react'
+import { Check } from 'lucide-react'
 
 function PrimaryButton({ children, onClick, type = 'button', disabled = false }) {
   return (
@@ -62,15 +63,15 @@ export default function HeroV2({ onViewDashboard, onScrollToWaitlist }) {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-text-inverse-muted">
           <div className="flex items-center gap-2">
-            <span className="text-brand-pistachio">✓</span>
+            <Check size={16} className="text-brand-pistachio flex-shrink-0" />
             <span>Free plan available</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-brand-pistachio">✓</span>
+            <Check size={16} className="text-brand-pistachio flex-shrink-0" />
             <span>No credit cards required</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-brand-pistachio">✓</span>
+            <Check size={16} className="text-brand-pistachio flex-shrink-0" />
             <span>Launching Q1 2025</span>
           </div>
         </div>

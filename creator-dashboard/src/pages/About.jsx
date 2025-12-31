@@ -1,13 +1,14 @@
 import React from 'react'
 import SEO from '../components/SEO.jsx'
+import { Check } from 'lucide-react'
 
 export default function AboutPage({ onNavigate }) {
   return (
     <>
       <SEO 
-        title="About MarketRisk - Credit Risk Monitoring for Romanian SMEs"
-        description="Learn about MarketRisk, our mission to help Romanian SMEs monitor credit risk, avoid bad debt, and make informed business decisions through simple, transparent tools."
-        keywords="about MarketRisk, credit risk monitoring Romania, SME risk management, Romanian business credit"
+        title="About marketrisk - Credit Risk Monitoring for Romanian SMEs"
+        description="Learn about marketrisk, our mission to help Romanian SMEs monitor credit risk, avoid bad debt, and make informed business decisions through simple, transparent tools."
+        keywords="about marketrisk, credit risk monitoring Romania, SME risk management, Romanian business credit"
       />
       <div className="space-y-12">
         {/* Hero Section */}
@@ -18,7 +19,7 @@ export default function AboutPage({ onNavigate }) {
               Built for calm, credible risk reporting
             </h1>
             <p className="text-lg text-text-secondary max-w-3xl">
-              MarketRisk helps Romanian SMEs turn credit risk data into clear decisions—without noisy dashboards, spreadsheet drift, or last-minute surprises.
+              <span className="text-brand-mughal-green font-medium">marketrisk</span> helps Romanian SMEs turn credit risk data into clear decisions—without noisy dashboards, spreadsheet drift, or last-minute surprises.
             </p>
           </div>
         </section>
@@ -35,7 +36,7 @@ export default function AboutPage({ onNavigate }) {
             <div className="bg-white border border-border-subtle p-6 rounded-xl hover:shadow-sm transition-all duration-normal">
               <h3 className="text-lg font-medium text-text-primary mb-3">Our Story</h3>
               <p className="text-sm text-text-secondary mb-4">
-                MarketRisk was born from a simple observation: Romanian SMEs were losing money to bad debt because they lacked simple, affordable tools to monitor their partners' credit risk. Traditional solutions were either too expensive, too complex, or didn't focus on the Romanian market.
+                <span className="text-brand-mughal-green font-medium">marketrisk</span> was born from a simple observation: Romanian SMEs were losing money to bad debt because they lacked simple, affordable tools to monitor their partners' credit risk. Traditional solutions were either too expensive, too complex, or didn't focus on the Romanian market.
               </p>
               <p className="text-sm text-text-secondary">
                 We set out to build something different—a tool that's accessible, transparent, and designed specifically for how Romanian businesses operate. No enterprise sales cycles, no hidden costs, just clear alerts when something changes.
@@ -143,23 +144,23 @@ export default function AboutPage({ onNavigate }) {
                 Designed for high-stakes updates
               </h3>
               <p className="text-text-inverse-muted text-sm max-w-2xl mb-4">
-                Whether it's a weekly risk review or an executive check-in, MarketRisk keeps the narrative clean and the signal strong. Mobile-first design means you can check alerts anywhere, anytime.
+                Whether it's a weekly risk review or an executive check-in, <span className="text-brand-mughal-green font-medium">marketrisk</span> keeps the narrative clean and the signal strong. Mobile-first design means you can check alerts anywhere, anytime.
               </p>
               <ul className="space-y-2 text-sm text-text-inverse-muted">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand-pistachio mt-[2px]">✓</span>
+                  <Check size={16} className="text-brand-pistachio mt-[2px] flex-shrink-0" />
                   <span>Real-time monitoring of Romanian business registries (ONRC, BPI, ANAF)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand-pistachio mt-[2px]">✓</span>
+                  <Check size={16} className="text-brand-pistachio mt-[2px] flex-shrink-0" />
                   <span>Simple watchlist management with tags and notes</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand-pistachio mt-[2px]">✓</span>
+                  <Check size={16} className="text-brand-pistachio mt-[2px] flex-shrink-0" />
                   <span>PDF exports for reports and documentation</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand-pistachio mt-[2px]">✓</span>
+                  <Check size={16} className="text-brand-pistachio mt-[2px] flex-shrink-0" />
                   <span>Team collaboration with role-based access</span>
                 </li>
               </ul>
@@ -255,7 +256,7 @@ export default function AboutPage({ onNavigate }) {
               </button>
               <button
                 type="button"
-                onClick={() => onNavigate?.('landing')}
+                onClick={() => onNavigate?.('pricing')}
                 className="px-6 py-3 bg-white/10 text-white border border-white/20 rounded-lg font-medium text-sm hover:bg-white/20 transition-all duration-normal"
               >
                 View pricing

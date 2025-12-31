@@ -17,7 +17,7 @@ export default function TermsPage() {
         <div>
           <h2 className="text-lg font-medium text-text-primary mb-2">Use of the service</h2>
           <p className="text-sm text-text-secondary">
-            You agree to use MarketRisk responsibly and comply with applicable laws. Don’t attempt to disrupt or access
+            You agree to use <span className="text-brand-mughal-green font-medium">marketrisk</span> responsibly and comply with applicable laws. Don't attempt to disrupt or access
             the service in unauthorized ways.
           </p>
         </div>
@@ -25,7 +25,7 @@ export default function TermsPage() {
         <div>
           <h2 className="text-lg font-medium text-text-primary mb-2">No financial advice</h2>
           <p className="text-sm text-text-secondary">
-            MarketRisk provides informational reporting tools. It does not provide investment, legal, or financial advice.
+            <span className="text-brand-mughal-green font-medium">marketrisk</span> provides informational reporting tools. It does not provide investment, legal, or financial advice.
           </p>
         </div>
 

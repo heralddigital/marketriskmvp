@@ -100,7 +100,9 @@ function App() {
                 </span>
               </div>
             </div>
-            <span className="text-lg font-semibold text-text-primary">MarketRisk</span>
+            <span className="text-lg text-text-primary">
+              <span>market</span><span className="font-bold">risk</span>
+            </span>
           </div>
           <nav className="flex items-center gap-6">
             {navItems.map((item) => (
@@ -273,7 +275,7 @@ function LandingPageOld({ onPrimaryCta }) {
 
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div>
-            <p className="text-text-inverse-muted text-sm mb-2">MarketRisk</p>
+            <p className="text-text-inverse-muted text-sm mb-2"><span>market</span><span className="font-bold">risk</span></p>
             <h1 className="text-4xl font-semibold text-text-inverse mb-4" style={{ letterSpacing: '-0.8px' }}>
               Make risk reporting feel effortless.
             </h1>
@@ -350,7 +352,7 @@ function LandingPageOld({ onPrimaryCta }) {
             <p className="text-xs text-text-muted mb-2">Solution</p>
             <h3 className="text-lg font-medium text-text-primary mb-2">One calm view</h3>
             <p className="text-sm text-text-secondary">
-              MarketRisk brings exposures, trends, and deltas into a clean, executive-ready narrative.
+              <span>market</span><span className="font-bold">risk</span> brings exposures, trends, and deltas into a clean, executive-ready narrative.
             </p>
           </div>
         </div>
@@ -763,7 +765,7 @@ function AppFooter({ onNavigate }) {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
               <div className="min-w-0">
                 <p className="text-sm text-text-inverse-muted">
-                  <span className="text-text-inverse font-semibold">MarketRisk</span> — calm reporting for high-stakes
+                  <span className="text-text-inverse"><span>market</span><span className="font-bold">risk</span></span> — calm reporting for high-stakes
                   decisions.
                 </p>
                 <div className="mt-4 flex flex-col sm:flex-row gap-3 sm:gap-6">
@@ -852,7 +854,7 @@ function AppFooter({ onNavigate }) {
 
             <div className="mt-8 py-6 border-t border-white/15 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <p className="text-xs text-text-inverse-muted">
-                © {new Date().getFullYear()} MarketRisk. All rights reserved.
+                © {new Date().getFullYear()} <span>market</span><span className="font-bold">risk</span>. All rights reserved.
               </p>
               <p className="text-xs text-text-inverse-muted">Made with calm defaults.</p>
             </div>

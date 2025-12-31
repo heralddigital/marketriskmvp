@@ -18,7 +18,7 @@ export default function PrivacyPage() {
           <h2 className="text-lg font-medium text-text-primary mb-2">What we collect</h2>
           <p className="text-sm text-text-secondary">
             Basic account details (like name and email), plus usage data to improve the product. We aim to collect the
-            minimum needed to operate MarketRisk.
+            minimum needed to operate <span className="text-brand-mughal-green font-medium">marketrisk</span>.
           </p>
         </div>
 

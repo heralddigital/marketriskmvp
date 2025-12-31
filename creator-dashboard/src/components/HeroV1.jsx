@@ -67,7 +67,7 @@ export default function HeroV1({ onViewDashboard, onScrollToWaitlist, waitlistFo
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div>
-          <p className="text-text-inverse-muted text-sm mb-2">MarketRisk</p>
+          <p className="text-text-inverse-muted text-sm mb-2">marketrisk</p>
           <h1 className="text-4xl font-semibold text-text-inverse mb-4" style={{ letterSpacing: '-0.8px' }}>
             Termene gives you data. We tell you when to worry.
           </h1>

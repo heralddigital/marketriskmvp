@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://marketrisk.app/sitemap.xml
+Sitemap: https://www.marketrisk.ro/sitemap.xml
 
 # Disallow admin or private areas if any
 # Disallow: /admin/

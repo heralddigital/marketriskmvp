@@ -1,4 +1,5 @@
 import React from 'react'
+import { Check } from 'lucide-react'
 
 function PrimaryButton({ children, onClick, type = 'button', disabled = false }) {
   return (
@@ -57,7 +58,7 @@ export default function HeroV3({ onViewDashboard, onScrollToWaitlist }) {
           <div className="space-y-4 mb-8">
             <div className="flex items-start gap-3">
               <div className="mt-1 w-5 h-5 rounded-full bg-brand-pistachio/30 flex items-center justify-center flex-shrink-0">
-                <span className="text-brand-pistachio text-xs">✓</span>
+                <Check size={12} className="text-brand-pistachio" />
               </div>
               <div>
                 <p className="text-text-inverse font-medium text-sm">Proactive alerts</p>
@@ -66,7 +67,7 @@ export default function HeroV3({ onViewDashboard, onScrollToWaitlist }) {
             </div>
             <div className="flex items-start gap-3">
               <div className="mt-1 w-5 h-5 rounded-full bg-brand-pistachio/30 flex items-center justify-center flex-shrink-0">
-                <span className="text-brand-pistachio text-xs">✓</span>
+                <Check size={12} className="text-brand-pistachio" />
               </div>
               <div>
                 <p className="text-text-inverse font-medium text-sm">Simple pricing</p>
@@ -75,7 +76,7 @@ export default function HeroV3({ onViewDashboard, onScrollToWaitlist }) {
             </div>
             <div className="flex items-start gap-3">
               <div className="mt-1 w-5 h-5 rounded-full bg-brand-pistachio/30 flex items-center justify-center flex-shrink-0">
-                <span className="text-brand-pistachio text-xs">✓</span>
+                <Check size={12} className="text-brand-pistachio" />
               </div>
               <div>
                 <p className="text-text-inverse font-medium text-sm">Mobile-first design</p>
