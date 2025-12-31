@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "meta": {
     "name": "MarketRisk — Editorial Green Brand System",
-    "version": "1.1.0",
-    "lastUpdated": "2025-12-30",
+    "version": "1.2.0",
+    "lastUpdated": "2025-01-02",
     "intent": "High-level design system guidelines that allow an AI (and humans) to reliably recreate the visual style shown in the attached brand guideline screenshots across web + mobile UI.",
     "brandName": "MarketRisk",
     "styleSummary": [

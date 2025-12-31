@@ -19,7 +19,9 @@ import {
   Clock,
   Building2,
   Target,
-  AlertTriangle
+  AlertTriangle,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react'
 
 function isValidEmail(email) {
@@ -164,6 +166,32 @@ function UseCaseCard({ icon: Icon, title, description, features }) {
           </li>
         ))}
       </ul>
+    </div>
+  )
+}
+
+function FAQItem({ question, answer }) {
+  const [isOpen, setIsOpen] = React.useState(false)
+
+  return (
+    <div className="bg-white border border-border-subtle rounded-xl overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-surface-paper transition-colors"
+      >
+        <span className="text-sm font-medium text-text-primary pr-4">{question}</span>
+        {isOpen ? (
+          <ChevronUp className="w-5 h-5 text-text-muted flex-shrink-0" />
+        ) : (
+          <ChevronDown className="w-5 h-5 text-text-muted flex-shrink-0" />
+        )}
+      </button>
+      {isOpen && (
+        <div className="px-6 pb-4">
+          <p className="text-sm text-text-secondary">{answer}</p>
+        </div>
+      )}
     </div>
   )
 }
@@ -420,11 +448,21 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1,
           <div className="text-center mb-8">
             <p className="text-sm text-text-muted mb-4">Trusted by Romanian SMEs</p>
             <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-              <div className="text-sm font-medium text-text-secondary">TechStart</div>
-              <div className="text-sm font-medium text-text-secondary">FinanceCorp</div>
-              <div className="text-sm font-medium text-text-secondary">RetailGroup</div>
-              <div className="text-sm font-medium text-text-secondary">ServicePro</div>
-              <div className="text-sm font-medium text-text-secondary">ManufacturingPlus</div>
+              <img 
+                src="/logos/anaf-logo.png" 
+                alt="ANAF" 
+                className="h-8 object-contain"
+              />
+              <img 
+                src="/logos/mfp-logo.jpg" 
+                alt="MFP" 
+                className="h-8 object-contain"
+              />
+              <img 
+                src="/logos/onrc-logo.png" 
+                alt="ONRC" 
+                className="h-8 object-contain"
+              />
             </div>
           </div>
         </section>
@@ -572,6 +610,28 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1,
             {testimonials.map((testimonial, index) => (
               <TestimonialCard key={index} {...testimonial} />
             ))}
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section>
+          <div className="text-center mb-12">
+            <p className="text-xs text-text-muted mb-2 uppercase tracking-wide">FAQ</p>
+            <h2 className="text-3xl md:text-4xl font-semibold text-text-primary mb-4" style={{ letterSpacing: '-0.5px' }}>
+              Frequently asked questions
+            </h2>
+            <p className="text-text-secondary max-w-2xl mx-auto">
+              Everything you need to know about marketrisk
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-4">
+            <FAQItem question="What data sources does marketrisk use?" answer="We monitor ANAF (tax authority), insolvency filings (BPI), court cases (Dosare), and other official Romanian business registries. All data is updated in real-time." />
+            <FAQItem question="Are there limits on how many companies I can monitor?" answer="Free plan: 3 lookups/month. Starter: 20 lookups/month + 10 company watchlist. PRO: Unlimited lookups + 250 company watchlist. Enterprise: Unlimited everything." />
+            <FAQItem question="How secure is my data?" answer="We use bank-level encryption, GDPR compliance, and store all data in EU data centers. Your watchlists and reports are never shared with third parties." />
+            <FAQItem question="Can I access the API?" answer="API access is available for Enterprise plans. Contact our sales team to discuss integration options and custom requirements." />
+            <FAQItem question="What happens if I exceed my plan limits?" answer="We'll notify you when you're approaching your limits. You can upgrade anytime, or we'll pause additional lookups until your next billing cycle. No surprise charges." />
+            <FAQItem question="How quickly will I receive alerts?" answer="PRO and Enterprise plans receive real-time alerts within minutes of a filing or change. Starter plans receive daily digest emails. Free plan includes basic email notifications." />
           </div>
         </section>
 

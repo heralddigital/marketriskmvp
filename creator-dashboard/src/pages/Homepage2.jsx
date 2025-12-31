@@ -340,11 +340,21 @@ export default function Homepage2({ onViewDashboard, onNavigate }) {
           <div className="text-center mb-8">
             <p className="text-sm text-text-muted mb-4">Trusted by Romanian SMEs</p>
             <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-              <div className="text-sm font-medium text-text-secondary">TechStart</div>
-              <div className="text-sm font-medium text-text-secondary">FinanceCorp</div>
-              <div className="text-sm font-medium text-text-secondary">RetailGroup</div>
-              <div className="text-sm font-medium text-text-secondary">ServicePro</div>
-              <div className="text-sm font-medium text-text-secondary">ManufacturingPlus</div>
+              <img 
+                src="/logos/anaf-logo.png" 
+                alt="ANAF" 
+                className="h-8 object-contain"
+              />
+              <img 
+                src="/logos/mfp-logo.jpg" 
+                alt="MFP" 
+                className="h-8 object-contain"
+              />
+              <img 
+                src="/logos/onrc-logo.png" 
+                alt="ONRC" 
+                className="h-8 object-contain"
+              />
             </div>
           </div>
         </section>

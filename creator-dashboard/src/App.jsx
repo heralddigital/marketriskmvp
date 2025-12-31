@@ -7,6 +7,7 @@ import ContactPage from './pages/Contact.jsx'
 import PrivacyPage from './pages/Privacy.jsx'
 import TermsPage from './pages/Terms.jsx'
 import PricingPage from './pages/Pricing.jsx'
+import FAQPage from './pages/FAQ.jsx'
 import BlogIndexPage from './pages/BlogIndex.jsx'
 import BlogPostPage from './pages/BlogPost.jsx'
 import DocumentationPage from './pages/Documentation.jsx'
@@ -29,6 +30,23 @@ function App() {
     page: 'landing',
     blogSlug: null,
     blogBackTarget: 'dashboard',
+  })
+
+  // User state - simulate logged in user
+  const [user, setUser] = React.useState(() => {
+    try {
+      const stored = localStorage.getItem('marketrisk_user_v1')
+      if (stored) {
+        return JSON.parse(stored)
+      }
+    } catch {}
+    // Default user for demo - set to null to show logged out state
+    return {
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      avatar: null,
+      isLoggedIn: true, // Set to false to show logged out state
+    }
   })
 
   React.useLayoutEffect(() => {
@@ -64,14 +82,11 @@ function App() {
 
   const navItems = [
     { key: 'landing', label: 'Landing' },
-    { key: 'homepage1', label: 'Homepage 1' },
     { key: 'home', label: 'Home' },
-    { key: 'dashboard', label: 'Dashboard' },
     { key: 'pricing', label: 'Pricing' },
-    { key: 'analytics', label: 'Analytics' },
+    { key: 'faq', label: 'FAQ' },
     { key: 'blogIndex', label: 'Blog' },
     { key: 'documentation', label: 'Documentation' },
-    { key: 'settings', label: 'Settings' },
   ]
 
   return (
@@ -106,14 +121,35 @@ function App() {
           </div>
           <nav className="flex items-center gap-6">
             {navItems.map((item) => (
-              <NavItem
-                key={item.key}
-                active={page === item.key}
-                onClick={() => navigate(item.key)}
-              >
-                {item.label}
-              </NavItem>
+              item.dropdown ? (
+                <DropdownNavItem
+                  key={item.key}
+                  item={item}
+                  active={item.dropdown.some(d => d.key === page) || page === item.key}
+                  currentPage={page}
+                  onNavigate={navigate}
+                />
+              ) : (
+                <NavItem
+                  key={item.key}
+                  active={page === item.key}
+                  onClick={() => navigate(item.key)}
+                >
+                  {item.label}
+                </NavItem>
+              )
             ))}
+            {user?.isLoggedIn && (
+              <UserMenu
+                user={user}
+                currentPage={page}
+                onNavigate={navigate}
+                onLogout={() => {
+                  setUser({ ...user, isLoggedIn: false })
+                  localStorage.removeItem('marketrisk_user_v1')
+                }}
+              />
+            )}
           </nav>
         </div>
       </header>
@@ -152,14 +188,22 @@ function App() {
           {page === 'about' && <AboutPage onNavigate={navigate} />}
           {page === 'contact' && <ContactPage />}
           {page === 'pricing' && <PricingPage onNavigate={navigate} />}
+          {page === 'faq' && <FAQPage onNavigate={navigate} />}
           {page === 'privacy' && <PrivacyPage />}
           {page === 'terms' && <TermsPage />}
           {page === 'documentation' && <DocumentationPage onNavigate={navigate} />}
-          {page === 'admin' && <AdminDashboard onNavigate={navigate} />}
+          {page === 'profile' && (
+            <SettingsPage
+              colorTheme={colorTheme}
+              onChangeColorTheme={setColorTheme}
+              onNavigate={navigate}
+            />
+          )}
           {page === 'settings' && (
             <SettingsPage
               colorTheme={colorTheme}
               onChangeColorTheme={setColorTheme}
+              onNavigate={navigate}
             />
           )}
         </main>
@@ -181,6 +225,188 @@ function NavItem({ active, onClick, children }) {
     >
       {children}
     </button>
+  )
+}
+
+function DropdownNavItem({ item, active, currentPage, onNavigate }) {
+  const [isOpen, setIsOpen] = React.useState(false)
+  const dropdownRef = React.useRef(null)
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
+
+  const handleItemClick = (key) => {
+    onNavigate(key)
+    setIsOpen(false)
+  }
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={`text-sm transition-colors duration-normal flex items-center gap-1 ${
+          active ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
+        }`}
+      >
+        {item.label}
+        <svg
+          className={`w-4 h-4 transition-transform duration-normal ${isOpen ? 'rotate-180' : ''}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      
+      {isOpen && (
+        <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-border-subtle rounded-lg shadow-lg z-50 overflow-hidden">
+          {item.dropdown.map((dropdownItem) => (
+            <button
+              key={dropdownItem.key}
+              type="button"
+              onClick={() => handleItemClick(dropdownItem.key)}
+              className={`w-full text-left px-4 py-2 text-sm transition-colors duration-normal ${
+                currentPage === dropdownItem.key
+                  ? 'bg-surface-paper text-text-primary font-medium'
+                  : 'text-text-secondary hover:bg-surface-paper hover:text-text-primary'
+              }`}
+            >
+              {dropdownItem.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function UserMenu({ user, currentPage, onNavigate, onLogout }) {
+  const [isOpen, setIsOpen] = React.useState(false)
+  const dropdownRef = React.useRef(null)
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
+
+  const getUserInitials = () => {
+    if (user.name) {
+      return user.name
+        .split(' ')
+        .map(n => n[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2)
+    }
+    return user.email?.[0]?.toUpperCase() || 'U'
+  }
+
+  const menuItems = [
+    { key: 'dashboard', label: 'Dashboard', icon: '📊' },
+    { key: 'analytics', label: 'Analytics', icon: '📈' },
+    { type: 'divider' },
+    { key: 'profile', label: 'Profile', icon: '👤' },
+    { key: 'settings', label: 'Settings', icon: '⚙️' },
+    { type: 'divider' },
+    { key: 'logout', label: 'Log out', icon: '🚪', action: onLogout },
+  ]
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 p-1 rounded-lg hover:bg-surface-paper transition-colors duration-normal"
+      >
+        {user.avatar ? (
+          <img
+            src={user.avatar}
+            alt={user.name || 'User'}
+            className="w-8 h-8 rounded-full object-cover"
+          />
+        ) : (
+          <div className="w-8 h-8 rounded-full bg-brand-mughal-green text-white flex items-center justify-center text-xs font-medium">
+            {getUserInitials()}
+          </div>
+        )}
+        <svg
+          className={`w-4 h-4 text-text-muted transition-transform duration-normal ${isOpen ? 'rotate-180' : ''}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      
+      {isOpen && (
+        <div className="absolute top-full right-0 mt-2 w-56 bg-white border border-border-subtle rounded-lg shadow-lg z-50 overflow-hidden">
+          {/* User Info Header */}
+          <div className="px-4 py-3 border-b border-border-subtle bg-surface-paper">
+            <p className="text-sm font-medium text-text-primary">{user.name || 'User'}</p>
+            <p className="text-xs text-text-muted truncate">{user.email}</p>
+          </div>
+
+          {/* Menu Items */}
+          <div className="py-1">
+            {menuItems.map((item, index) => {
+              if (item.type === 'divider') {
+                return <div key={`divider-${index}`} className="h-px bg-border-subtle my-1" />
+              }
+
+              return (
+                <button
+                  key={item.key}
+                  type="button"
+                  onClick={() => {
+                    if (item.action) {
+                      item.action()
+                    } else {
+                      onNavigate(item.key)
+                    }
+                    setIsOpen(false)
+                  }}
+                  className={`w-full text-left px-4 py-2 text-sm transition-colors duration-normal flex items-center gap-2 ${
+                    currentPage === item.key
+                      ? 'bg-surface-paper text-text-primary font-medium'
+                      : 'text-text-secondary hover:bg-surface-paper hover:text-text-primary'
+                  }`}
+                >
+                  {item.icon && <span className="text-base">{item.icon}</span>}
+                  <span>{item.label}</span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -1007,7 +1233,8 @@ function PlaceholderPage({ title }) {
 }
 
 // Settings Page Component
-function SettingsPage({ colorTheme, onChangeColorTheme }) {
+function SettingsPage({ colorTheme, onChangeColorTheme, onNavigate }) {
+  const [activeTab, setActiveTab] = React.useState('settings')
   const AVATAR_STORAGE_KEY = 'marketrisk_profile_avatar_v1'
   const [user, setUser] = React.useState(() => {
     let avatarUrl = ''
@@ -1129,6 +1356,41 @@ function SettingsPage({ colorTheme, onChangeColorTheme }) {
           Manage your account, preferences, and notifications.
         </p>
       </div>
+
+      {/* Tabs */}
+      <div className="flex gap-2 border-b border-border-subtle">
+        <button
+          type="button"
+          onClick={() => setActiveTab('settings')}
+          className={`px-4 py-2 text-sm font-medium transition-colors duration-normal border-b-2 ${
+            activeTab === 'settings'
+              ? 'text-brand-mughal-green border-brand-mughal-green'
+              : 'text-text-secondary border-transparent hover:text-text-primary'
+          }`}
+        >
+          Settings
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab('admin')}
+          className={`px-4 py-2 text-sm font-medium transition-colors duration-normal border-b-2 ${
+            activeTab === 'admin'
+              ? 'text-brand-mughal-green border-brand-mughal-green'
+              : 'text-text-secondary border-transparent hover:text-text-primary'
+          }`}
+        >
+          Admin Dashboard
+        </button>
+      </div>
+
+      {/* Admin Tab Content */}
+      {activeTab === 'admin' && (
+        <AdminDashboard onNavigate={onNavigate} />
+      )}
+
+      {/* Settings Tab Content */}
+      {activeTab === 'settings' && (
+        <>
 
       {/* Success Toast */}
       {saveStatus.show && (
@@ -1488,6 +1750,8 @@ function SettingsPage({ colorTheme, onChangeColorTheme }) {
           </div>
         </div>
       </div>
+        </>
+      )}
     </div>
   )
 }

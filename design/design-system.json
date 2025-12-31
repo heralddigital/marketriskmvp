@@ -3,8 +3,8 @@
   "meta": {
     "name": "Creator Dashboard — App Design System (Tailwind-first)",
     "brandName": "MarketRisk",
-    "version": "1.1.0",
-    "lastUpdated": "2025-12-30",
+    "version": "1.2.0",
+    "lastUpdated": "2025-01-02",
     "goal": "A comprehensive, app-specific style guide for AI (and humans) to build new features with consistent visuals. This document reflects the exact Tailwind tokens and component class recipes currently used in the app.",
     "sourceOfTruth": [
       {
@@ -1244,6 +1244,142 @@
         "Keep corners at 4px (tokenized via rounded-* utilities).",
         "Use token colors only; no ad-hoc hex values.",
         "Ensure focus styles exist for all blog links, buttons, and inputs."
+      ]
+    }
+  },
+  "navigation": {
+    "header": {
+      "description": "App header with logo, navigation items, and user menu.",
+      "height": "72px",
+      "classes": "h-[72px] bg-surface-paper border-b border-border-subtle sticky top-0 z-50",
+      "innerClasses": "max-w-[1200px] mx-auto px-12 h-full flex items-center justify-between"
+    },
+    "mainNavItems": {
+      "structure": [
+        { "key": "landing", "label": "Landing" },
+        { "key": "home", "label": "Home" },
+        { "key": "pricing", "label": "Pricing" },
+        { "key": "faq", "label": "FAQ" },
+        { "key": "blogIndex", "label": "Blog" },
+        { "key": "documentation", "label": "Documentation" }
+      ],
+      "note": "Homepage1 removed from navbar. Settings removed from main nav, now in user menu."
+    },
+    "userMenu": {
+      "description": "User menu dropdown shown when user is logged in. Positioned on right side of navbar.",
+      "trigger": {
+        "classes": "flex items-center gap-2 p-1 rounded-lg hover:bg-surface-paper transition-colors duration-normal",
+        "avatar": {
+          "withImage": "w-8 h-8 rounded-full object-cover",
+          "withInitials": "w-8 h-8 rounded-full bg-brand-mughal-green text-white flex items-center justify-center text-xs font-medium"
+        }
+      },
+      "dropdown": {
+        "classes": "absolute top-full right-0 mt-2 w-56 bg-white border border-border-subtle rounded-lg shadow-lg z-50 overflow-hidden",
+        "userInfo": {
+          "classes": "px-4 py-3 border-b border-border-subtle bg-surface-paper",
+          "name": "text-sm font-medium text-text-primary",
+          "email": "text-xs text-text-muted truncate"
+        },
+        "menuItems": [
+          { "key": "dashboard", "label": "Dashboard", "icon": "📊" },
+          { "key": "analytics", "label": "Analytics", "icon": "📈" },
+          { "type": "divider" },
+          { "key": "profile", "label": "Profile", "icon": "👤" },
+          { "key": "settings", "label": "Settings", "icon": "⚙️" },
+          { "type": "divider" },
+          { "key": "logout", "label": "Log out", "icon": "🚪", "action": "logout" }
+        ]
+      },
+      "behavior": {
+        "clickOutside": "Closes on outside click",
+        "navigation": "Navigates and closes on item click",
+        "logout": "Clears user state and localStorage"
+      }
+    }
+  },
+  "pages": {
+    "FAQPage": {
+      "description": "Comprehensive FAQ page with search, category filtering, and accordion items.",
+      "route": "/faq",
+      "sections": [
+        {
+          "name": "Hero",
+          "components": ["HelpCircle icon", "Title", "Description with contact link", "Search bar"]
+        },
+        {
+          "name": "Category Filter",
+          "components": ["Category buttons with counts", "Active state styling"]
+        },
+        {
+          "name": "FAQ List",
+          "components": ["Accordion items", "Empty state when no results"]
+        },
+        {
+          "name": "CTA Section",
+          "components": ["Contact Support button", "View Documentation button", "Support info"]
+        }
+      ],
+      "features": {
+        "search": "Real-time search filtering by question/answer text",
+        "categories": "8 categories with question counts",
+        "accordion": "Expandable/collapsible FAQ items",
+        "emptyState": "Shown when search/filter returns no results"
+      },
+      "totalQuestions": "60+",
+      "questionCategories": [
+        "Getting Started (6)",
+        "Pricing & Billing (8)",
+        "Features & Functionality (10)",
+        "Security & Privacy (7)",
+        "Account Management (6)",
+        "Support & Help (6)",
+        "Technical Questions (7)"
+      ]
+    },
+    "PricingPage": {
+      "description": "Comprehensive pricing page with detailed plans, feature comparison, testimonials, and ROI calculator.",
+      "route": "/pricing",
+      "sections": [
+        "Hero with trust indicators",
+        "Social proof with statistics",
+        "Pricing cards with monthly/yearly toggle",
+        "Why Accountants Choose Us",
+        "ROI Calculator",
+        "Testimonials (accountants and businesses)",
+        "Trust badges",
+        "Value propositions",
+        "Feature comparison table",
+        "FAQs",
+        "Final CTA"
+      ],
+      "features": {
+        "billingToggle": "Monthly/Yearly with '2 months free' badge",
+        "pricingCards": "4 plans: Free, Starter, PRO (highlighted), Enterprise",
+        "comparisonTable": "Side-by-side feature comparison",
+        "testimonials": "Separated by category (accountants vs businesses)"
+      }
+    },
+    "LandingPage": {
+      "description": "Comprehensive marketing landing page with hero, features, use cases, testimonials, pricing preview, and waitlist.",
+      "route": "/landing",
+      "sections": [
+        "Hero section (with version selector)",
+        "Waitlist form",
+        "Social proof with company logos",
+        "How It Works (3 steps)",
+        "Features (6 feature cards)",
+        "Use Cases (3 use cases)",
+        "Benefits (4 benefit cards)",
+        "Testimonials",
+        "FAQ",
+        "Pricing preview (3 plans)",
+        "Final CTA section"
+      ],
+      "companyLogos": [
+        "/logos/anaf-logo.png (ANAF)",
+        "/logos/mfp-logo.jpg (MFP)",
+        "/logos/onrc-logo.png (ONRC)"
       ]
     }
   }
