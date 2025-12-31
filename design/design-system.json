@@ -447,6 +447,35 @@
         "Buttons: transition-all duration-normal",
         "Chart fill: transition-all duration-slow"
       ]
+    },
+    "iconography": {
+      "library": {
+        "primary": "lucide-react",
+        "rule": "ALWAYS use lucide-react library for all icons. Do not use emojis, custom SVGs, or other icon libraries. lucide-react provides consistent, accessible, and well-designed icons that match the design system.",
+        "importPattern": "import { IconName } from 'lucide-react'",
+        "usage": "Use icon components directly: <IconName className=\"w-4 h-4\" />",
+        "sizing": "Standard sizes: w-4 h-4 (16px), w-5 h-5 (20px), w-6 h-6 (24px). Match icon size to text size context.",
+        "commonIcons": {
+          "dashboard": "LayoutDashboard",
+          "analytics": "BarChart3",
+          "user": "User",
+          "settings": "Settings",
+          "logout": "LogOut",
+          "search": "Search",
+          "help": "HelpCircle",
+          "mail": "Mail",
+          "arrow": "ArrowRight",
+          "check": "CheckCircle2",
+          "alert": "AlertTriangle",
+          "bell": "Bell"
+        }
+      },
+      "doNotUse": [
+        "Do not use emojis (📊, 📈, 👤, etc.)",
+        "Do not use custom SVG files",
+        "Do not use other icon libraries (Font Awesome, Material Icons, etc.)",
+        "Do not inline SVG code - always use lucide-react components"
+      ]
     }
   },
   "layout": {

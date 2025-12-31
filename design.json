@@ -518,6 +518,13 @@
     },
     "iconography": {
       "notes": "Iconography is minimal and geometric. Prefer rounded corners, 1.5–2px strokes, and avoid overly detailed icons.",
+      "library": {
+        "primary": "lucide-react",
+        "rule": "ALWAYS use lucide-react library for all icons. Do not use emojis, custom SVGs, or other icon libraries. lucide-react provides consistent, accessible, and well-designed icons that match the design system.",
+        "importPattern": "import { IconName } from 'lucide-react'",
+        "usage": "Use icon components directly: <IconName className=\"w-4 h-4\" />",
+        "sizing": "Standard sizes: w-4 h-4 (16px), w-5 h-5 (20px), w-6 h-6 (24px). Match icon size to text size context."
+      },
       "sizesPx": {
         "sm": 16,
         "md": 20,
@@ -528,7 +535,8 @@
       "styleRules": [
         "Use rounded line caps and joins.",
         "Prefer single-color icons that inherit from text color.",
-        "When using icon containers, use rounded-square backplates in bone or pistachio at low saturation."
+        "When using icon containers, use rounded-square backplates in bone or pistachio at low saturation.",
+        "ALWAYS import icons from 'lucide-react' - never use emojis or other icon sources."
       ]
     },
     "imagery": {
