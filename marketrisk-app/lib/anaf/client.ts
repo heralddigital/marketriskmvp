@@ -72,52 +72,74 @@ export async function searchCompanyByName(name: string): Promise<never> {
 }
 
 /**
- * Parse ANAF response to internal CompanyData format
+ * Parse ANAF v9 response to internal CompanyData format
+ * V9 has nested structure with date_generale
  */
 export function parseANAFResponse(response: ANAFResponse): CompanyData | null {
   // Check if we have any results
   if (!response || !response.found || response.found.length === 0) {
-    console.log('ANAF Response:', JSON.stringify(response, null, 2))
+    console.log('ANAF Response (no results):', JSON.stringify(response, null, 2))
     return null
   }
 
-  const anafData = response.found[0]
+  const anafCompany = response.found[0]
 
   // Log the actual response structure for debugging
-  console.log('ANAF Data received:', JSON.stringify(anafData, null, 2))
+  console.log('ANAF v9 Company Data:', JSON.stringify(anafCompany, null, 2))
+
+  // V9 API has data nested under date_generale
+  const dateGenerale = anafCompany.date_generale
+
+  if (!dateGenerale) {
+    console.error('Missing date_generale in ANAF v9 response')
+    throw new Error('Date invalide primite de la ANAF: structură invalidă')
+  }
 
   // Safely extract CUI - handle both number and string formats
-  const cui = anafData.cui !== undefined && anafData.cui !== null
-    ? anafData.cui.toString()
+  const cui = dateGenerale.cui !== undefined && dateGenerale.cui !== null
+    ? dateGenerale.cui.toString()
     : ''
 
   if (!cui) {
-    console.error('Missing CUI in ANAF response')
+    console.error('Missing CUI in ANAF v9 date_generale')
     throw new Error('Date invalide primite de la ANAF: lipsește CUI-ul')
   }
 
+  // Extract inactive status from stare_inactiv section
+  const isInactive = anafCompany.stare_inactiv?.statusInactivi || false
+  const inactiveDate = anafCompany.stare_inactiv?.dataInactivare || undefined
+  const reactivationDate = anafCompany.stare_inactiv?.dataReactivare || undefined
+
+  // Extract Split TVA status
+  const isVATSplit = anafCompany.inregistrare_SplitTVA?.statusSplitTVA || false
+
+  // Extract TVA la incasare status
+  const isTVAIncasare = anafCompany.inregistrare_RTVAI?.statusTvaIncasare || false
+
   return {
     cui,
-    name: anafData.denumire || 'N/A',
-    registrationNumber: anafData.nrRegCom || '',
-    address: anafData.adresa || 'N/A',
-    phone: anafData.telefon || undefined,
-    fax: anafData.fax || undefined,
-    postalCode: anafData.codPostal || '',
-    status: anafData.stare_inregistrare || 'NECUNOSCUT',
-    registrationDate: anafData.data_inregistrare || '',
-    caenCode: anafData.cod_CAEN || '',
-    iban: anafData.iban || undefined,
-    eInvoiceStatus: anafData.statusRO_e_Factura || false,
-    taxAuthority: anafData.organFiscalCompetent || '',
-    legalForm: anafData.forma_juridica || 'NECUNOSCUTĂ',
-    organizationForm: anafData.forma_organizare || '',
-    propertyForm: anafData.forma_de_proprietate || '',
+    name: dateGenerale.denumire || 'N/A',
+    registrationNumber: dateGenerale.nrRegCom || '',
+    address: dateGenerale.adresa || 'N/A',
+    phone: dateGenerale.telefon || undefined,
+    fax: dateGenerale.fax || undefined,
+    postalCode: dateGenerale.codPostal || '',
+    status: dateGenerale.stare_inregistrare || 'NECUNOSCUT',
+    registrationDate: dateGenerale.data_inregistrare || '',
+    caenCode: dateGenerale.cod_CAEN || '',
+    iban: dateGenerale.iban || undefined,
+    eInvoiceStatus: dateGenerale.statusRO_e_Factura || false,
+    taxAuthority: dateGenerale.organFiscalCompetent || '',
+    legalForm: dateGenerale.forma_juridica || 'NECUNOSCUTĂ',
+    organizationForm: dateGenerale.forma_organizare || '',
+    propertyForm: dateGenerale.forma_de_proprietate || '',
 
-    // Default values for inactive status (would come from additional ANAF endpoints)
-    isInactive: false,
-    isVATSplit: false,
-    isTVAIncasare: false,
+    // V9 provides real inactive/special status data
+    isInactive,
+    inactiveDate,
+    reactivationDate,
+    isVATSplit,
+    isTVAIncasare,
   }
 }
 
