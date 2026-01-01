@@ -23,6 +23,11 @@ export async function fetchCompanyByCUI(cui: string): Promise<ANAFResponse> {
   }]
 
   try {
+    console.log('ANAF Request:', {
+      url: ANAF_API_URL,
+      body: requestBody
+    })
+
     const response = await fetch(ANAF_API_URL, {
       method: 'POST',
       headers: {
@@ -33,14 +38,20 @@ export async function fetchCompanyByCUI(cui: string): Promise<ANAFResponse> {
       next: { revalidate: 3600 } // Cache for 1 hour
     })
 
+    console.log('ANAF Response status:', response.status, response.statusText)
+
     if (!response.ok) {
+      const errorText = await response.text()
+      console.error('ANAF API error response:', errorText)
       throw new Error(`ANAF API error: ${response.status} ${response.statusText}`)
     }
 
     const data: ANAFResponse = await response.json()
+    console.log('ANAF Response data:', JSON.stringify(data, null, 2))
     return data
 
   } catch (error) {
+    console.error('ANAF fetch error:', error)
     if (error instanceof Error) {
       throw new Error(`Eroare la accesarea ANAF: ${error.message}`)
     }
@@ -64,29 +75,44 @@ export async function searchCompanyByName(name: string): Promise<never> {
  * Parse ANAF response to internal CompanyData format
  */
 export function parseANAFResponse(response: ANAFResponse): CompanyData | null {
-  if (response.found.length === 0) {
+  // Check if we have any results
+  if (!response || !response.found || response.found.length === 0) {
+    console.log('ANAF Response:', JSON.stringify(response, null, 2))
     return null
   }
 
   const anafData = response.found[0]
 
+  // Log the actual response structure for debugging
+  console.log('ANAF Data received:', JSON.stringify(anafData, null, 2))
+
+  // Safely extract CUI - handle both number and string formats
+  const cui = anafData.cui !== undefined && anafData.cui !== null
+    ? anafData.cui.toString()
+    : ''
+
+  if (!cui) {
+    console.error('Missing CUI in ANAF response')
+    throw new Error('Date invalide primite de la ANAF: lipsește CUI-ul')
+  }
+
   return {
-    cui: anafData.cui.toString(),
-    name: anafData.denumire,
-    registrationNumber: anafData.nrRegCom,
-    address: anafData.adresa,
+    cui,
+    name: anafData.denumire || 'N/A',
+    registrationNumber: anafData.nrRegCom || '',
+    address: anafData.adresa || 'N/A',
     phone: anafData.telefon || undefined,
     fax: anafData.fax || undefined,
-    postalCode: anafData.codPostal,
-    status: anafData.stare_inregistrare,
-    registrationDate: anafData.data_inregistrare,
-    caenCode: anafData.cod_CAEN,
+    postalCode: anafData.codPostal || '',
+    status: anafData.stare_inregistrare || 'NECUNOSCUT',
+    registrationDate: anafData.data_inregistrare || '',
+    caenCode: anafData.cod_CAEN || '',
     iban: anafData.iban || undefined,
-    eInvoiceStatus: anafData.statusRO_e_Factura,
-    taxAuthority: anafData.organFiscalCompetent,
-    legalForm: anafData.forma_juridica,
-    organizationForm: anafData.forma_organizare,
-    propertyForm: anafData.forma_de_proprietate,
+    eInvoiceStatus: anafData.statusRO_e_Factura || false,
+    taxAuthority: anafData.organFiscalCompetent || '',
+    legalForm: anafData.forma_juridica || 'NECUNOSCUTĂ',
+    organizationForm: anafData.forma_organizare || '',
+    propertyForm: anafData.forma_de_proprietate || '',
 
     // Default values for inactive status (would come from additional ANAF endpoints)
     isInactive: false,
