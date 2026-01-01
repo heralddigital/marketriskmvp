@@ -39,13 +39,13 @@ export async function searchCompany(cui: string): Promise<SearchResult> {
     }
 
     // Get user profile to check plan limits
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('subscription_plan, searches_used, searches_limit')
+    const { data: profile, error: profileError } = await supabase
+      .from('users')
+      .select('plan, searches_this_month, search_limit_monthly')
       .eq('id', user.id)
       .single()
 
-    if (!profile) {
+    if (!profile || profileError) {
       return {
         success: false,
         error: 'Profil utilizator negăsit'
@@ -53,10 +53,10 @@ export async function searchCompany(cui: string): Promise<SearchResult> {
     }
 
     // Check if user has reached their limit
-    if (profile.searches_used >= profile.searches_limit) {
+    if (profile.searches_this_month >= profile.search_limit_monthly) {
       return {
         success: false,
-        error: `Ai atins limita de ${profile.searches_limit} căutări pentru planul ${profile.subscription_plan}`,
+        error: `Ai atins limita de ${profile.search_limit_monthly} căutări pentru planul ${profile.plan}`,
         limitReached: true
       }
     }
@@ -91,11 +91,11 @@ export async function searchCompany(cui: string): Promise<SearchResult> {
       lastUpdated: new Date().toISOString()
     }
 
-    // Increment searches_used counter
+    // Increment searches counter
     await supabase
-      .from('profiles')
+      .from('users')
       .update({
-        searches_used: profile.searches_used + 1,
+        searches_this_month: profile.searches_this_month + 1,
         updated_at: new Date().toISOString()
       })
       .eq('id', user.id)
@@ -138,8 +138,8 @@ export async function getRemainingSearches(): Promise<{ used: number; limit: num
   }
 
   const { data: profile } = await supabase
-    .from('profiles')
-    .select('searches_used, searches_limit')
+    .from('users')
+    .select('searches_this_month, search_limit_monthly')
     .eq('id', user.id)
     .single()
 
@@ -148,8 +148,8 @@ export async function getRemainingSearches(): Promise<{ used: number; limit: num
   }
 
   return {
-    used: profile.searches_used || 0,
-    limit: profile.searches_limit || 0,
-    remaining: Math.max(0, (profile.searches_limit || 0) - (profile.searches_used || 0))
+    used: profile.searches_this_month || 0,
+    limit: profile.search_limit_monthly || 0,
+    remaining: Math.max(0, (profile.search_limit_monthly || 0) - (profile.searches_this_month || 0))
   }
 }

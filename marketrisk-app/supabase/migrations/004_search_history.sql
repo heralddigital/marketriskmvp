@@ -1,4 +1,9 @@
--- Create search_history table
+-- MarketRisk Database Schema
+-- Migration 004: Search History Table
+
+-- =============================================
+-- TABLE: search_history
+-- =============================================
 CREATE TABLE IF NOT EXISTS search_history (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -7,16 +12,22 @@ CREATE TABLE IF NOT EXISTS search_history (
   risk_level TEXT NOT NULL CHECK (risk_level IN ('GREEN', 'YELLOW', 'RED')),
   risk_score INTEGER NOT NULL CHECK (risk_score >= 0 AND risk_score <= 100),
   search_data JSONB NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-
-  -- Indexes for performance
-  INDEX idx_search_history_user_id (user_id),
-  INDEX idx_search_history_created_at (created_at DESC),
-  INDEX idx_search_history_cui (cui)
+  created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Enable RLS
+-- Indexes for performance
+CREATE INDEX IF NOT EXISTS idx_search_history_user_id ON search_history(user_id);
+CREATE INDEX IF NOT EXISTS idx_search_history_created_at ON search_history(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_search_history_cui ON search_history(cui);
+
+-- =============================================
+-- ROW LEVEL SECURITY
+-- =============================================
 ALTER TABLE search_history ENABLE ROW LEVEL SECURITY;
+
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Users can view own search history" ON search_history;
+DROP POLICY IF EXISTS "Users can insert own search history" ON search_history;
 
 -- RLS Policies
 CREATE POLICY "Users can view own search history"
@@ -29,34 +40,8 @@ CREATE POLICY "Users can insert own search history"
   FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
--- Add searches_used and searches_limit to profiles if not exists
-ALTER TABLE profiles
-ADD COLUMN IF NOT EXISTS searches_used INTEGER DEFAULT 0,
-ADD COLUMN IF NOT EXISTS searches_limit INTEGER DEFAULT 3;
-
--- Update existing profiles with default limits based on plan
-UPDATE profiles
-SET searches_limit = CASE
-  WHEN subscription_plan = 'free' THEN 3
-  WHEN subscription_plan = 'starter' THEN 50
-  WHEN subscription_plan = 'pro' THEN 200
-  WHEN subscription_plan = 'enterprise' THEN 999999
-  ELSE 3
-END
-WHERE searches_limit IS NULL OR searches_limit = 0;
-
--- Function to reset monthly searches
-CREATE OR REPLACE FUNCTION reset_monthly_searches()
-RETURNS void
-LANGUAGE plpgsql
-SECURITY DEFINER
-AS $$
-BEGIN
-  UPDATE profiles
-  SET searches_used = 0,
-      updated_at = NOW();
-END;
-$$;
-
--- Comment on function
-COMMENT ON FUNCTION reset_monthly_searches() IS 'Reset all users monthly search counters - run on 1st of each month';
+-- =============================================
+-- COMMENT
+-- =============================================
+COMMENT ON TABLE search_history IS 'Stores all company searches performed by users with full ANAF data and risk scores';
+COMMENT ON COLUMN search_history.search_data IS 'Full CompanySearchResult as JSONB including company data and risk score breakdown';

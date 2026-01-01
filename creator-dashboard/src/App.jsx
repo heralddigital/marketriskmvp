@@ -13,6 +13,7 @@ import BlogPostPage from './pages/BlogPost.jsx'
 import DocumentationPage from './pages/Documentation.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
 import { BLOG_POSTS, getBlogPostBySlug } from './data/blogPosts.js'
+import { LayoutDashboard, BarChart3, User, Settings, LogOut } from 'lucide-react'
 
 function App() {
   const COLOR_THEME_STORAGE_KEY = 'marketrisk_color_theme_v1'
@@ -328,13 +329,13 @@ function UserMenu({ user, currentPage, onNavigate, onLogout }) {
   }
 
   const menuItems = [
-    { key: 'dashboard', label: 'Dashboard', icon: '📊' },
-    { key: 'analytics', label: 'Analytics', icon: '📈' },
+    { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { key: 'analytics', label: 'Analytics', icon: BarChart3 },
     { type: 'divider' },
-    { key: 'profile', label: 'Profile', icon: '👤' },
-    { key: 'settings', label: 'Settings', icon: '⚙️' },
+    { key: 'profile', label: 'Profile', icon: User },
+    { key: 'settings', label: 'Settings', icon: Settings },
     { type: 'divider' },
-    { key: 'logout', label: 'Log out', icon: '🚪', action: onLogout },
+    { key: 'logout', label: 'Log out', icon: LogOut, action: onLogout },
   ]
 
   return (
@@ -380,6 +381,7 @@ function UserMenu({ user, currentPage, onNavigate, onLogout }) {
                 return <div key={`divider-${index}`} className="h-px bg-border-subtle my-1" />
               }
 
+              const IconComponent = item.icon
               return (
                 <button
                   key={item.key}
@@ -398,7 +400,7 @@ function UserMenu({ user, currentPage, onNavigate, onLogout }) {
                       : 'text-text-secondary hover:bg-surface-paper hover:text-text-primary'
                   }`}
                 >
-                  {item.icon && <span className="text-base">{item.icon}</span>}
+                  {IconComponent && <IconComponent className="w-4 h-4" />}
                   <span>{item.label}</span>
                 </button>
               )
