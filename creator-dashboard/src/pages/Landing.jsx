@@ -1,8 +1,5 @@
 import React from 'react'
 import SEO from '../components/SEO.jsx'
-import HeroV1 from '../components/HeroV1.jsx'
-import HeroV2 from '../components/HeroV2.jsx'
-import HeroV3 from '../components/HeroV3.jsx'
 import HeroV4 from '../components/HeroV4.jsx'
 import { 
   Shield, 
@@ -311,9 +308,7 @@ function WaitlistForm() {
   )
 }
 
-export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1, onNavigate }) {
-  const [currentHeroVersion, setCurrentHeroVersion] = React.useState(heroVersion)
-  
+export default function LandingMarketingPage({ onViewDashboard, onNavigate }) {
   const handleScrollToWaitlist = () => {
     document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -388,18 +383,7 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1,
       onScrollToWaitlist: handleScrollToWaitlist,
     }
 
-    switch (currentHeroVersion) {
-      case 1:
-        return <HeroV1 {...commonProps} waitlistForm={<WaitlistForm />} />
-      case 2:
-        return <HeroV2 {...commonProps} />
-      case 3:
-        return <HeroV3 {...commonProps} />
-      case 4:
-        return <HeroV4 {...commonProps} />
-      default:
-        return <HeroV1 {...commonProps} waitlistForm={<WaitlistForm />} />
-    }
+    return <HeroV4 {...commonProps} />
   }
 
   return (
@@ -410,30 +394,11 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1,
         keywords="credit risk monitoring, Romanian SMEs, risk alerts, insolvency monitoring, debt management, business credit check"
       />
       <div className="space-y-16 md:space-y-24">
-        {/* Hero Version Selector - Always visible for testing */}
-        <div className="flex gap-2 p-4 bg-surface-paper rounded-lg border border-border-subtle">
-          <span className="text-sm text-text-secondary mr-2">Hero Version:</span>
-          {[1, 2, 3, 4].map((v) => (
-            <button
-              key={v}
-              onClick={() => setCurrentHeroVersion(v)}
-              className={`px-3 py-1 text-xs rounded transition-colors ${
-                currentHeroVersion === v
-                  ? 'bg-brand-mughal-green text-white'
-                  : 'bg-white text-text-primary border border-border-subtle hover:bg-surface-paper'
-              }`}
-            >
-              Version {v}
-            </button>
-          ))}
-        </div>
-
         {/* Hero Section */}
         {renderHero()}
 
-        {/* Waitlist Section (shown below hero for V2, V3, and V4, V1 has it inline) */}
-        {currentHeroVersion !== 1 && (
-          <section id="waitlist" className="bg-brand-mughal-green rounded-2xl p-8">
+        {/* Waitlist Section */}
+        <section id="waitlist" className="bg-brand-mughal-green rounded-2xl p-8">
             <div className="max-w-2xl mx-auto">
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
                 <p className="text-text-inverse text-lg font-medium mb-4">Stay in the know</p>
@@ -441,7 +406,6 @@ export default function LandingMarketingPage({ onViewDashboard, heroVersion = 1,
               </div>
             </div>
           </section>
-        )}
 
         {/* Social Proof / Trust Logos */}
         <section className="py-8">

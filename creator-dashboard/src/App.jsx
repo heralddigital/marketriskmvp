@@ -14,6 +14,7 @@ import DocumentationPage from './pages/Documentation.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
 import { BLOG_POSTS, getBlogPostBySlug } from './data/blogPosts.js'
 import { LayoutDashboard, BarChart3, User, Settings, LogOut } from 'lucide-react'
+import CookieConsent from './components/CookieConsent.jsx'
 
 function App() {
   const COLOR_THEME_STORAGE_KEY = 'marketrisk_color_theme_v1'
@@ -211,6 +212,9 @@ function App() {
       )}
 
       <AppFooter onNavigate={navigate} />
+      
+      {/* Cookie Consent Modal */}
+      <CookieConsent />
     </div>
   )
 }
