@@ -1,6 +1,6 @@
 import type { ANAFResponse, CompanyData } from './types'
 
-const ANAF_API_URL = 'https://webservicesp.anaf.ro/ProdusServiciiWeb/api/v8/ws/tva'
+const ANAF_API_URL = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/ws/tva'
 
 /**
  * Fetch company information from ANAF by CUI
