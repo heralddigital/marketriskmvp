@@ -68,9 +68,15 @@ Expected: Should work, RO prefix is stripped automatically
 
 ### Endpoint Information
 - **Base URL**: `https://webservicesp.anaf.ro`
-- **Path**: `/PlatitorTvaRest/api/v8/ws/tva`
+- **Path**: `/api/PlatitorTvaRest/v9/tva` (updated to v9 - January 2026)
+- **Full URL**: `https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva`
 - **Method**: POST
 - **Content-Type**: `application/json`
+
+**Version History:**
+- v7: `/PlatitorTvaRest/api/v7/ws/tva` (deprecated)
+- v8: `/PlatitorTvaRest/api/v8/ws/tva` (deprecated)
+- v9: `/api/PlatitorTvaRest/v9/tva` (current - note the `/api/` prefix)
 
 ### Request Format
 ```json
@@ -116,7 +122,7 @@ Open http://localhost:3000/app/search and test the search function.
 
 ### 2. Test with cURL (Direct API)
 ```bash
-curl -X POST https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/ws/tva \
+curl -X POST https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva \
   -H "Content-Type: application/json" \
   -d '[{"cui": 1590082, "data": "2026-01-01"}]'
 ```
@@ -174,7 +180,12 @@ Expected response: JSON with company data
 ## Debugging Tips
 
 ### If You Get 404 Error
-Check that the endpoint is: `/PlatitorTvaRest/api/v8/ws/tva`
+✅ **FIXED**: The endpoint must be `/api/PlatitorTvaRest/v9/tva`
+
+Common mistakes:
+- ❌ `/PlatitorTvaRest/api/v8/ws/tva` (old v8)
+- ❌ `/ProdusServiciiWeb/api/v8/ws/tva` (wrong path)
+- ✅ `/api/PlatitorTvaRest/v9/tva` (correct v9)
 
 ### If You Get 400 Bad Request
 - Check JSON format
@@ -214,9 +225,12 @@ ANAF API rate limits are not publicly documented, but based on usage:
 
 ## References
 
+- [ANAF API Documentation v9](https://static.anaf.ro/static/10/Anaf/Informatii_R/Servicii_web/doc_WS_V9.txt) **(CURRENT)**
 - [ANAF API Documentation v7](https://static.anaf.ro/static/10/Anaf/Informatii_R/Servicii_web/doc_WS_V7.txt)
-- [ANAF API Base URL](https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/)
-- [GitHub - ANAF API Examples](https://github.com/itrack/anaf)
+- [ANAF API Base URL](https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva)
+- [GitHub - ANAF PHP API Client](https://github.com/andalisolutions/anaf-php)
+- [GitHub - ANAF API Examples (itrack)](https://github.com/itrack/anaf)
+- [RO ANAF OAuth Service Documentation](https://docs.socrate.io/api-reference/ro-anaf-oauth-service/)
 - [LinkedIn - Romanian APIs Guide](https://www.linkedin.com/pulse/romanian-apis-exposed-you-can-use-starting-now-part-1-paladuta-stefan)
 
 ---
