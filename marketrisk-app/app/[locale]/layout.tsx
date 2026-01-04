@@ -46,24 +46,17 @@ export default async function LocaleLayout({
   const websiteSchema = getWebsiteSchema(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <head>
-        <JsonLd data={[organizationSchema, websiteSchema]} />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning
-      >
+    <>
+      <JsonLd data={[organizationSchema, websiteSchema]} />
+      <div className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-surface-paper`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
-            <div className="flex flex-col min-h-screen bg-surface-paper">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer locale={locale as 'ro' | 'en'} />
-            </div>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer locale={locale as 'ro' | 'en'} />
           </ThemeProvider>
         </NextIntlClientProvider>
-      </body>
-    </html>
+      </div>
+    </>
   );
 }
