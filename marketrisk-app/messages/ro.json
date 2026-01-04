@@ -1,0 +1,551 @@
+{
+  "common": {
+    "appName": "MarketRisk",
+    "tagline": "Platforma ta de monitorizare a riscului de credit",
+    "getStarted": "Începe acum",
+    "learnMore": "Află mai multe",
+    "signUp": "Înregistrare",
+    "signIn": "Autentificare",
+    "signOut": "Deconectare",
+    "dashboard": "Panou de control",
+    "pricing": "Prețuri",
+    "about": "Despre noi",
+    "contact": "Contact",
+    "faq": "Întrebări frecvente",
+    "blog": "Blog",
+    "docs": "Documentație",
+    "privacy": "Politica de confidențialitate",
+    "terms": "Termeni și condiții",
+    "loading": "Se încarcă...",
+    "error": "Eroare",
+    "success": "Succes",
+    "cancel": "Anulează",
+    "save": "Salvează",
+    "delete": "Șterge",
+    "edit": "Editează",
+    "search": "Caută",
+    "filter": "Filtrează",
+    "back": "Înapoi",
+    "next": "Următorul",
+    "previous": "Anterior",
+    "close": "Închide"
+  },
+  "nav": {
+    "features": "Funcționalități",
+    "solutions": "Soluții",
+    "resources": "Resurse",
+    "company": "Companie"
+  },
+  "homepage": {
+    "hero": {
+      "badge": "Acces anticipat disponibil",
+      "title": "Oprește datoriile neîncasate înainte să îți oprească afacerea",
+      "subtitle": "Monitorizează riscul de credit pentru partenerii tăi IMM din România. Primește alerte inteligente când ceva se schimbă—astfel poți acționa rapid și îți protejezi fluxul de numerar.",
+      "primaryCTA": "Obține acces anticipat",
+      "secondaryCTA": "Vezi cum funcționează",
+      "trust1": "Plan gratuit disponibil",
+      "trust2": "Fără card necesar",
+      "trust3": "Lansare Q1 2025"
+    },
+    "mockup": {
+      "header": "Tablou de bord general",
+      "title": "Analiză monitorizare risc",
+      "last7days": "Ultimele 7 zile",
+      "last30days": "Ultimele 30 zile",
+      "kpi1": {
+        "label": "Monitorizate",
+        "change": "+3 săptămâna aceasta"
+      },
+      "kpi2": {
+        "label": "Alerte",
+        "change": "3 noi astăzi"
+      },
+      "kpi3": {
+        "label": "Risc ridicat",
+        "change": "Acțiune necesară"
+      },
+      "kpi4": {
+        "label": "Stare bună",
+        "change": "Totul OK"
+      },
+      "chartTitle": "Tendințe risc",
+      "legend1": "Alerte",
+      "legend2": "Rezolvate",
+      "day1": "Lun",
+      "day2": "Mar",
+      "day3": "Mie",
+      "day4": "Joi",
+      "day5": "Vin",
+      "day6": "Sâm",
+      "day7": "Dum",
+      "stat1": "Verificări insolvență",
+      "stat2": "Actualizări datorii",
+      "stat3": "Schimbări status"
+    },
+    "socialProof": {
+      "title": "De încredere pentru IMM-uri din România"
+    },
+    "howItWorks": {
+      "label": "Cum funcționează",
+      "title": "Pornește în câteva minute",
+      "subtitle": "Configurare simplă, protecție puternică. Începe să îți monitorizezi partenerii de afaceri astăzi.",
+      "step1": {
+        "title": "Creează watchlist-ul",
+        "description": "Adaugă până la 25 de companii după CUI. Organizează cu etichete și notițe pentru gestionare ușoară."
+      },
+      "step2": {
+        "title": "Configurează alertele",
+        "description": "Alege ce contează: proceduri de insolvență, modificări juridice, semnale datorii la stat și altele."
+      },
+      "step3": {
+        "title": "Rămâi protejat",
+        "description": "Primești notificări instant când apar riscuri. Acționează înainte să îți afecteze fluxul de numerar."
+      }
+    },
+    "features": {
+      "label": "Funcționalități",
+      "title": "Tot ce ai nevoie pentru gestionarea riscului",
+      "feature1": {
+        "title": "Alerte în timp real",
+        "description": "Primește notificări instant pentru proceduri de insolvență, procese, datorii fiscale și modificări juridice."
+      },
+      "feature2": {
+        "title": "Căutare rapidă CUI",
+        "description": "Verificări rapide de credit pentru orice companie din România. Obține profiluri complete de risc în secunde."
+      },
+      "feature3": {
+        "title": "Rapoarte PDF",
+        "description": "Exportă rapoarte detaliate pentru stakeholderi, audituri sau documentație internă."
+      },
+      "feature4": {
+        "title": "Tendințe risc",
+        "description": "Urmărește schimbările în timp. Vezi când nivelurile de risc cresc sau scad pentru companiile monitorizate."
+      },
+      "feature5": {
+        "title": "Colaborare în echipă",
+        "description": "Împărtășește watchlist-uri cu echipa. Setează permisiuni și ține pe toată lumea informată."
+      },
+      "feature6": {
+        "title": "Securitate nivel bancar",
+        "description": "Datele tale sunt criptate și protejate cu standarde de securitate de top în industrie."
+      }
+    },
+    "useCases": {
+      "label": "Cazuri de utilizare",
+      "title": "Construit pentru echipe ca a ta",
+      "subtitle": "Fie că ești în vânzări, finanțe sau analiză credit, MarketRisk se adaptează workflow-ului tău.",
+      "sales": {
+        "title": "Echipe de vânzări",
+        "description": "Monitorizează clienții potențiali și actuali înainte și după contracte.",
+        "feature1": "Verifică bonitatea înainte de onboarding",
+        "feature2": "Urmărește schimbările în comportamentul de plată",
+        "feature3": "Identifică clienții cu risc ridicat din timp"
+      },
+      "finance": {
+        "title": "Departamente financiare",
+        "description": "Protejează fluxul de numerar monitorizând furnizori și parteneri.",
+        "feature1": "Monitorizează stabilitatea furnizorilor",
+        "feature2": "Primește alerte pentru proceduri de insolvență",
+        "feature3": "Urmărește datorii la stat și probleme fiscale"
+      },
+      "credit": {
+        "title": "Analiști credit",
+        "description": "Ia decizii de creditare informate cu date complete de risc.",
+        "feature1": "Acces la informații de credit în timp real",
+        "feature2": "Analiză trend istoric",
+        "feature3": "Exportă rapoarte detaliate"
+      }
+    },
+    "benefits": {
+      "label": "Beneficii",
+      "title": "Construit pentru alerte — nu supraîncărcare informațională",
+      "benefit1": {
+        "title": "Alerte proactive de risc",
+        "description": "Primești avertizări timpurii care îți spun ce s-a schimbat și ce să faci mai departe.",
+        "bullet1": "Insolvență & modificări juridice",
+        "bullet2": "Semnale datorii la stat",
+        "bullet3": "Context + acțiune recomandată"
+      },
+      "benefit2": {
+        "title": "Watchlist-uri prietenoase IMM",
+        "description": "Setează o singură dată: monitorizează cele 25 de companii care contează cel mai mult.",
+        "bullet1": "Căutare rapidă",
+        "bullet2": "Etichete + notițe",
+        "bullet3": "Istoric status clar"
+      },
+      "benefit3": {
+        "title": "Prețuri simple și transparente",
+        "description": "Upgrade self-service, fără credite, fără \"contactează vânzările pentru preț\".",
+        "bullet1": "Plan gratuit pentru încercare",
+        "bullet2": "99 RON Starter pentru portofolii mici",
+        "bullet3": "299 RON PRO pentru vânzări active",
+        "bullet4": "Enterprise pentru volum mare"
+      },
+      "benefit4": {
+        "title": "Mobile-first în mod implicit",
+        "description": "Proiectat pentru operatori ocupați — verificări rapide, alerte rapide, UI calm.",
+        "bullet1": "Tipografie curată",
+        "bullet2": "Sarcină cognitivă redusă",
+        "bullet3": "Funcționează excelent pe telefoane"
+      }
+    },
+    "testimonials": {
+      "label": "Testimoniale",
+      "title": "Apreciat de afaceri din România",
+      "quote1": "MarketRisk ne-a salvat de o datorie de 50.000€. Sistemul de avertizare timpurie a detectat o procedură de insolvență pe care am fi ratat-o.",
+      "quote2": "Monitorizarea 24/7 ne oferă liniște sufletească. Știm imediat când se schimbă ceva la partenerii noștri.",
+      "role2": "Manager risc",
+      "quote3": "Cea mai bună investiție a anului. Planul PRO se plătește singur prevenind o singură creanță neîncasată.",
+      "role3": "Director operațiuni",
+      "quote4": "Prețuri simple și transparente. Fără taxe ascunse, fără surprize. Exact ce aveam nevoie."
+    },
+    "faq": {
+      "label": "Întrebări frecvente",
+      "title": "Întrebări frecvente",
+      "subtitle": "Tot ce trebuie să știi despre MarketRisk",
+      "q1": {
+        "question": "Ce surse de date folosește MarketRisk?",
+        "answer": "Monitorizăm ANAF (autoritatea fiscală), proceduri de insolvență (BPI), procese judiciare (Dosare) și alte registre oficiale românești. Toate datele sunt actualizate în timp real."
+      },
+      "q2": {
+        "question": "Sunt limite la câte companii pot monitoriza?",
+        "answer": "Plan gratuit: 3 căutări/lună. Starter: 20 căutări/lună + watchlist 10 companii. PRO: căutări nelimitate + watchlist 250 companii. Enterprise: totul nelimitat."
+      },
+      "q3": {
+        "question": "Cât de securizate sunt datele mele?",
+        "answer": "Folosim criptare nivel bancar, conformitate GDPR și stocăm toate datele în centre de date din UE. Watchlist-urile și rapoartele tale nu sunt niciodată partajate cu terți."
+      },
+      "q4": {
+        "question": "Pot accesa API-ul?",
+        "answer": "Accesul API este disponibil pentru planurile Enterprise. Contactează echipa noastră de vânzări pentru a discuta opțiuni de integrare și cerințe personalizate."
+      },
+      "q5": {
+        "question": "Ce se întâmplă dacă depășesc limitele planului?",
+        "answer": "Te vom notifica când te apropii de limite. Poți face upgrade oricând, sau vom pauzează căutările adiționale până la următorul ciclu de facturare. Fără taxe surpriză."
+      },
+      "q6": {
+        "question": "Cât de repede voi primi alerte?",
+        "answer": "Planurile PRO și Enterprise primesc alerte în timp real în câteva minute de la o înregistrare sau modificare. Planurile Starter primesc e-mailuri zilnice rezumative. Planul gratuit include notificări de bază prin email."
+      }
+    },
+    "pricing": {
+      "label": "Prețuri",
+      "title": "Prețuri simple și transparente",
+      "subtitle": "Începe gratuit, upgrade când ești gata. Fără taxe ascunse, fără surprize.",
+      "currency": "RON",
+      "perMonth": "/lună",
+      "popular": "Cel mai popular",
+      "free": {
+        "name": "Gratuit",
+        "description": "Pentru verificări ocazionale",
+        "feature1": "3 căutări CUI / lună",
+        "feature2": "Verificări de credit de bază",
+        "feature3": "Suport prin email",
+        "cta": "Începe"
+      },
+      "pro": {
+        "name": "PRO",
+        "price": "299",
+        "description": "Pentru echipe de vânzări active",
+        "feature1": "Căutări CUI nelimitate",
+        "feature2": "Watchlist 50 CUI",
+        "feature3": "Toate alertele activate",
+        "feature4": "Export PDF nelimitat",
+        "feature5": "Suport prioritar",
+        "cta": "Începe trial PRO"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Personalizat",
+        "description": "Pentru nevoi de volum mare",
+        "feature1": "Totul nelimitat",
+        "feature2": "Integrări personalizate",
+        "feature3": "Suport dedicat",
+        "feature4": "Garanții SLA",
+        "cta": "Contactează vânzările"
+      },
+      "viewDetails": "Vezi prețurile detaliate"
+    },
+    "cta": {
+      "title": "Gata să îți protejezi afacerea?",
+      "subtitle": "Începe gratuit astăzi. Fără card necesar, fără angajamente.",
+      "primaryCTA": "Creează cont gratuit",
+      "secondaryCTA": "Vezi demo produs",
+      "noCard": "Fără card necesar",
+      "freePlan": "Plan gratuit disponibil"
+    }
+  },
+  "hero": {
+    "title": "Monitorizează riscul de credit al companiilor românești",
+    "subtitle": "Acces instant la informații financiare și juridice esențiale. Ia decizii informate cu MarketRisk.",
+    "earlyAccess": "Acces Anticipat Disponibil",
+    "comingSoon": "În Curând",
+    "primaryCTA": "Începe perioada de probă gratuită",
+    "secondaryCTA": "Vezi demonstrație",
+    "trustBadge1": "Plan gratuit disponibil",
+    "trustBadge2": "Fără card de credit necesar",
+    "trustBadge3": "Lansare: T1 2025"
+  },
+  "features": {
+    "title": "Tot ce ai nevoie pentru evaluarea riscului",
+    "subtitle": "Instrumente complete pentru monitorizarea companiilor românești",
+    "feature1": {
+      "title": "Monitorizare în timp real",
+      "description": "Primește alerte instantanee când companiile monitorizate își schimbă statusul fiscal sau juridic"
+    },
+    "feature2": {
+      "title": "Date oficiale ANAF",
+      "description": "Acces direct la baza de date a Agenției Naționale de Administrare Fiscală"
+    },
+    "feature3": {
+      "title": "Scor de risc avansat",
+      "description": "Algoritmul nostru proprietar analizează 24 de factori pentru a calcula scorul de risc"
+    },
+    "feature4": {
+      "title": "Istoric litigii",
+      "description": "Verifică istoricul proceselor juridice și insolvențelor din bazele de date oficiale"
+    },
+    "feature5": {
+      "title": "Export rapoarte PDF",
+      "description": "Generează rapoarte profesionale cu un singur click pentru clienți și parteneri"
+    },
+    "feature6": {
+      "title": "API pentru integrare",
+      "description": "Integrează MarketRisk în sistemele tale existente prin API-ul nostru"
+    }
+  },
+  "pricing": {
+    "title": "Prețuri simple și transparente",
+    "subtitle": "Alege planul potrivit pentru nevoile tale",
+    "monthly": "Lunar",
+    "annual": "Anual",
+    "annualDiscount": "Economisești 20%",
+    "currency": "RON",
+    "perMonth": "/lună",
+    "perYear": "/an",
+    "free": {
+      "name": "Gratuit",
+      "price": "0",
+      "description": "Perfect pentru a începe",
+      "features": [
+        "3 căutări pe lună",
+        "Acces la date ANAF",
+        "Scor de risc de bază",
+        "Suport comunitate"
+      ],
+      "cta": "Începe gratuit"
+    },
+    "starter": {
+      "name": "Starter",
+      "price": "125",
+      "priceAnnual": "1200",
+      "description": "Pentru freelanceri și IMM-uri",
+      "features": [
+        "50 căutări pe lună",
+        "10 companii monitorizate",
+        "5 rapoarte PDF pe lună",
+        "Alerte email",
+        "Date ANAF + Litigii",
+        "Suport prioritar"
+      ],
+      "cta": "Începe perioada de probă",
+      "popular": true
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "375",
+      "priceAnnual": "3600",
+      "description": "Pentru echipe și departamente",
+      "features": [
+        "200 căutări pe lună",
+        "250 companii monitorizate",
+        "Rapoarte PDF nelimitate",
+        "Alerte în timp real",
+        "Toate sursele de date",
+        "API acces",
+        "Manager de cont dedicat"
+      ],
+      "cta": "Contactează vânzări"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Personalizat",
+      "description": "Pentru corporații și instituții",
+      "features": [
+        "Căutări nelimitate",
+        "Companii monitorizate nelimitate",
+        "Rapoarte personalizate",
+        "SLA garantat",
+        "Integrare on-premise",
+        "Suport 24/7",
+        "Training dedicat"
+      ],
+      "cta": "Solicită ofertă"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bun venit înapoi",
+      "subtitle": "Autentifică-te în contul tău MarketRisk",
+      "email": "Adresa de email",
+      "password": "Parolă",
+      "forgotPassword": "Ai uitat parola?",
+      "noAccount": "Nu ai cont?",
+      "signUpLink": "Creează cont gratuit",
+      "submit": "Autentificare",
+      "withGoogle": "Continuă cu Google"
+    },
+    "signup": {
+      "title": "Creează cont MarketRisk",
+      "subtitle": "Începe perioada de probă gratuită astăzi",
+      "fullName": "Nume complet",
+      "company": "Companie (opțional)",
+      "email": "Adresa de email",
+      "password": "Parolă",
+      "confirmPassword": "Confirmă parola",
+      "hasAccount": "Ai deja cont?",
+      "signInLink": "Autentifică-te",
+      "submit": "Creează cont",
+      "withGoogle": "Înregistrare cu Google",
+      "terms": "Prin crearea contului, accepți",
+      "termsLink": "Termenii și condițiile",
+      "and": "și",
+      "privacyLink": "Politica de confidențialitate"
+    },
+    "forgotPassword": {
+      "title": "Resetare parolă",
+      "subtitle": "Îți vom trimite instrucțiuni pe email",
+      "email": "Adresa de email",
+      "submit": "Trimite link de resetare",
+      "backToLogin": "Înapoi la autentificare"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bun venit, {name}",
+    "overview": "Prezentare generală",
+    "quickStats": "Statistici rapide",
+    "searchesThisMonth": "Căutări luna aceasta",
+    "companiesWatched": "Companii monitorizate",
+    "activeAlerts": "Alerte active",
+    "reportsGenerated": "Rapoarte generate",
+    "quickActions": "Acțiuni rapide",
+    "searchCompany": "Caută companie",
+    "viewWatchlist": "Vezi lista de monitorizare",
+    "generateReport": "Generează raport",
+    "manageAlerts": "Gestionează alertele",
+    "recentActivity": "Activitate recentă",
+    "noActivity": "Nu există activitate recentă"
+  },
+  "search": {
+    "title": "Caută companie",
+    "placeholder": "Introdu CUI sau denumire companie",
+    "searchByCUI": "Caută după CUI",
+    "searchByName": "Caută după denumire",
+    "submit": "Caută",
+    "results": "Rezultate căutare",
+    "noResults": "Nu s-au găsit rezultate",
+    "companyInfo": "Informații companie",
+    "riskScore": "Scor de risc",
+    "riskLevel": {
+      "green": "RISC SCĂZUT",
+      "yellow": "RISC MEDIU",
+      "red": "RISC RIDICAT"
+    },
+    "vatStatus": "Status TVA",
+    "active": "Activă",
+    "inactive": "Inactivă",
+    "addToWatchlist": "Adaugă la monitorizare",
+    "generateReport": "Generează raport PDF",
+    "detailsTitle": "Detalii companie",
+    "legalInfo": "Informații juridice",
+    "fiscalInfo": "Informații fiscale",
+    "riskFactors": "Factori de risc"
+  },
+  "watchlist": {
+    "title": "Lista de monitorizare",
+    "subtitle": "Companiile pe care le urmărești",
+    "empty": "Nu ai încă companii monitorizate",
+    "addCompany": "Adaugă companie",
+    "removeCompany": "Elimină din monitorizare",
+    "lastChecked": "Ultima verificare",
+    "riskChange": "Schimbare risc",
+    "viewDetails": "Vezi detalii",
+    "checkNow": "Verifică acum"
+  },
+  "alerts": {
+    "title": "Alerte",
+    "subtitle": "Notificări și actualizări importante",
+    "unread": "Necitite",
+    "all": "Toate",
+    "markAsRead": "Marchează ca citit",
+    "deleteAlert": "Șterge alertă",
+    "noAlerts": "Nu ai alerte",
+    "types": {
+      "risk_change": "Schimbare scor de risc",
+      "lawsuit": "Proces juridic nou",
+      "insolvency": "Procedură insolvență",
+      "debt": "Modificare datorii fiscale",
+      "vat_change": "Schimbare status TVA",
+      "status_change": "Schimbare status legal"
+    },
+    "severity": {
+      "info": "Informare",
+      "warning": "Atenționare",
+      "critical": "Critic"
+    }
+  },
+  "settings": {
+    "title": "Setări",
+    "profile": "Profil",
+    "notifications": "Notificări",
+    "billing": "Facturare",
+    "security": "Securitate",
+    "api": "Acces API",
+    "profileSettings": {
+      "title": "Setări profil",
+      "fullName": "Nume complet",
+      "email": "Email",
+      "company": "Companie",
+      "phone": "Telefon",
+      "saveChanges": "Salvează modificările"
+    },
+    "notificationSettings": {
+      "title": "Preferințe notificări",
+      "emailAlerts": "Alerte email",
+      "riskChanges": "Notifică schimbări scor de risc",
+      "newLawsuits": "Notifică procese noi",
+      "monthlyReport": "Raport lunar",
+      "marketingEmails": "Emailuri marketing"
+    },
+    "securitySettings": {
+      "title": "Securitate",
+      "changePassword": "Schimbă parola",
+      "currentPassword": "Parola curentă",
+      "newPassword": "Parolă nouă",
+      "confirmNewPassword": "Confirmă parola nouă",
+      "twoFactor": "Autentificare în doi pași",
+      "enableTwoFactor": "Activează 2FA"
+    }
+  },
+  "footer": {
+    "description": "Platforma profesională de monitorizare a riscului de credit pentru piața românească",
+    "product": "Produs",
+    "company": "Companie",
+    "legal": "Legal",
+    "support": "Suport",
+    "newsletter": "Abonează-te la newsletter",
+    "newsletterPlaceholder": "Adresa ta de email",
+    "subscribe": "Abonează-te",
+    "rights": "© 2025 MarketRisk. Toate drepturile rezervate.",
+    "madeIn": "Făcut în România"
+  },
+  "errors": {
+    "generic": "A apărut o eroare. Te rugăm să încerci din nou.",
+    "network": "Eroare de conexiune. Verifică conexiunea la internet.",
+    "unauthorized": "Nu ai permisiunea să accesezi această resursă.",
+    "notFound": "Resursa solicitată nu a fost găsită.",
+    "validation": "Te rugăm să completezi toate câmpurile obligatorii.",
+    "limitReached": "Ai atins limita de căutări pentru acest plan.",
+    "invalidCUI": "CUI invalid. Te rugăm să verifici și să încerci din nou."
+  }
+}

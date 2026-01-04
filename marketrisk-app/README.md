@@ -32,6 +32,22 @@ A production-ready Next.js 15 application for monitoring Romanian company credit
 - ✅ Risk trend analysis
 - ✅ Romanian language factor descriptions
 
+#### PHASE 4: ANAF API Integration ✅
+- ✅ ANAF API v9 client implementation
+- ✅ Company data fetching and parsing
+- ✅ Risk scoring algorithm (24 factors)
+- ✅ Search history tracking
+- ✅ Plan-based usage limits
+
+#### PHASE 5: PortalJust API Integration ✅
+- ✅ SOAP client for PortalJust (Romanian Ministry of Justice)
+- ✅ Court case data fetching
+- ✅ Litigation risk metrics calculation
+- ✅ Integration into risk scoring algorithm
+- ✅ LitigationCard component for display
+- ✅ Dashboard widget for latest cases
+- ✅ Plaintiff/defendant role differentiation in scoring
+
 ### 🚧 Next Steps
 
 1. **Set up Supabase Project**
@@ -39,11 +55,10 @@ A production-ready Next.js 15 application for monitoring Romanian company credit
    - Run migrations from `supabase/migrations/`
    - Update `.env.local` with credentials
 
-2. **ANAF API Integration**
-3. **PortalJust API Integration**
-4. **Authentication Pages**
-5. **Core SaaS Features**
-6. **Marketing Pages**
+2. **BPI API Integration** (Insolvency Registry)
+3. **Email Notifications** (Resend integration)
+4. **PDF Report Generation**
+5. **Payment Processing** (Stripe integration)
 
 ---
 
@@ -57,19 +72,21 @@ A production-ready Next.js 15 application for monitoring Romanian company credit
   - Operational Red Flags (20 points max)
   - Positive Adjustments (negative points)
 
-- 🚧 **Data Integrations**
-  - ANAF (Romanian Tax Authority)
-  - PortalJust (Litigation Database)
-  - BPI (Insolvency Registry)
-  - 24-hour response caching
+- ✅ **Data Integrations**
+  - ✅ ANAF (Romanian Tax Authority) - Fully integrated
+  - ✅ PortalJust (Litigation Database) - Fully integrated with SOAP API
+  - 🚧 BPI (Insolvency Registry) - Structure ready, needs API access
+  - ✅ 24-hour response caching for all APIs
 
-- 🚧 **SaaS Features**
-  - Company search (CUI lookup)
-  - Watchlist management
-  - Automated daily monitoring (6 AM cron)
-  - Email alerts on risk changes
-  - PDF report generation
-  - Plan-based usage limits
+- ✅ **SaaS Features**
+  - ✅ Company search (CUI lookup) with ANAF + PortalJust data
+  - ✅ Watchlist management with plan-based limits
+  - ✅ Automated daily monitoring (6 AM cron) - Structure ready
+  - ✅ Risk scoring with real litigation data
+  - ✅ Dashboard with latest litigation cases
+  - ✅ Plan-based usage limits (searches, watchlist, PDF exports)
+  - 🚧 Email alerts on risk changes
+  - 🚧 PDF report generation
 
 ### Pricing Tiers
 | Feature | Free | Starter | Pro | Enterprise |
@@ -117,11 +134,15 @@ A production-ready Next.js 15 application for monitoring Romanian company credit
 - **pg_cron** or **Vercel Cron** for scheduled tasks
 
 ### APIs & Integrations
-- **ANAF API** - Romanian tax authority data
-- **PortalJust API** - Litigation database
-- **BPI API** - Insolvency registry
-- **Stripe** - Payment processing (planned)
-- **Resend** - Email notifications (planned)
+- ✅ **ANAF API** - Romanian tax authority data (v9, fully integrated)
+- ✅ **PortalJust SOAP API** - Litigation database (fully integrated)
+  - Endpoint: `http://portalquery.just.ro/query.asmx`
+  - Uses `CautareDosare` operation
+  - Real-time court case data
+  - Integrated into risk scoring
+- 🚧 **BPI API** - Insolvency registry (structure ready)
+- 🚧 **Stripe** - Payment processing (planned)
+- 🚧 **Resend** - Email notifications (planned)
 
 ### Development
 - **TypeScript** - Type safety
@@ -172,9 +193,15 @@ marketrisk-app/
 │   │   └── middleware.ts     # Auth middleware
 │   ├── risk-algorithm/       # Risk scoring engine
 │   │   ├── calculator.ts     # Main calculator
-│   │   └── factors.ts        # Risk factors
+│   │   ├── factors.ts        # Risk factors
+│   │   └── litigation-transformer.ts  # PortalJust data transformer
 │   ├── anaf/                 # ANAF API client
-│   ├── portaljust/           # PortalJust client
+│   │   ├── client.ts         # ANAF v9 API client
+│   │   ├── types.ts          # ANAF types
+│   │   └── risk-calculator.ts # ANAF-based scoring (legacy)
+│   ├── portaljust/           # PortalJust SOAP client
+│   │   ├── client.ts         # SOAP client implementation
+│   │   └── types.ts          # PortalJust types
 │   └── pdf/                  # PDF generation
 ├── types/
 │   ├── company.ts            # Company types
@@ -265,12 +292,16 @@ The proprietary algorithm analyzes multiple risk factors:
 - State debts (high >€10k): +30
 - Split VAT regime: +15
 
-#### Category 2: Litigation (40 pts max)
-- Active lawsuits: +8 per case (max 40)
-- Lost cases (2y): +12 per case (max 36)
-- Bankruptcy filing: +40
-- Execution proceedings: +25
-- Labor disputes: +10 per case
+#### Category 2: Litigation & Legal Risk (Enhanced with PortalJust)
+- **Active as Defendant**: +10 per case (max 40) - Higher risk, being sued
+- **Active as Plaintiff**: +3 per case (max 15) - Lower risk, pursuing claims
+- **Lost Cases (2y)**: +15 per case (max 45) - Financial liability indicator
+- **Won Cases (as Plaintiff)**: -2 points (1-2 cases only) - Small positive
+- **Bankruptcy Filing**: +40 - Critical financial distress
+- **Execution Proceedings**: +30 - Assets can be seized
+- **Commercial Disputes**: +8 per case (max 24) - High financial impact
+- **High-Value Cases**: +5 per case (max 15) - Significant financial impact
+- **Labor Disputes**: +6 per case (max 18) - Operational issues
 
 #### Category 3: Financial (30 pts max)
 - Missing statements: +20
@@ -336,12 +367,19 @@ Protected routes: `/app/*`, `/dashboard`, `/search`, `/watchlist`, `/alerts`, `/
 - Cache ANAF responses for 24 hours
 
 ### Risk Scoring
+- **Main Algorithm**: `lib/risk-algorithm/calculator.ts` (comprehensive scoring)
+- **Uses Real Data**: ANAF + PortalJust litigation data
+- **Differentiated Scoring**: Plaintiff vs Defendant roles weighted differently
 - Run risk calculation when:
-  - New company search
+  - New company search (automatic PortalJust fetch)
   - Daily monitoring (6 AM)
   - Manual refresh request
 - Store historical scores in `risk_scores` table
 - Generate alerts on risk level changes
+- **Litigation Impact**: Real court cases affect risk score based on:
+  - Role (defendant = higher risk, plaintiff = lower risk)
+  - Case outcomes (lost cases = financial liability)
+  - Case types (commercial, execution, bankruptcy = higher impact)
 
 ---
 
@@ -398,16 +436,16 @@ Resets `searches_this_month` and `pdf_exports_this_month` for all users.
 - [x] Phase 1: Foundation
 - [x] Phase 2: Database Schema
 - [x] Phase 3: Risk Algorithm
-- [ ] Phase 4: Authentication
-- [ ] Phase 5: API Integrations
-- [ ] Phase 6: Core SaaS Features
-- [ ] Phase 7: Automated Monitoring
-- [ ] Phase 8: User Management
-- [ ] Phase 9: PDF Export
-- [ ] Phase 10: Marketing Pages
-- [ ] Phase 11: Blog System
-- [ ] Phase 12: Documentation
-- [ ] Phase 13: SEO & Performance
+- [x] Phase 4: Authentication
+- [x] Phase 5: ANAF API Integration
+- [x] Phase 6: PortalJust API Integration
+- [x] Phase 7: Risk Calculation with Real Data
+- [x] Phase 8: Core SaaS Features (Search, Watchlist, Dashboard)
+- [ ] Phase 9: BPI Integration
+- [ ] Phase 10: Email Notifications
+- [ ] Phase 11: PDF Export
+- [ ] Phase 12: Automated Monitoring (Cron Jobs)
+- [ ] Phase 13: Payment Processing
 - [ ] Phase 14: Testing & QA
 - [ ] Phase 15: Deployment & Launch
 
@@ -427,10 +465,21 @@ Proprietary - All rights reserved
 
 ## 🔗 Resources
 
+### Documentation
+- **[Documentation Index](./DOCUMENTATION_INDEX.md)** - Master index of all docs
+- [API Integrations Guide](./API_INTEGRATIONS.md) - Complete API documentation
+- [PortalJust Integration](./PORTALJUST_INTEGRATION.md) - PortalJust complete guide
+- [Architecture Documentation](./ARCHITECTURE.md) - System architecture
+- [Integration Status](./INTEGRATION_STATUS.md) - Current integration status
+- [Dashboard Features](./DASHBOARD_COMPLETE.md) - Dashboard implementation
+- [Quick Start Guide](./QUICK_START.md) - Setup instructions
+
+### External Resources
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Supabase Documentation](https://supabase.com/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [ANAF API Documentation](https://www.anaf.ro)
+- [PortalJust WSDL](http://portalquery.just.ro/query.asmx?WSDL)
 
 ---
 

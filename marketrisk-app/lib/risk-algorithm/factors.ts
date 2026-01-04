@@ -27,6 +27,12 @@ export interface CompanyRiskData {
     bankruptcy_filing: boolean;
     execution_proceedings: boolean;
     labor_disputes: number;
+    // Enhanced metrics
+    active_as_defendant?: number;
+    active_as_plaintiff?: number;
+    won_cases_2y?: number;
+    commercial_disputes?: number;
+    high_value_cases?: number;
   };
 
   // MFinante (Ministry of Finance) data
@@ -124,35 +130,76 @@ export function calculateLegalRegulatoryPoints(
 
 // =============================================
 // CATEGORY 2: Litigation & Legal Risk (40 points max)
+// Enhanced with plaintiff/defendant differentiation
 // =============================================
 export function calculateLitigationPoints(
   data: CompanyRiskData
 ): RiskDetail[] {
   const details: RiskDetail[] = [];
 
-  // Active lawsuits (defendant) - 8 points each, max 40
-  const lawsuits = data.portaljust.active_lawsuits || 0;
-  if (lawsuits > 0) {
-    const points = Math.min(lawsuits * 8, 40);
+  // Active lawsuits as DEFENDANT - Higher risk (10 points each, max 40)
+  // Being a defendant indicates the company is being sued, which is a financial risk
+  const activeAsDefendant = data.portaljust.active_as_defendant || 0;
+  if (activeAsDefendant > 0) {
+    const points = Math.min(activeAsDefendant * 10, 40);
     details.push({
-      factor: `${lawsuits} proces${lawsuits > 1 ? 'e' : ''} activ${lawsuits > 1 ? 'e' : ''} (pârât)`,
+      factor: `${activeAsDefendant} proces${activeAsDefendant > 1 ? 'e' : ''} activ${activeAsDefendant > 1 ? 'e' : ''} ca pârât`,
       points,
       category: 'litigation',
     });
   }
 
-  // Lost cases in last 2 years - 12 points each, max 36
+  // Active lawsuits as PLAINTIFF - Lower risk (3 points each, max 15)
+  // Being a plaintiff means the company is pursuing claims, less risky but still indicates disputes
+  const activeAsPlaintiff = data.portaljust.active_as_plaintiff || 0;
+  if (activeAsPlaintiff > 0) {
+    const points = Math.min(activeAsPlaintiff * 3, 15);
+    details.push({
+      factor: `${activeAsPlaintiff} proces${activeAsPlaintiff > 1 ? 'e' : ''} activ${activeAsPlaintiff > 1 ? 'e' : ''} ca reclamant`,
+      points,
+      category: 'litigation',
+    });
+  }
+
+  // Fallback: If no role-specific data, use total active lawsuits (conservative approach)
+  if (activeAsDefendant === 0 && activeAsPlaintiff === 0) {
+    const lawsuits = data.portaljust.active_lawsuits || 0;
+    if (lawsuits > 0) {
+      // Assume worst case: all are as defendant
+      const points = Math.min(lawsuits * 10, 40);
+      details.push({
+        factor: `${lawsuits} proces${lawsuits > 1 ? 'e' : ''} activ${lawsuits > 1 ? 'e' : ''} (rol necunoscut)`,
+        points,
+        category: 'litigation',
+      });
+    }
+  }
+
+  // Lost cases in last 2 years (as defendant) - 15 points each, max 45
+  // Lost cases indicate financial liability and poor legal outcomes
   const lostCases = data.portaljust.lost_cases_2y || 0;
   if (lostCases > 0) {
-    const points = Math.min(lostCases * 12, 36);
+    const points = Math.min(lostCases * 15, 45);
     details.push({
-      factor: `${lostCases} proces${lostCases > 1 ? 'e' : ''} pierdut${lostCases > 1 ? 'e' : ''} (ultimi 2 ani)`,
+      factor: `${lostCases} proces${lostCases > 1 ? 'e' : ''} pierdut${lostCases > 1 ? 'e' : ''} ca pârât (ultimi 2 ani)`,
       points,
       category: 'litigation',
     });
   }
 
-  // Bankruptcy filing (+40)
+  // Won cases as plaintiff - Small positive adjustment (negative points)
+  // Shows company can successfully pursue claims, but too many lawsuits still a concern
+  const wonCases = data.portaljust.won_cases_2y || 0;
+  if (wonCases > 0 && wonCases <= 2) {
+    // Only small positive if 1-2 won cases (shows competence, not excessive litigation)
+    details.push({
+      factor: `${wonCases} proces${wonCases > 1 ? 'e' : ''} câștigat${wonCases > 1 ? 'e' : ''} ca reclamant`,
+      points: -2,
+      category: 'positive_adjustment',
+    });
+  }
+
+  // Bankruptcy filing (+40) - Critical financial risk
   if (data.portaljust.bankruptcy_filing) {
     details.push({
       factor: 'Cerere de faliment activă',
@@ -161,21 +208,47 @@ export function calculateLitigationPoints(
     });
   }
 
-  // Execution proceedings (+25)
+  // Execution proceedings (+30) - High financial risk
+  // Execution means assets can be seized, severe financial distress
   if (data.portaljust.execution_proceedings) {
     details.push({
       factor: 'Executare silită activă',
-      points: 25,
+      points: 30,
       category: 'litigation',
     });
   }
 
-  // Labor disputes - 10 points each
+  // Commercial disputes - 8 points each (max 24)
+  // Commercial disputes often involve significant financial amounts
+  const commercialDisputes = data.portaljust.commercial_disputes || 0;
+  if (commercialDisputes > 0) {
+    const points = Math.min(commercialDisputes * 8, 24);
+    details.push({
+      factor: `${commercialDisputes} litig${commercialDisputes > 1 ? 'ii' : 'iu'} comercial${commercialDisputes > 1 ? 'e' : ''}`,
+      points,
+      category: 'litigation',
+    });
+  }
+
+  // High-value cases - Additional 5 points per case (max 15)
+  // Cases with significant financial impact
+  const highValueCases = data.portaljust.high_value_cases || 0;
+  if (highValueCases > 0) {
+    const points = Math.min(highValueCases * 5, 15);
+    details.push({
+      factor: `${highValueCases} proces${highValueCases > 1 ? 'e' : ''} cu impact financiar semnificativ`,
+      points,
+      category: 'litigation',
+    });
+  }
+
+  // Labor disputes - 6 points each (max 18)
+  // Labor disputes indicate operational issues and potential financial liability
   const laborDisputes = data.portaljust.labor_disputes || 0;
   if (laborDisputes > 0) {
-    const points = laborDisputes * 10;
+    const points = Math.min(laborDisputes * 6, 18);
     details.push({
-      factor: `${laborDisputes} litigii de muncă`,
+      factor: `${laborDisputes} litig${laborDisputes > 1 ? 'ii' : 'iu'} de muncă`,
       points,
       category: 'litigation',
     });

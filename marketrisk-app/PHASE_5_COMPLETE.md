@@ -278,9 +278,23 @@ ADD COLUMN searches_limit INTEGER DEFAULT 3;
 
 ---
 
-**Status**: ✅ Phase 5 Complete!
+**Status**: ✅ Phase 5 Complete! (ANAF + PortalJust)
 **Ready to test**: Yes
 **Next phase**: Phase 6 - Core SaaS Features (Watchlist, Alerts, PDF Export)
+
+---
+
+## 🆕 PortalJust Integration (Added January 2026)
+
+### PortalJust SOAP API
+- ✅ SOAP 1.2 client implementation
+- ✅ Court case data fetching
+- ✅ Integration into risk calculation
+- ✅ LitigationCard component
+- ✅ Dashboard widget for latest cases
+- ✅ Plaintiff/defendant role differentiation
+
+**See**: [PORTALJUST_INTEGRATION.md](./PORTALJUST_INTEGRATION.md) for complete documentation
 
 ---
 

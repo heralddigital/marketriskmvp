@@ -1,0 +1,17 @@
+# robots.txt for marketrisk.ro
+
+User-agent: *
+Allow: /
+
+# Disallow authenticated app routes
+Disallow: /app/
+
+# Disallow PayloadCMS admin routes
+Disallow: /admin/
+Disallow: /api/
+
+# Allow public uploads (images, PDFs)
+Allow: /uploads/
+
+# Sitemap location
+Sitemap: https://www.marketrisk.ro/sitemap.xml

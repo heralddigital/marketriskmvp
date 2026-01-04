@@ -1,21 +1,18 @@
+'use client'
+
+import React from 'react'
+
 /**
  * MarketRisk Logo Component
- *
+ * 
  * The logo represents credit risk monitoring SaaS:
  * 1. Shield shape - represents protection and security
  * 2. Alert/warning triangle - represents risk alerts and early warnings
  * 3. Chart/graph lines - represents credit data and risk trends
- *
+ * 
  * This creates a visual metaphor for "protecting your business through intelligent credit risk monitoring"
  */
-
-interface LogoProps {
-  size?: number
-  variant?: 'default' | 'dark' | 'inverse'
-  className?: string
-}
-
-export default function Logo({ size = 32, variant = 'default', className = '' }: LogoProps) {
+export default function Logo({ size = 32, variant = 'default', className = '' }: { size?: number; variant?: 'default' | 'dark' | 'inverse'; className?: string }) {
   const isDark = variant === 'dark' || variant === 'inverse'
   const primaryColor = isDark ? '#DCE7DC' : 'var(--brand-mughal-green)'
   const secondaryColor = isDark ? '#A3B18A' : 'var(--brand-pistachio)'
@@ -41,7 +38,7 @@ export default function Logo({ size = 32, variant = 'default', className = '' }:
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-
+      
       {/* Inner Shield - Core Protection */}
       <path
         d="M16 4.5L8.5 7.5V14C8.5 19 12 23.5 16 26.5C20 23.5 23.5 19 23.5 14V7.5L16 4.5Z"
@@ -66,7 +63,7 @@ export default function Logo({ size = 32, variant = 'default', className = '' }:
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-
+      
       {/* Exclamation Mark - Alert Symbol */}
       <line
         x1="16"
@@ -94,7 +91,7 @@ export default function Logo({ size = 32, variant = 'default', className = '' }:
         fill="none"
         opacity="0.7"
       />
-
+      
       {/* Data points on chart */}
       <circle cx="9" cy="22" r="1.2" fill={accentColor} opacity="0.8" />
       <circle cx="14" cy="22" r="1.2" fill={accentColor} opacity="0.8" />
@@ -108,7 +105,7 @@ export default function Logo({ size = 32, variant = 'default', className = '' }:
  * Logo with Text - Full brand mark
  * "market" is normal weight, "risk" is bold
  */
-export function LogoWithText({ size = 32, variant = 'default', showText = true, className = '' }: LogoProps & { showText?: boolean }) {
+export function LogoWithText({ size = 32, variant = 'default', showText = true, className = '' }: { size?: number; variant?: 'default' | 'dark' | 'inverse'; showText?: boolean; className?: string }) {
   const isDark = variant === 'dark' || variant === 'inverse'
   const textColor = isDark ? '#DCE7DC' : 'var(--text-primary)'
 
@@ -130,10 +127,11 @@ export function LogoWithText({ size = 32, variant = 'default', showText = true, 
 /**
  * Compact Logo - Icon only, optimized for small spaces
  */
-export function LogoCompact({ size = 24, variant = 'default', className = '' }: LogoProps) {
+export function LogoCompact({ size = 24, variant = 'default', className = '' }: { size?: number; variant?: 'default' | 'dark' | 'inverse'; className?: string }) {
   const isDark = variant === 'dark' || variant === 'inverse'
   const primaryColor = isDark ? '#DCE7DC' : 'var(--brand-mughal-green)'
   const secondaryColor = isDark ? '#A3B18A' : 'var(--brand-pistachio)'
+  const accentColor = isDark ? '#588157' : 'var(--brand-mughal-green-2)'
 
   return (
     <svg
@@ -155,7 +153,7 @@ export function LogoCompact({ size = 24, variant = 'default', className = '' }: 
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-
+      
       {/* Alert/Warning Triangle */}
       <path
         d="M12 6L14.5 11H9.5L12 6Z"
@@ -169,7 +167,7 @@ export function LogoCompact({ size = 24, variant = 'default', className = '' }: 
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-
+      
       {/* Exclamation Mark */}
       <line
         x1="12"
@@ -186,7 +184,7 @@ export function LogoCompact({ size = 24, variant = 'default', className = '' }: 
         r="0.6"
         fill={primaryColor}
       />
-
+      
       {/* Credit Risk Chart Line */}
       <path
         d="M7 16L9 15L11 15.5L13 14L15 14.5L17 13.5"

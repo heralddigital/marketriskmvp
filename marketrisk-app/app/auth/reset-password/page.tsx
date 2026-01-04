@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { updatePassword } from '../../(auth)/actions'
+import { updatePassword } from '../../[locale]/(auth)/actions'
 import { Lock, AlertCircle } from 'lucide-react'
 
 export default function ResetPasswordPage() {

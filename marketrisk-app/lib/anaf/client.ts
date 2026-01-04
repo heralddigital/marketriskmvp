@@ -116,6 +116,29 @@ export function parseANAFResponse(response: ANAFResponse): CompanyData | null {
   // Extract TVA la incasare status
   const isTVAIncasare = anafCompany.inregistrare_RTVAI?.statusTvaIncasare || false
 
+  // Extract VAT registration details
+  const vatRegistration = anafCompany.inregistrare_scop_Tva ? {
+    isRegistered: anafCompany.inregistrare_scop_Tva.scpTVA || false,
+    periods: anafCompany.inregistrare_scop_Tva.perioade_TVA || [],
+    startDate: anafCompany.inregistrare_scop_Tva.perioade_TVA?.[0]?.data_inceput_ScpTVA,
+    endDate: anafCompany.inregistrare_scop_Tva.perioade_TVA?.[anafCompany.inregistrare_scop_Tva.perioade_TVA.length - 1]?.data_sfarsit_ScpTVA,
+  } : undefined
+
+  // Extract VAT Incasare details
+  const vatIncasareDetails = anafCompany.inregistrare_RTVAI ? {
+    startDate: anafCompany.inregistrare_RTVAI.dataInceputTvaInc,
+    endDate: anafCompany.inregistrare_RTVAI.dataSfarsitTvaInc,
+    updateDate: anafCompany.inregistrare_RTVAI.dataActualizareTvaInc,
+    publicationDate: anafCompany.inregistrare_RTVAI.dataPublicareTvaInc,
+    actType: anafCompany.inregistrare_RTVAI.tipActTvaInc,
+  } : undefined
+
+  // Extract Split TVA details
+  const splitTVADetails = anafCompany.inregistrare_SplitTVA ? {
+    startDate: anafCompany.inregistrare_SplitTVA.dataInceputSplitTVA,
+    cancellationDate: anafCompany.inregistrare_SplitTVA.dataAnulareSplitTVA,
+  } : undefined
+
   return {
     cui,
     name: dateGenerale.denumire || 'N/A',
@@ -140,6 +163,13 @@ export function parseANAFResponse(response: ANAFResponse): CompanyData | null {
     reactivationDate,
     isVATSplit,
     isTVAIncasare,
+
+    // Enhanced Financial Data
+    vatRegistration,
+    vatIncasareDetails,
+    splitTVADetails,
+    fiscalAddress: anafCompany.adresa_domiciliu_fiscal,
+    socialAddress: anafCompany.adresa_sediu_social,
   }
 }
 

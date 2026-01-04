@@ -40,12 +40,13 @@
 - `/forgot-password` - Reset
 
 ### App (`/app`)
-- `/app/dashboard` - Main dashboard
-- `/app/search` - Search (Phase 5)
-- `/app/watchlist` - Watchlist (Phase 6)
+- `/app/dashboard` - Main dashboard (with latest litigation cases)
+- `/app/search` - Search with ANAF + PortalJust data
+- `/app/company/[cui]` - Company detail with full litigation info
+- `/app/watchlist` - Watchlist management
 - `/app/alerts` - Alerts (Phase 6)
-- `/app/history` - History (Phase 6)
-- `/app/settings` - Settings (Phase 6)
+- `/app/history` - Search history
+- `/app/settings` - Settings
 
 ## 🗂️ Archive Location
 
@@ -75,7 +76,16 @@ vercel
 - Full documentation: `MIGRATION_COMPLETE.md`
 - Setup guide: `PHASE_4_COMPLETE.md`
 - Supabase setup: `SUPABASE_SETUP.md`
+- **PortalJust Integration**: `PORTALJUST_INTEGRATION.md`
+- **API Integrations**: `API_INTEGRATIONS.md`
 - UI recommendations: `UI_TEMPLATES_RECOMMENDATIONS.md`
+
+## 🔥 Key Features
+
+- ✅ **Real-time ANAF data** - Company registration, VAT status, addresses
+- ✅ **PortalJust litigation data** - Court cases, bankruptcy, execution proceedings
+- ✅ **Comprehensive risk scoring** - Uses real litigation data with plaintiff/defendant differentiation
+- ✅ **Dashboard widgets** - Latest litigation cases, watchlist summary, recent searches
 
 ---
 

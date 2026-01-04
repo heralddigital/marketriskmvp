@@ -113,6 +113,27 @@ export interface CompanyData {
   reactivationDate?: string
   isVATSplit: boolean
   isTVAIncasare: boolean
+
+  // Enhanced Financial Data
+  vatRegistration?: {
+    isRegistered: boolean
+    periods?: ANAFV9TVAPeriod[]
+    startDate?: string
+    endDate?: string
+  }
+  vatIncasareDetails?: {
+    startDate?: string
+    endDate?: string
+    updateDate?: string
+    publicationDate?: string
+    actType?: string
+  }
+  splitTVADetails?: {
+    startDate?: string
+    cancellationDate?: string
+  }
+  fiscalAddress?: ANAFV9Address
+  socialAddress?: ANAFV9Address
 }
 
 // Risk Score Types

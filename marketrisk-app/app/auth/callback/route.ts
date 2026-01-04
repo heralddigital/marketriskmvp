@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
+import { sendWelcomeEmail } from '@/lib/email/notifications'
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
@@ -8,9 +9,36 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = await createClient()
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code)
 
-    if (!error) {
+    if (!error && data.user) {
+      // Send welcome email for new users (check if this is their first session)
+      try {
+        const { data: userProfile } = await supabase
+          .from('users')
+          .select('email, name, locale, created_at')
+          .eq('id', data.user.id)
+          .single()
+
+        // Send welcome email if user was created recently (within last hour)
+        if (userProfile) {
+          const createdAt = new Date(userProfile.created_at)
+          const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000)
+
+          if (createdAt > oneHourAgo) {
+            await sendWelcomeEmail({
+              to: userProfile.email,
+              name: userProfile.name || data.user.email?.split('@')[0] || 'User',
+              locale: (userProfile.locale || 'ro') as 'ro' | 'en',
+            })
+            console.log(`Welcome email sent to ${userProfile.email}`)
+          }
+        }
+      } catch (emailError) {
+        console.error('Error sending welcome email:', emailError)
+        // Don't fail the auth flow if email fails
+      }
+
       const forwardedHost = request.headers.get('x-forwarded-host')
       const isLocalEnv = process.env.NODE_ENV === 'development'
 

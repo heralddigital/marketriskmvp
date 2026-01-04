@@ -1,0 +1,551 @@
+{
+  "common": {
+    "appName": "MarketRisk",
+    "tagline": "Your credit risk monitoring platform",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "dashboard": "Dashboard",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "docs": "Documentation",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "filter": "Filter",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close"
+  },
+  "nav": {
+    "features": "Features",
+    "solutions": "Solutions",
+    "resources": "Resources",
+    "company": "Company"
+  },
+  "homepage": {
+    "hero": {
+      "badge": "Early Access Available",
+      "title": "Stop bad debts before they stop your business",
+      "subtitle": "Monitor credit risk for your Romanian SME partners. Get smart alerts when something changes—so you can act fast and protect your cash flow.",
+      "primaryCTA": "Get early access",
+      "secondaryCTA": "See how it works",
+      "trust1": "Free plan available",
+      "trust2": "No card required",
+      "trust3": "Launch Q1 2025"
+    },
+    "mockup": {
+      "header": "General dashboard",
+      "title": "Risk monitoring analysis",
+      "last7days": "Last 7 days",
+      "last30days": "Last 30 days",
+      "kpi1": {
+        "label": "Monitored",
+        "change": "+3 this week"
+      },
+      "kpi2": {
+        "label": "Alerts",
+        "change": "3 new today"
+      },
+      "kpi3": {
+        "label": "High risk",
+        "change": "Action needed"
+      },
+      "kpi4": {
+        "label": "All good",
+        "change": "Everything OK"
+      },
+      "chartTitle": "Risk trends",
+      "legend1": "Alerts",
+      "legend2": "Resolved",
+      "day1": "Mon",
+      "day2": "Tue",
+      "day3": "Wed",
+      "day4": "Thu",
+      "day5": "Fri",
+      "day6": "Sat",
+      "day7": "Sun",
+      "stat1": "Insolvency checks",
+      "stat2": "Debt updates",
+      "stat3": "Status changes"
+    },
+    "socialProof": {
+      "title": "Trusted by Romanian SMEs"
+    },
+    "howItWorks": {
+      "label": "How it works",
+      "title": "Get started in minutes",
+      "subtitle": "Simple setup, powerful protection. Start monitoring your business partners today.",
+      "step1": {
+        "title": "Create your watchlist",
+        "description": "Add up to 25 companies by CUI. Organize with tags and notes for easy management."
+      },
+      "step2": {
+        "title": "Configure alerts",
+        "description": "Choose what matters: insolvency procedures, legal changes, state debt signals and more."
+      },
+      "step3": {
+        "title": "Stay protected",
+        "description": "Get instant notifications when risks appear. Act before they affect your cash flow."
+      }
+    },
+    "features": {
+      "label": "Features",
+      "title": "Everything you need for risk management",
+      "feature1": {
+        "title": "Real-time alerts",
+        "description": "Get instant notifications for insolvency procedures, lawsuits, tax debts and legal changes."
+      },
+      "feature2": {
+        "title": "Fast CUI search",
+        "description": "Quick credit checks for any Romanian company. Get complete risk profiles in seconds."
+      },
+      "feature3": {
+        "title": "PDF reports",
+        "description": "Export detailed reports for stakeholders, audits or internal documentation."
+      },
+      "feature4": {
+        "title": "Risk trends",
+        "description": "Track changes over time. See when risk levels rise or fall for monitored companies."
+      },
+      "feature5": {
+        "title": "Team collaboration",
+        "description": "Share watchlists with your team. Set permissions and keep everyone informed."
+      },
+      "feature6": {
+        "title": "Bank-level security",
+        "description": "Your data is encrypted and protected with industry-leading security standards."
+      }
+    },
+    "useCases": {
+      "label": "Use cases",
+      "title": "Built for teams like yours",
+      "subtitle": "Whether you're in sales, finance, or credit analysis, MarketRisk adapts to your workflow.",
+      "sales": {
+        "title": "Sales teams",
+        "description": "Monitor potential and current clients before and after contracts.",
+        "feature1": "Check creditworthiness before onboarding",
+        "feature2": "Track changes in payment behavior",
+        "feature3": "Identify high-risk clients early"
+      },
+      "finance": {
+        "title": "Finance departments",
+        "description": "Protect cash flow by monitoring suppliers and partners.",
+        "feature1": "Monitor supplier stability",
+        "feature2": "Get alerts for insolvency procedures",
+        "feature3": "Track state debts and tax issues"
+      },
+      "credit": {
+        "title": "Credit analysts",
+        "description": "Make informed lending decisions with complete risk data.",
+        "feature1": "Access real-time credit information",
+        "feature2": "Historical trend analysis",
+        "feature3": "Export detailed reports"
+      }
+    },
+    "benefits": {
+      "label": "Benefits",
+      "title": "Built for alerts — not information overload",
+      "benefit1": {
+        "title": "Proactive risk alerts",
+        "description": "Get early warnings that tell you what changed and what to do next.",
+        "bullet1": "Insolvency & legal changes",
+        "bullet2": "State debt signals",
+        "bullet3": "Context + recommended action"
+      },
+      "benefit2": {
+        "title": "SME-friendly watchlists",
+        "description": "Set it once: monitor the 25 companies that matter most.",
+        "bullet1": "Quick search",
+        "bullet2": "Tags + notes",
+        "bullet3": "Clear status history"
+      },
+      "benefit3": {
+        "title": "Simple, transparent pricing",
+        "description": "Self-service upgrade, no credits, no \"contact sales for pricing\".",
+        "bullet1": "Free plan to try",
+        "bullet2": "€25 Starter for small portfolios",
+        "bullet3": "€75 PRO for active sales",
+        "bullet4": "Enterprise for high volume"
+      },
+      "benefit4": {
+        "title": "Mobile-first by default",
+        "description": "Designed for busy operators — quick checks, fast alerts, calm UI.",
+        "bullet1": "Clean typography",
+        "bullet2": "Reduced cognitive load",
+        "bullet3": "Works great on phones"
+      }
+    },
+    "testimonials": {
+      "label": "Testimonials",
+      "title": "Trusted by businesses across Romania",
+      "quote1": "MarketRisk saved us from a €50,000 bad debt. The early warning system caught an insolvency procedure we would have missed.",
+      "quote2": "24/7 monitoring gives us peace of mind. We know immediately when something changes with our partners.",
+      "role2": "Risk Manager",
+      "quote3": "Best investment of the year. The PRO plan pays for itself by preventing a single uncollected receivable.",
+      "role3": "Operations Director",
+      "quote4": "Simple, transparent pricing. No hidden fees, no surprises. Exactly what we needed."
+    },
+    "faq": {
+      "label": "FAQ",
+      "title": "Frequently asked questions",
+      "subtitle": "Everything you need to know about MarketRisk",
+      "q1": {
+        "question": "What data sources does MarketRisk use?",
+        "answer": "We monitor ANAF (tax authority), insolvency procedures (BPI), court cases (Dosare) and other official Romanian registers. All data is updated in real-time."
+      },
+      "q2": {
+        "question": "Are there limits on how many companies I can monitor?",
+        "answer": "Free plan: 3 searches/month. Starter: 20 searches/month + 10 company watchlist. PRO: unlimited searches + 250 company watchlist. Enterprise: everything unlimited."
+      },
+      "q3": {
+        "question": "How secure is my data?",
+        "answer": "We use bank-level encryption, GDPR compliance and store all data in EU data centers. Your watchlists and reports are never shared with third parties."
+      },
+      "q4": {
+        "question": "Can I access the API?",
+        "answer": "API access is available for Enterprise plans. Contact our sales team to discuss integration options and custom requirements."
+      },
+      "q5": {
+        "question": "What happens if I exceed my plan limits?",
+        "answer": "We'll notify you when you're approaching limits. You can upgrade anytime, or we'll pause additional searches until the next billing cycle. No surprise fees."
+      },
+      "q6": {
+        "question": "How quickly will I receive alerts?",
+        "answer": "PRO and Enterprise plans receive real-time alerts within minutes of a filing or change. Starter plans get daily summary emails. Free plan includes basic email notifications."
+      }
+    },
+    "pricing": {
+      "label": "Pricing",
+      "title": "Simple, transparent pricing",
+      "subtitle": "Start free, upgrade when you're ready. No hidden fees, no surprises.",
+      "currency": "EUR",
+      "perMonth": "/month",
+      "popular": "Most popular",
+      "free": {
+        "name": "Free",
+        "description": "For occasional checks",
+        "feature1": "3 CUI searches / month",
+        "feature2": "Basic credit checks",
+        "feature3": "Email support",
+        "cta": "Get started"
+      },
+      "pro": {
+        "name": "PRO",
+        "price": "75",
+        "description": "For active sales teams",
+        "feature1": "Unlimited CUI searches",
+        "feature2": "50 CUI watchlist",
+        "feature3": "All alerts enabled",
+        "feature4": "Unlimited PDF export",
+        "feature5": "Priority support",
+        "cta": "Start PRO trial"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "description": "For high-volume needs",
+        "feature1": "Everything unlimited",
+        "feature2": "Custom integrations",
+        "feature3": "Dedicated support",
+        "feature4": "SLA guarantees",
+        "cta": "Contact sales"
+      },
+      "viewDetails": "View detailed pricing"
+    },
+    "cta": {
+      "title": "Ready to protect your business?",
+      "subtitle": "Start free today. No card required, no commitments.",
+      "primaryCTA": "Create free account",
+      "secondaryCTA": "View product demo",
+      "noCard": "No card required",
+      "freePlan": "Free plan available"
+    }
+  },
+  "hero": {
+    "title": "Monitor credit risk of Romanian companies",
+    "subtitle": "Instant access to essential financial and legal information. Make informed decisions with MarketRisk.",
+    "earlyAccess": "Early Access Available",
+    "comingSoon": "Coming Soon",
+    "primaryCTA": "Start Free Trial",
+    "secondaryCTA": "Watch Demo",
+    "trustBadge1": "Free plan available",
+    "trustBadge2": "No credit card required",
+    "trustBadge3": "Launch: Q1 2025"
+  },
+  "features": {
+    "title": "Everything you need for risk assessment",
+    "subtitle": "Complete tools for monitoring Romanian companies",
+    "feature1": {
+      "title": "Real-time Monitoring",
+      "description": "Receive instant alerts when monitored companies change their tax or legal status"
+    },
+    "feature2": {
+      "title": "Official ANAF Data",
+      "description": "Direct access to the National Tax Administration Agency database"
+    },
+    "feature3": {
+      "title": "Advanced Risk Score",
+      "description": "Our proprietary algorithm analyzes 24 factors to calculate risk score"
+    },
+    "feature4": {
+      "title": "Litigation History",
+      "description": "Check legal proceedings and insolvency history from official databases"
+    },
+    "feature5": {
+      "title": "PDF Report Export",
+      "description": "Generate professional reports with a single click for clients and partners"
+    },
+    "feature6": {
+      "title": "API Integration",
+      "description": "Integrate MarketRisk into your existing systems through our API"
+    }
+  },
+  "pricing": {
+    "title": "Simple, transparent pricing",
+    "subtitle": "Choose the plan that fits your needs",
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "annualDiscount": "Save 20%",
+    "currency": "EUR",
+    "perMonth": "/month",
+    "perYear": "/year",
+    "free": {
+      "name": "Free",
+      "price": "0",
+      "description": "Perfect to get started",
+      "features": [
+        "3 searches per month",
+        "Access to ANAF data",
+        "Basic risk score",
+        "Community support"
+      ],
+      "cta": "Get Started"
+    },
+    "starter": {
+      "name": "Starter",
+      "price": "25",
+      "priceAnnual": "240",
+      "description": "For freelancers and SMEs",
+      "features": [
+        "50 searches per month",
+        "10 monitored companies",
+        "5 PDF reports per month",
+        "Email alerts",
+        "ANAF + Litigation data",
+        "Priority support"
+      ],
+      "cta": "Start Free Trial",
+      "popular": true
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "75",
+      "priceAnnual": "720",
+      "description": "For teams and departments",
+      "features": [
+        "200 searches per month",
+        "250 monitored companies",
+        "Unlimited PDF reports",
+        "Real-time alerts",
+        "All data sources",
+        "API access",
+        "Dedicated account manager"
+      ],
+      "cta": "Contact Sales"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Custom",
+      "description": "For corporations and institutions",
+      "features": [
+        "Unlimited searches",
+        "Unlimited monitored companies",
+        "Custom reports",
+        "Guaranteed SLA",
+        "On-premise integration",
+        "24/7 support",
+        "Dedicated training"
+      ],
+      "cta": "Request Quote"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your MarketRisk account",
+      "email": "Email address",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "signUpLink": "Create free account",
+      "submit": "Sign In",
+      "withGoogle": "Continue with Google"
+    },
+    "signup": {
+      "title": "Create MarketRisk Account",
+      "subtitle": "Start your free trial today",
+      "fullName": "Full name",
+      "company": "Company (optional)",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "hasAccount": "Already have an account?",
+      "signInLink": "Sign in",
+      "submit": "Create Account",
+      "withGoogle": "Sign up with Google",
+      "terms": "By creating an account, you agree to our",
+      "termsLink": "Terms & Conditions",
+      "and": "and",
+      "privacyLink": "Privacy Policy"
+    },
+    "forgotPassword": {
+      "title": "Reset Password",
+      "subtitle": "We'll send you instructions via email",
+      "email": "Email address",
+      "submit": "Send Reset Link",
+      "backToLogin": "Back to Sign In"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome, {name}",
+    "overview": "Overview",
+    "quickStats": "Quick Stats",
+    "searchesThisMonth": "Searches this month",
+    "companiesWatched": "Monitored companies",
+    "activeAlerts": "Active alerts",
+    "reportsGenerated": "Generated reports",
+    "quickActions": "Quick Actions",
+    "searchCompany": "Search Company",
+    "viewWatchlist": "View Watchlist",
+    "generateReport": "Generate Report",
+    "manageAlerts": "Manage Alerts",
+    "recentActivity": "Recent Activity",
+    "noActivity": "No recent activity"
+  },
+  "search": {
+    "title": "Search Company",
+    "placeholder": "Enter CUI or company name",
+    "searchByCUI": "Search by CUI",
+    "searchByName": "Search by name",
+    "submit": "Search",
+    "results": "Search Results",
+    "noResults": "No results found",
+    "companyInfo": "Company Information",
+    "riskScore": "Risk Score",
+    "riskLevel": {
+      "green": "LOW RISK",
+      "yellow": "MEDIUM RISK",
+      "red": "HIGH RISK"
+    },
+    "vatStatus": "VAT Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "addToWatchlist": "Add to Watchlist",
+    "generateReport": "Generate PDF Report",
+    "detailsTitle": "Company Details",
+    "legalInfo": "Legal Information",
+    "fiscalInfo": "Tax Information",
+    "riskFactors": "Risk Factors"
+  },
+  "watchlist": {
+    "title": "Watchlist",
+    "subtitle": "Companies you're monitoring",
+    "empty": "You don't have any monitored companies yet",
+    "addCompany": "Add Company",
+    "removeCompany": "Remove from Watchlist",
+    "lastChecked": "Last checked",
+    "riskChange": "Risk change",
+    "viewDetails": "View Details",
+    "checkNow": "Check Now"
+  },
+  "alerts": {
+    "title": "Alerts",
+    "subtitle": "Important notifications and updates",
+    "unread": "Unread",
+    "all": "All",
+    "markAsRead": "Mark as read",
+    "deleteAlert": "Delete alert",
+    "noAlerts": "You have no alerts",
+    "types": {
+      "risk_change": "Risk score change",
+      "lawsuit": "New legal proceeding",
+      "insolvency": "Insolvency procedure",
+      "debt": "Tax debt change",
+      "vat_change": "VAT status change",
+      "status_change": "Legal status change"
+    },
+    "severity": {
+      "info": "Info",
+      "warning": "Warning",
+      "critical": "Critical"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "billing": "Billing",
+    "security": "Security",
+    "api": "API Access",
+    "profileSettings": {
+      "title": "Profile Settings",
+      "fullName": "Full name",
+      "email": "Email",
+      "company": "Company",
+      "phone": "Phone",
+      "saveChanges": "Save Changes"
+    },
+    "notificationSettings": {
+      "title": "Notification Preferences",
+      "emailAlerts": "Email alerts",
+      "riskChanges": "Notify risk score changes",
+      "newLawsuits": "Notify new lawsuits",
+      "monthlyReport": "Monthly report",
+      "marketingEmails": "Marketing emails"
+    },
+    "securitySettings": {
+      "title": "Security",
+      "changePassword": "Change Password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmNewPassword": "Confirm new password",
+      "twoFactor": "Two-factor authentication",
+      "enableTwoFactor": "Enable 2FA"
+    }
+  },
+  "footer": {
+    "description": "Professional credit risk monitoring platform for the Romanian market",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "support": "Support",
+    "newsletter": "Subscribe to newsletter",
+    "newsletterPlaceholder": "Your email address",
+    "subscribe": "Subscribe",
+    "rights": "© 2025 MarketRisk. All rights reserved.",
+    "madeIn": "Made in Romania"
+  },
+  "errors": {
+    "generic": "An error occurred. Please try again.",
+    "network": "Connection error. Check your internet connection.",
+    "unauthorized": "You don't have permission to access this resource.",
+    "notFound": "The requested resource was not found.",
+    "validation": "Please complete all required fields.",
+    "limitReached": "You've reached your search limit for this plan.",
+    "invalidCUI": "Invalid CUI. Please check and try again."
+  }
+}

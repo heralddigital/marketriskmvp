@@ -9,13 +9,15 @@
 
 ### 1. ✅ Căutare (Search) - `/app/search`
 **Features:**
-- Interactive search form with CUI/company name input
-- Mock search results with 3 demo companies
+- Interactive search form with CUI input
+- **Real ANAF API integration** - Fetches company data
+- **Real PortalJust integration** - Fetches court cases
 - Risk score badges (GREEN, YELLOW, RED) with colors
-- Company details cards (status, capital, employees, activity)
-- Action buttons: "Raport complet PDF", "Adaugă în Watchlist"
+- Company details cards (status, VAT, addresses)
+- **LitigationCard component** - Shows all court cases
+- Action buttons: "Vezi detalii complete", "Adaugă în Watchlist"
 - Usage counter showing remaining searches
-- "Coming soon" notice for Phase 5
+- Real-time risk calculation with litigation data
 - Upgrade prompt at bottom
 
 **UI Elements:**
@@ -171,16 +173,30 @@ Each page includes appropriate messaging:
 
 ---
 
-## 🚀 Ready For
+## 🚀 Current Status
 
-1. **Phase 5**: Real ANAF API integration for search
-2. **Phase 6**: 
+1. ✅ **Phase 5**: ANAF API integration complete
+2. ✅ **PortalJust Integration**: SOAP API fully integrated
+3. ✅ **Risk Calculation**: Uses real litigation data
+4. ✅ **Dashboard Widgets**: Latest litigation cases displayed
+5. 🚧 **Phase 6**: 
    - Real-time alert system
-   - Actual watchlist monitoring
    - PDF export functionality
-   - Search history persistence
-3. **Backend Connection**: All forms and actions are ready for API integration
-4. **User Testing**: Full UI is functional and demo-ready
+   - Email notifications
+6. **Backend Connection**: All forms and actions connected to APIs
+7. **User Testing**: Full UI is functional with real data
+
+## 🆕 Latest Features (January 2026)
+
+### Dashboard Enhancements
+- **Latest Litigation Cases Widget**: Shows 5 most recent court cases from watchlist companies
+- **Real-time PortalJust Data**: Fetches court cases automatically
+- **Enhanced Risk Scoring**: Differentiates plaintiff vs defendant roles
+
+### Search Enhancements
+- **Comprehensive Risk Calculation**: Uses ANAF + PortalJust data
+- **Litigation Display**: Full court case details with risk metrics
+- **Financial Viability Assessment**: Scoring based on financial impact of cases
 
 ---
 

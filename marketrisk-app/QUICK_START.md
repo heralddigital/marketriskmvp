@@ -178,12 +178,15 @@ Now that your environment is set up, you can:
 
 1. **Read the Documentation**
    - `README.md` - Full project overview
-   - `IMPLEMENTATION_PROGRESS.md` - What's done and what's next
+   - `API_INTEGRATIONS.md` - API integration details
+   - `PORTALJUST_INTEGRATION.md` - PortalJust complete guide
+   - `DASHBOARD_COMPLETE.md` - Dashboard features
 
-2. **Start Building**
-   - Phase 4: Create authentication pages
-   - Phase 5: Integrate ANAF API
-   - Phase 6: Build core features
+2. **Test Features**
+   - Search companies by CUI (ANAF + PortalJust data)
+   - View litigation cases in search results
+   - Check dashboard for latest cases
+   - Verify risk scoring includes litigation data
 
 3. **Test the Risk Algorithm**
    ```typescript
@@ -205,16 +208,30 @@ Now that your environment is set up, you can:
      },
      portaljust: {
        active_lawsuits: 0,
+       active_as_defendant: 0,
+       active_as_plaintiff: 0,
        lost_cases_2y: 0,
+       won_cases_2y: 0,
        bankruptcy_filing: false,
        execution_proceedings: false,
        labor_disputes: 0,
+       commercial_disputes: 0,
+       high_value_cases: 0,
      },
    };
 
    const score = calculateMarketRiskScore(testData);
    console.log(score);
    // Should output: { score: 0, riskLevel: 'GREEN', ... }
+   ```
+
+4. **Test PortalJust Integration**
+   ```typescript
+   import { fetchPortalJustData } from '@/lib/portaljust/client';
+
+   const data = await fetchPortalJustData('COMPANIA SRL', '12345678');
+   console.log(`Found ${data.total} court cases`);
+   // Returns: { success: true, lawsuits: [...], total: number }
    ```
 
 ---
