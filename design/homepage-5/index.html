@@ -1,0 +1,1106 @@
+<title>marketrisk Homepage 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300..800&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --space:#070B12;
+  --space-2:#0C1320;
+  --ink:#EEF0EA;
+  --ink-2:rgba(238,240,234,.70);
+  --ink-3:rgba(238,240,234,.48);
+  --line:rgba(238,240,234,.12);
+  --line-2:rgba(238,240,234,.22);
+  --scan:#8C8DFF;
+  --scan-2:#B7B8FF;
+  --ok:#3CCFA8;--warn:#F5B544;--bad:#FF5C7A;
+  --paper:#EEF0EA;
+  --paper-2:#E3E6DF;
+  --card:#FFFFFF;
+  --pink:#0B1016;
+  --pink-2:rgba(11,16,22,.70);
+  --pink-3:rgba(11,16,22,.50);
+  --pline:rgba(11,16,22,.10);
+  --pline-2:rgba(11,16,22,.18);
+  --accent:#4B4CE0;
+  --ok-d:#0A7F68;--warn-d:#94620A;--bad-d:#C23455;
+  --ok-s:rgba(10,127,104,.10);--warn-s:rgba(214,145,20,.14);--bad-s:rgba(194,52,85,.10);
+  --display:"Unbounded","Manrope",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --ui:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.2,0,0,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--space);overflow-x:clip}
+body{margin:0;background:var(--space);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.wrap{max-width:1360px;margin-inline:auto;padding-inline:clamp(16px,4.5vw,64px)}
+h1,h2,h3,h4{margin:0;font-weight:500;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+button{font-family:inherit}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.kick{font:500 12px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.ico{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:2px solid var(--scan);outline-offset:3px;border-radius:6px}
+::selection{background:var(--scan);color:#070B12}
+
+/* canvas + chrome */
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none;transition:opacity .4s linear}
+.gl-fallback{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 50% at 70% 45%,rgba(140,141,255,.18),transparent 70%),radial-gradient(40% 40% at 30% 70%,rgba(60,207,168,.10),transparent 70%)}
+.grain{position:fixed;inset:-50%;z-index:1;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.labels{position:fixed;inset:0;z-index:2;pointer-events:none}
+.lbl{position:absolute;left:0;top:0;transform:translate(-50%,-50%);opacity:0;will-change:transform,opacity;white-space:nowrap}
+.lbl span{display:inline-flex;align-items:center;gap:8px;margin-left:18px;padding:6px 10px 6px 8px;border-radius:999px;background:rgba(7,11,18,.72);border:1px solid var(--line-2);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:500 11px var(--mono);color:var(--ink)}
+.lbl i{width:8px;height:8px;border-radius:50%}
+.lbl b{font-weight:500;color:var(--ink-3)}
+.lbl.you span{margin-left:0;transform:translateY(-26px);background:var(--ink);color:#070B12;border-color:transparent}
+main,header,footer{position:relative;z-index:3}
+
+/* cursor */
+.cur,.cur-ring{position:fixed;left:0;top:0;z-index:60;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%);display:none}
+.cur{width:6px;height:6px;background:var(--ink);mix-blend-mode:difference}
+.cur-ring{width:36px;height:36px;border:1px solid rgba(238,240,234,.5);transition:width .25s var(--ease),height .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease)}
+.cur-ring.big{width:72px;height:72px;background:rgba(140,141,255,.12);border-color:var(--scan)}
+@media (pointer:fine){ .has-cursor .cur,.has-cursor .cur-ring{display:block} }
+
+/* header */
+.top{position:fixed;left:0;right:0;top:0;z-index:40;padding-top:env(safe-area-inset-top,0px);transition:transform .45s var(--ease),background .3s var(--ease)}
+.top.hide{transform:translateY(-110%)}
+.top.solid{background:rgba(7,11,18,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.top.on-light{background:rgba(238,240,234,.78);color:var(--pink)}
+.top-in{display:flex;align-items:center;gap:24px;height:76px}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 18px/1 var(--display);letter-spacing:-.03em}
+.logo svg{width:28px;height:28px}
+.logo .ring{stroke:currentColor}
+.nav{display:flex;gap:26px;margin-left:12px}
+.nav a{text-decoration:none;font-size:14px;opacity:.72;transition:opacity .2s}
+.nav a:hover{opacity:1}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+.lang{display:inline-flex;gap:2px;padding:3px;border-radius:999px;border:1px solid currentColor;border-color:color-mix(in srgb,currentColor 24%,transparent)}
+.lang button{font:500 11px/1 var(--mono);letter-spacing:.06em;padding:7px 9px;border-radius:999px;border:0;background:transparent;color:inherit;opacity:.6;cursor:pointer}
+.lang button[aria-pressed="true"]{background:currentColor;opacity:1}
+.lang button[aria-pressed="true"] span{color:var(--space)}
+.top.on-light .lang button[aria-pressed="true"] span{color:var(--paper)}
+.pill-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;font:600 14px/1 var(--ui);text-decoration:none;border:1px solid transparent;cursor:pointer;will-change:transform}
+.pb-light{background:var(--ink);color:#070B12}
+.pb-scan{background:var(--scan);color:#070B12}
+.pb-ghost{border-color:var(--line-2);color:var(--ink)}
+.pb-ghost:hover{background:rgba(238,240,234,.06)}
+.top.on-light .pb-light{background:var(--pink);color:var(--paper)}
+.pill-btn .ico{width:16px;height:16px}
+
+/* progress */
+.prog{position:fixed;left:0;top:0;height:2px;width:100%;z-index:41;transform-origin:0 50%;transform:scaleX(0);background:var(--scan)}
+.steps-nav{position:fixed;left:clamp(12px,2vw,28px);top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:14px;opacity:0;transition:opacity .3s}
+.steps-nav.on{opacity:1}
+.steps-nav a{display:flex;align-items:center;gap:10px;font:500 11px var(--mono);color:var(--ink-3);text-decoration:none}
+.steps-nav a i{width:18px;height:1px;background:currentColor;transition:width .3s var(--ease)}
+.steps-nav a.act{color:var(--ink)}
+.steps-nav a.act i{width:36px;background:var(--scan)}
+
+/* story */
+.step{min-height:100vh;display:flex;align-items:center;padding-block:120px 80px}
+.step .txt{max-width:640px;position:relative}
+.step .txt::before{content:"";position:absolute;inset:-60px -80px -60px -120px;background:radial-gradient(60% 60% at 30% 50%,rgba(7,11,18,.78),transparent 75%);z-index:-1;pointer-events:none}
+.hero .txt{max-width:780px}
+.hero h1{margin-top:26px;font:500 clamp(40px,5.6vw,92px)/1.02 var(--display);letter-spacing:-.045em}
+.hero h1 em.s{font-size:1.12em;color:var(--scan-2)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.wi{display:inline-block;will-change:transform}
+.hero p.lead{margin-top:28px;font-size:clamp(17px,1.35vw,20px);color:var(--ink-2);max-width:34em}
+.hero .acts{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px}
+.hero .pill-btn{padding:16px 22px;font-size:15px}
+.scroll-hint{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font:500 10px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.scroll-hint i{width:1px;height:48px;background:linear-gradient(var(--ink-3),transparent);position:relative;overflow:hidden}
+.scroll-hint i::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--scan);animation:drip 2.2s var(--ease) infinite}
+@keyframes drip{to{top:110%}}
+.hero{position:relative}
+.step h2{margin-top:22px;font:500 clamp(30px,3.6vw,58px)/1.06 var(--display);letter-spacing:-.04em}
+.step h2 em.s{color:var(--scan-2);font-size:1.1em}
+.step p.b{margin-top:22px;font-size:clamp(16px,1.2vw,18px);color:var(--ink-2);max-width:32em}
+.tagrow{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--line-2);font:500 12px var(--mono);color:var(--ink-2);background:rgba(7,11,18,.5)}
+.tag i{width:8px;height:8px;border-radius:50%}
+.big-num{margin-top:28px;display:inline-flex;align-items:baseline;gap:12px;padding:14px 20px;border-radius:14px;border:1px solid rgba(255,92,122,.35);background:rgba(255,92,122,.08)}
+.big-num b{font:600 clamp(28px,3vw,44px)/1 var(--display);letter-spacing:-.04em;color:var(--bad);font-variant-numeric:tabular-nums}
+.big-num span{font:500 12px var(--mono);color:var(--ink-3)}
+.step .count{font:500 12px var(--mono);letter-spacing:.14em;color:var(--scan)}
+
+/* marquee */
+.marq{position:relative;z-index:3;padding-block:36px;border-block:1px solid var(--line);overflow:hidden;background:rgba(7,11,18,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.marq-track{display:flex;width:max-content;will-change:transform}
+.marq-row{display:flex;align-items:center;gap:48px;padding-right:48px;font:500 clamp(28px,4vw,56px)/1 var(--display);letter-spacing:-.04em;white-space:nowrap}
+.marq-row em.s{color:var(--scan-2)}
+.marq-row i{width:14px;height:14px;border-radius:50%;background:var(--scan);flex:none}
+.marq-row i.o{background:var(--ok)}.marq-row i.w{background:var(--warn)}.marq-row i.b{background:var(--bad)}
+
+/* benefits (horizontal) */
+.ben{position:relative;z-index:3;overflow:hidden}
+.ben-head{padding-block:clamp(96px,12vw,160px) 48px}
+.ben-head h2{margin-top:18px;font:500 clamp(32px,4.2vw,64px)/1.04 var(--display);letter-spacing:-.045em;max-width:16ch}
+.ben-pin{height:100vh;display:flex;align-items:center}
+.ben-track{display:flex;gap:24px;padding-inline:clamp(16px,4.5vw,64px);will-change:transform}
+.bcard{flex:none;width:min(78vw,620px);min-height:min(68vh,560px);border-radius:28px;padding:clamp(24px,3vw,40px);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--line);display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.bcard .kick{color:var(--scan)}
+.bcard .huge{font:500 clamp(64px,9vw,148px)/.9 var(--display);letter-spacing:-.06em;margin-top:auto;color:var(--ink)}
+.bcard .huge em.s{color:var(--scan-2)}
+.bcard h3{font:500 clamp(22px,2vw,30px)/1.15 var(--display);letter-spacing:-.03em}
+.bcard p{color:var(--ink-2);max-width:30em}
+.bcard .orb{position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(140,141,255,.35),transparent 70%);filter:blur(10px)}
+.bcard.b2 .orb{background:radial-gradient(circle,rgba(60,207,168,.3),transparent 70%)}
+.bcard.b3 .orb{background:radial-gradient(circle,rgba(245,181,68,.3),transparent 70%)}
+.bcard.b4 .orb{background:radial-gradient(circle,rgba(255,92,122,.28),transparent 70%)}
+.bcard.intro{background:none;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;width:min(60vw,440px);justify-content:center}
+.bcard.intro p{font-size:18px}
+
+/* light panel */
+#light{position:relative;z-index:4;background:var(--paper);color:var(--pink);clip-path:inset(0 0 0 0 round 0);will-change:clip-path}
+#light .kick{color:var(--pink-3)}
+.lsec{padding-block:clamp(96px,11vw,160px) 0}
+.lh{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(40px,5vw,72px)}
+.lh h2{margin-top:18px;font:500 clamp(32px,4.2vw,64px)/1.04 var(--display);letter-spacing:-.045em}
+.lh h2 em.s{color:var(--accent);font-size:1.1em}
+.lh p{color:var(--pink-2);font-size:17px;max-width:30em}
+.fill .fw{opacity:.16;transition:none}
+
+/* dashboard mock */
+.dash-stage{position:relative;perspective:1600px;padding-bottom:40px}
+.mock{position:relative;border-radius:18px;background:#F7F8F5;border:1px solid var(--pline);box-shadow:0 60px 120px -30px rgba(11,16,22,.35),0 20px 40px -20px rgba(11,16,22,.25);overflow:hidden;display:grid;grid-template-columns:200px minmax(0,1fr);transform-origin:50% 0;will-change:transform}
+.m-side{background:#EDEFEA;border-right:1px solid var(--pline);padding:16px 12px;display:flex;flex-direction:column;gap:4px;font-size:13px}
+.m-ws{display:flex;gap:10px;align-items:center;padding:4px 6px 14px;border-bottom:1px solid var(--pline);margin-bottom:8px}
+.m-ws i{width:26px;height:26px;border-radius:8px;background:var(--accent);display:grid;place-items:center;font:600 11px var(--mono);color:#fff;font-style:normal}
+.m-ws b{font-size:12px;line-height:1.2;display:block}.m-ws small{font-size:11px;color:var(--pink-3)}
+.m-nav{padding:8px 10px;border-radius:8px;color:var(--pink-2);display:flex;justify-content:space-between}
+.m-nav.a{background:#fff;color:var(--pink);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.m-nav em{font-style:normal;font:500 10px var(--mono);background:var(--bad-d);color:#fff;border-radius:999px;padding:2px 6px}
+.m-main{padding:20px;display:grid;gap:14px;min-width:0}
+.m-h{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap}
+.m-h b{font:500 20px/1.2 var(--display);letter-spacing:-.03em}
+.m-h small{display:block;font-size:12px;color:var(--pink-3);margin-top:4px}
+.m-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.m-card{background:#fff;border:1px solid var(--pline);border-radius:12px;padding:14px;min-width:0}
+.m-card h5{margin:0;font:600 12px var(--ui);color:var(--pink-2)}
+.m-card .v{margin-top:8px;font:500 24px/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.m-card small{display:block;margin-top:6px;font-size:11px;color:var(--pink-3)}
+.m-g{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:10px}
+.m-bars{display:flex;align-items:flex-end;gap:10px;height:130px;margin-top:12px;padding-inline:4px}
+.m-bar{flex:1;display:flex;flex-direction:column-reverse;gap:2px;height:100%}
+.m-bar i{display:block;border-radius:3px}
+.m-bar i:last-child{border-radius:5px 5px 3px 3px}
+.m-lbl{display:flex;gap:10px;margin-top:6px;padding-inline:4px}
+.m-lbl span{flex:1;text-align:center;font:400 10px var(--mono);color:var(--pink-3)}
+.m-leg{display:flex;gap:12px;margin-top:10px;font-size:11px;color:var(--pink-2)}
+.m-leg span{display:inline-flex;gap:6px;align-items:center}
+.m-leg i{width:8px;height:8px;border-radius:2px}
+.m-al{display:grid;gap:8px;margin-top:10px}
+.m-al div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:10px;border-radius:10px;background:#F7F8F5;font-size:12px;line-height:1.4}
+.m-al div small{display:block;font:400 10px var(--mono);color:var(--pink-3);margin-top:2px}
+.sev{display:inline-flex;align-items:center;font:600 9px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 6px;border-radius:5px;white-space:nowrap}
+.s-ok{background:var(--ok-s);color:var(--ok-d)}.s-warn{background:var(--warn-s);color:var(--warn-d)}.s-bad{background:var(--bad-s);color:var(--bad-d)}
+.toast{position:absolute;z-index:2;display:flex;gap:12px;align-items:flex-start;max-width:320px;padding:14px 16px;border-radius:14px;background:#0B1016;color:var(--ink);box-shadow:0 30px 60px -20px rgba(11,16,22,.5);font-size:13px;line-height:1.4;will-change:transform}
+.toast small{display:block;margin-top:4px;font:400 11px var(--mono);color:var(--ink-3)}
+.toast .dot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex:none;box-shadow:0 0 0 4px rgba(255,92,122,.2)}
+.t1{right:-3%;top:-3%}.t2{left:-3%;top:58%}.t3{right:6%;bottom:-2%}
+.note{margin-top:22px;font:400 12px var(--mono);color:var(--pink-3);text-align:center}
+
+/* try */
+.try{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.panel{background:var(--card);border:1px solid var(--pline);border-radius:24px;padding:clamp(22px,3vw,40px)}
+.cui-row{display:flex;gap:8px;padding:6px;border-radius:999px;border:1px solid var(--pline-2);background:var(--paper);margin-top:18px}
+.cui-row:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px rgba(75,76,224,.15)}
+.cui-row span{display:flex;align-items:center;padding-left:14px;font:500 15px var(--mono);color:var(--pink-3)}
+.cui-row input{flex:1;min-width:0;border:0;background:transparent;font:500 17px var(--mono);letter-spacing:.04em;color:var(--pink);outline:none;padding:10px 4px}
+.cui-row button{border:0;border-radius:999px;background:var(--pink);color:var(--paper);font:600 14px var(--ui);padding:0 18px;cursor:pointer}
+.msg{min-height:22px;margin-top:10px;font-size:13px;color:var(--pink-2)}
+.msg.err{color:var(--bad-d)}.msg.ok{color:var(--ok-d)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{display:inline-flex;gap:8px;align-items:center;padding:9px 12px;border-radius:999px;border:1px solid var(--pline-2);background:transparent;font:500 12px var(--mono);color:var(--pink-2);cursor:pointer}
+.chip i{width:8px;height:8px;border-radius:50%}
+.chip[aria-pressed="true"]{background:var(--pink);color:var(--paper);border-color:var(--pink)}
+.gauge-wrap{display:grid;justify-items:center;text-align:center}
+.gauge{width:100%;max-width:380px}
+.g-num{margin-top:2px;font:500 72px/1 var(--display);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.g-lv{margin-top:10px}
+.g-name{margin-top:18px;font:500 18px/1.2 var(--display);letter-spacing:-.02em}
+.g-meta{font:400 12px var(--mono);color:var(--pink-3);margin-top:6px}
+.facts{list-style:none;margin:20px 0 0;padding:0;width:100%;text-align:left;border-top:1px solid var(--pline)}
+.facts li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--pline);font-size:14px}
+.facts small{font:400 11px var(--mono);color:var(--pink-3)}
+
+/* calc */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:16px}
+.field{display:grid;gap:10px;padding-block:8px 24px}
+.field + .field{border-top:1px solid var(--pline);padding-top:24px}
+.field label{display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-weight:600}
+.field output{font:500 22px var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.field small{font-size:13px;color:var(--pink-3)}
+input[type=range]{width:100%;accent-color:var(--accent);height:24px}
+.c-big{margin-top:12px;font:500 clamp(44px,6vw,96px)/.95 var(--display);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.c-big small{font-size:.32em;letter-spacing:-.02em;color:var(--pink-3);margin-left:.25em}
+.c-txt{margin-top:14px;color:var(--pink-2);max-width:32em}
+.cbars{margin-top:28px;display:grid;gap:12px}
+.cbar{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;align-items:center;font-size:13px;color:var(--pink-2)}
+.cbar div div{height:28px;border-radius:0 8px 8px 0;position:relative;min-width:4px}
+.cbar b{position:absolute;top:50%;transform:translateY(-50%);font:500 12px var(--mono);white-space:nowrap}
+.c-foot{margin-top:24px;padding-top:18px;border-top:1px dashed var(--pline-2);font-size:14px;color:var(--pink-2)}
+
+/* pricing */
+.bill{display:inline-flex;gap:2px;padding:4px;border-radius:999px;border:1px solid var(--pline-2);margin-top:20px}
+.bill button{font:600 13px/1 var(--ui);padding:10px 14px;border-radius:999px;border:0;background:transparent;color:var(--pink-2);cursor:pointer}
+.bill button[aria-pressed="true"]{background:var(--pink);color:var(--paper)}
+.bill small{font:500 11px var(--mono);margin-left:6px;opacity:.75}
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;perspective:1200px}
+.plan{background:var(--card);border:1px solid var(--pline);border-radius:24px;padding:28px 24px;display:flex;flex-direction:column;transform-style:preserve-3d;will-change:transform}
+.plan h3{font:500 18px var(--display);letter-spacing:-.03em;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.plan .d{margin-top:6px;font-size:13px;color:var(--pink-3);min-height:2.9em;line-height:1.45}
+.price{margin-top:22px;display:flex;align-items:baseline;gap:6px}
+.price b{font:500 46px/1 var(--display);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.price span{font:400 12px var(--mono);color:var(--pink-3)}
+.plan ul{list-style:none;margin:22px 0 26px;padding:18px 0 0;border-top:1px solid var(--pline);display:grid;gap:10px;flex:1;align-content:start}
+.plan li{display:grid;grid-template-columns:16px 1fr;gap:10px;font-size:14px;line-height:1.45}
+.plan li .ico{width:15px;height:15px;color:var(--accent);margin-top:3px}
+.plan .pill-btn{justify-content:center}
+.pb-dark{background:var(--pink);color:var(--paper)}
+.pb-line{border-color:var(--pline-2);color:var(--pink)}
+.pb-line:hover{background:var(--paper)}
+.plan.pro{background:#0B1016;color:var(--ink);border-color:#0B1016}
+.plan.pro .d,.plan.pro .price span{color:var(--ink-3)}
+.plan.pro ul{border-top-color:var(--line)}
+.plan.pro li .ico{color:var(--scan)}
+.badge{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 8px;border-radius:999px;background:var(--scan);color:#070B12}
+.pnote{margin-top:16px;font-size:13px;color:var(--pink-3)}
+
+/* faq */
+.faq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:clamp(28px,5vw,80px);padding-bottom:clamp(96px,11vw,160px)}
+.faq h2{margin-top:18px;font:500 clamp(28px,3.4vw,48px)/1.06 var(--display);letter-spacing:-.045em}
+.qa{border-top:1px solid var(--pline-2)}
+.qi{border-bottom:1px solid var(--pline)}
+.qi button{width:100%;display:flex;justify-content:space-between;gap:20px;align-items:center;background:none;border:0;padding:22px 0;text-align:left;cursor:pointer;color:var(--pink);font:500 18px/1.35 var(--display);letter-spacing:-.025em}
+.qi button .ico{transition:transform .35s var(--ease);color:var(--pink-3)}
+.qi.open button .ico{transform:rotate(45deg)}
+.qa-body{overflow:hidden;height:0}
+.qi.open .qa-body{height:auto}
+.qa-body p{padding:0 0 22px;color:var(--pink-2);max-width:42em}
+
+/* cta */
+.cta{position:relative;z-index:3;min-height:100vh;display:flex;align-items:center;padding-block:140px}
+.cta h2{font:500 clamp(40px,6.4vw,112px)/.98 var(--display);letter-spacing:-.055em;max-width:14ch}
+.cta h2 em.s{color:var(--scan-2);font-size:1.08em}
+.cta-row{margin-top:48px;display:flex;flex-wrap:wrap;align-items:center;gap:28px 48px}
+.cta-row p{color:var(--ink-2);max-width:26em}
+.orb-btn{width:168px;height:168px;border-radius:50%;background:var(--scan);color:#070B12;display:grid;place-items:center;text-align:center;font:600 15px/1.25 var(--ui);text-decoration:none;will-change:transform;box-shadow:0 0 0 0 rgba(140,141,255,.5);animation:ping 2.8s var(--ease) infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(140,141,255,.45)}70%,100%{box-shadow:0 0 0 28px rgba(140,141,255,0)}}
+footer{border-top:1px solid var(--line);padding-block:48px 36px;background:rgba(7,11,18,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.foot{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:32px}
+.foot p{margin-top:12px;font-size:13px;color:var(--ink-3);max-width:28em}
+.foot h4{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.foot ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.foot a{color:var(--ink-2);text-decoration:none;font-size:14px}
+.foot a:hover{color:var(--ink)}
+.legal{margin-top:40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font:400 12px var(--mono);color:var(--ink-3)}
+
+@media (max-width:1100px){
+  .plans{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .m-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  .nav{display:none}
+  .steps-nav{display:none}
+  .lh,.try,.calc,.faq{grid-template-columns:minmax(0,1fr)}
+  .mock{grid-template-columns:minmax(0,1fr)}
+  .m-side{display:none}
+  .m-g{grid-template-columns:minmax(0,1fr)}
+  .toast{display:none}
+  .ben-pin{height:auto;display:block;padding-bottom:40px}
+  .ben-track{flex-direction:column;transform:none!important}
+  .bcard{width:100%;min-height:0}
+  .bcard .huge{margin-top:24px}
+  .bcard.intro{display:none}
+  .foot{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .step .txt::before{inset:-40px -24px;background:radial-gradient(80% 70% at 50% 50%,rgba(7,11,18,.82),transparent 80%)}
+}
+@media (max-width:560px){
+  .top .pill-btn{display:none}
+  .plans{grid-template-columns:minmax(0,1fr)}
+  .cbar{grid-template-columns:minmax(0,1fr)}
+  .foot{grid-template-columns:minmax(0,1fr)}
+  .orb-btn{width:140px;height:140px}
+  .g-num{font-size:60px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+</svg>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="labels" id="labels" aria-hidden="true">
+  <div class="lbl you" id="lb-you"><span data-i18n="lb.you">Firma ta</span></div>
+  <div class="lbl" id="lb-bad"><span><i style="background:var(--bad)"></i>Stâna Agro · 22 <b data-i18n="lb.bad">insolvență</b></span></div>
+  <div class="lbl" id="lb-warn"><span><i style="background:var(--warn)"></i>Vâlcan Mobila · 62 <b data-i18n="lb.warn">TVA la încasare</b></span></div>
+  <div class="lbl" id="lb-ok"><span><i style="background:var(--ok)"></i>Brâna Logistic · 86 <b data-i18n="lb.ok">stabil</b></span></div>
+</div>
+<div class="cur" id="cur"></div><div class="cur-ring" id="cur-ring"></div>
+<div class="prog" id="prog"></div>
+
+<header class="top" id="top">
+  <div class="wrap top-in">
+    <a class="logo" href="#s0" aria-label="marketrisk">
+      <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle class="ring" cx="14" cy="14" r="12.5" stroke-width="1.2" opacity=".5"/><circle cx="14" cy="14" r="7" stroke="#8C8DFF" stroke-width="1.2"/><circle cx="14" cy="14" r="2.6" fill="currentColor"/><circle cx="22.4" cy="8.6" r="1.8" fill="#FF5C7A"/><circle cx="5.8" cy="18.4" r="1.5" fill="#3CCFA8"/></svg>
+      marketrisk
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#s1" data-i18n="nav.1">Povestea</a>
+      <a href="#beneficii" data-i18n="nav.2">Beneficii</a>
+      <a href="#aplicatia" data-i18n="nav.3">Aplicația</a>
+      <a href="#preturi" data-i18n="nav.4">Prețuri</a>
+    </nav>
+    <div class="top-r">
+      <div class="lang" role="group" aria-label="Limba / Language"><button type="button" id="lang-ro" data-lang="ro" aria-pressed="true"><span>RO</span></button><button type="button" id="lang-en" data-lang="en" aria-pressed="false"><span>EN</span></button></div>
+      <a class="pill-btn pb-light mag" href="#preturi" data-i18n="nav.cta">Începe gratuit</a>
+    </div>
+  </div>
+</header>
+
+<nav class="steps-nav" id="steps-nav" aria-label="Capitole">
+  <a href="#s0" data-s="0"><i></i>00</a><a href="#s1" data-s="1"><i></i>01</a><a href="#s2" data-s="2"><i></i>02</a><a href="#s3" data-s="3"><i></i>03</a><a href="#s4" data-s="4"><i></i>04</a>
+</nav>
+
+<main>
+  <div id="story">
+    <section class="step hero" id="s0" aria-labelledby="h1">
+      <div class="wrap" style="width:100%">
+        <div class="txt">
+          <p class="kick" data-i18n="h.k">marketrisk · monitorizare risc de credit · România</p>
+          <h1 id="h1" class="split" data-i18n="h.t">Afacerea ta e la fel de <em class="s">solventă</em> ca firmele cu care lucrezi.</h1>
+          <p class="lead" data-i18n="h.l">marketrisk urmărește în fiecare dimineață clienții și furnizorii tăi în ANAF, BPI, instanțe și bilanțuri, și te anunță înainte ca problemele lor să devină ale tale.</p>
+          <div class="acts">
+            <a class="pill-btn pb-scan mag" href="#preturi"><span data-i18n="h.c1">Începe gratuit</span><svg class="ico"><use href="#i-arrow"/></svg></a>
+            <a class="pill-btn pb-ghost mag" href="#s1"><span data-i18n="h.c2">Vezi cum funcționează</span><svg class="ico"><use href="#i-down"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true"><span>scroll</span><i></i></div>
+    </section>
+
+    <section class="step" id="s1" aria-labelledby="s1h">
+      <div class="wrap" style="width:100%"><div class="txt">
+        <p class="count">01 / 04</p>
+        <h2 id="s1h" data-i18n="s1.t">Fiecare client și furnizor e un <em class="s">fir</em> legat de tine.</h2>
+        <p class="b" data-i18n="s1.b">Vinzi pe termen, plătești avansuri, depinzi de livrări. Fiecare relație e o expunere, iar cele mai multe nu mai sunt verificate după primul contract.</p>
+      </div></div>
+    </section>
+
+    <section class="step" id="s2" aria-labelledby="s2h">
+      <div class="wrap" style="width:100%"><div class="txt">
+        <p class="count">02 / 04</p>
+        <h2 id="s2h" data-i18n="s2.t">Riscul circulă în <em class="s">tăcere</em>.</h2>
+        <p class="b" data-i18n="s2.b">Un partener trece la TVA la încasare. Apoi apare un dosar nou. Apoi e declarat inactiv fiscal. Tu afli abia când factura rămâne neplătită.</p>
+        <div class="big-num"><b id="cnt-loss">48.600</b><span data-i18n="s2.n">RON neîncasați · exemplu fictiv</span></div>
+      </div></div>
+    </section>
+
+    <section class="step" id="s3" aria-labelledby="s3h">
+      <div class="wrap" style="width:100%"><div class="txt">
+        <p class="count">03 / 04</p>
+        <h2 id="s3h" data-i18n="s3.t">marketrisk verifică fiecare fir, în fiecare dimineață la <em class="s">06:00</em>.</h2>
+        <p class="b" data-i18n="s3.b">Patru registre oficiale. Un scor de la 0 la 100 pentru fiecare partener, cu sursa fiecărui semnal.</p>
+        <div class="tagrow">
+          <span class="tag"><i style="background:var(--ok)"></i><span data-i18n="lv.ok">75–100 · risc scăzut</span></span>
+          <span class="tag"><i style="background:var(--warn)"></i><span data-i18n="lv.warn">50–74 · risc mediu</span></span>
+          <span class="tag"><i style="background:var(--bad)"></i><span data-i18n="lv.bad">0–49 · risc ridicat</span></span>
+        </div>
+      </div></div>
+    </section>
+
+    <section class="step" id="s4" aria-labelledby="s4h">
+      <div class="wrap" style="width:100%"><div class="txt">
+        <p class="count">04 / 04</p>
+        <h2 id="s4h" data-i18n="s4.t">Tu acționezi <em class="s">înainte</em> să ajungă la tine.</h2>
+        <p class="b" data-i18n="s4.b">Oprești livrările pe credit, ceri plata în avans, scurtezi termenele. Restul rețelei tale rămâne sănătoasă.</p>
+        <div class="acts" style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap"><a class="pill-btn pb-light mag" href="#aplicatia"><span data-i18n="s4.c">Vezi aplicația</span><svg class="ico"><use href="#i-arrow"/></svg></a></div>
+      </div></div>
+    </section>
+  </div>
+
+  <div class="marq" aria-hidden="true">
+    <div class="marq-track" id="marq">
+      <div class="marq-row"><span>ANAF</span><i></i><span>BPI</span><i class="b"></i><span>portal.just.ro</span><i></i><span>MFinanțe</span><i class="w"></i><span><em class="s">TVA la încasare</em></span><i></i><span><em class="s">split TVA</em></span><i class="b"></i><span><em class="s">inactivitate fiscală</em></span><i class="o"></i><span><em class="s">dosare noi</em></span><i></i></div>
+      <div class="marq-row"><span>ANAF</span><i></i><span>BPI</span><i class="b"></i><span>portal.just.ro</span><i></i><span>MFinanțe</span><i class="w"></i><span><em class="s">TVA la încasare</em></span><i></i><span><em class="s">split TVA</em></span><i class="b"></i><span><em class="s">inactivitate fiscală</em></span><i class="o"></i><span><em class="s">dosare noi</em></span><i></i></div>
+    </div>
+  </div>
+
+  <section class="ben" id="beneficii" aria-labelledby="ben-h">
+    <div class="wrap ben-head">
+      <p class="kick" data-i18n="b.k">Beneficii</p>
+      <h2 id="ben-h" class="fill" data-i18n="b.t">Ce se schimbă când ai pe cineva de pază pe registre.</h2>
+    </div>
+    <div class="ben-pin" id="ben-pin">
+      <div class="ben-track" id="ben-track">
+        <article class="bcard b1"><span class="orb"></span><p class="kick" data-i18n="b1.k">Timp</p><h3 data-i18n="b1.h">Un CUI în loc de patru registre.</h3><p data-i18n="b1.p">ANAF, BPI, portalul instanțelor și bilanțurile, într-un singur raport, cu data fiecărei informații.</p><p class="huge">4<em class="s">→</em>1</p></article>
+        <article class="bcard b2"><span class="orb"></span><p class="kick" data-i18n="b2.k">Avertizare timpurie</p><h3 data-i18n="b2.h">Afli în aceeași dimineață.</h3><p data-i18n="b2.p">Watchlist-ul e scanat zilnic. Când ceva se schimbă la un partener, primești alerta cu pasul următor recomandat.</p><p class="huge">06<em class="s">:</em>00</p></article>
+        <article class="bcard b3"><span class="orb"></span><p class="kick" data-i18n="b3.k">TVA</p><h3 data-i18n="b3.h">Știi când un furnizor devine inactiv.</h3><p data-i18n="b3.p">Facturile de la furnizori declarați inactivi fiscal pot pune în pericol deducerea TVA. Primești alerta înainte de următoarea factură.</p><p class="huge">TVA<em class="s">✓</em></p></article>
+        <article class="bcard b4"><span class="orb"></span><p class="kick" data-i18n="b4.k">Audit</p><h3 data-i18n="b4.h">Fiecare limită de credit are un dosar.</h3><p data-i18n="b4.p">Raport PDF datat, cu scor, factori și sursa fiecăruia. Știi oricând pe ce s-a bazat o decizie.</p><p class="huge">PDF</p></article>
+      </div>
+    </div>
+  </section>
+
+  <div id="light">
+    <section class="lsec wrap" id="aplicatia" aria-labelledby="dash-h">
+      <div class="lh">
+        <div><p class="kick" data-i18n="d.k">Aplicația</p><h2 id="dash-h" data-i18n="d.t">Tot portofoliul, pe un <em class="s">singur</em> ecran.</h2></div>
+        <p data-i18n="d.l">Câte firme sunt în risc, câți bani ai expuși la ele și ce s-a schimbat azi. Fără tabele în Excel, fără tab-uri deschise în patru registre.</p>
+      </div>
+      <div class="dash-stage">
+        <div class="mock" id="mock">
+          <aside class="m-side">
+            <div class="m-ws"><i>CD</i><div><b>Cerealis Distribuție SA</b><small>PRO · 128/250</small></div></div>
+            <div class="m-nav a"><span data-i18n="m.n1">Portofoliu</span></div>
+            <div class="m-nav"><span>Watchlist</span></div>
+            <div class="m-nav"><span data-i18n="m.n3">Alerte</span><em>5</em></div>
+            <div class="m-nav"><span data-i18n="m.n4">Rapoarte</span></div>
+          </aside>
+          <div class="m-main">
+            <div class="m-h"><div><b data-i18n="m.h">Bună dimineața, Ioana</b><small data-i18n="m.s">Joi, 24 septembrie 2026 · scanat la 06:00</small></div></div>
+            <div class="m-kpis">
+              <div class="m-card"><h5 data-i18n="m.k1">Companii monitorizate</h5><p class="v">128</p><small data-i18n="m.k1s">+6 luna aceasta</small></div>
+              <div class="m-card"><h5 data-i18n="m.k2">Sold neîncasat urmărit</h5><p class="v" id="m-k2">2,41 mil.</p><small>RON</small></div>
+              <div class="m-card"><h5 data-i18n="m.k3">Expus la risc ridicat</h5><p class="v" style="color:var(--bad-d)" id="m-k3">138.200</p><small data-i18n="m.k3s">RON · 5,7% din sold</small></div>
+              <div class="m-card"><h5 data-i18n="m.k4">Alerte noi</h5><p class="v">5</p><small data-i18n="m.k4s">2 critice</small></div>
+            </div>
+            <div class="m-g">
+              <div class="m-card"><h5 data-i18n="m.c1">Portofoliul pe niveluri de risc</h5>
+                <div class="m-bars" id="m-bars"></div>
+                <div class="m-lbl" id="m-lbl"></div>
+                <div class="m-leg"><span><i style="background:var(--ok-d)"></i><span data-i18n="m.l1">Scăzut</span></span><span><i style="background:#D69114"></i><span data-i18n="m.l2">Mediu</span></span><span><i style="background:var(--bad-d)"></i><span data-i18n="m.l3">Ridicat</span></span></div>
+              </div>
+              <div class="m-card"><h5 data-i18n="m.c2">Alerte de azi</h5>
+                <div class="m-al">
+                  <div><span class="sev s-bad" data-i18n="m.sb">critic</span><span><span data-i18n="m.a1">Stâna Agro: cerere de insolvență</span><small>BPI · 06:02</small></span></div>
+                  <div><span class="sev s-bad" data-i18n="m.sb">critic</span><span><span data-i18n="m.a2">Nera Transport: inactivă fiscal</span><small>ANAF · 06:02</small></span></div>
+                  <div><span class="sev s-warn" data-i18n="m.sw">atenție</span><span><span data-i18n="m.a3">Vâlcan Mobila: dosar nou</span><small>portal.just.ro · 18:40</small></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="toast t1" data-speed="-0.18"><span class="dot" style="background:var(--bad)"></span><div><span data-i18n="t1.t">Stâna Agro Trading: cerere de deschidere a insolvenței.</span><small data-i18n="t1.s">BPI · azi, 06:02 · sold 48.600 RON</small></div></div>
+        <div class="toast t2" data-speed="0.14"><span class="dot" style="background:var(--warn);box-shadow:0 0 0 4px rgba(245,181,68,.2)"></span><div><span data-i18n="t2.t">Lotru Metal a intrat în TVA la încasare.</span><small>ANAF · ieri, 06:00</small></div></div>
+        <div class="toast t3" data-speed="-0.08"><span class="dot" style="background:var(--ok);box-shadow:0 0 0 4px rgba(60,207,168,.2)"></span><div><span data-i18n="t3.t">Olteț Construct: dosar închis în favoarea sa.</span><small data-i18n="t3.s">portal.just.ro · scor +4</small></div></div>
+      </div>
+      <p class="note" data-i18n="d.n">Interfață de prezentare. Companiile, CUI-urile și sumele sunt fictive.</p>
+    </section>
+
+    <section class="lsec wrap" id="incearca" aria-labelledby="try-h">
+      <div class="lh">
+        <div><p class="kick" data-i18n="tr.k">Încearcă</p><h2 id="try-h" data-i18n="tr.t">Verifică un <em class="s">CUI</em>.</h2></div>
+        <p data-i18n="tr.l">Scrie un CUI sau alege un exemplu. Validăm cifra de control exact ca ANAF; exemplele de mai jos sunt companii fictive.</p>
+      </div>
+      <div class="try">
+        <form class="panel" id="cui-form" novalidate>
+          <label class="kick" for="cui" data-i18n="tr.lab">Cod unic de înregistrare</label>
+          <div class="cui-row"><span>RO</span><input id="cui" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="99000468" aria-describedby="cui-msg"><button type="submit" class="mag" data-i18n="tr.btn">Verifică</button></div>
+          <p class="msg" id="cui-msg" role="status" aria-live="polite"></p>
+          <p class="kick" style="margin-top:18px" data-i18n="tr.ex">Exemple</p>
+          <div class="chips">
+            <button type="button" class="chip" data-ex="c" aria-pressed="true"><i style="background:var(--bad)"></i>RO 99000468</button>
+            <button type="button" class="chip" data-ex="b" aria-pressed="false"><i style="background:var(--warn)"></i>RO 99000310</button>
+            <button type="button" class="chip" data-ex="a" aria-pressed="false"><i style="background:var(--ok)"></i>RO 99000174</button>
+          </div>
+        </form>
+        <div class="panel gauge-wrap" aria-live="polite">
+          <svg class="gauge" viewBox="0 0 320 180" aria-hidden="true">
+            <path d="M 30 160 A 130 130 0 0 1 160 30" fill="none" style="stroke:var(--bad-d)" stroke-width="14" stroke-linecap="round" opacity=".9"/>
+            <path d="M 161 30 A 130 130 0 0 1 252 68" fill="none" style="stroke:#D69114" stroke-width="14" opacity=".9"/>
+            <path d="M 253 69 A 130 130 0 0 1 290 160" fill="none" style="stroke:var(--ok-d)" stroke-width="14" stroke-linecap="round" opacity=".9"/>
+            <g id="needle" style="transform-origin:160px 160px"><line x1="160" y1="160" x2="160" y2="46" style="stroke:var(--pink)" stroke-width="3" stroke-linecap="round"/><circle cx="160" cy="160" r="9" style="fill:var(--pink)"/></g>
+            <text x="22" y="178" style="fill:var(--pink-3);font:400 11px var(--mono)">0</text><text x="286" y="178" style="fill:var(--pink-3);font:400 11px var(--mono)">100</text>
+          </svg>
+          <p class="g-num" id="g-num">22</p>
+          <span class="sev g-lv s-bad" id="g-lv">risc ridicat</span>
+          <p class="g-name" id="g-name">Stâna Agro Trading SRL</p>
+          <p class="g-meta" id="g-meta">RO 99000468 · CAEN 4621</p>
+          <ul class="facts" id="facts"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="lsec wrap" id="calcul" aria-labelledby="calc-h">
+      <div class="lh">
+        <div><p class="kick" data-i18n="c.k">Calculator</p><h2 id="calc-h" data-i18n="c.t">Cât te costă o factură <em class="s">neîncasată</em>?</h2></div>
+        <p data-i18n="c.l">O pierdere se acoperă numai din profit. Mută cursoarele și vezi câte vânzări noi îți trebuie ca s-o recuperezi.</p>
+      </div>
+      <div class="calc">
+        <form class="panel" onsubmit="return false">
+          <div class="field"><label for="c-amt"><span data-i18n="c.f1">Factura neîncasată</span><output id="o-amt" for="c-amt">50.000 RON</output></label><input type="range" id="c-amt" min="5000" max="500000" step="5000" value="50000"><small data-i18n="c.f1s">Între 5.000 și 500.000 RON</small></div>
+          <div class="field"><label for="c-mg"><span data-i18n="c.f2">Marja ta netă</span><output id="o-mg" for="c-mg">8%</output></label><input type="range" id="c-mg" min="2" max="30" step="1" value="8"><small data-i18n="c.f2s">Profitul net ca procent din vânzări</small></div>
+        </form>
+        <div class="panel" aria-live="polite">
+          <p class="kick" data-i18n="c.o">Vânzări noi necesare</p>
+          <p class="c-big" id="c-big">625.000<small>RON</small></p>
+          <p class="c-txt" id="c-txt"></p>
+          <div class="cbars" aria-hidden="true">
+            <div class="cbar"><span data-i18n="c.b1">Factura pierdută</span><div><div id="cb-a" style="background:var(--bad-d)"><b id="cb-at" style="left:calc(100% + 8px);color:var(--pink)"></b></div></div></div>
+            <div class="cbar"><span data-i18n="c.b2">Vânzări ca s-o acoperi</span><div><div id="cb-b" style="background:var(--accent);width:100%"><b id="cb-bt" style="right:10px;color:#fff"></b></div></div></div>
+          </div>
+          <p class="c-foot" id="c-foot"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lsec wrap" id="preturi" aria-labelledby="pr-h">
+      <div class="lh">
+        <div><p class="kick" data-i18n="p.k">Prețuri</p><h2 id="pr-h" data-i18n="p.t">Începi <em class="s">gratuit</em>. Plătești când monitorizezi.</h2></div>
+        <div><p data-i18n="p.l">Prețuri în lei, fără TVA. Schimbi sau anulezi oricând.</p><div class="bill" role="group" aria-label="Facturare"><button type="button" id="bill-m" data-bill="m" aria-pressed="true" data-i18n="p.m">Lunar</button><button type="button" id="bill-y" data-bill="y" aria-pressed="false"><span data-i18n="p.y">Anual</span><small data-i18n="p.s">−2 luni</small></button></div></div>
+      </div>
+      <div class="plans">
+        <article class="plan"><h3 data-i18n="p1.n">Gratuit</h3><p class="d" data-i18n="p1.d">O verificare rapidă din când în când.</p><div class="price"><b>0</b><span>RON</span></div><ul><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p1.1">3 verificări CUI pe lună</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p1.2">Scor MRCS și factori</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p1.3">Notificări de bază pe email</span></li></ul><a class="pill-btn pb-line" href="#s0" data-i18n="p1.c">Începe gratuit</a></article>
+        <article class="plan"><h3>Starter</h3><p class="d" data-i18n="p2.d">Pentru un portofoliu mic de clienți.</p><div class="price"><b data-m="39" data-y="390">39</b><span data-per>RON / lună</span></div><ul><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p2.1">20 verificări CUI pe lună</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p2.2">Watchlist de 10 companii</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p2.3">Alerte de insolvență, rezumat zilnic</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p2.4">5 rapoarte PDF pe lună</span></li></ul><a class="pill-btn pb-line" href="#s0" data-i18n="p2.c">Alege Starter</a></article>
+        <article class="plan pro"><h3>PRO <span class="badge" data-i18n="p3.b">Recomandat</span></h3><p class="d" data-i18n="p3.d">Pentru echipe B2B care vând pe termen.</p><div class="price"><b data-m="99" data-y="990">99</b><span data-per>RON / lună</span></div><ul><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p3.1">Verificări CUI nelimitate</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p3.2">Watchlist de 250 de companii</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p3.3">Alerte în timp real</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p3.4">Dosare în instanță și datorii fiscale</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p3.5">Rapoarte PDF nelimitate</span></li></ul><a class="pill-btn pb-scan" href="#s0" data-i18n="p3.c">Alege PRO</a></article>
+        <article class="plan"><h3>Enterprise</h3><p class="d" data-i18n="p4.d">Volume mari și instituții financiare.</p><div class="price"><b style="font-size:32px" data-i18n="p4.p">La cerere</b></div><ul><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p4.1">Tot ce include PRO</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p4.2">Watchlist nelimitat</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p4.3">Acces API complet</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p4.4">SLA și suport dedicat</span></li></ul><a class="pill-btn pb-line" href="#intrebari" data-i18n="p4.c">Discută cu noi</a></article>
+      </div>
+      <p class="pnote" data-i18n="p.n">Anual: Starter 390 RON, PRO 990 RON, adică prețul a 10 luni.</p>
+    </section>
+
+    <section class="lsec wrap" id="intrebari" aria-labelledby="faq-h">
+      <div class="faq">
+        <div><p class="kick" data-i18n="q.k">Întrebări</p><h2 id="faq-h" data-i18n="q.t">Ce ne întreabă clienții înainte să înceapă.</h2></div>
+        <div class="qa" id="qa">
+          <div class="qi open"><button type="button" aria-expanded="true" aria-controls="qa1" id="qb1"><span data-i18n="q1.q">De unde vin datele?</span><svg class="ico"><use href="#i-plus"/></svg></button><div class="qa-body" id="qa1" role="region" aria-labelledby="qb1"><p data-i18n="q1.a">Din registre publice oficiale: ANAF pentru starea fiscală și TVA, Buletinul Procedurilor de Insolvență, portalul instanțelor (portal.just.ro) și bilanțurile publicate de Ministerul Finanțelor.</p></div></div>
+          <div class="qi"><button type="button" aria-expanded="false" aria-controls="qa2" id="qb2"><span data-i18n="q2.q">Cât de des sunt verificați partenerii?</span><svg class="ico"><use href="#i-plus"/></svg></button><div class="qa-body" id="qa2" role="region" aria-labelledby="qb2"><p data-i18n="q2.a">Watchlist-ul e scanat zilnic. Pe PRO și Enterprise primești alerta imediat după scanare; pe Starter primești un rezumat zilnic pe email.</p></div></div>
+          <div class="qi"><button type="button" aria-expanded="false" aria-controls="qa3" id="qb3"><span data-i18n="q3.q">Cum e calculat scorul?</span><svg class="ico"><use href="#i-plus"/></svg></button><div class="qa-body" id="qa3" role="region" aria-labelledby="qb3"><p data-i18n="q3.a">Scorul MRCS ponderează factori din opt categorii, de la statusul legal și TVA până la calitatea datelor declarate. Sub 50 înseamnă risc ridicat, 50–74 mediu, 75 și peste scăzut.</p></div></div>
+          <div class="qi"><button type="button" aria-expanded="false" aria-controls="qa4" id="qb4"><span data-i18n="q4.q">Află partenerii că îi urmăresc?</span><svg class="ico"><use href="#i-plus"/></svg></button><div class="qa-body" id="qa4" role="region" aria-labelledby="qb4"><p data-i18n="q4.a">Nu. Folosim doar date publice, iar watchlist-ul tău e privat: îl văd doar tu și colegii cărora le dai acces.</p></div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="cta" id="final" aria-labelledby="cta-h">
+    <div class="wrap" style="width:100%">
+      <p class="kick" data-i18n="f.k">Începe azi</p>
+      <h2 id="cta-h" style="margin-top:22px" data-i18n="f.t">Vezi riscul <em class="s">înainte</em> să ajungă la tine.</h2>
+      <div class="cta-row">
+        <a class="orb-btn mag" href="#s0" data-i18n="f.b">Creează cont gratuit</a>
+        <p data-i18n="f.p">Cont gratuit, 3 verificări pe lună, fără card. Treci pe un plan plătit doar când vrei monitorizare zilnică.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a class="logo" href="#s0" aria-label="marketrisk" style="color:var(--ink)"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle class="ring" cx="14" cy="14" r="12.5" stroke-width="1.2" opacity=".5"/><circle cx="14" cy="14" r="7" stroke="#8C8DFF" stroke-width="1.2"/><circle cx="14" cy="14" r="2.6" fill="currentColor"/><circle cx="22.4" cy="8.6" r="1.8" fill="#FF5C7A"/><circle cx="5.8" cy="18.4" r="1.5" fill="#3CCFA8"/></svg>marketrisk</a><p data-i18n="ft.p">Monitorizare a riscului de credit pentru companiile din România, din surse publice oficiale.</p></div>
+      <div><h4 data-i18n="ft.h1">Produs</h4><ul><li><a href="#aplicatia" data-i18n="nav.3">Aplicația</a></li><li><a href="#incearca" data-i18n="tr.k">Încearcă</a></li><li><a href="#preturi" data-i18n="nav.4">Prețuri</a></li></ul></div>
+      <div><h4 data-i18n="ft.h2">Resurse</h4><ul><li><a href="#intrebari" data-i18n="q.k">Întrebări</a></li><li><a href="#s0" data-i18n="ft.api">Documentație API</a></li><li><a href="#s0">Blog</a></li></ul></div>
+      <div><h4 data-i18n="ft.h3">Legal</h4><ul><li><a href="#s0" data-i18n="ft.t">Termeni</a></li><li><a href="#s0" data-i18n="ft.pr">Confidențialitate</a></li><li><a href="#s0">GDPR</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 marketrisk</span><span data-i18n="ft.proto">Homepage 5 · prototip de design</span></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+"use strict";
+var $ = function(id){ return document.getElementById(id); };
+var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+var fine = window.matchMedia && matchMedia("(pointer: fine)").matches;
+var hasGSAP = !!(window.gsap && window.ScrollTrigger);
+if (hasGSAP) gsap.registerPlugin(ScrollTrigger);
+
+/* ---------------- i18n ---------------- */
+var EN = {
+  "nav.1":"The story","nav.2":"Benefits","nav.3":"The app","nav.4":"Pricing","nav.cta":"Start free",
+  "lb.you":"Your company","lb.bad":"insolvency","lb.warn":"cash-accounting VAT","lb.ok":"stable",
+  "h.k":"marketrisk · credit risk monitoring · Romania",
+  "h.t":"Your business is only as <em class=\"s\">solvent</em> as the companies you trade with.",
+  "h.l":"Every morning, marketrisk checks your clients and suppliers against ANAF, the insolvency bulletin, the courts and annual accounts, and warns you before their problems become yours.",
+  "h.c1":"Start free","h.c2":"See how it works",
+  "s1.t":"Every client and supplier is a <em class=\"s\">thread</em> tied to you.","s1.b":"You sell on credit, pay deposits, depend on deliveries. Every relationship is exposure, and most are never checked again after the first contract.",
+  "s2.t":"Risk travels in <em class=\"s\">silence</em>.","s2.b":"A partner moves to cash-accounting VAT. Then a new lawsuit appears. Then it's declared tax-inactive. You only find out when the invoice goes unpaid.","s2.n":"RON unpaid · fictional example",
+  "s3.t":"marketrisk checks every thread, every morning at <em class=\"s\">06:00</em>.","s3.b":"Four official registers. A score from 0 to 100 for every partner, with the source of every signal.",
+  "lv.ok":"75–100 · low risk","lv.warn":"50–74 · medium risk","lv.bad":"0–49 · high risk",
+  "s4.t":"You act <em class=\"s\">before</em> it reaches you.","s4.b":"Stop shipping on credit, ask for payment up front, shorten terms. The rest of your network stays healthy.","s4.c":"See the app",
+  "b.k":"Benefits","b.t":"What changes when someone keeps watch over the registers.",
+  "b1.k":"Time","b1.h":"One CUI instead of four registers.","b1.p":"ANAF, the insolvency bulletin, the courts portal and annual accounts in a single report, with every item dated.",
+  "b2.k":"Early warning","b2.h":"Find out the same morning.","b2.p":"Your watchlist is scanned daily. When something changes for a partner, you get the alert and the recommended next step.",
+  "b3.k":"VAT","b3.h":"Know when a supplier goes inactive.","b3.p":"Invoices from suppliers declared tax-inactive can put your VAT deduction at risk. You get the alert before the next invoice.",
+  "b4.k":"Audit","b4.h":"Every credit limit has a paper trail.","b4.p":"A dated PDF report with the score, factors and each source. You always know what a decision was based on.",
+  "d.k":"The app","d.t":"Your whole portfolio on a <em class=\"s\">single</em> screen.","d.l":"How many companies are at risk, how much you have riding on them and what changed today. No spreadsheets, no tabs open across four registers.",
+  "m.n1":"Portfolio","m.n3":"Alerts","m.n4":"Reports","m.h":"Good morning, Ioana","m.s":"Thursday, 24 September 2026 · scanned at 06:00",
+  "m.k1":"Companies monitored","m.k1s":"+6 this month","m.k2":"Receivables tracked","m.k3":"Exposed to high risk","m.k3s":"RON · 5.7% of receivables","m.k4":"New alerts","m.k4s":"2 critical",
+  "m.c1":"Portfolio by risk level","m.l1":"Low","m.l2":"Medium","m.l3":"High","m.c2":"Today's alerts","m.sb":"critical","m.sw":"watch",
+  "m.a1":"Stâna Agro: insolvency petition","m.a2":"Nera Transport: tax-inactive","m.a3":"Vâlcan Mobila: new court case",
+  "t1.t":"Stâna Agro Trading: insolvency petition filed.","t1.s":"BPI · today, 06:02 · owed 48,600 RON","t2.t":"Lotru Metal moved to cash-accounting VAT.","t3.t":"Olteț Construct: court case closed in its favour.","t3.s":"portal.just.ro · score +4",
+  "d.n":"Demo interface. Companies, CUIs and amounts are fictional.",
+  "tr.k":"Try it","tr.t":"Check a <em class=\"s\">CUI</em>.","tr.l":"Type a CUI or pick an example. We validate the check digit the same way ANAF does; the examples below are fictional companies.","tr.lab":"Tax identification code (CUI)","tr.btn":"Check","tr.ex":"Examples",
+  "c.k":"Calculator","c.t":"What does an <em class=\"s\">unpaid</em> invoice cost you?","c.l":"A loss can only be covered out of profit. Move the sliders to see how much new revenue it takes to win it back.",
+  "c.f1":"Unpaid invoice","c.f1s":"From 5,000 to 500,000 RON","c.f2":"Your net margin","c.f2s":"Net profit as a share of revenue","c.o":"New revenue needed","c.b1":"Invoice lost","c.b2":"Revenue to cover it",
+  "p.k":"Pricing","p.t":"Start <em class=\"s\">free</em>. Pay when you monitor.","p.l":"Prices in RON, excluding VAT. Change or cancel any time.","p.m":"Monthly","p.y":"Yearly","p.s":"−2 months","p.n":"Yearly: Starter 390 RON, PRO 990 RON, the price of 10 months.",
+  "p1.n":"Free","p1.d":"A quick check now and then.","p1.1":"3 CUI checks a month","p1.2":"MRCS score and factors","p1.3":"Basic email notifications","p1.c":"Start free",
+  "p2.d":"For a small portfolio of clients.","p2.1":"20 CUI checks a month","p2.2":"Watchlist of 10 companies","p2.3":"Insolvency alerts, daily digest","p2.4":"5 PDF reports a month","p2.c":"Choose Starter",
+  "p3.b":"Recommended","p3.d":"For B2B teams that sell on credit.","p3.1":"Unlimited CUI checks","p3.2":"Watchlist of 250 companies","p3.3":"Real-time alerts","p3.4":"Court cases and tax debts","p3.5":"Unlimited PDF reports","p3.c":"Choose PRO",
+  "p4.d":"High volumes and financial institutions.","p4.p":"On request","p4.1":"Everything in PRO","p4.2":"Unlimited watchlist","p4.3":"Full API access","p4.4":"SLA and dedicated support","p4.c":"Talk to us",
+  "q.k":"FAQ","q.t":"What clients ask us before they start.",
+  "q1.q":"Where does the data come from?","q1.a":"From official public registers: ANAF for tax status and VAT, the Insolvency Proceedings Bulletin, the courts portal (portal.just.ro) and annual accounts published by the Ministry of Finance.",
+  "q2.q":"How often are partners checked?","q2.a":"The watchlist is scanned daily. On PRO and Enterprise you get the alert right after the scan; on Starter you get a daily email digest.",
+  "q3.q":"How is the score calculated?","q3.a":"MRCS weighs factors from eight categories, from legal and VAT status to the quality of declared data. Below 50 is high risk, 50–74 medium, 75 and above low.",
+  "q4.q":"Do partners know I'm watching them?","q4.a":"No. We only use public data, and your watchlist is private: only you and the colleagues you invite can see it.",
+  "f.k":"Start today","f.t":"See the risk <em class=\"s\">before</em> it reaches you.","f.b":"Create a free account","f.p":"Free account, 3 checks a month, no card. Move to a paid plan only when you want daily monitoring.",
+  "ft.p":"Credit risk monitoring for Romanian companies, built on official public sources.","ft.h1":"Product","ft.h2":"Resources","ft.h3":"Legal","ft.api":"API docs","ft.t":"Terms","ft.pr":"Privacy","ft.proto":"Homepage 5 · design prototype"
+};
+var RO = {};
+document.querySelectorAll("[data-i18n]").forEach(function(e){ var k = e.getAttribute("data-i18n"); if (!(k in RO)) RO[k] = e.innerHTML; });
+var lang = "ro";
+try { var sv = localStorage.getItem("mr-h5-lang"); if (sv === "ro" || sv === "en") lang = sv; } catch(e){}
+function L(o){ return o[lang]; }
+function nf(n, d){ return Number(n).toLocaleString(lang === "ro" ? "ro-RO" : "en-GB", {minimumFractionDigits:d||0, maximumFractionDigits:d||0}); }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+/* split hero words */
+function splitWords(el){
+  var out = "";
+  el.childNodes.forEach(function(n){
+    if (n.nodeType === 3){ n.textContent.split(/(\s+)/).forEach(function(t){ if (!t) return; out += /^\s+$/.test(t) ? " " : '<span class="w"><span class="wi">' + esc(t) + '</span></span>'; }); }
+    else { out += '<span class="w"><span class="wi">' + n.outerHTML + '</span></span>'; }
+  });
+  el.innerHTML = out;
+}
+function fillWords(el){
+  var out = "";
+  el.childNodes.forEach(function(n){
+    if (n.nodeType === 3){ n.textContent.split(/(\s+)/).forEach(function(t){ if (!t) return; out += /^\s+$/.test(t) ? " " : '<span class="fw">' + esc(t) + '</span>'; }); }
+    else out += '<span class="fw">' + n.outerHTML + '</span>';
+  });
+  el.innerHTML = out;
+}
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  var D = lang === "en" ? EN : RO;
+  document.querySelectorAll("[data-i18n]").forEach(function(e){ var k = e.getAttribute("data-i18n"); if (D[k] != null) e.innerHTML = D[k]; });
+  $("lang-ro").setAttribute("aria-pressed", lang === "ro"); $("lang-en").setAttribute("aria-pressed", lang === "en");
+  $("m-k2").textContent = lang === "ro" ? "2,41 mil." : "2.41M";
+  $("m-k3").textContent = nf(138200);
+  $("cnt-loss").textContent = nf(48600);
+  splitWords($("h1"));
+  document.querySelectorAll(".fill").forEach(fillWords);
+  drawBars(); showCo(cur, false); calc(); renderPrices();
+  if (hasGSAP){ bindFill(); ScrollTrigger.refresh(); }
+}
+
+/* ---------------- dashboard bars ---------------- */
+var BARS = [[98,15,4],[99,16,4],[100,17,5],[101,18,5],[101,19,6],[102,19,7]];
+var BM = {ro:["apr.","mai","iun.","iul.","aug.","sept."], en:["Apr","May","Jun","Jul","Aug","Sep"]};
+function drawBars(){
+  $("m-bars").innerHTML = BARS.map(function(b){ var t = b[0]+b[1]+b[2]; return '<div class="m-bar" title="' + t + '"><i style="height:' + (b[0]/140*100).toFixed(1) + '%;background:var(--ok-d)"></i><i style="height:' + (b[1]/140*100).toFixed(1) + '%;background:#D69114"></i><i style="height:' + (b[2]/140*100).toFixed(1) + '%;background:var(--bad-d)"></i></div>'; }).join("");
+  $("m-lbl").innerHTML = BM[lang].map(function(m){ return "<span>" + m + "</span>"; }).join("");
+}
+
+/* ---------------- CUI demo ---------------- */
+var CO = {
+  a:{cui:"99000174", n:"Brâna Logistic SRL", caen:"4941", s:86, lv:"ok", f:[["ok",{ro:"Activă, plătitoare de TVA",en:"Active, VAT registered"},"ANAF"],["ok",{ro:"Fără dosare active",en:"No open court cases"},"portal.just.ro"],["ok",{ro:"Bilanț 2025 depus, profit",en:"2025 accounts filed, profitable"},"MFinanțe"]]},
+  b:{cui:"99000310", n:"Vâlcan Mobila SRL", caen:"3109", s:62, lv:"warn", f:[["warn",{ro:"Aplică TVA la încasare",en:"Uses cash-accounting VAT"},"ANAF"],["warn",{ro:"1 dosar activ: pretenții",en:"1 open case: monetary claim"},"portal.just.ro"],["ok",{ro:"Activă, plătitoare de TVA",en:"Active, VAT registered"},"ANAF"]]},
+  c:{cui:"99000468", n:"Stâna Agro Trading SRL", caen:"4621", s:22, lv:"bad", f:[["bad",{ro:"Declarată inactivă fiscal",en:"Declared tax-inactive"},"ANAF"],["bad",{ro:"Cerere de deschidere a insolvenței",en:"Insolvency petition filed"},"BPI"],["warn",{ro:"Bilanț 2025 nedepus",en:"2025 accounts not filed"},"MFinanțe"]]}
+};
+var LVT = {ok:{ro:"risc scăzut",en:"low risk"}, warn:{ro:"risc mediu",en:"medium risk"}, bad:{ro:"risc ridicat",en:"high risk"}};
+var SEVT = {ok:{ro:"favorabil",en:"favourable"}, warn:{ro:"atenție",en:"watch"}, bad:{ro:"critic",en:"critical"}};
+var cur = "c", gaugeVal = {v:22};
+function showCo(k, animate){
+  var c = CO[k];
+  document.querySelectorAll("[data-ex]").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-ex") === k); });
+  $("g-name").textContent = c.n;
+  $("g-meta").textContent = "RO " + c.cui + " · CAEN " + c.caen + " · " + (lang === "ro" ? "fictivă" : "fictional");
+  $("g-lv").className = "sev g-lv s-" + c.lv; $("g-lv").textContent = L(LVT[c.lv]);
+  $("facts").innerHTML = c.f.map(function(f){ return '<li><span class="sev s-' + f[0] + '">' + L(SEVT[f[0]]) + '</span><span>' + esc(L(f[1])) + '</span><small>' + f[2] + '</small></li>'; }).join("");
+  var angle = function(v){ return -90 + v / 100 * 180; };
+  if (hasGSAP && animate && !reduce){
+    gsap.to(gaugeVal, {v:c.s, duration:1.1, ease:"power3.out", onUpdate:function(){ $("g-num").textContent = Math.round(gaugeVal.v); }});
+    gsap.to("#needle", {rotation:angle(c.s), duration:1.3, ease:"elastic.out(1,0.55)", svgOrigin:"160 160"});
+    gsap.fromTo("#facts li", {x:-16, opacity:.25}, {x:0, opacity:1, stagger:.08, duration:.5, ease:"power2.out"});
+  } else {
+    gaugeVal.v = c.s; $("g-num").textContent = c.s;
+    if (hasGSAP) gsap.set("#needle", {rotation:angle(c.s), svgOrigin:"160 160"});
+    else $("needle").setAttribute("transform", "rotate(" + angle(c.s) + " 160 160)");
+  }
+}
+function cuiValid(n){ var key = "753217532", body = n.slice(0,-1), ctrl = +n.slice(-1), k = key.slice(key.length - body.length), s = 0; for (var i = 0; i < body.length; i++) s += +body[i] * +k[i]; var c = s * 10 % 11; if (c === 10) c = 0; return c === ctrl; }
+function msg(t, kind){ var m = $("cui-msg"); m.textContent = t; m.className = "msg" + (kind ? " " + kind : ""); }
+$("cui-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  var raw = $("cui").value.replace(/\s+/g,"").replace(/^ro/i,"");
+  if (!raw) return msg(lang === "ro" ? "Scrie un CUI: între 2 și 10 cifre, cu sau fără RO." : "Type a CUI: 2 to 10 digits, with or without RO.", "err");
+  if (!/^\d{2,10}$/.test(raw)) return msg(lang === "ro" ? "Un CUI are între 2 și 10 cifre." : "A CUI has 2 to 10 digits.", "err");
+  if (!cuiValid(raw)) return msg(lang === "ro" ? "Cifra de control nu se potrivește. Probabil o cifră e greșită sau inversată." : "The check digit doesn't match. A digit is probably wrong or swapped.", "err");
+  var hit = null; Object.keys(CO).forEach(function(k){ if (CO[k].cui === raw) hit = k; });
+  if (hit){ cur = hit; showCo(hit, true); msg((lang === "ro" ? "Exemplu încărcat: RO " : "Example loaded: RO ") + raw, "ok"); }
+  else msg(lang === "ro" ? "CUI valid. Raportul complet pentru RO " + raw + " e disponibil după ce îți faci cont gratuit." : "Valid CUI. The full report for RO " + raw + " is available once you create a free account.", "ok");
+});
+document.querySelectorAll("[data-ex]").forEach(function(b){ b.addEventListener("click", function(){ cur = b.getAttribute("data-ex"); $("cui").value = CO[cur].cui; msg("", ""); showCo(cur, true); }); });
+
+/* ---------------- calculator ---------------- */
+var calcState = {need:625000};
+function calc(){
+  var amt = +$("c-amt").value, mg = +$("c-mg").value, need = amt / (mg / 100), x = need / amt;
+  $("o-amt").textContent = nf(amt) + " RON"; $("o-mg").textContent = mg + "%";
+  if (hasGSAP && !reduce){ gsap.to(calcState, {need:need, duration:.6, ease:"power3.out", overwrite:true, onUpdate:function(){ $("c-big").innerHTML = nf(Math.round(calcState.need / 100) * 100) + "<small>RON</small>"; }}); }
+  else { calcState.need = need; $("c-big").innerHTML = nf(need) + "<small>RON</small>"; }
+  $("c-txt").textContent = lang === "ro" ? "La o marjă de " + mg + "%, fiecare leu pierdut cere " + nf(x, x < 10 ? 1 : 0) + " lei de vânzări noi ca să fie recuperat." : "At a " + mg + "% margin, every leu lost takes " + nf(x, x < 10 ? 1 : 0) + " lei of new revenue to win back.";
+  $("cb-a").style.width = Math.max(1.5, amt / need * 100) + "%"; $("cb-at").textContent = nf(amt);
+  $("cb-bt").textContent = nf(need);
+  $("c-foot").innerHTML = lang === "ro" ? "Pentru comparație: <b>marketrisk PRO costă 990 RON pe an</b> și urmărește până la 250 de parteneri." : "For comparison: <b>marketrisk PRO costs 990 RON a year</b> and watches up to 250 partners.";
+}
+$("c-amt").addEventListener("input", calc); $("c-mg").addEventListener("input", calc);
+
+/* ---------------- pricing ---------------- */
+var billing = "m";
+function renderPrices(){
+  document.querySelectorAll("[data-m]").forEach(function(b){ b.textContent = billing === "m" ? b.getAttribute("data-m") : b.getAttribute("data-y"); });
+  document.querySelectorAll("[data-per]").forEach(function(s){ s.textContent = billing === "m" ? (lang === "ro" ? "RON / lună" : "RON / month") : (lang === "ro" ? "RON / an" : "RON / year"); });
+  $("bill-m").setAttribute("aria-pressed", billing === "m"); $("bill-y").setAttribute("aria-pressed", billing === "y");
+}
+document.querySelectorAll("[data-bill]").forEach(function(b){ b.addEventListener("click", function(){ billing = b.getAttribute("data-bill"); renderPrices(); if (hasGSAP && !reduce) gsap.fromTo(".price b[data-m]", {yPercent:-30, opacity:.3}, {yPercent:0, opacity:1, duration:.45, ease:"power3.out"}); }); });
+
+/* ---------------- FAQ ---------------- */
+document.querySelectorAll(".qi button").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    var qi = btn.parentNode, body = qi.querySelector(".qa-body"), open = qi.classList.contains("open");
+    qi.classList.toggle("open", !open); btn.setAttribute("aria-expanded", !open);
+    if (hasGSAP && !reduce){ gsap.fromTo(body, {height: open ? body.scrollHeight : 0}, {height: open ? 0 : body.scrollHeight, duration:.45, ease:"power3.inOut", onComplete:function(){ body.style.height = open ? "0px" : "auto"; ScrollTrigger.refresh(); }}); }
+    else body.style.height = open ? "0px" : "auto";
+  });
+});
+
+/* ---------------- language buttons ---------------- */
+document.querySelectorAll("[data-lang]").forEach(function(b){ b.addEventListener("click", function(){ lang = b.getAttribute("data-lang"); try { localStorage.setItem("mr-h5-lang", lang); } catch(e){} applyLang(); }); });
+
+/* ================= three.js network ================= */
+var S = {camZ:27, reveal:0, contagion:0, scan:0, cut:0, dim:1, labels:1, spin:0};
+var gl = null;
+function initGL(){
+  if (!window.THREE) return null;
+  var canvas = $("gl"), renderer;
+  try { renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, alpha:false, powerPreference:"high-performance"}); } catch(e){ return null; }
+  var mobile = innerWidth < 900;
+  renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1));
+  renderer.setClearColor(0x070B12, 1);
+  var scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x070B12, 0.028);
+  var camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 200);
+  var group = new THREE.Group(); scene.add(group);
+
+  var seed = 11; function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  function dir(){ var u = rnd() * 2 - 1, t = rnd() * Math.PI * 2, s = Math.sqrt(1 - u * u); return new THREE.Vector3(s * Math.cos(t), u * .72, s * Math.sin(t)); }
+  var N = mobile ? 110 : 170, DIRECT = 30;
+  var nodes = [{p:new THREE.Vector3(0,0,0), risk:-1, direct:0, story:0, size:3.2}];
+  var SPECIAL = {bad:new THREE.Vector3(3.4, 1.3, 3.6), warn:new THREE.Vector3(-4.4, -1.6, 2.6), ok:new THREE.Vector3(-1.6, 3.4, 3.2)};
+  nodes.push({p:SPECIAL.bad, risk:2, direct:1, story:1, size:1.6, key:"bad"});
+  nodes.push({p:SPECIAL.warn, risk:1, direct:1, story:0, size:1.4, key:"warn"});
+  nodes.push({p:SPECIAL.ok, risk:0, direct:1, story:0, size:1.4, key:"ok"});
+  for (var i = nodes.length; i < N; i++){
+    var isDirect = i < DIRECT;
+    var r = isDirect ? 3.6 + rnd() * 3.4 : 6.5 + rnd() * 6;
+    var roll = rnd(), risk = roll < .07 ? 2 : roll < .21 ? 1 : 0;
+    nodes.push({p:dir().multiplyScalar(r), risk:risk, direct:isDirect ? 1 : 0, story:0, size:isDirect ? 1.15 + rnd() * .5 : .6 + rnd() * .6});
+  }
+  var edges = [];
+  for (var j = 1; j < nodes.length; j++){
+    if (nodes[j].direct){ edges.push([0, j]); continue; }
+    var best = [], d;
+    for (var k = 1; k < nodes.length; k++){ if (k === j) continue; if (nodes[k].p.length() >= nodes[j].p.length()) continue; d = nodes[k].p.distanceTo(nodes[j].p); best.push([d, k]); }
+    best.sort(function(a,b){ return a[0] - b[0]; });
+    var cnt = rnd() < .45 ? 2 : 1;
+    for (var q = 0; q < Math.min(cnt, best.length); q++) edges.push([best[q][1], j]);
+  }
+
+  var pos = new Float32Array(nodes.length * 3), aRisk = new Float32Array(nodes.length), aDirect = new Float32Array(nodes.length), aStory = new Float32Array(nodes.length), aSize = new Float32Array(nodes.length), aPhase = new Float32Array(nodes.length);
+  nodes.forEach(function(n, i){ pos[i*3] = n.p.x; pos[i*3+1] = n.p.y; pos[i*3+2] = n.p.z; aRisk[i] = n.risk; aDirect[i] = n.direct; aStory[i] = n.story; aSize[i] = n.size; aPhase[i] = rnd() * 6.28; });
+  var ng = new THREE.BufferGeometry();
+  ng.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  ng.setAttribute("aRisk", new THREE.BufferAttribute(aRisk, 1));
+  ng.setAttribute("aDirect", new THREE.BufferAttribute(aDirect, 1));
+  ng.setAttribute("aStory", new THREE.BufferAttribute(aStory, 1));
+  ng.setAttribute("aSize", new THREE.BufferAttribute(aSize, 1));
+  ng.setAttribute("aPhase", new THREE.BufferAttribute(aPhase, 1));
+  var U = {
+    uTime:{value:0}, uScan:{value:0}, uReveal:{value:0}, uContagion:{value:0}, uCut:{value:0}, uDim:{value:1}, uPix:{value:renderer.getPixelRatio()},
+    cNeutral:{value:new THREE.Color(0x8FA3B8)}, cOk:{value:new THREE.Color(0x3CCFA8)}, cWarn:{value:new THREE.Color(0xF5B544)}, cBad:{value:new THREE.Color(0xFF5C7A)}, cYou:{value:new THREE.Color(0xF4EFE6)}, cScan:{value:new THREE.Color(0x8C8DFF)}
+  };
+  var common = [
+    "uniform float uTime,uScan,uReveal,uContagion,uCut,uDim;",
+    "uniform vec3 cNeutral,cOk,cWarn,cBad,cYou,cScan;",
+    "vec3 riskCol(float r){ return r < .5 ? cOk : (r < 1.5 ? cWarn : cBad); }"
+  ].join("\n");
+  var nodeMat = new THREE.ShaderMaterial({
+    uniforms:U,
+    vertexShader:[common,
+      "attribute float aRisk,aDirect,aStory,aSize,aPhase;",
+      "uniform float uPix;",
+      "varying vec3 vCol; varying float vA;",
+      "void main(){",
+      " vec4 mv = modelViewMatrix * vec4(position,1.);",
+      " float d = length(position);",
+      " float sc = 1. - smoothstep(uScan - .7, uScan, d);",
+      " float ring = exp(-pow((d - uScan) * 1.8, 2.)) * step(.01, uScan) * (1. - step(15.5, uScan));",
+      " vec3 col = aRisk < -.5 ? cYou : mix(cNeutral, riskCol(aRisk), sc);",
+      " col = mix(col, cBad, aStory * uContagion);",
+      " col = mix(col, cScan, ring * .85);",
+      " float s = aSize * (1. + aDirect * uReveal * .55) * (1. + ring * 1.6);",
+      " s *= 1. + aStory * uContagion * (1.2 + .5 * sin(uTime * 6.));",
+      " if (aRisk < -.5) s *= 1. + .12 * sin(uTime * 2.) + uCut * .4;",
+      " s *= .9 + .15 * sin(uTime * 1.7 + aPhase);",
+      " float a = (aDirect > .5 ? .55 + uReveal * .45 : .5);",
+      " a *= mix(1., .28, step(1.5, aRisk) * uCut);",
+      " a *= uDim;",
+      " vCol = col; vA = a;",
+      " gl_PointSize = s * uPix * (230. / -mv.z);",
+      " gl_Position = projectionMatrix * mv;",
+      "}"].join("\n"),
+    fragmentShader:[
+      "varying vec3 vCol; varying float vA;",
+      "void main(){ float r = length(gl_PointCoord - .5); if (r > .5) discard; float glow = smoothstep(.5, 0., r); float core = smoothstep(.16, 0., r); gl_FragColor = vec4(vCol * (.55 + core * .9), (glow * .75 + core) * vA); }"].join("\n"),
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending
+  });
+  var points = new THREE.Points(ng, nodeMat); group.add(points);
+
+  var ePos = new Float32Array(edges.length * 6), eRisk = new Float32Array(edges.length * 2), eDirect = new Float32Array(edges.length * 2), eStory = new Float32Array(edges.length * 2), eBad = new Float32Array(edges.length * 2);
+  edges.forEach(function(e, i){
+    var A = nodes[e[0]], B = nodes[e[1]];
+    ePos.set([A.p.x, A.p.y, A.p.z, B.p.x, B.p.y, B.p.z], i * 6);
+    var rk = B.risk, bad = (A.risk === 2 || B.risk === 2) ? 1 : 0, dr = e[0] === 0 ? 1 : 0, st = (B.story || A.story) && dr ? 1 : 0;
+    eRisk[i*2] = eRisk[i*2+1] = rk; eDirect[i*2] = eDirect[i*2+1] = dr; eStory[i*2] = eStory[i*2+1] = st; eBad[i*2] = eBad[i*2+1] = bad;
+  });
+  var eg = new THREE.BufferGeometry();
+  eg.setAttribute("position", new THREE.BufferAttribute(ePos, 3));
+  eg.setAttribute("aRisk", new THREE.BufferAttribute(eRisk, 1));
+  eg.setAttribute("aDirect", new THREE.BufferAttribute(eDirect, 1));
+  eg.setAttribute("aStory", new THREE.BufferAttribute(eStory, 1));
+  eg.setAttribute("aBad", new THREE.BufferAttribute(eBad, 1));
+  var edgeMat = new THREE.ShaderMaterial({
+    uniforms:U,
+    vertexShader:[common,
+      "attribute float aRisk,aDirect,aStory,aBad;",
+      "varying vec3 vCol; varying float vA;",
+      "void main(){",
+      " float d = length(position);",
+      " float sc = 1. - smoothstep(uScan - .7, uScan, d);",
+      " vec3 col = mix(cNeutral * .6, cNeutral, aDirect * uReveal);",
+      " col = mix(col, riskCol(aRisk), sc * .85);",
+      " col = mix(col, cBad, aStory * uContagion);",
+      " float a = .11 + aDirect * uReveal * .24 + aStory * uContagion * .5 + sc * .06;",
+      " a *= 1. - aBad * uCut * .92;",
+      " a *= uDim;",
+      " vCol = col; vA = a;",
+      " gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.);",
+      "}"].join("\n"),
+    fragmentShader:"varying vec3 vCol; varying float vA; void main(){ gl_FragColor = vec4(vCol, vA); }",
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending
+  });
+  var lines = new THREE.LineSegments(eg, edgeMat); group.add(lines);
+
+  var PN = 7, pPos = new Float32Array(PN * 3), pg = new THREE.BufferGeometry();
+  pg.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
+  var dot = document.createElement('canvas'); dot.width = dot.height = 64; var dc = dot.getContext('2d'), gr = dc.createRadialGradient(32,32,0,32,32,32); gr.addColorStop(0,'rgba(255,255,255,1)'); gr.addColorStop(.35,'rgba(255,255,255,.55)'); gr.addColorStop(1,'rgba(255,255,255,0)'); dc.fillStyle = gr; dc.fillRect(0,0,64,64);
+  var pulseMat = new THREE.PointsMaterial({color:0xFF5C7A, size:.75, map:new THREE.CanvasTexture(dot), transparent:true, opacity:0, depthWrite:false, blending:THREE.AdditiveBlending});
+  var pulses = new THREE.Points(pg, pulseMat); group.add(pulses);
+
+  var ring = new THREE.Mesh(new THREE.RingGeometry(.985, 1, 160), new THREE.MeshBasicMaterial({color:0x8C8DFF, transparent:true, opacity:0, side:THREE.DoubleSide, depthWrite:false, blending:THREE.AdditiveBlending}));
+  scene.add(ring);
+  var ring2 = new THREE.Mesh(new THREE.RingGeometry(.955, 1, 160), new THREE.MeshBasicMaterial({color:0x8C8DFF, transparent:true, opacity:0, side:THREE.DoubleSide, depthWrite:false, blending:THREE.AdditiveBlending}));
+  scene.add(ring2);
+  var shield = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(1.9, 1)), new THREE.LineBasicMaterial({color:0x8C8DFF, transparent:true, opacity:0, depthWrite:false, blending:THREE.AdditiveBlending}));
+  group.add(shield);
+
+  var mouse = {x:0, y:0, tx:0, ty:0};
+  addEventListener("pointermove", function(e){ mouse.tx = (e.clientX / innerWidth - .5); mouse.ty = (e.clientY / innerHeight - .5); }, {passive:true});
+
+  var LB = {you:$("lb-you"), bad:$("lb-bad"), warn:$("lb-warn"), ok:$("lb-ok")};
+  var tmp = new THREE.Vector3();
+  function placeLabel(el, p, o){
+    tmp.copy(p).applyMatrix4(group.matrixWorld).project(camera);
+    if (tmp.z > 1 || o < .01){ el.style.opacity = 0; return; }
+    var x = (tmp.x * .5 + .5) * innerWidth, y = (-tmp.y * .5 + .5) * innerHeight;
+    el.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) translate(" + (el === LB.you ? "-50%" : "0") + ",-50%)";
+    el.style.opacity = o.toFixed(3);
+  }
+  function resize(){
+    var w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+    mobile = w < 900;
+  }
+  addEventListener("resize", resize); resize();
+
+  var paused = false, clock = new THREE.Clock(), spinT = 0;
+  function frame(){
+    requestAnimationFrame(frame);
+    if (paused || document.hidden) return;
+    var dt = Math.min(.05, clock.getDelta()), t = clock.elapsedTime;
+    spinT += dt * (reduce ? 0 : .045);
+    mouse.x += (mouse.tx - mouse.x) * .05; mouse.y += (mouse.ty - mouse.y) * .05;
+    U.uTime.value = t; U.uScan.value = S.scan; U.uReveal.value = S.reveal; U.uContagion.value = S.contagion; U.uCut.value = S.cut; U.uDim.value = S.dim;
+    group.rotation.y = spinT + S.spin + mouse.x * .35;
+    group.rotation.x = -.12 + mouse.y * .18;
+    group.position.x = mobile ? 0 : 4.2;
+    group.position.y = mobile ? 2.2 : 0;
+    camera.position.set(0, 0, S.camZ + (mobile ? 8 : 0)); camera.lookAt(mobile ? 0 : 1.2, mobile ? .6 : 0, 0);
+    group.updateMatrixWorld();
+    var A = nodes[1].p, you = nodes[0].p, pa = pulses.geometry.attributes.position;
+    for (var i = 0; i < PN; i++){ var f = ((t * .42) + i / PN) % 1; pa.setXYZ(i, A.x + (you.x - A.x) * f, A.y + (you.y - A.y) * f, A.z + (you.z - A.z) * f); }
+    pa.needsUpdate = true;
+    pulseMat.opacity = S.contagion * (1 - S.cut) * .95 * S.dim;
+    var scanning = S.scan > .05 && S.scan < 15.5;
+    [ring, ring2].forEach(function(rg, ix){ rg.position.copy(group.position); rg.quaternion.copy(camera.quaternion); var sc = Math.max(.001, S.scan - ix * .6); rg.scale.setScalar(sc); rg.material.opacity = scanning ? (ix ? .07 : .6) * (1 - S.scan / 17) * S.dim : 0; });
+    shield.material.opacity = S.cut * .35 * S.dim; shield.rotation.y = t * .2; shield.rotation.x = t * .1; shield.scale.setScalar(.6 + S.cut * .4);
+    renderer.render(scene, camera);
+    var lab = S.labels * S.dim;
+    placeLabel(LB.you, you, S.reveal * lab);
+    function scanned(p){ var d = p.length(); return Math.max(0, Math.min(1, (S.scan - d + .2) / .8)); }
+    placeLabel(LB.bad, SPECIAL.bad, Math.max(S.contagion, scanned(SPECIAL.bad)) * lab);
+    placeLabel(LB.warn, SPECIAL.warn, scanned(SPECIAL.warn) * lab);
+    placeLabel(LB.ok, SPECIAL.ok, scanned(SPECIAL.ok) * lab);
+  }
+  frame();
+  return {pause:function(v){ paused = v; }};
+}
+
+/* ================= GSAP choreography ================= */
+var fillTweens = [];
+function bindFill(){
+  fillTweens.forEach(function(t){ if (t.scrollTrigger) t.scrollTrigger.kill(); t.kill(); }); fillTweens = [];
+  document.querySelectorAll(".fill").forEach(function(el){
+    var w = el.querySelectorAll(".fw");
+    if (reduce){ gsap.set(w, {opacity:1}); return; }
+    fillTweens.push(gsap.fromTo(w, {opacity:.16}, {opacity:1, stagger:.08, ease:"none", scrollTrigger:{trigger:el, start:"top 85%", end:"bottom 45%", scrub:true}}));
+  });
+}
+function setupMotion(){
+  var lenis = null;
+  if (window.Lenis && !reduce){
+    lenis = new Lenis({lerp:.09, wheelMultiplier:1});
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(function(time){ lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener("click", function(e){ var id = a.getAttribute("href"); var t = document.querySelector(id); if (t){ e.preventDefault(); lenis.scrollTo(t, {offset:0, duration:1.4}); } }); });
+  }
+
+  /* intro */
+  if (!reduce){
+    var tl = gsap.timeline({delay:.15});
+    tl.from("#h1 .wi", {yPercent:110, rotate:4, duration:1.05, stagger:.045, ease:"power4.out"})
+      .from(".hero .kick", {y:14, opacity:.2, duration:.6, ease:"power3.out"}, 0)
+      .from(".hero .lead, .hero .acts", {y:24, opacity:.2, duration:.8, stagger:.1, ease:"power3.out"}, .45)
+      .from("#top", {yPercent:-100, duration:.8, ease:"power3.out", clearProps:"transform"}, .2)
+      .fromTo(S, {camZ:44}, {camZ:27, duration:2.2, ease:"power3.out"}, 0);
+  }
+
+  /* story scrub */
+  var story = gsap.timeline({scrollTrigger:{trigger:"#story", start:"top top", end:"bottom bottom", scrub:1.2}});
+  story.to(S, {camZ:21, reveal:1, spin:.6, duration:1, ease:"power1.inOut"})
+       .to(S, {camZ:16.5, contagion:1, spin:1.05, duration:1, ease:"power1.inOut"})
+       .to(S, {scan:16, spin:1.5, camZ:19, duration:1, ease:"power1.in"})
+       .to(S, {cut:1, camZ:23, spin:2.1, duration:1, ease:"power1.inOut"});
+
+  /* step text parallax */
+  gsap.utils.toArray(".step:not(.hero) .txt").forEach(function(el){
+    gsap.fromTo(el, {y:90, opacity:.25}, {y:-40, opacity:1, ease:"none", scrollTrigger:{trigger:el.closest(".step"), start:"top 85%", end:"center 40%", scrub:true}});
+  });
+  gsap.to(".hero .txt", {y:-120, opacity:.2, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:true}});
+  gsap.to(".scroll-hint", {opacity:0, scrollTrigger:{trigger:".hero", start:"top top", end:"20% top", scrub:true}});
+
+  /* loss counter */
+  var loss = {v:0};
+  ScrollTrigger.create({trigger:"#s2", start:"top 60%", once:true, onEnter:function(){ gsap.fromTo(loss, {v:0}, {v:48600, duration:1.6, ease:"power2.out", onUpdate:function(){ $("cnt-loss").textContent = nf(Math.round(loss.v / 100) * 100); }}); }});
+
+  /* step nav */
+  var snav = $("steps-nav"), links = snav.querySelectorAll("a");
+  ScrollTrigger.create({trigger:"#story", start:"top top", end:"bottom 60%", onToggle:function(s){ snav.classList.toggle("on", s.isActive); }});
+  document.querySelectorAll(".step").forEach(function(st, i){ ScrollTrigger.create({trigger:st, start:"top 50%", end:"bottom 50%", onToggle:function(s){ if (s.isActive) links.forEach(function(l, j){ l.classList.toggle("act", i === j); }); }}); });
+
+  /* progress + header */
+  gsap.to("#prog", {scaleX:1, ease:"none", scrollTrigger:{trigger:document.documentElement, start:"top top", end:"bottom bottom", scrub:.3}});
+  var top = $("top");
+  ScrollTrigger.create({start:0, end:"max", onUpdate:function(s){ top.classList.toggle("hide", s.direction === 1 && s.scroll() > 400); top.classList.toggle("solid", s.scroll() > 40); }});
+  ScrollTrigger.create({trigger:"#light", start:"top 40px", end:"bottom 40px", onToggle:function(s){ top.classList.toggle("on-light", s.isActive); }});
+
+  /* marquee with velocity */
+  var mq = $("marq"), mx = 0, vel = 0, dirn = -1, half = mq.scrollWidth / 2;
+  addEventListener("resize", function(){ half = mq.scrollWidth / 2; });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ half = mq.scrollWidth / 2; ScrollTrigger.refresh(); });
+  ScrollTrigger.create({start:0, end:"max", onUpdate:function(s){ vel = s.getVelocity() / 300; dirn = s.direction === 1 ? -1 : 1; }});
+  gsap.ticker.add(function(){ if (!half) return; mx += (dirn * 1.1) + dirn * Math.min(12, Math.abs(vel)); vel *= .9; if (mx <= -half) mx += half; if (mx > 0) mx -= half; gsap.set(mq, {x:mx}); });
+
+  /* network dims under benefits, returns for final */
+  gsap.fromTo(S, {dim:1}, {dim:.35, ease:"none", immediateRender:false, scrollTrigger:{trigger:"#beneficii", start:"top 80%", end:"top 20%", scrub:true}});
+  gsap.fromTo(S, {labels:1}, {labels:0, ease:"none", immediateRender:false, scrollTrigger:{trigger:"#beneficii", start:"top 95%", end:"top 60%", scrub:true}});
+  gsap.fromTo(S, {dim:.35}, {dim:1, ease:"none", immediateRender:false, scrollTrigger:{trigger:"#final", start:"top 90%", end:"top 30%", scrub:true}});
+
+  /* benefits horizontal */
+  var mm = gsap.matchMedia();
+  mm.add("(min-width: 901px)", function(){
+    var track = $("ben-track");
+    var dist = function(){ return Math.max(0, track.scrollWidth - innerWidth); };
+    gsap.to(track, {x:function(){ return -dist(); }, ease:"none", scrollTrigger:{trigger:"#ben-pin", start:"top top", end:function(){ return "+=" + dist(); }, pin:true, scrub:1, invalidateOnRefresh:true, anticipatePin:1}});
+    gsap.utils.toArray(".bcard .huge").forEach(function(h){ gsap.fromTo(h, {xPercent:30}, {xPercent:0, ease:"none", scrollTrigger:{trigger:"#ben-pin", start:"top top", end:function(){ return "+=" + dist(); }, scrub:true}}); });
+  });
+
+  /* light panel reveal */
+  gsap.fromTo("#light", {clipPath:"inset(0% 4% 0% 4% round 48px)"}, {clipPath:"inset(0% 0% 0% 0% round 0px)", ease:"none", scrollTrigger:{trigger:"#light", start:"top bottom", end:"top 15%", scrub:true}});
+  ScrollTrigger.create({trigger:"#light", start:"top top", end:"bottom bottom", onToggle:function(s){ if (gl) gl.pause(s.isActive); }});
+
+  /* dashboard tilt */
+  gsap.fromTo("#mock", {rotateX:24, scale:.86, y:40}, {rotateX:0, scale:1, y:0, ease:"none", scrollTrigger:{trigger:".dash-stage", start:"top 90%", end:"top 20%", scrub:true}});
+  gsap.utils.toArray(".toast").forEach(function(t){ var sp = parseFloat(t.getAttribute("data-speed")); gsap.fromTo(t, {y:-sp * 260}, {y:sp * 260, ease:"none", scrollTrigger:{trigger:".dash-stage", start:"top bottom", end:"bottom top", scrub:true}}); });
+  gsap.fromTo(".m-bar i", {scaleY:.15, transformOrigin:"50% 100%"}, {scaleY:1, stagger:.03, duration:.9, ease:"power3.out", scrollTrigger:{trigger:"#mock", start:"top 60%", once:true}});
+
+  /* panels lift */
+  gsap.utils.toArray(".panel, .plan").forEach(function(p){ gsap.fromTo(p, {y:60, opacity:.35}, {y:0, opacity:1, duration:1, ease:"power3.out", scrollTrigger:{trigger:p, start:"top 92%", once:true}}); });
+  ScrollTrigger.create({trigger:"#incearca", start:"top 55%", once:true, onEnter:function(){ gaugeVal.v = 0; $("g-num").textContent = 0; gsap.set("#needle", {rotation:-90, svgOrigin:"160 160"}); showCo(cur, true); }});
+
+  /* final */
+  gsap.fromTo(".cta h2", {y:80, opacity:.25}, {y:0, opacity:1, ease:"none", scrollTrigger:{trigger:"#final", start:"top 80%", end:"top 30%", scrub:true}});
+}
+
+/* magnetic + tilt + cursor */
+function setupMicro(){
+  if (!fine || reduce) return;
+  document.documentElement.classList.add("has-cursor");
+  var c = $("cur"), r = $("cur-ring");
+  var cx = gsap.quickTo(c, "x", {duration:.12, ease:"power3"}), cy = gsap.quickTo(c, "y", {duration:.12, ease:"power3"});
+  var rx = gsap.quickTo(r, "x", {duration:.45, ease:"power3"}), ry = gsap.quickTo(r, "y", {duration:.45, ease:"power3"});
+  addEventListener("pointermove", function(e){ cx(e.clientX); cy(e.clientY); rx(e.clientX); ry(e.clientY); }, {passive:true});
+  document.querySelectorAll("a, button, input[type=range], .m-card").forEach(function(el){ el.addEventListener("pointerenter", function(){ r.classList.add("big"); }); el.addEventListener("pointerleave", function(){ r.classList.remove("big"); }); });
+  document.querySelectorAll(".mag").forEach(function(el){
+    var xT = gsap.quickTo(el, "x", {duration:.5, ease:"elastic.out(1,0.4)"}), yT = gsap.quickTo(el, "y", {duration:.5, ease:"elastic.out(1,0.4)"});
+    el.addEventListener("pointermove", function(e){ var b = el.getBoundingClientRect(); xT((e.clientX - b.left - b.width / 2) * .35); yT((e.clientY - b.top - b.height / 2) * .35); });
+    el.addEventListener("pointerleave", function(){ xT(0); yT(0); });
+  });
+  document.querySelectorAll(".plan").forEach(function(p){
+    var rX = gsap.quickTo(p, "rotationX", {duration:.6, ease:"power3"}), rY = gsap.quickTo(p, "rotationY", {duration:.6, ease:"power3"});
+    p.addEventListener("pointermove", function(e){ var b = p.getBoundingClientRect(); rY(((e.clientX - b.left) / b.width - .5) * 10); rX(-((e.clientY - b.top) / b.height - .5) * 10); });
+    p.addEventListener("pointerleave", function(){ rX(0); rY(0); });
+  });
+}
+
+/* boot */
+try { gl = initGL(); } catch(e){ gl = null; }
+if (!gl){ var fb = document.createElement("div"); fb.className = "gl-fallback"; document.body.insertBefore(fb, document.body.firstChild); $("gl").style.display = "none"; $("labels").style.display = "none"; }
+applyLang();
+if (hasGSAP){ setupMotion(); setupMicro(); showCo(cur, false); }
+else { S.reveal = 1; S.scan = 16; S.cut = 1; showCo(cur, false); }
+})();
+</script>
