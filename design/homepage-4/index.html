@@ -1,0 +1,1338 @@
+<title>marketrisk Homepage 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F3EF;
+  --bg-2:#E7E9E3;
+  --surface:#FFFFFF;
+  --ink:#0E1A1C;
+  --ink-2:rgba(14,26,28,.72);
+  --ink-3:rgba(14,26,28,.52);
+  --line:rgba(14,26,28,.10);
+  --line-2:rgba(14,26,28,.18);
+  --accent:#3B3FE4;
+  --accent-t:#3337D6;
+  --accent-soft:rgba(59,63,228,.10);
+  --on-accent:#FFFFFF;
+  --ok:#07907A;--warn:#C0850A;--bad:#C42E55;
+  --ok-t:#067565;--warn-t:#8A5F05;--bad-t:#AD2449;
+  --ok-soft:rgba(7,144,122,.10);--warn-soft:rgba(192,133,10,.12);--bad-soft:rgba(196,46,85,.09);
+  --stage:#0E1A1C;
+  --stage-2:#152427;
+  --stage-ink:#E7ECEA;
+  --stage-ink-2:rgba(231,236,234,.70);
+  --stage-ink-3:rgba(231,236,234,.48);
+  --stage-line:rgba(231,236,234,.12);
+  --app-bg:#F6F7F4;
+  --app-side:#EDEFEA;
+  --app-card:#FFFFFF;
+  --tip-bg:#0E1A1C;
+  --tip-ink:#F2F3EF;
+  --shadow-app:0 1px 0 rgba(255,255,255,.06) inset,0 30px 80px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.25);
+  --display:"Bricolage Grotesque","Onest",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --ui:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.2,0,0,1);
+  --r-s:6px;--r-l:12px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0A1214;--bg-2:#0F191B;--surface:#121C1F;
+    --ink:#E7ECEA;--ink-2:rgba(231,236,234,.74);--ink-3:rgba(231,236,234,.52);
+    --line:rgba(231,236,234,.10);--line-2:rgba(231,236,234,.20);
+    --accent:#6F72EF;--accent-t:#A3A5FF;--accent-soft:rgba(111,114,239,.16);--on-accent:#FFFFFF;
+    --ok:#1E9A80;--warn:#BD8722;--bad:#DE4E69;
+    --ok-t:#4CC2A6;--warn-t:#E2B056;--bad-t:#F4839A;
+    --ok-soft:rgba(30,154,128,.14);--warn-soft:rgba(189,135,34,.16);--bad-soft:rgba(222,78,105,.14);
+    --stage:#060C0D;--stage-2:#0D1618;
+    --app-bg:#0E171A;--app-side:#0B1315;--app-card:#142023;
+    --tip-bg:#E7ECEA;--tip-ink:#0E1A1C;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0A1214;--bg-2:#0F191B;--surface:#121C1F;
+  --ink:#E7ECEA;--ink-2:rgba(231,236,234,.74);--ink-3:rgba(231,236,234,.52);
+  --line:rgba(231,236,234,.10);--line-2:rgba(231,236,234,.20);
+  --accent:#6F72EF;--accent-t:#A3A5FF;--accent-soft:rgba(111,114,239,.16);--on-accent:#FFFFFF;
+  --ok:#1E9A80;--warn:#BD8722;--bad:#DE4E69;
+  --ok-t:#4CC2A6;--warn-t:#E2B056;--bad-t:#F4839A;
+  --ok-soft:rgba(30,154,128,.14);--warn-soft:rgba(189,135,34,.16);--bad-soft:rgba(222,78,105,.14);
+  --stage:#060C0D;--stage-2:#0D1618;
+  --app-bg:#0E171A;--app-side:#0B1315;--app-card:#142023;
+  --tip-bg:#E7ECEA;--tip-ink:#0E1A1C;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1280px;margin-inline:auto;padding-inline:clamp(16px,4vw,56px)}
+h1,h2,h3,h4{margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--accent-t)}
+button{font-family:inherit}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.ico{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r-s)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:500 15px/1 var(--ui);padding:14px 20px;border-radius:999px;border:1px solid transparent;text-decoration:none;cursor:pointer;transition:transform .18s var(--ease),background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:none}
+.btn-accent{background:var(--accent);color:var(--on-accent);box-shadow:0 6px 20px -8px var(--accent)}
+.btn-accent:hover{box-shadow:0 10px 26px -8px var(--accent)}
+.btn-ink{background:var(--ink);color:var(--bg)}
+.btn-line{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn-line:hover{background:var(--surface)}
+.btn-stage{background:var(--stage-ink);color:#0E1A1C}
+.btn-stage-line{background:transparent;color:var(--stage-ink);border-color:var(--stage-line)}
+.btn-stage-line:hover{background:rgba(255,255,255,.06)}
+
+/* nav */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;transition:background .2s var(--ease),border-color .2s var(--ease);border-bottom:1px solid transparent}
+.top.scrolled{background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-bottom-color:var(--line)}
+.top-in{display:flex;align-items:center;gap:28px;height:72px}
+.logo{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font:700 21px/1 var(--display);letter-spacing:-.04em}
+.logo-mark{width:26px;height:26px;border-radius:7px;background:var(--ink);display:grid;place-items:center}
+.logo-mark svg{width:18px;height:18px}
+.logo-mark path{stroke:var(--bg)}
+.logo small{font:500 11px var(--mono);letter-spacing:.04em;color:var(--ink-3);margin-left:2px}
+.nav{display:flex;gap:26px}
+.nav a{color:var(--ink-2);text-decoration:none;font-size:14px}
+.nav a:hover{color:var(--ink)}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:14px}
+.lang{display:inline-flex;gap:2px;padding:3px;border-radius:999px;border:1px solid var(--line-2)}
+.lang button{font:500 11px/1 var(--mono);letter-spacing:.06em;padding:7px 9px;border-radius:999px;border:0;background:transparent;color:var(--ink-3);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.login{color:var(--ink-2);text-decoration:none;font-size:14px}
+.top .btn{padding:11px 16px;font-size:14px}
+
+/* hero */
+.hero{padding-block:clamp(40px,7vw,96px) 0}
+.hero-kick{display:inline-flex;align-items:center;gap:10px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.hero-kick i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.hero h1{margin-top:22px;font-family:var(--display);font-weight:700;font-size:clamp(46px,7.2vw,112px);line-height:.92;letter-spacing:-.05em;font-variation-settings:"opsz" 96;max-width:14ch}
+.hero h1 span{color:var(--ink-3)}
+.hero-row{margin-top:clamp(28px,4vw,44px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end}
+.hero-row p{font-size:clamp(17px,1.45vw,19px);color:var(--ink-2);max-width:36em}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.hero-note{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:flex-end;font-size:13px;color:var(--ink-3)}
+.hero-note span{display:inline-flex;gap:6px;align-items:center}
+.hero-note .ico{width:14px;height:14px;color:var(--ok)}
+
+/* instrument */
+.inst{margin-top:clamp(40px,5vw,64px);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden}
+.inst-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding:18px 22px;border-bottom:1px solid var(--line)}
+.inst-co b{display:block;font:600 17px/1.2 var(--display);letter-spacing:-.02em}
+.inst-co span{font:400 12px var(--mono);color:var(--ink-3)}
+.fict{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 8px;border-radius:999px;border:1px dashed var(--line-2);color:var(--ink-3);white-space:nowrap}
+.inst-score{margin-left:auto;display:flex;align-items:center;gap:14px}
+.inst-score b{font:700 44px/1 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.inst-score small{display:block;font:400 11px var(--mono);color:var(--ink-3)}
+.pill{display:inline-flex;align-items:center;gap:6px;font:500 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:6px 8px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-ok{background:var(--ok-soft);color:var(--ok-t)}
+.p-warn{background:var(--warn-soft);color:var(--warn-t)}
+.p-bad{background:var(--bad-soft);color:var(--bad-t)}
+.chart-box{position:relative;padding:8px 8px 0 12px}
+.chart-box svg{display:block;width:100%;overflow:visible}
+.inst-foot{display:grid;grid-template-columns:minmax(0,1fr);gap:0;border-top:1px solid var(--line)}
+.inst-caption{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;padding:16px 22px}
+.inst-caption p{font:600 clamp(16px,1.5vw,19px)/1.35 var(--display);letter-spacing:-.02em}
+.inst-caption p em{font-style:normal;color:var(--accent-t)}
+.inst-caption small{font:400 12px var(--mono);color:var(--ink-3)}
+.events{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:1px solid var(--line)}
+.events li{padding:14px 16px 16px;border-right:1px solid var(--line);font-size:13px;line-height:1.4;transition:background .3s var(--ease)}
+.events li:last-child{border-right:0}
+.events li.hot{background:var(--accent-soft)}
+.ev-top{display:flex;align-items:center;gap:8px;font:500 11px var(--mono);color:var(--ink-3);margin-bottom:6px}
+.ev-n{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font:600 10px var(--mono);color:#fff}
+.ev-src{margin-top:6px;font:400 11px var(--mono);color:var(--ink-3)}
+.events li.final{background:var(--bad-soft)}
+.events li.final strong{color:var(--bad-t)}
+
+/* sources */
+.srcs{padding-block:28px 0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 36px;color:var(--ink-3)}
+.srcs span.kicker{margin-right:6px}
+.srcs b{font:600 17px var(--display);letter-spacing:-.02em;color:var(--ink-2)}
+
+/* sections */
+.sec{padding-block:clamp(88px,11vw,152px) 0}
+.sec-h{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.sec-h h2{margin-top:14px;font:700 clamp(36px,4.8vw,68px)/.98 var(--display);letter-spacing:-.045em;font-variation-settings:"opsz" 96}
+.sec-h p{color:var(--ink-2);font-size:17px;max-width:32em}
+
+/* pains */
+.pains{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden}
+.pain{background:var(--surface);padding:clamp(22px,3vw,36px);display:grid;grid-template-rows:auto auto 1fr auto;gap:10px}
+.pain .kicker{color:var(--bad-t)}
+.pain h3{font:650 clamp(22px,2.2vw,28px)/1.1 var(--display);letter-spacing:-.03em}
+.pain p{color:var(--ink-2);font-size:15px;max-width:34em}
+.fix{margin-top:14px;display:flex;align-items:flex-start;gap:12px;padding-top:16px;border-top:1px dashed var(--line-2);font-weight:500;font-size:15px}
+.fix .ico{color:var(--accent-t);margin-top:2px}
+
+/* stage / tour */
+.stage{margin-top:clamp(88px,11vw,152px);background:var(--stage);color:var(--stage-ink);padding-block:clamp(72px,9vw,120px);position:relative;overflow:hidden}
+.stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--stage-line) 1px,transparent 1px),linear-gradient(90deg,var(--stage-line) 1px,transparent 1px);background-size:56px 56px;opacity:.35;mask-image:radial-gradient(ellipse 70% 60% at 50% 0%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 0%,#000 30%,transparent 75%);pointer-events:none}
+.stage .wrap{position:relative}
+.stage .kicker{color:var(--stage-ink-3)}
+.stage .sec-h{margin-bottom:36px}
+.stage .sec-h p{color:var(--stage-ink-2)}
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:22px}
+.tab{text-align:left;background:transparent;border:1px solid var(--stage-line);border-radius:var(--r-l);padding:16px 18px;color:var(--stage-ink-2);cursor:pointer;transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)}
+.tab b{display:block;font:600 16px/1.2 var(--display);letter-spacing:-.02em;color:var(--stage-ink)}
+.tab span{display:block;margin-top:6px;font-size:13px;line-height:1.45}
+.tab:hover{background:rgba(255,255,255,.04)}
+.tab[aria-selected="true"]{background:var(--stage-2);border-color:rgba(163,165,255,.5);color:var(--stage-ink)}
+.tab[aria-selected="true"] b{color:#fff}
+
+/* app mock */
+.app{background:var(--app-bg);color:var(--ink);border-radius:14px;box-shadow:var(--shadow-app);overflow:hidden;display:grid;grid-template-columns:220px minmax(0,1fr);min-height:700px;border:1px solid rgba(255,255,255,.08)}
+.side{background:var(--app-side);border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.ws{display:flex;align-items:center;gap:10px;padding:6px 8px 14px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.ws-av{width:28px;height:28px;border-radius:8px;background:var(--accent);color:#fff;display:grid;place-items:center;font:600 12px var(--mono)}
+.ws b{display:block;font-size:13px;line-height:1.2}
+.ws small{display:block;font-size:11px;color:var(--ink-3)}
+.sbtn{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;border:0;background:transparent;color:var(--ink-2);font:500 14px var(--ui);cursor:pointer;text-align:left;width:100%}
+.sbtn .ico{width:16px;height:16px}
+.sbtn:hover{background:var(--line)}
+.sbtn[aria-current="true"]{background:var(--app-card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.sbtn .cnt{margin-left:auto;font:500 11px var(--mono);padding:2px 6px;border-radius:999px;background:var(--bad);color:#fff}
+.sbtn .cnt.zero{background:var(--line);color:var(--ink-3)}
+.side-foot{margin-top:auto;padding:12px 10px 4px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3)}
+.meter{height:6px;border-radius:3px;background:var(--line);margin-top:8px;overflow:hidden}
+.meter i{display:block;height:100%;width:51.2%;background:var(--accent);border-radius:3px}
+.main{display:flex;flex-direction:column;min-width:0}
+.appbar{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line)}
+.asearch{flex:1;max-width:420px;display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;background:var(--app-card);border:1px solid var(--line);color:var(--ink-3);font-size:13px}
+.asearch kbd{margin-left:auto;font:500 11px var(--mono);padding:2px 6px;border-radius:4px;border:1px solid var(--line-2)}
+.appbar .who{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-2)}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:600 11px var(--mono);color:#fff}
+.mtabs{display:none}
+.view{padding:22px 22px 26px;display:grid;gap:16px;align-content:start}
+.view[hidden]{display:none}
+.vh{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 20px}
+.vh h3{font:650 24px/1.15 var(--display);letter-spacing:-.03em}
+.vh p{font-size:13px;color:var(--ink-3);margin-top:4px}
+.vh .acts{display:flex;gap:8px;flex-wrap:wrap}
+.mini-btn{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 var(--ui);padding:9px 12px;border-radius:8px;border:1px solid var(--line-2);background:var(--app-card);color:var(--ink);cursor:pointer}
+.mini-btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.mini-btn .ico{width:15px;height:15px}
+.card{background:var(--app-card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.card h4{font:600 13px var(--ui);color:var(--ink-2);display:flex;justify-content:space-between;gap:10px}
+.card h4 small{font:400 11px var(--mono);color:var(--ink-3)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi b{display:block;margin-top:10px;font:650 28px/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.kpi small{display:block;margin-top:8px;font-size:12px;color:var(--ink-3)}
+.kpi small em{font-style:normal;font-family:var(--mono)}
+.up{color:var(--ok-t)}.down{color:var(--bad-t)}
+.g2{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px}
+.g2b{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:12px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px}
+.svgc{display:block;width:100%;overflow:visible;margin-top:10px}
+.movers{list-style:none;margin:8px 0 0;padding:0}
+.movers li{display:grid;grid-template-columns:minmax(0,1fr) 64px 44px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.movers li:last-child{border-bottom:0}
+.movers b{font-weight:500;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.movers small{font:400 11px var(--mono);color:var(--ink-3)}
+.movers .d{text-align:right;font:500 12px var(--mono)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.fchip{font:500 12px/1 var(--ui);padding:8px 10px;border-radius:999px;border:1px solid var(--line-2);background:var(--app-card);color:var(--ink-2);cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.fchip b{font:500 11px var(--mono);color:var(--ink-3)}
+.fchip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--app-bg)}
+.fchip[aria-pressed="true"] b{color:inherit;opacity:.7}
+.tscroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--app-card)}
+table.wl{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}
+.wl th{text-align:left;font:500 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);padding:11px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+.wl td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:middle;white-space:nowrap}
+.wl tr:last-child td{border-bottom:0}
+.wl tbody tr{cursor:pointer;transition:background .15s var(--ease)}
+.wl tbody tr:hover{background:var(--accent-soft)}
+.wl td.r,.wl th.r{text-align:right}
+.co b{display:block;font-weight:500}
+.co small{font:400 11px var(--mono);color:var(--ink-3)}
+.sc{display:flex;align-items:center;gap:10px}
+.sc b{font:600 14px var(--mono);width:22px}
+.dos-top{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px}
+.bigscore{display:flex;align-items:flex-end;gap:10px}
+.bigscore b{font:700 56px/.9 var(--display);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.bigscore span{font:400 12px var(--mono);color:var(--ink-3);padding-bottom:4px}
+.reco{border-radius:10px;padding:16px 18px;border:1px solid transparent}
+.reco.r-bad{background:var(--bad-soft);border-color:color-mix(in srgb,var(--bad) 30%,transparent)}
+.reco.r-warn{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 30%,transparent)}
+.reco.r-ok{background:var(--ok-soft);border-color:color-mix(in srgb,var(--ok) 30%,transparent)}
+.reco .kicker{color:var(--ink-2)}
+.reco p{margin-top:8px;font:600 17px/1.3 var(--display);letter-spacing:-.02em}
+.reco small{display:block;margin-top:8px;font-size:13px;color:var(--ink-2)}
+.flist{list-style:none;margin:8px 0 0;padding:0}
+.flist li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.flist li:last-child{border-bottom:0}
+.flist small{font:400 11px var(--mono);color:var(--ink-3)}
+.sev{display:inline-flex;align-items:center;gap:5px;font:500 10px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:5px 6px;border-radius:4px}
+.sev svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.s-ok{background:var(--ok-soft);color:var(--ok-t)}
+.s-warn{background:var(--warn-soft);color:var(--warn-t)}
+.s-bad{background:var(--bad-soft);color:var(--bad-t)}
+.cases{list-style:none;margin:8px 0 0;padding:0}
+.cases li{padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.cases li:last-child{border-bottom:0}
+.cases b{font-weight:500}
+.cases small{display:block;font:400 11px var(--mono);color:var(--ink-3);margin-top:2px}
+.alist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.al{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:start;background:var(--app-card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;transition:opacity .2s var(--ease)}
+.al.done{opacity:.5}
+.al.done .al-t{text-decoration:line-through;text-decoration-color:var(--ink-3)}
+.al-t{font-weight:500;font-size:14px}
+.al-m{font:400 11px var(--mono);color:var(--ink-3);margin-top:3px}
+.al-a{margin-top:8px;font-size:13px;color:var(--ink-2);display:flex;gap:8px}
+.al-a .ico{width:15px;height:15px;color:var(--accent-t);margin-top:2px}
+.al-b{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.agroup{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
+.tour-note{margin-top:18px;font:400 12px var(--mono);color:var(--stage-ink-3);text-align:center}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;position:relative}
+.tl::before{content:"";position:absolute;left:0;right:0;top:22px;height:2px;background:linear-gradient(90deg,var(--accent),var(--ok));border-radius:1px}
+.tl li{position:relative;padding:0 18px 0 0}
+.tl-dot{width:46px;height:46px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);display:grid;place-items:center;position:relative;color:var(--accent-t)}
+.tl-dot .ico{width:18px;height:18px}
+.tl li:last-child .tl-dot{border-color:var(--ok);color:var(--ok-t)}
+.tl-time{margin-top:20px;font:500 12px var(--mono);color:var(--accent-t);letter-spacing:.02em}
+.tl h3{margin-top:8px;font:650 19px/1.2 var(--display);letter-spacing:-.02em}
+.tl p{margin-top:8px;font-size:14px;color:var(--ink-2)}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.bx{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);padding:24px;display:flex;flex-direction:column;gap:8px;min-height:230px;overflow:hidden}
+.bx h3{font:650 20px/1.2 var(--display);letter-spacing:-.025em}
+.bx p{font-size:14px;color:var(--ink-2);max-width:30em}
+.bx .viz{margin-top:auto;padding-top:16px}
+.b-a{grid-column:span 3}.b-b{grid-column:span 3}.b-c{grid-column:span 2}.b-d{grid-column:span 2}.b-e{grid-column:span 2}
+.pdf{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.pdf-page{width:54px;height:70px;border-radius:4px;background:var(--surface);border:1px solid var(--line-2);position:relative}
+.pdf-page::before{content:"";position:absolute;left:8px;right:8px;top:10px;height:3px;background:var(--ink);opacity:.8;border-radius:2px;box-shadow:0 7px 0 var(--line-2),0 14px 0 var(--line-2),0 21px 0 var(--line-2)}
+.pdf-page::after{content:"22";position:absolute;right:6px;bottom:6px;font:700 13px var(--display);color:var(--bad-t)}
+.pdf b{display:block;font-size:13px}
+.pdf small{display:block;font:400 11px var(--mono);color:var(--ink-3);margin-top:3px}
+.code{font:400 12px/1.6 var(--mono);background:var(--stage);color:var(--stage-ink-2);border-radius:8px;padding:14px;overflow-x:auto;white-space:pre}
+.code .k{color:#A3A5FF}.code .s{color:#7FD1BE}
+.team{display:flex}
+.team span{width:34px;height:34px;border-radius:50%;border:2px solid var(--surface);margin-left:-8px;display:grid;place-items:center;font:600 11px var(--mono);color:#fff}
+.team span:first-child{margin-left:0}
+.hist{list-style:none;margin:0;padding:0;font-size:13px}
+.hist li{display:grid;grid-template-columns:70px 1fr;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.hist li:last-child{border-bottom:0}
+.hist small{font:400 11px var(--mono);color:var(--ink-3)}
+
+/* calc */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:12px}
+.calc-in,.calc-out{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);padding:clamp(22px,3vw,36px)}
+.field{display:grid;gap:10px;padding-block:6px 22px}
+.field + .field{border-top:1px solid var(--line);padding-top:22px}
+.field label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-weight:500;font-size:15px}
+.field output{font:600 22px var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.field small{color:var(--ink-3);font-size:13px}
+input[type=range]{width:100%;accent-color:var(--accent);height:24px}
+.calc-out .kicker{color:var(--ink-3)}
+.calc-big{margin-top:10px;font:700 clamp(40px,5.4vw,76px)/.95 var(--display);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.calc-big small{font:600 .38em var(--display);letter-spacing:-.02em;color:var(--ink-3);margin-left:.2em}
+.calc-out > p{margin-top:12px;color:var(--ink-2);max-width:32em}
+.bars{margin-top:26px;display:grid;gap:12px}
+.bar-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;align-items:center;font-size:13px}
+.bar-row span{color:var(--ink-2)}
+.bar{height:26px;border-radius:0 6px 6px 0;min-width:3px;position:relative;transition:width .35s var(--ease)}
+.bar b{position:absolute;left:calc(100% + 8px);top:50%;transform:translateY(-50%);font:500 12px var(--mono);white-space:nowrap;color:var(--ink)}
+.bar.in b{left:auto;right:8px;color:#fff}
+.calc-foot{margin-top:24px;padding-top:18px;border-top:1px dashed var(--line-2);font-size:14px;color:var(--ink-2)}
+.calc-foot b{color:var(--ink)}
+
+/* score */
+.score-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:12px}
+.bandlist{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);padding:10px 24px}
+.bandrow{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.bandrow:last-child{border-bottom:0}
+.bandrow b{font:700 26px/1 var(--display);letter-spacing:-.03em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.bandrow .pill{margin-top:10px}
+.bandrow h3{font:600 16px/1.3 var(--ui)}
+.bandrow p{font-size:14px;color:var(--ink-2);margin-top:4px}
+.wbox{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);padding:24px}
+.wbox h3{font:650 20px/1.2 var(--display);letter-spacing:-.025em}
+.wbox > p{font-size:14px;color:var(--ink-2);margin-top:4px}
+.wstack{display:flex;gap:2px;height:40px;margin-top:20px}
+.wstack div{border-radius:4px;transition:transform .18s var(--ease),opacity .18s var(--ease)}
+.wstack.dim div{opacity:.35}
+.wstack.dim div.hl{opacity:1;transform:translateY(-2px)}
+.wscale{display:flex;justify-content:space-between;margin-top:8px;font:400 11px var(--mono);color:var(--ink-3)}
+.wl2{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.wl2 li{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;cursor:default}
+.wl2 li i{width:10px;height:10px;border-radius:3px;display:block;transform:translateY(1px)}
+.wl2 li b{font:500 13px var(--mono)}
+
+/* pricing */
+.bill{display:inline-flex;gap:2px;padding:4px;border-radius:999px;border:1px solid var(--line-2);margin-top:20px}
+.bill button{font:500 13px/1 var(--ui);padding:10px 14px;border-radius:999px;border:0;background:transparent;color:var(--ink-2);cursor:pointer}
+.bill button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.bill small{font:500 11px var(--mono);margin-left:6px;color:var(--ok-t)}
+.bill button[aria-pressed="true"] small{color:inherit;opacity:.75}
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);padding:26px 22px;display:flex;flex-direction:column}
+.plan h3{font:650 18px var(--display);letter-spacing:-.02em;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.plan .d{margin-top:6px;font-size:13px;color:var(--ink-3);min-height:2.9em;line-height:1.45}
+.price{margin-top:20px;display:flex;align-items:baseline;gap:6px}
+.price b{font:700 44px/1 var(--display);letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.price span{font:400 12px var(--mono);color:var(--ink-3)}
+.plan ul{list-style:none;margin:22px 0 26px;padding:18px 0 0;border-top:1px solid var(--line);display:grid;gap:10px;flex:1;align-content:start}
+.plan li{display:grid;grid-template-columns:16px 1fr;gap:10px;font-size:14px;line-height:1.45}
+.plan li .ico{width:15px;height:15px;color:var(--accent-t);margin-top:3px}
+.plan.pro{background:var(--stage);color:var(--stage-ink);border-color:var(--stage);position:relative;overflow:hidden}
+.plan.pro::before{content:"";position:absolute;inset:-1px;border-radius:var(--r-l);padding:1px;background:linear-gradient(140deg,var(--accent),transparent 50%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.plan.pro .d,.plan.pro .price span{color:var(--stage-ink-3)}
+.plan.pro ul{border-top-color:var(--stage-line)}
+.plan.pro li .ico{color:#A3A5FF}
+.tagp{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 8px;border-radius:999px;background:var(--accent);color:#fff}
+.plan-note{margin-top:16px;font-size:13px;color:var(--ink-3)}
+
+/* trust + faq */
+.trust{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line)}
+.trust div{padding:22px 20px 22px 0}
+.trust div + div{padding-left:20px;border-left:1px solid var(--line)}
+.trust b{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+.trust .ico{color:var(--accent-t)}
+.trust p{margin-top:6px;font-size:13px;color:var(--ink-2)}
+.faq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:clamp(28px,5vw,80px)}
+.faq h2{margin-top:14px;font:700 clamp(32px,3.8vw,52px)/1 var(--display);letter-spacing:-.045em}
+.qa{border-top:1px solid var(--line-2)}
+.qa details{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:20px 0;font:600 18px/1.35 var(--display);letter-spacing:-.02em}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .ico{transition:transform .2s var(--ease);color:var(--ink-3);margin-top:3px}
+.qa details[open] summary .ico{transform:rotate(45deg)}
+.qa details p{padding:0 0 22px;color:var(--ink-2);max-width:42em;font-size:15px}
+
+/* cta */
+.cta{margin-top:clamp(88px,11vw,152px);background:var(--stage);color:var(--stage-ink);position:relative;overflow:hidden}
+.cta-in{position:relative;padding-block:clamp(72px,9vw,128px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end}
+.cta h2{font:700 clamp(40px,6vw,88px)/.95 var(--display);letter-spacing:-.05em;font-variation-settings:"opsz" 96}
+.cta h2 span{color:#A3A5FF}
+.cta p{color:var(--stage-ink-2);font-size:17px}
+.cta .acts{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.cta-trace{position:absolute;left:0;right:0;bottom:0;height:60%;width:100%;pointer-events:none;opacity:.5}
+footer{background:var(--stage);color:var(--stage-ink-2);padding-block:0 36px}
+.foot{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:32px;padding-top:44px;border-top:1px solid var(--stage-line)}
+.foot .logo{color:var(--stage-ink)}
+.foot .logo-mark{background:var(--stage-ink)}
+.foot .logo-mark path{stroke:#0E1A1C}
+.foot p{margin-top:12px;font-size:13px;max-width:28em;color:var(--stage-ink-3)}
+.foot h4{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--stage-ink-3)}
+.foot ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.foot a{color:var(--stage-ink-2);text-decoration:none;font-size:14px}
+.foot a:hover{color:var(--stage-ink)}
+.legal{margin-top:40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font:400 12px var(--mono);color:var(--stage-ink-3)}
+
+/* tooltip */
+.tip{position:fixed;z-index:50;pointer-events:none;background:var(--tip-bg);color:var(--tip-ink);border-radius:8px;padding:9px 11px;font-size:12px;line-height:1.45;max-width:260px;box-shadow:0 8px 24px rgba(0,0,0,.2);opacity:0;transform:translateY(4px);transition:opacity .12s var(--ease),transform .12s var(--ease)}
+.tip.on{opacity:1;transform:none}
+.tip b{font-weight:600}
+.tip .t-m{font-family:var(--mono);font-size:11px;opacity:.7}
+
+/* responsive */
+@media (max-width:1100px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plans{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tl{grid-template-columns:minmax(0,1fr);gap:28px}
+  .tl::before{left:22px;right:auto;top:0;bottom:0;width:2px;height:auto;background:linear-gradient(180deg,var(--accent),var(--ok))}
+  .tl li{display:grid;grid-template-columns:46px minmax(0,1fr);gap:0 18px;padding:0}
+  .tl li > *:not(.tl-dot){grid-column:2}
+  .tl-dot{grid-row:1 / span 3}
+  .tl-time{margin-top:0}
+  .trust{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .trust div:nth-child(3){padding-left:0;border-left:0}
+  .trust div:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:920px){
+  .nav,.login{display:none}
+  .hero-row,.sec-h,.g2,.g2b,.dos-top,.calc,.score-g,.faq,.cta-in{grid-template-columns:minmax(0,1fr)}
+  .hero-cta,.hero-note{justify-content:flex-start}
+  .pains{grid-template-columns:minmax(0,1fr)}
+  .tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{display:none}
+  .mtabs{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .mtabs button{flex:none;font:500 13px var(--ui);padding:8px 12px;border-radius:999px;border:1px solid var(--line-2);background:var(--app-card);color:var(--ink-2);cursor:pointer}
+  .mtabs button[aria-current="true"]{background:var(--ink);color:var(--app-bg);border-color:var(--ink)}
+  .bento{grid-template-columns:minmax(0,1fr)}
+  .b-a,.b-b,.b-c,.b-d,.b-e{grid-column:auto}
+  .foot{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .top .btn{display:none}
+  .top-in{gap:12px}
+  .inst-score{margin-left:0;width:100%}
+  .tabs{grid-template-columns:minmax(0,1fr)}
+  .tab span{display:none}
+  .kpis{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .kpi b{font-size:22px}
+  .view{padding:16px 14px 20px}
+  .appbar{padding:10px 14px}
+  .appbar .who span{display:none}
+  .al{grid-template-columns:auto minmax(0,1fr)}
+  .al-b{grid-column:1 / -1;flex-direction:row;justify-content:flex-start}
+  .plans,.wl2{grid-template-columns:minmax(0,1fr)}
+  .trust{grid-template-columns:minmax(0,1fr)}
+  .trust div,.trust div + div{padding-left:0;border-left:0}
+  .trust div + div{border-top:1px solid var(--line)}
+  .bar-row{grid-template-columns:minmax(0,1fr)}
+  .bandrow{grid-template-columns:minmax(0,1fr)}
+  .foot{grid-template-columns:minmax(0,1fr)}
+  .events li{border-right:0;border-bottom:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M3 12h.01"/><path d="M3 18h.01"/><path d="M3 6h.01"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M8 6h13"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/></symbol>
+  <symbol id="i-bad" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></symbol>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap top-in">
+    <a class="logo" href="#acasa" aria-label="marketrisk">
+      <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M2 14h4l2.5-6 4 10 3-7 2 3H22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      marketrisk
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#probleme" data-i18n="nav.1">De ce</a>
+      <a href="#produs" data-i18n="nav.2">Produsul</a>
+      <a href="#calcul" data-i18n="nav.3">Calculator</a>
+      <a href="#preturi" data-i18n="nav.4">Prețuri</a>
+      <a href="#intrebari" data-i18n="nav.5">Întrebări</a>
+    </nav>
+    <div class="top-r">
+      <div class="lang" role="group" aria-label="Limba / Language">
+        <button type="button" id="lang-ro" data-lang="ro" aria-pressed="true">RO</button>
+        <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="login" href="#preturi" data-i18n="nav.login">Autentificare</a>
+      <a class="btn btn-ink" href="#preturi" data-i18n="nav.cta">Începe gratuit</a>
+    </div>
+  </div>
+</header>
+
+<main id="acasa">
+  <section class="hero wrap" aria-labelledby="h1">
+    <p class="hero-kick"><i></i><span data-i18n="hero.kick">Monitorizare risc de credit pentru companii din România</span></p>
+    <h1 id="h1" data-i18n="hero.h1">Firmele nu intră în insolvență <span>peste noapte.</span></h1>
+    <div class="hero-row">
+      <p data-i18n="hero.lead">Semnalele apar în registrele publice cu luni înainte: TVA la încasare, dosare noi, bilanțuri nedepuse, inactivitate fiscală. marketrisk le citește în fiecare dimineață pentru toți clienții și furnizorii tăi și te anunță înainte să mai livrezi pe credit.</p>
+      <div>
+        <div class="hero-cta">
+          <a class="btn btn-accent" href="#preturi"><span data-i18n="hero.c1">Creează cont gratuit</span><svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-line" href="#produs" data-i18n="hero.c2">Vezi aplicația</a>
+        </div>
+        <div class="hero-note">
+          <span><svg class="ico"><use href="#i-check"/></svg><span data-i18n="hero.n1">3 verificări gratuite pe lună</span></span>
+          <span><svg class="ico"><use href="#i-check"/></svg><span data-i18n="hero.n2">Fără card</span></span>
+        </div>
+      </div>
+    </div>
+
+    <figure class="inst" style="margin-inline:0" aria-labelledby="inst-cap">
+      <div class="inst-head">
+        <div class="inst-co"><b>Stâna Agro Trading SRL</b><span>RO 99000468 · CAEN 4621</span></div>
+        <span class="fict" data-i18n="fict">Companie fictivă · exemplu</span>
+        <div class="inst-score">
+          <div><small data-i18n="inst.s">Scor MRCS azi</small><b id="inst-num">22</b></div>
+          <span class="pill p-bad" data-i18n="lv.bad">Risc ridicat</span>
+        </div>
+      </div>
+      <div class="chart-box" id="hero-chart"></div>
+      <div class="inst-foot">
+        <div class="inst-caption">
+          <p id="inst-cap" data-i18n="inst.cap">Primul semnal a apărut cu <em>37 de săptămâni</em> înainte de scadența facturii.</p>
+          <small data-i18n="inst.src">Scor săptămânal, 52 de săptămâni · ANAF, BPI, portal.just.ro, MFinanțe</small>
+        </div>
+        <ol class="events" id="hero-events"></ol>
+      </div>
+    </figure>
+
+    <div class="srcs">
+      <span class="kicker" data-i18n="srcs">Date din surse oficiale</span>
+      <b>ANAF</b><b>BPI</b><b>portal.just.ro</b><b>MFinanțe</b>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="probleme" aria-labelledby="pain-h">
+    <div class="sec-h">
+      <div><p class="kicker" data-i18n="pain.k">Problema</p><h2 id="pain-h" data-i18n="pain.h">Verificarea partenerilor, așa cum se face azi.</h2></div>
+      <p data-i18n="pain.l">Majoritatea firmelor își verifică un client o singură dată, la primul contract. Apoi livrează pe termen luni sau ani, fără să mai privească registrele.</p>
+    </div>
+    <div class="pains">
+      <article class="pain"><p class="kicker" data-i18n="p1.k">01 · Timp</p><h3 data-i18n="p1.h">Patru registre, zece tab-uri, un Excel.</h3><p data-i18n="p1.p">ANAF, BPI, portalul instanțelor, bilanțurile. Fiecare verificare durează, așa că se face rar și incomplet.</p><div class="fix"><svg class="ico"><use href="#i-arrow"/></svg><span data-i18n="p1.f">Un CUI, un raport, toate sursele, cu data fiecărei informații.</span></div></article>
+      <article class="pain"><p class="kicker" data-i18n="p2.k">02 · Întârziere</p><h3 data-i18n="p2.h">Afli de insolvență după ce ai livrat.</h3><p data-i18n="p2.p">Partenerii vechi nu mai sunt reverificați. Schimbările trec neobservate până când factura rămâne neplătită.</p><div class="fix"><svg class="ico"><use href="#i-arrow"/></svg><span data-i18n="p2.f">Watchlist scanat zilnic la 06:00, alertă în aceeași dimineață.</span></div></article>
+      <article class="pain"><p class="kicker" data-i18n="p3.k">03 · TVA</p><h3 data-i18n="p3.h">Facturi de la furnizori declarați inactivi.</h3><p data-i18n="p3.p">Când un furnizor devine inactiv fiscal, poți pierde dreptul de deducere a TVA pentru facturile primite de la el.</p><div class="fix"><svg class="ico"><use href="#i-arrow"/></svg><span data-i18n="p3.f">Alertă de inactivitate fiscală pentru fiecare furnizor din listă.</span></div></article>
+      <article class="pain"><p class="kicker" data-i18n="p4.k">04 · Audit</p><h3 data-i18n="p4.h">Limite de credit date după impresie.</h3><p data-i18n="p4.p">Când un client nu plătește, nimeni nu poate arăta pe ce s-a bazat decizia de a-i da marfă pe termen.</p><div class="fix"><svg class="ico"><use href="#i-arrow"/></svg><span data-i18n="p4.f">Raport PDF datat, cu scor, factori și sursa fiecăruia.</span></div></article>
+    </div>
+  </section>
+
+  <section class="stage" id="produs" aria-labelledby="tour-h">
+    <div class="wrap">
+      <div class="sec-h">
+        <div><p class="kicker" data-i18n="t.k">Produsul</p><h2 id="tour-h" data-i18n="t.h">Ce vezi după ce te autentifici.</h2></div>
+        <p data-i18n="t.l">Un singur loc pentru tot portofoliul de clienți și furnizori. Apasă pe fiecare ecran; datele sunt exemple fictive.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Ecrane">
+        <button class="tab" role="tab" id="tab-ov" data-view="ov" aria-selected="true" aria-controls="v-ov"><b data-i18n="t1.b">Portofoliu</b><span data-i18n="t1.s">Câte firme sunt în risc și câți bani ai expuși la ele.</span></button>
+        <button class="tab" role="tab" id="tab-wl" data-view="wl" aria-selected="false" aria-controls="v-wl"><b data-i18n="t2.b">Watchlist</b><span data-i18n="t2.s">Fiecare partener cu scor, tendință și ultimul eveniment.</span></button>
+        <button class="tab" role="tab" id="tab-co" data-view="co" aria-selected="false" aria-controls="v-co"><b data-i18n="t3.b">Dosar companie</b><span data-i18n="t3.s">Istoric, factori, dosare și bilanțuri, cu sursa fiecăruia.</span></button>
+        <button class="tab" role="tab" id="tab-al" data-view="al" aria-selected="false" aria-controls="v-al"><b data-i18n="t4.b">Alerte</b><span data-i18n="t4.s">Doar ce s-a schimbat, cu pasul următor recomandat.</span></button>
+      </div>
+
+      <div class="app" id="app">
+        <aside class="side" aria-label="Navigare aplicație">
+          <div class="ws"><span class="ws-av">CD</span><div><b>Cerealis Distribuție SA</b><small data-i18n="app.plan">Plan PRO</small></div></div>
+          <button class="sbtn" data-view="ov" aria-current="true"><svg class="ico"><use href="#i-grid"/></svg><span data-i18n="t1.b">Portofoliu</span></button>
+          <button class="sbtn" data-view="wl" aria-current="false"><svg class="ico"><use href="#i-list"/></svg><span data-i18n="t2.b">Watchlist</span></button>
+          <button class="sbtn" data-view="co" aria-current="false"><svg class="ico"><use href="#i-file"/></svg><span data-i18n="t3.b">Dosar companie</span></button>
+          <button class="sbtn" data-view="al" aria-current="false"><svg class="ico"><use href="#i-bell"/></svg><span data-i18n="t4.b">Alerte</span><span class="cnt" id="al-count">5</span></button>
+          <button class="sbtn" data-view="ov" aria-current="false" tabindex="-1" style="pointer-events:none;opacity:.6"><svg class="ico"><use href="#i-download"/></svg><span data-i18n="app.rep">Rapoarte</span></button>
+          <button class="sbtn" data-view="ov" aria-current="false" tabindex="-1" style="pointer-events:none;opacity:.6"><svg class="ico"><use href="#i-settings"/></svg><span data-i18n="app.set">Setări</span></button>
+          <div class="side-foot"><span data-i18n="app.use">Watchlist: 128 din 250</span><div class="meter"><i></i></div></div>
+        </aside>
+        <div class="main">
+          <div class="appbar">
+            <div class="asearch"><svg class="ico" style="width:15px;height:15px"><use href="#i-search"/></svg><span data-i18n="app.search">Caută CUI sau denumire</span><kbd>⌘K</kbd></div>
+            <div class="who"><span data-i18n="app.scan">Scanat azi, 06:00</span><span class="av" style="background:#3B3FE4">IP</span></div>
+          </div>
+          <div class="mtabs" role="group" aria-label="Ecrane">
+            <button data-view="ov" aria-current="true" data-i18n="t1.b">Portofoliu</button>
+            <button data-view="wl" aria-current="false" data-i18n="t2.b">Watchlist</button>
+            <button data-view="co" aria-current="false" data-i18n="t3.b">Dosar companie</button>
+            <button data-view="al" aria-current="false" data-i18n="t4.b">Alerte</button>
+          </div>
+
+          <section class="view" id="v-ov" role="tabpanel" aria-labelledby="tab-ov">
+            <div class="vh"><div><h3 data-i18n="ov.h">Bună dimineața, Ioana</h3><p data-i18n="ov.p">Joi, 24 septembrie 2026 · 5 alerte noi de ieri</p></div><div class="acts"><button class="mini-btn" type="button"><svg class="ico"><use href="#i-download"/></svg><span data-i18n="ov.b1">Raport lunar</span></button><button class="mini-btn pri" type="button" data-go="al"><svg class="ico"><use href="#i-bell"/></svg><span data-i18n="ov.b2">Vezi alertele</span></button></div></div>
+            <div class="kpis">
+              <div class="card kpi"><h4 data-i18n="k1.h">Companii monitorizate</h4><b>128</b><small><em class="up">+6</em> <span data-i18n="k1.s">luna aceasta</span></small></div>
+              <div class="card kpi"><h4 data-i18n="k2.h">Sold neîncasat urmărit</h4><b id="k2">2,41 mil.</b><small data-i18n="k2.s">RON, la 128 de parteneri</small></div>
+              <div class="card kpi"><h4 data-i18n="k3.h">Expus la risc ridicat</h4><b id="k3" class="down">138.200</b><small><span data-i18n="k3.s">RON · 5,7% din sold</span></small></div>
+              <div class="card kpi"><h4 data-i18n="k4.h">Scor mediu ponderat</h4><b>78</b><small><em class="down">−2</em> <span data-i18n="k4.s">față de august</span></small></div>
+            </div>
+            <div class="g2">
+              <div class="card"><h4><span data-i18n="c1.h">Portofoliul pe niveluri de risc</span><small data-i18n="c1.s">nr. companii, ultimele 6 luni</small></h4><div id="ch-stack"></div><div class="legend" id="lg-stack"></div></div>
+              <div class="card"><h4><span data-i18n="c2.h">Sold neîncasat pe nivel de risc</span><small>RON</small></h4><div id="ch-exp"></div></div>
+            </div>
+            <div class="card"><h4><span data-i18n="c3.h">Cele mai mari schimbări, 30 de zile</span><small data-i18n="c3.s">apasă pentru dosar</small></h4><ul class="movers" id="movers"></ul></div>
+          </section>
+
+          <section class="view" id="v-wl" role="tabpanel" aria-labelledby="tab-wl" hidden>
+            <div class="vh"><div><h3 data-i18n="wl.h">Watchlist</h3><p data-i18n="wl.p">128 de companii · sortate după risc</p></div><div class="acts"><button class="mini-btn" type="button"><svg class="ico"><use href="#i-upload"/></svg><span data-i18n="wl.b1">Importă CUI-uri</span></button><button class="mini-btn pri" type="button"><svg class="ico"><use href="#i-plus"/></svg><span data-i18n="wl.b2">Adaugă companie</span></button></div></div>
+            <div class="chips" id="wl-chips"></div>
+            <div class="tscroll"><table class="wl"><thead><tr><th data-i18n="th.1">Companie</th><th data-i18n="th.2">Scor · 12 săpt.</th><th class="r" data-i18n="th.3">Δ 30 zile</th><th data-i18n="th.4">Nivel</th><th class="r" data-i18n="th.5">Sold neîncasat</th><th data-i18n="th.6">Ultimul eveniment</th><th data-i18n="th.7">Resp.</th></tr></thead><tbody id="wl-body"></tbody></table></div>
+          </section>
+
+          <section class="view" id="v-co" role="tabpanel" aria-labelledby="tab-co" hidden>
+            <div class="vh"><div><h3 id="co-name">Stâna Agro Trading SRL</h3><p id="co-meta" class="mono"></p></div><div class="acts"><button class="mini-btn" type="button"><svg class="ico"><use href="#i-download"/></svg><span data-i18n="co.b1">Raport PDF</span></button><button class="mini-btn" type="button"><svg class="ico"><use href="#i-check"/></svg><span data-i18n="co.b2">În watchlist</span></button></div></div>
+            <div class="dos-top">
+              <div class="card"><h4><span data-i18n="co.c1">Scor MRCS, ultimele 26 de săptămâni</span><small id="co-band"></small></h4><div class="bigscore" style="margin-top:10px"><b id="co-score">22</b><span>/ 100</span></div><div id="ch-co"></div></div>
+              <div style="display:grid;gap:12px;align-content:start">
+                <div class="reco" id="co-reco"><p class="kicker" data-i18n="co.rk">Recomandare</p><p id="co-reco-t"></p><small id="co-reco-s"></small></div>
+                <div class="card"><h4><span data-i18n="co.c2">Factori</span><small data-i18n="co.c2s">sursă</small></h4><ul class="flist" id="co-factors"></ul></div>
+              </div>
+            </div>
+            <div class="g2b">
+              <div class="card"><h4><span data-i18n="co.c3">Dosare în instanță</span><small>portal.just.ro</small></h4><ul class="cases" id="co-cases"></ul></div>
+              <div class="card"><h4><span data-i18n="co.c4">Cifră de afaceri</span><small data-i18n="co.c4s">mil. RON · MFinanțe</small></h4><div id="ch-fin"></div></div>
+            </div>
+          </section>
+
+          <section class="view" id="v-al" role="tabpanel" aria-labelledby="tab-al" hidden>
+            <div class="vh"><div><h3 data-i18n="al.h">Alerte</h3><p id="al-sub">5 noi · din scanarea de azi, 06:00</p></div><div class="acts"><button class="mini-btn" type="button"><svg class="ico"><use href="#i-mail"/></svg><span data-i18n="al.b1">Rezumat pe email: activ</span></button></div></div>
+            <ul class="alist" id="alerts"></ul>
+          </section>
+        </div>
+      </div>
+      <p class="tour-note" data-i18n="t.note">Interfață de prezentare. Companiile, CUI-urile și sumele sunt fictive.</p>
+    </div>
+  </section>
+
+  <section class="sec wrap" aria-labelledby="tl-h">
+    <div class="sec-h">
+      <div><p class="kicker" data-i18n="tl.k">Primii pași</p><h2 id="tl-h" data-i18n="tl.h">De la cont nou la primul raport, în 24 de ore.</h2></div>
+      <p data-i18n="tl.l">Fără implementare, fără consultanți. Ai nevoie doar de lista CUI-urilor partenerilor.</p>
+    </div>
+    <ol class="tl">
+      <li><span class="tl-dot"><svg class="ico"><use href="#i-user"/></svg></span><p class="tl-time" data-i18n="tl1.t">Minutul 1</p><h3 data-i18n="tl1.h">Îți faci cont</h3><p data-i18n="tl1.p">Email și parolă. Fără card, fără apel de vânzări.</p></li>
+      <li><span class="tl-dot"><svg class="ico"><use href="#i-upload"/></svg></span><p class="tl-time" data-i18n="tl2.t">Minutul 5</p><h3 data-i18n="tl2.h">Adaugi partenerii</h3><p data-i18n="tl2.p">Lipești lista de CUI-uri sau încarci un CSV din contabilitate. Pui etichete: client, furnizor, echipă.</p></li>
+      <li><span class="tl-dot"><svg class="ico"><use href="#i-scan"/></svg></span><p class="tl-time" data-i18n="tl3.t">Prima noapte</p><h3 data-i18n="tl3.h">Scanăm registrele</h3><p data-i18n="tl3.p">Fiecare CUI e verificat în ANAF, BPI, portal.just.ro și bilanțuri. Primești scorul pentru toate.</p></li>
+      <li><span class="tl-dot"><svg class="ico"><use href="#i-mail"/></svg></span><p class="tl-time" data-i18n="tl4.t">A doua zi, 06:00</p><h3 data-i18n="tl4.h">Primul raport</h3><p data-i18n="tl4.p">Pe email: câte firme sunt în risc ridicat și ce sold ai la ele. Începi cu cele mai urgente.</p></li>
+      <li><span class="tl-dot"><svg class="ico"><use href="#i-bell"/></svg></span><p class="tl-time" data-i18n="tl5.t">Apoi, zilnic</p><h3 data-i18n="tl5.h">Doar schimbările</h3><p data-i18n="tl5.p">Nu primești zgomot. Primești o alertă doar când se schimbă ceva la un partener.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec wrap" aria-labelledby="bento-h">
+    <div class="sec-h">
+      <div><p class="kicker" data-i18n="bn.k">Funcții</p><h2 id="bento-h" data-i18n="bn.h">Tot ce îți trebuie pentru o decizie de credit.</h2></div>
+      <p data-i18n="bn.l">De la o verificare rapidă înaintea unei oferte până la monitorizarea a sute de parteneri, cu acces pentru toată echipa.</p>
+    </div>
+    <div class="bento">
+      <article class="bx b-a"><h3 data-i18n="b1.h">Rapoarte PDF pentru dosar</h3><p data-i18n="b1.p">Scorul, factorii, dosarele și bilanțurile, cu data și sursa fiecărei informații. Bune pentru comitetul de credit sau audit.</p><div class="viz"><div class="pdf"><span class="pdf-page"></span><div><b>Raport_Stana_Agro_99000468.pdf</b><small data-i18n="b1.m">Generat 24.09.2026, 09:14 · 4 pagini</small></div></div></div></article>
+      <article class="bx b-b"><h3 data-i18n="b2.h">API pentru ERP și CRM</h3><p data-i18n="b2.p">Pe Enterprise, verifici un CUI direct din sistemul tău, la emiterea ofertei sau a facturii.</p><div class="viz"><div class="code"><span class="k">GET</span> /api/v1/companies/search?cui=<span class="s">99000468</span>
+{ <span class="s">"score"</span>: 22, <span class="s">"level"</span>: <span class="s">"RED"</span>, ... }</div></div></article>
+      <article class="bx b-c"><h3 data-i18n="b3.h">Istoricul companiei</h3><p data-i18n="b3.p">Fiecare schimbare, păstrată în timp.</p><div class="viz"><ul class="hist" id="hist"></ul></div></article>
+      <article class="bx b-d"><h3 data-i18n="b4.h">Bilanțuri pe mai mulți ani</h3><p data-i18n="b4.p">Cifră de afaceri, profit, capitaluri și angajați, din datele publicate de MFinanțe.</p><div class="viz" id="bx-fin"></div></article>
+      <article class="bx b-e"><h3 data-i18n="b5.h">Echipă cu permisiuni</h3><p data-i18n="b5.p">Vânzări, achiziții și contabilitate lucrează pe aceeași listă, fiecare cu etichetele lui.</p><div class="viz"><div class="team"><span style="background:#3B3FE4">IP</span><span style="background:#07907A">AM</span><span style="background:#C0850A">RD</span><span style="background:#44524F">+2</span></div></div></article>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="calcul" aria-labelledby="calc-h">
+    <div class="sec-h">
+      <div><p class="kicker" data-i18n="cl.k">Calculator</p><h2 id="calc-h" data-i18n="cl.h">Cât te costă o factură neîncasată?</h2></div>
+      <p data-i18n="cl.l">O pierdere se acoperă numai din profit. Află câte vânzări noi îți trebuie ca să o recuperezi.</p>
+    </div>
+    <div class="calc">
+      <form class="calc-in" id="calc" onsubmit="return false">
+        <div class="field"><label for="c-amt"><span data-i18n="cl.f1">Valoarea facturii neîncasate</span><output id="o-amt" for="c-amt">50.000 RON</output></label><input type="range" id="c-amt" min="5000" max="500000" step="5000" value="50000"><small data-i18n="cl.f1s">Între 5.000 și 500.000 RON</small></div>
+        <div class="field"><label for="c-mg"><span data-i18n="cl.f2">Marja ta netă de profit</span><output id="o-mg" for="c-mg">8%</output></label><input type="range" id="c-mg" min="2" max="30" step="1" value="8"><small data-i18n="cl.f2s">Profitul net ca procent din vânzări</small></div>
+      </form>
+      <div class="calc-out" aria-live="polite">
+        <p class="kicker" data-i18n="cl.o">Vânzări noi necesare</p>
+        <p class="calc-big" id="c-big">625.000<small>RON</small></p>
+        <p id="c-txt"></p>
+        <div class="bars" aria-hidden="true">
+          <div class="bar-row"><span data-i18n="cl.b1">Factura pierdută</span><div><div class="bar" id="bar-a" style="background:var(--bad)"><b id="bar-a-t"></b></div></div></div>
+          <div class="bar-row"><span data-i18n="cl.b2">Vânzări ca să o acoperi</span><div><div class="bar in" id="bar-b" style="background:var(--accent)"><b id="bar-b-t"></b></div></div></div>
+        </div>
+        <p class="calc-foot" id="c-foot"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" aria-labelledby="sc-h">
+    <div class="sec-h">
+      <div><p class="kicker">MarketRisk Credit Score</p><h2 id="sc-h" data-i18n="sc.h">Un număr de la 0 la 100. Toate motivele la vedere.</h2></div>
+      <p data-i18n="sc.l">Scorul MRCS adună factori din opt categorii. Cu cât e mai mare, cu atât partenerul e mai sigur, iar fiecare factor vine cu sursa lui.</p>
+    </div>
+    <div class="score-g">
+      <div class="bandlist">
+        <div class="bandrow"><div><b>75–100</b><br><span class="pill p-ok" data-i18n="lv.ok">Risc scăzut</span></div><div><h3 data-i18n="bd1.h">Termene normale de plată</h3><p data-i18n="bd1.p">Companie activă, fiscal în regulă, fără semnale de insolvență.</p></div></div>
+        <div class="bandrow"><div><b>50–74</b><br><span class="pill p-warn" data-i18n="lv.warn">Risc mediu</span></div><div><h3 data-i18n="bd2.h">Termene scurte, garanții</h3><p data-i18n="bd2.p">Firmă tânără, TVA la încasare sau litigii noi. Merită urmărită.</p></div></div>
+        <div class="bandrow"><div><b>0–49</b><br><span class="pill p-bad" data-i18n="lv.bad">Risc ridicat</span></div><div><h3 data-i18n="bd3.h">Plată în avans</h3><p data-i18n="bd3.p">Inactivitate fiscală, split TVA sau o procedură de insolvență.</p></div></div>
+      </div>
+      <div class="wbox">
+        <h3 data-i18n="wb.h">Ce intră în scor</h3>
+        <p data-i18n="wb.p">Ponderea fiecărei categorii din cele 100 de puncte.</p>
+        <div class="wstack" id="wstack" role="img"></div>
+        <div class="wscale" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+        <ul class="wl2" id="wl2"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="preturi" aria-labelledby="pr-h">
+    <div class="sec-h">
+      <div><p class="kicker" data-i18n="pr.k">Prețuri</p><h2 id="pr-h" data-i18n="pr.h">Începi gratuit. Plătești când monitorizezi.</h2></div>
+      <div><p data-i18n="pr.l">Prețuri în lei, fără TVA. Schimbi sau anulezi planul oricând.</p>
+        <div class="bill" role="group" aria-label="Facturare"><button type="button" id="bill-m" data-bill="m" aria-pressed="true" data-i18n="pr.m">Lunar</button><button type="button" id="bill-y" data-bill="y" aria-pressed="false"><span data-i18n="pr.y">Anual</span><small data-i18n="pr.save">−2 luni</small></button></div></div>
+    </div>
+    <div class="plans">
+      <article class="plan"><h3 data-i18n="pl1.n">Gratuit</h3><p class="d" data-i18n="pl1.d">O verificare rapidă din când în când.</p><div class="price"><b>0</b><span>RON</span></div><ul><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl1.1">3 verificări CUI pe lună</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl1.2">Scor MRCS și factori</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl1.3">Notificări de bază pe email</span></li></ul><a class="btn btn-line" href="#acasa" data-i18n="pl1.c">Începe gratuit</a></article>
+      <article class="plan"><h3>Starter</h3><p class="d" data-i18n="pl2.d">Pentru un portofoliu mic de clienți.</p><div class="price"><b data-m="39" data-y="390">39</b><span data-per>RON / lună</span></div><ul><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl2.1">20 verificări CUI pe lună</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl2.2">Watchlist de 10 companii</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl2.3">Alerte de insolvență, rezumat zilnic</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl2.4">5 rapoarte PDF pe lună</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl2.5">Până la 5 utilizatori</span></li></ul><a class="btn btn-line" href="#acasa" data-i18n="pl2.c">Alege Starter</a></article>
+      <article class="plan pro"><h3>PRO <span class="tagp" data-i18n="pl3.t">Recomandat</span></h3><p class="d" data-i18n="pl3.d">Pentru echipe B2B care vând pe termen.</p><div class="price"><b data-m="99" data-y="990">99</b><span data-per>RON / lună</span></div><ul><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl3.1">Verificări CUI nelimitate</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl3.2">Watchlist de 250 de companii</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl3.3">Alerte în timp real</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl3.4">Dosare în instanță și datorii fiscale</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl3.5">Rapoarte PDF nelimitate</span></li></ul><a class="btn btn-accent" href="#acasa" data-i18n="pl3.c">Alege PRO</a></article>
+      <article class="plan"><h3>Enterprise</h3><p class="d" data-i18n="pl4.d">Volume mari și instituții financiare.</p><div class="price"><b style="font-size:32px" data-i18n="pl4.p">La cerere</b></div><ul><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl4.1">Tot ce include PRO</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl4.2">Watchlist nelimitat</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl4.3">Acces API complet</span></li><li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="pl4.4">SLA și suport dedicat</span></li></ul><a class="btn btn-line" href="#intrebari" data-i18n="pl4.c">Discută cu noi</a></article>
+    </div>
+    <p class="plan-note" data-i18n="pr.note">Anual: Starter 390 RON, PRO 990 RON, adică prețul a 10 luni.</p>
+  </section>
+
+  <section class="sec wrap" id="intrebari" aria-labelledby="faq-h">
+    <div class="trust" style="margin-bottom:clamp(56px,7vw,96px)">
+      <div><b><svg class="ico"><use href="#i-db"/></svg><span data-i18n="tr1.h">Doar surse publice</span></b><p data-i18n="tr1.p">Registre oficiale, cu sursa afișată la fiecare informație.</p></div>
+      <div><b><svg class="ico"><use href="#i-globe"/></svg><span data-i18n="tr2.h">Găzduit în UE</span></b><p data-i18n="tr2.p">Datele tale rămân în centre de date din Uniunea Europeană.</p></div>
+      <div><b><svg class="ico"><use href="#i-lock"/></svg><span data-i18n="tr3.h">Criptat</span></b><p data-i18n="tr3.p">Watchlist-urile și rapoartele sunt criptate și private.</p></div>
+      <div><b><svg class="ico"><use href="#i-shield"/></svg><span>GDPR</span></b><p data-i18n="tr4.p">Nu vindem și nu partajăm listele tale cu nimeni.</p></div>
+    </div>
+    <div class="faq">
+      <div><p class="kicker" data-i18n="q.k">Întrebări</p><h2 id="faq-h" data-i18n="q.h">Ce ne întreabă clienții înainte să înceapă.</h2></div>
+      <div class="qa">
+        <details open><summary><span data-i18n="q1.q">De unde vin datele?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p data-i18n="q1.a">Din registre publice oficiale: ANAF pentru starea fiscală și TVA, Buletinul Procedurilor de Insolvență, portalul instanțelor (portal.just.ro) și bilanțurile publicate de Ministerul Finanțelor.</p></details>
+        <details><summary><span data-i18n="q2.q">Cât de des sunt verificați partenerii?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p data-i18n="q2.a">Watchlist-ul e scanat zilnic. Pe PRO și Enterprise primești alerta imediat după scanare; pe Starter primești un rezumat zilnic pe email.</p></details>
+        <details><summary><span data-i18n="q3.q">Pot importa lista de clienți din contabilitate?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p data-i18n="q3.a">Da. Lipești CUI-urile sau încarci un fișier CSV exportat din programul de contabilitate. Sumele restante sunt opționale și te ajută să vezi expunerea pe nivel de risc.</p></details>
+        <details><summary><span data-i18n="q4.q">Cum e calculat scorul?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p data-i18n="q4.a">Scorul MRCS ponderează factori din opt categorii, de la statusul legal și TVA până la calitatea datelor declarate. Sub 50 înseamnă risc ridicat, 50–74 mediu, 75 și peste scăzut.</p></details>
+        <details><summary><span data-i18n="q5.q">Cine îmi vede watchlist-ul?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p data-i18n="q5.a">Doar tu și colegii cărora le dai acces. Companiile din listă nu sunt notificate că le urmărești.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-h">
+    <canvas class="cta-trace" id="cta-trace" aria-hidden="true"></canvas>
+    <div class="wrap cta-in">
+      <h2 id="cta-h" data-i18n="cta.h">Pune primul partener în watchlist <span>azi.</span></h2>
+      <div><p data-i18n="cta.p">Cont gratuit, 3 verificări pe lună, fără card. Treci pe un plan plătit doar când vrei monitorizare zilnică.</p>
+        <div class="acts"><a class="btn btn-stage" href="#acasa"><span data-i18n="cta.b1">Creează cont gratuit</span><svg class="ico"><use href="#i-arrow"/></svg></a><a class="btn btn-stage-line" href="#produs" data-i18n="cta.b2">Revezi aplicația</a></div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a class="logo" href="#acasa" aria-label="marketrisk"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M2 14h4l2.5-6 4 10 3-7 2 3H22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>marketrisk</a><p data-i18n="f.p">Monitorizare a riscului de credit pentru companiile din România, din surse publice oficiale.</p></div>
+      <div><h4 data-i18n="f.h1">Produs</h4><ul><li><a href="#produs" data-i18n="t1.b">Portofoliu</a></li><li><a href="#produs" data-i18n="t4.b">Alerte</a></li><li><a href="#preturi" data-i18n="nav.4">Prețuri</a></li></ul></div>
+      <div><h4 data-i18n="f.h2">Resurse</h4><ul><li><a href="#intrebari" data-i18n="nav.5">Întrebări</a></li><li><a href="#acasa" data-i18n="f.api">Documentație API</a></li><li><a href="#acasa">Blog</a></li></ul></div>
+      <div><h4 data-i18n="f.h3">Legal</h4><ul><li><a href="#acasa" data-i18n="f.t">Termeni</a></li><li><a href="#acasa" data-i18n="f.pr">Confidențialitate</a></li><li><a href="#acasa">GDPR</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 marketrisk</span><span data-i18n="f.proto">Homepage 4 · prototip de design</span></div>
+  </div>
+</footer>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+(function(){
+"use strict";
+var EN = {
+  "nav.1":"Why","nav.2":"Product","nav.3":"Calculator","nav.4":"Pricing","nav.5":"FAQ","nav.login":"Log in","nav.cta":"Start free",
+  "hero.kick":"Credit risk monitoring for Romanian companies",
+  "hero.h1":"Companies don't go insolvent <span>overnight.</span>",
+  "hero.lead":"The warning signs show up in the public registers months ahead: cash-accounting VAT, new lawsuits, unfiled accounts, tax-inactive status. marketrisk reads them every morning for all your clients and suppliers, and tells you before you ship on credit again.",
+  "hero.c1":"Create a free account","hero.c2":"See the app","hero.n1":"3 free checks a month","hero.n2":"No card",
+  "fict":"Fictional company · example","inst.s":"MRCS score today",
+  "inst.cap":"The first warning sign appeared <em>37 weeks</em> before the invoice fell due.",
+  "inst.src":"Weekly score, 52 weeks · ANAF, BPI, portal.just.ro, MFinanțe","srcs":"Data from official sources",
+  "lv.ok":"Low risk","lv.warn":"Medium risk","lv.bad":"High risk",
+  "pain.k":"The problem","pain.h":"How partners get checked today.","pain.l":"Most companies check a client once, at the first contract. Then they sell on credit for months or years without looking at the registers again.",
+  "p1.k":"01 · Time","p1.h":"Four registers, ten tabs, one spreadsheet.","p1.p":"ANAF, the insolvency bulletin, the courts portal, annual accounts. Every check takes a while, so it happens rarely and partially.","p1.f":"One CUI, one report, every source, each item dated.",
+  "p2.k":"02 · Delay","p2.h":"You hear about insolvency after you've shipped.","p2.p":"Long-standing partners never get re-checked. Changes go unnoticed until the invoice goes unpaid.","p2.f":"Watchlist scanned daily at 06:00, alert the same morning.",
+  "p3.k":"03 · VAT","p3.h":"Invoices from suppliers declared inactive.","p3.p":"When a supplier becomes tax-inactive, you can lose the right to deduct VAT on the invoices it issued you.","p3.f":"A tax-inactivity alert for every supplier on your list.",
+  "p4.k":"04 · Audit","p4.h":"Credit limits set on gut feeling.","p4.p":"When a client doesn't pay, nobody can show what the decision to extend credit was based on.","p4.f":"A dated PDF report with the score, factors and each source.",
+  "t.k":"The product","t.h":"What you see once you log in.","t.l":"One place for your whole portfolio of clients and suppliers. Click through each screen; the data is fictional.",
+  "t1.b":"Portfolio","t1.s":"How many companies are at risk, and how much you have riding on them.",
+  "t2.b":"Watchlist","t2.s":"Every partner with score, trend and latest event.",
+  "t3.b":"Company file","t3.s":"History, factors, court cases and accounts, each with its source.",
+  "t4.b":"Alerts","t4.s":"Only what changed, with the recommended next step.",
+  "app.plan":"PRO plan","app.rep":"Reports","app.set":"Settings","app.use":"Watchlist: 128 of 250","app.search":"Search CUI or name","app.scan":"Scanned today, 06:00",
+  "ov.h":"Good morning, Ioana","ov.p":"Thursday, 24 September 2026 · 5 new alerts since yesterday","ov.b1":"Monthly report","ov.b2":"View alerts",
+  "k1.h":"Companies monitored","k1.s":"this month","k2.h":"Receivables tracked","k2.s":"RON, across 128 partners","k3.h":"Exposed to high risk","k3.s":"RON · 5.7% of receivables","k4.h":"Weighted average score","k4.s":"vs August",
+  "c1.h":"Portfolio by risk level","c1.s":"companies, last 6 months","c2.h":"Receivables by risk level","c3.h":"Biggest changes, last 30 days","c3.s":"click for the file",
+  "wl.h":"Watchlist","wl.p":"128 companies · sorted by risk","wl.b1":"Import CUIs","wl.b2":"Add company",
+  "th.1":"Company","th.2":"Score · 12 wks","th.3":"Δ 30 days","th.4":"Level","th.5":"Receivable","th.6":"Latest event","th.7":"Owner",
+  "co.b1":"PDF report","co.b2":"On watchlist","co.c1":"MRCS score, last 26 weeks","co.rk":"Recommendation","co.c2":"Factors","co.c2s":"source","co.c3":"Court cases","co.c4":"Turnover","co.c4s":"RON m · MFinanțe",
+  "al.h":"Alerts","al.p":"5 new · from today's 06:00 scan","al.b1":"Email digest: on",
+  "t.note":"Demo interface. Companies, CUIs and amounts are fictional.",
+  "tl.k":"Getting started","tl.h":"From new account to first report in 24 hours.","tl.l":"No implementation, no consultants. All you need is the list of your partners' CUIs.",
+  "tl1.t":"Minute 1","tl1.h":"Create an account","tl1.p":"Email and password. No card, no sales call.",
+  "tl2.t":"Minute 5","tl2.h":"Add your partners","tl2.p":"Paste a list of CUIs or upload a CSV from your accounting software. Tag them: client, supplier, team.",
+  "tl3.t":"First night","tl3.h":"We scan the registers","tl3.p":"Every CUI is checked against ANAF, BPI, portal.just.ro and annual accounts. You get a score for each.",
+  "tl4.t":"Next day, 06:00","tl4.h":"Your first report","tl4.p":"By email: how many companies are high risk and what you're owed by them. Start with the most urgent.",
+  "tl5.t":"Then, daily","tl5.h":"Only the changes","tl5.p":"No noise. You get an alert only when something changes for a partner.",
+  "bn.k":"Features","bn.h":"Everything you need for a credit decision.","bn.l":"From a quick check before a quote to monitoring hundreds of partners, with access for the whole team.",
+  "b1.h":"PDF reports for the file","b1.p":"Score, factors, court cases and accounts, with the date and source of each item. Ready for a credit committee or an audit.","b1.m":"Generated 24.09.2026, 09:14 · 4 pages",
+  "b2.h":"API for your ERP and CRM","b2.p":"On Enterprise, check a CUI straight from your own system when you issue a quote or an invoice.",
+  "b3.h":"Company history","b3.p":"Every change, kept over time.",
+  "b4.h":"Multi-year accounts","b4.p":"Turnover, profit, equity and headcount, from data published by the Ministry of Finance.",
+  "b5.h":"Team with permissions","b5.p":"Sales, procurement and accounting work from the same list, each with their own tags.",
+  "cl.k":"Calculator","cl.h":"What does an unpaid invoice cost you?","cl.l":"A loss can only be covered out of profit. See how much new revenue it takes to make it back.",
+  "cl.f1":"Unpaid invoice amount","cl.f1s":"From 5,000 to 500,000 RON","cl.f2":"Your net profit margin","cl.f2s":"Net profit as a share of revenue","cl.o":"New revenue needed","cl.b1":"Invoice lost","cl.b2":"Revenue to cover it",
+  "sc.h":"A number from 0 to 100. Every reason in plain sight.","sc.l":"The MRCS score combines factors from eight categories. The higher it is, the safer the partner, and every factor comes with its source.",
+  "bd1.h":"Normal payment terms","bd1.p":"Active company, tax affairs in order, no insolvency signals.",
+  "bd2.h":"Short terms, guarantees","bd2.p":"A young company, cash-accounting VAT or new lawsuits. Worth watching.",
+  "bd3.h":"Payment up front","bd3.p":"Tax-inactive status, split VAT or insolvency proceedings.",
+  "wb.h":"What goes into the score","wb.p":"Each category's share of the 100 points.",
+  "pr.k":"Pricing","pr.h":"Start free. Pay when you monitor.","pr.l":"Prices in RON, excluding VAT. Change or cancel at any time.","pr.m":"Monthly","pr.y":"Yearly","pr.save":"−2 months","pr.note":"Yearly: Starter 390 RON, PRO 990 RON, the price of 10 months.",
+  "pl1.n":"Free","pl1.d":"A quick check now and then.","pl1.1":"3 CUI checks a month","pl1.2":"MRCS score and factors","pl1.3":"Basic email notifications","pl1.c":"Start free",
+  "pl2.d":"For a small portfolio of clients.","pl2.1":"20 CUI checks a month","pl2.2":"Watchlist of 10 companies","pl2.3":"Insolvency alerts, daily digest","pl2.4":"5 PDF reports a month","pl2.5":"Up to 5 users","pl2.c":"Choose Starter",
+  "pl3.t":"Recommended","pl3.d":"For B2B teams that sell on credit.","pl3.1":"Unlimited CUI checks","pl3.2":"Watchlist of 250 companies","pl3.3":"Real-time alerts","pl3.4":"Court cases and tax debts","pl3.5":"Unlimited PDF reports","pl3.c":"Choose PRO",
+  "pl4.d":"High volumes and financial institutions.","pl4.p":"On request","pl4.1":"Everything in PRO","pl4.2":"Unlimited watchlist","pl4.3":"Full API access","pl4.4":"SLA and dedicated support","pl4.c":"Talk to us",
+  "tr1.h":"Public sources only","tr1.p":"Official registers, with the source shown for every item.","tr2.h":"Hosted in the EU","tr2.p":"Your data stays in European Union data centres.","tr3.h":"Encrypted","tr3.p":"Watchlists and reports are encrypted and private.","tr4.p":"We never sell or share your lists with anyone.",
+  "q.k":"FAQ","q.h":"What clients ask us before they start.",
+  "q1.q":"Where does the data come from?","q1.a":"From official public registers: ANAF for tax status and VAT, the Insolvency Proceedings Bulletin, the courts portal (portal.just.ro) and annual accounts published by the Ministry of Finance.",
+  "q2.q":"How often are partners checked?","q2.a":"The watchlist is scanned daily. On PRO and Enterprise you get the alert right after the scan; on Starter you get a daily email digest.",
+  "q3.q":"Can I import my client list from accounting?","q3.a":"Yes. Paste the CUIs or upload a CSV exported from your accounting software. Outstanding amounts are optional and let you see exposure by risk level.",
+  "q4.q":"How is the score calculated?","q4.a":"MRCS weighs factors from eight categories, from legal and VAT status to the quality of declared data. Below 50 is high risk, 50–74 medium, 75 and above low.",
+  "q5.q":"Who can see my watchlist?","q5.a":"Only you and the colleagues you invite. Companies on your list are not notified that you follow them.",
+  "cta.h":"Put your first partner on the watchlist <span>today.</span>","cta.p":"Free account, 3 checks a month, no card. Move to a paid plan only when you want daily monitoring.","cta.b1":"Create a free account","cta.b2":"See the app again",
+  "f.p":"Credit risk monitoring for Romanian companies, built on official public sources.","f.h1":"Product","f.h2":"Resources","f.h3":"Legal","f.api":"API docs","f.t":"Terms","f.pr":"Privacy","f.proto":"Homepage 4 · design prototype"
+};
+var RO = {};
+document.querySelectorAll("[data-i18n]").forEach(function(el){ var k = el.getAttribute("data-i18n"); if (!(k in RO)) RO[k] = el.innerHTML; });
+
+var lang = "ro";
+try { var sv = localStorage.getItem("mr-h4-lang"); if (sv === "en" || sv === "ro") lang = sv; } catch(e){}
+function L(o){ return o[lang]; }
+var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+function nf(n,d){ return Number(n).toLocaleString(lang === "ro" ? "ro-RO" : "en-GB", {minimumFractionDigits:d||0, maximumFractionDigits:d||0}); }
+function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+var SVGNS = "http://www.w3.org/2000/svg";
+
+var MON = {ro:["ian.","feb.","mar.","apr.","mai","iun.","iul.","aug.","sept.","oct.","nov.","dec."], en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]};
+function dstr(d, withYear){ var m = MON[lang][d.getMonth()]; return lang === "ro" ? d.getDate() + " " + m + (withYear ? " " + d.getFullYear() : "") : d.getDate() + " " + m + (withYear ? " " + d.getFullYear() : ""); }
+var START = new Date(2025, 8, 29);
+function wdate(i){ var d = new Date(START); d.setDate(d.getDate() + i*7); return d; }
+function band(s){ return s >= 75 ? "ok" : s >= 50 ? "warn" : "bad"; }
+var LV = {ok:{ro:"Risc scăzut",en:"Low risk"}, warn:{ro:"Risc mediu",en:"Medium risk"}, bad:{ro:"Risc ridicat",en:"High risk"}};
+var SEV = {ok:{ro:"favorabil",en:"favourable"}, warn:{ro:"atenție",en:"watch"}, bad:{ro:"critic",en:"critical"}};
+var SEVICO = {ok:"i-ok", warn:"i-warn", bad:"i-bad"};
+function sevChip(s){ return '<span class="sev s-' + s + '"><svg><use href="#' + SEVICO[s] + '"/></svg>' + L(SEV[s]) + '</span>'; }
+
+/* ---------- hero data ---------- */
+var KEY = [[0,81],[13,80],[14,73],[22,70],[23,63],[37,60],[38,54],[41,52],[42,41],[45,38],[46,27],[48,25],[49,24],[51,22]];
+var seed = 7; function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+var SERIES = [];
+for (var i = 0; i < 52; i++){
+  var a = KEY[0], b = KEY[KEY.length-1];
+  for (var k = 0; k < KEY.length - 1; k++){ if (i >= KEY[k][0] && i <= KEY[k+1][0]){ a = KEY[k]; b = KEY[k+1]; break; } }
+  var t = b[0] === a[0] ? 0 : (i - a[0]) / (b[0] - a[0]);
+  var v = a[1] + (b[1] - a[1]) * t;
+  var isKey = KEY.some(function(q){ return q[0] === i; });
+  SERIES.push(Math.round(isKey ? v : v + (rnd() - .5) * 2.4));
+}
+var EVENTS = [
+  {w:14, s:"warn", src:"ANAF", t:{ro:"Intră în sistemul TVA la încasare",en:"Moves to cash-accounting VAT"}},
+  {w:23, s:"warn", src:"portal.just.ro", t:{ro:"Dosar nou: pretenții, Tribunalul Ialomița",en:"New case: monetary claim, Ialomița Tribunal"}},
+  {w:38, s:"warn", src:"MFinanțe", t:{ro:"Bilanțul pe 2025 nu a fost depus",en:"2025 accounts not filed"}},
+  {w:42, s:"bad", src:"ANAF", t:{ro:"Declarată inactivă fiscal",en:"Declared tax-inactive"}},
+  {w:46, s:"bad", src:"BPI", t:{ro:"Cerere de deschidere a insolvenței",en:"Insolvency petition filed"}},
+  {w:49, s:"bad", src:"ANAF", t:{ro:"Aplică split TVA",en:"Placed under split VAT"}},
+  {w:51, s:"final", src:{ro:"contabilitatea ta",en:"your ledger"}, t:{ro:"Factura ta, scadentă: 48.600 RON neîncasați",en:"Your invoice falls due: 48,600 RON unpaid"}}
+];
+
+var tip = $("tip");
+function showTip(html, x, y){
+  tip.innerHTML = html; tip.classList.add("on");
+  var r = tip.getBoundingClientRect();
+  var px = x + 14, py = y - r.height - 12;
+  if (px + r.width > innerWidth - 8) px = x - r.width - 14;
+  if (py < 8) py = y + 16;
+  tip.style.left = px + "px"; tip.style.top = py + "px";
+}
+function hideTip(){ tip.classList.remove("on"); }
+
+var STYLEK = {fill:1,stroke:1,"font-family":1,"fill-opacity":1};
+function el(tag, attrs, parent){ var e = document.createElementNS(SVGNS, tag), st = ""; for (var a in attrs){ if (STYLEK[a] && String(attrs[a]).indexOf("var(") > -1) st += a + ":" + attrs[a] + ";"; else e.setAttribute(a, attrs[a]); } if (st) e.setAttribute("style", st + (attrs.style || "")); if (parent) parent.appendChild(e); return e; }
+
+function lineChart(host, data, opts){
+  host.innerHTML = "";
+  var W = host.clientWidth || 600;
+  var H = opts.h(W);
+  var m = {l:4, r:34, t:14, b:26};
+  var svg = el("svg", {viewBox:"0 0 " + W + " " + H, height:H, role:"img", "aria-label":opts.label}, host);
+  var iw = W - m.l - m.r, ih = H - m.t - m.b, n = data.length;
+  function X(i){ return m.l + (n === 1 ? 0 : i * iw / (n - 1)); }
+  function Y(v){ return m.t + (1 - v / 100) * ih; }
+  var bands = [[75,100,"--ok-soft"],[50,75,"--warn-soft"],[0,50,"--bad-soft"]];
+  bands.forEach(function(b){ el("rect", {x:m.l, y:Y(b[1]), width:iw, height:Y(b[0]) - Y(b[1]), fill:"var(" + b[2] + ")"}, svg); });
+  [50,75].forEach(function(v){ el("line", {x1:m.l, x2:m.l + iw, y1:Y(v), y2:Y(v), stroke:"var(--line-2)", "stroke-width":1, "stroke-dasharray":"2 4"}, svg); });
+  [0,50,75,100].forEach(function(v){ var tx = el("text", {x:W - m.r + 8, y:Y(v) + 4, fill:"var(--ink-3)", "font-size":11, "font-family":"var(--mono)"}, svg); tx.textContent = v; });
+  if (opts.bandLabels && W > 520){
+    [[87.5,"ok"],[62.5,"warn"],[25,"bad"]].forEach(function(b){ var tx = el("text", {x:m.l + 10, y:Y(b[0]) + 4, fill:"var(--" + b[1] + "-t)", "font-size":11, "font-family":"var(--mono)", "letter-spacing":".04em"}, svg); tx.textContent = L(LV[b[1]]).toUpperCase(); });
+  }
+  var lastM = -1, lastX = -99;
+  for (var i = 0; i < n; i++){
+    var d = opts.date(i);
+    if (d.getMonth() !== lastM){ lastM = d.getMonth(); if (X(i) - lastX > (W < 560 ? 44 : 36) && X(i) < m.l + iw - 16){ var tx = el("text", {x:X(i), y:H - 6, fill:"var(--ink-3)", "font-size":11, "font-family":"var(--mono)"}, svg); tx.textContent = MON[lang][d.getMonth()]; lastX = X(i); } }
+  }
+  var dpath = data.map(function(v,i){ return (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(v).toFixed(1); }).join(" ");
+  if (opts.area) el("path", {d:dpath + " L" + X(n-1) + " " + Y(0) + " L" + X(0) + " " + Y(0) + " Z", fill:"var(--accent)", "fill-opacity":.07}, svg);
+  el("path", {d:dpath, fill:"none", stroke:"var(--accent)", "stroke-width":2.25, "stroke-linejoin":"round", "stroke-linecap":"round"}, svg);
+  var pins = [];
+  (opts.events || []).forEach(function(ev, idx){
+    var ix = ev.w - (opts.offset || 0); if (ix < 0 || ix >= n) return;
+    var cx = X(ix), cy = Y(data[ix]);
+    var g = el("g", {class:"pin"}, svg);
+    var col = ev.s === "final" ? "var(--bad)" : "var(--" + ev.s + ")";
+    if (ev.s === "final"){
+      el("line", {x1:cx, x2:cx, y1:m.t, y2:m.t + ih, stroke:"var(--bad)", "stroke-width":1.5}, g);
+      el("rect", {x:cx - 7, y:cy - 7, width:14, height:14, rx:3, fill:col, stroke:"var(--surface)", "stroke-width":2}, g);
+    } else {
+      el("circle", {cx:cx, cy:cy, r:opts.numbered ? 9 : 5, fill:col, stroke:"var(--surface)", "stroke-width":2}, g);
+    }
+    if (opts.numbered){
+      var tn = el("text", {x:cx, y:cy + 3.5, "text-anchor":"middle", fill:"#fff", "font-size":10, "font-weight":600, "font-family":"var(--mono)"}, g);
+      tn.textContent = idx + 1;
+    }
+    pins.push({g:g, ix:ix, ev:ev, idx:idx});
+  });
+  var cross = el("line", {x1:0, x2:0, y1:m.t, y2:m.t + ih, stroke:"var(--ink)", "stroke-width":1, opacity:0}, svg);
+  var dot = el("circle", {r:5, fill:"var(--accent)", stroke:"var(--surface)", "stroke-width":2, opacity:0}, svg);
+  var play = null;
+  if (opts.playhead){ play = el("line", {x1:m.l, x2:m.l, y1:m.t, y2:m.t + ih, stroke:"var(--accent)", "stroke-width":1.5, opacity:0}, svg); }
+  var hit = el("rect", {x:m.l, y:m.t, width:iw, height:ih, fill:"transparent", style:"cursor:crosshair"}, svg);
+  function over(e){
+    var r = svg.getBoundingClientRect();
+    var sx = (e.clientX - r.left) * (W / r.width);
+    var i = Math.max(0, Math.min(n - 1, Math.round((sx - m.l) / (iw / (n - 1)))));
+    cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i)); cross.setAttribute("opacity", .35);
+    dot.setAttribute("cx", X(i)); dot.setAttribute("cy", Y(data[i])); dot.setAttribute("opacity", 1);
+    var ev = (opts.events || []).filter(function(q){ return q.w - (opts.offset || 0) === i; })[0];
+    var s = data[i], bd = band(s);
+    var html = '<div class="t-m">' + (lang === "ro" ? "Săpt. din " : "Week of ") + dstr(opts.date(i), true) + '</div><b>' + (lang === "ro" ? "Scor " : "Score ") + s + '</b> · ' + L(LV[bd]);
+    if (ev) html += '<div style="margin-top:4px">' + esc(L(ev.t)) + ' <span class="t-m">· ' + esc(typeof ev.src === "string" ? ev.src : L(ev.src)) + '</span></div>';
+    showTip(html, e.clientX, e.clientY);
+    if (opts.onHover) opts.onHover(ev ? (opts.events.indexOf(ev)) : -1);
+  }
+  hit.addEventListener("mousemove", over);
+  hit.addEventListener("mouseleave", function(){ cross.setAttribute("opacity", 0); dot.setAttribute("opacity", 0); hideTip(); if (opts.onHover) opts.onHover(-1); });
+  return {svg:svg, X:X, pins:pins, play:play, n:n};
+}
+
+function renderHeroEvents(){
+  $("hero-events").innerHTML = EVENTS.map(function(ev, i){
+    var col = ev.s === "final" ? "var(--bad)" : "var(--" + ev.s + ")";
+    var src = typeof ev.src === "string" ? ev.src : L(ev.src);
+    return '<li data-i="' + i + '"' + (ev.s === "final" ? ' class="final"' : '') + '><div class="ev-top"><span class="ev-n" style="background:' + col + '">' + (i + 1) + '</span>' + dstr(wdate(ev.w), true) + '</div><strong style="font-weight:500">' + esc(L(ev.t)) + '</strong><div class="ev-src">' + esc(src) + '</div></li>';
+  }).join("");
+}
+function hotEvent(i){ document.querySelectorAll("#hero-events li").forEach(function(li){ li.classList.toggle("hot", +li.getAttribute("data-i") === i); }); }
+
+var heroChart = null, played = false;
+function drawHero(){
+  heroChart = lineChart($("hero-chart"), SERIES, {
+    h:function(W){ return Math.round(Math.max(240, Math.min(400, W * .32))); },
+    label: lang === "ro" ? "Scorul MRCS al companiei, săptămânal, scade de la 81 la 22 în 52 de săptămâni" : "Company MRCS score, weekly, falling from 81 to 22 over 52 weeks",
+    date: wdate, events: EVENTS, numbered: true, bandLabels: true, playhead: true, area: true, onHover: hotEvent
+  });
+  if (!played && !reduce) sweep();
+}
+function sweep(){
+  played = true;
+  var c = heroChart, start = null, dur = 3600;
+  c.play.setAttribute("opacity", .9);
+  function step(ts){
+    if (!start) start = ts;
+    var p = Math.min(1, (ts - start) / dur);
+    var i = p * (c.n - 1), x = c.X(i);
+    c.play.setAttribute("x1", x); c.play.setAttribute("x2", x);
+    var active = -1;
+    c.pins.forEach(function(pn){ if (Math.abs(pn.ix - i) < 1.2) active = pn.idx; });
+    hotEvent(active);
+    if (p < 1) requestAnimationFrame(step); else { c.play.setAttribute("opacity", 0); hotEvent(-1); }
+  }
+  setTimeout(function(){ requestAnimationFrame(step); }, 500);
+}
+
+/* ---------- app data ---------- */
+var CO = [
+  {id:"stana", n:"Stâna Agro Trading SRL", cui:"99000468", caen:"4621", s:22, d:-16, exp:48600, own:["IP","#3B3FE4"], ev:{ro:"Cerere insolvență · BPI",en:"Insolvency petition · BPI"}},
+  {id:"nera", n:"Nera Transport SRL", cui:"99000832", caen:"4941", s:44, d:-9, exp:31200, own:["AM","#07907A"], ev:{ro:"Declarată inactivă · ANAF",en:"Declared inactive · ANAF"}},
+  {id:"lotru", n:"Lotru Metal SRL", cui:"99000913", caen:"2511", s:58, d:-4, exp:64800, own:["RD","#C0850A"], ev:{ro:"TVA la încasare · ANAF",en:"Cash-accounting VAT · ANAF"}},
+  {id:"valcan", n:"Vâlcan Mobila SRL", cui:"99000310", caen:"3109", s:62, d:-6, exp:27450, own:["IP","#3B3FE4"], ev:{ro:"Dosar nou · pretenții",en:"New case · monetary claim"}},
+  {id:"soimu", n:"Șoimu Pack SRL", cui:"99000689", caen:"1721", s:71, d:-3, exp:12900, own:["AM","#07907A"], ev:{ro:"Bilanț 2025: pierdere",en:"2025 accounts: loss"}},
+  {id:"aries", n:"Arieș Distribuție SRL", cui:"99001129", caen:"4639", s:77, d:-1, exp:88400, own:["RD","#C0850A"], ev:{ro:"Schimbare sediu · ANAF",en:"Office moved · ANAF"}},
+  {id:"oltet", n:"Olteț Construct SA", cui:"99000522", caen:"4120", s:79, d:4, exp:203500, own:["RD","#C0850A"], ev:{ro:"Dosar închis · câștigat",en:"Case closed · won"}},
+  {id:"pietrosu", n:"Pietrosu Farm SRL", cui:"99000751", caen:"0111", s:83, d:0, exp:9800, own:["AM","#07907A"], ev:{ro:"Fără schimbări",en:"No changes"}},
+  {id:"brana", n:"Brâna Logistic SRL", cui:"99000174", caen:"4941", s:86, d:1, exp:118300, own:["IP","#3B3FE4"], ev:{ro:"Fără schimbări",en:"No changes"}},
+  {id:"bistra", n:"Bistra Textil SRL", cui:"99001048", caen:"1392", s:91, d:2, exp:56100, own:["IP","#3B3FE4"], ev:{ro:"Înregistrată în e-Factura",en:"Registered for e-Factura"}}
+];
+CO.forEach(function(c){
+  var sd = c.id.length * 31 + c.s; var r = function(){ sd = (sd * 9301 + 49297) % 233280; return sd / 233280; };
+  var start = c.s - c.d * 1.6 + (c.d === 0 ? 1 : 0);
+  c.hist = [];
+  for (var i = 0; i < 26; i++){
+    var t = i / 25, base = start + (c.s - start) * Math.pow(t, 1.6);
+    c.hist.push(i === 25 ? c.s : Math.max(2, Math.min(99, Math.round(base + (r() - .5) * 2.2))));
+  }
+});
+CO[0].hist = SERIES.slice(26);
+var FACT = {
+  bad:[["bad",{ro:"Declarată inactivă fiscal",en:"Declared tax-inactive"},"ANAF"],["bad",{ro:"Cerere de deschidere a insolvenței",en:"Insolvency petition filed"},"BPI"],["bad",{ro:"Aplică split TVA",en:"Under split VAT"},"ANAF"],["warn",{ro:"Bilanț 2025 nedepus",en:"2025 accounts not filed"},"MFinanțe"],["ok",{ro:"Înregistrată în e-Factura",en:"Registered for e-Factura"},"ANAF"]],
+  warn:[["warn",{ro:"Aplică TVA la încasare",en:"Uses cash-accounting VAT"},"ANAF"],["warn",{ro:"1 dosar activ: pretenții",en:"1 open case: monetary claim"},"portal.just.ro"],["warn",{ro:"Profit în scădere în 2025",en:"Profit down in 2025"},"MFinanțe"],["ok",{ro:"Activă, plătitoare de TVA",en:"Active, VAT registered"},"ANAF"],["ok",{ro:"Vechime peste 5 ani",en:"More than 5 years old"},"ANAF"]],
+  ok:[["ok",{ro:"Activă, plătitoare de TVA",en:"Active, VAT registered"},"ANAF"],["ok",{ro:"Fără dosare active",en:"No open court cases"},"portal.just.ro"],["ok",{ro:"Bilanț 2025 depus, profit",en:"2025 accounts filed, profitable"},"MFinanțe"],["ok",{ro:"Înregistrată în e-Factura",en:"Registered for e-Factura"},"ANAF"],["warn",{ro:"Schimbare de sediu recentă",en:"Recent change of office"},"ANAF"]]
+};
+var RECO = {
+  bad:[{ro:"Plată în avans. Oprește livrările pe credit.",en:"Payment up front. Stop shipping on credit."},{ro:"Verifică termenul de declarare a creanței în procedura de insolvență.",en:"Check the deadline for filing your claim in the insolvency proceedings."}],
+  warn:[{ro:"Scurtează termenul de plată și cere garanții.",en:"Shorten payment terms and ask for guarantees."},{ro:"Urmărește următoarele plăți; alertele sunt active.",en:"Watch the next payments; alerts are on."}],
+  ok:[{ro:"Termene normale de plată.",en:"Normal payment terms."},{ro:"Niciun semnal de risc în ultimele 30 de zile.",en:"No risk signals in the last 30 days."}]
+};
+var CASES = {
+  stana:[{t:{ro:"Insolvență · cerere de deschidere",en:"Insolvency · opening petition"},m:{ro:"Tribunalul Ialomița · înregistrat 17 aug. 2026 · reclamant: creditor",en:"Ialomița Tribunal · filed 17 Aug 2026 · claimant: creditor"}},{t:{ro:"Pretenții · 212.400 RON",en:"Monetary claim · 212,400 RON"},m:{ro:"Tribunalul Ialomița · înregistrat 9 mar. 2026 · pârât",en:"Ialomița Tribunal · filed 9 Mar 2026 · defendant"}}],
+  warn:[{t:{ro:"Pretenții · 38.900 RON",en:"Monetary claim · 38,900 RON"},m:{ro:"Tribunalul Cluj · înregistrat 22 sept. 2026 · pârât",en:"Cluj Tribunal · filed 22 Sep 2026 · defendant"}}],
+  bad:[{t:{ro:"Pretenții · 74.100 RON",en:"Monetary claim · 74,100 RON"},m:{ro:"Tribunalul București · înregistrat 3 iun. 2026 · pârât",en:"Bucharest Tribunal · filed 3 Jun 2026 · defendant"}}],
+  ok:[]
+};
+var FIN = {stana:[14.2,11.8,null], def:{bad:[6.4,5.1,3.9], warn:[3.1,3.6,3.3], ok:[8.2,9.4,10.7]}};
+
+var ALERTS = [
+  {s:"bad", co:"stana", src:"BPI", when:{ro:"azi, 06:02",en:"today, 06:02"}, t:{ro:"Cerere de deschidere a procedurii de insolvență, publicată în BPI.",en:"Insolvency petition published in the BPI."}, a:{ro:"Oprește livrările pe credit. Ai 48.600 RON neîncasați de la această firmă.",en:"Stop shipping on credit. You are owed 48,600 RON by this company."}, g:0},
+  {s:"bad", co:"nera", src:"ANAF", when:{ro:"azi, 06:02",en:"today, 06:02"}, t:{ro:"Declarată inactivă fiscal.",en:"Declared tax-inactive."}, a:{ro:"Verifică cu contabilul deductibilitatea TVA pentru facturile primite de la ea.",en:"Check VAT deductibility on its invoices with your accountant."}, g:0},
+  {s:"warn", co:"valcan", src:"portal.just.ro", when:{ro:"ieri, 18:40",en:"yesterday, 18:40"}, t:{ro:"Dosar nou: pretenții, Tribunalul Cluj.",en:"New case: monetary claim, Cluj Tribunal."}, a:{ro:"Scurtează termenul de plată pentru următoarele comenzi.",en:"Shorten payment terms on the next orders."}, g:1},
+  {s:"warn", co:"lotru", src:"ANAF", when:{ro:"ieri, 06:00",en:"yesterday, 06:00"}, t:{ro:"A intrat în sistemul TVA la încasare.",en:"Moved to cash-accounting VAT."}, a:{ro:"Poate semnala presiune pe lichiditate. Urmărește următoarele plăți.",en:"Can signal cash pressure. Watch the next payments."}, g:1},
+  {s:"ok", co:"oltet", src:"portal.just.ro", when:{ro:"luni, 06:00",en:"Monday, 06:00"}, t:{ro:"Dosar închis în favoarea companiei.",en:"Court case closed in the company's favour."}, a:{ro:"Scorul a crescut cu 4 puncte. Nu e nevoie de nicio acțiune.",en:"Score up 4 points. No action needed."}, g:2}
+];
+var doneSet = {};
+
+function byId(id){ return CO.filter(function(c){ return c.id === id; })[0]; }
+
+function spark(vals, w, h){
+  var mn = 0, mx = 100;
+  var pts = vals.map(function(v,i){ return (i * (w - 4) / (vals.length - 1) + 2).toFixed(1) + "," + (h - 2 - (v - mn) / (mx - mn) * (h - 4)).toFixed(1); });
+  var last = vals[vals.length - 1], bd = band(last);
+  var lx = w - 2, ly = h - 2 - last / 100 * (h - 4);
+  return '<svg width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '" aria-hidden="true" style="display:block;overflow:visible"><polyline points="' + pts.join(" ") + '" style="fill:none;stroke:var(--ink-3)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="' + lx + '" cy="' + ly.toFixed(1) + '" r="3" style="fill:var(--' + bd + ')"/></svg>';
+}
+
+/* overview charts */
+var STACK = [["apr",98,15,4],["mai",99,16,4],["iun",100,17,5],["iul",101,18,5],["aug",101,19,6],["sep",102,19,7]];
+var STACKM = {ro:["apr.","mai","iun.","iul.","aug.","sept."], en:["Apr","May","Jun","Jul","Aug","Sep"]};
+function drawStack(){
+  var host = $("ch-stack"); host.innerHTML = "";
+  var W = host.clientWidth || 400, H = 190, m = {l:26, r:4, t:8, b:22};
+  var svg = el("svg", {viewBox:"0 0 " + W + " " + H, height:H, class:"svgc", role:"img", "aria-label": lang === "ro" ? "Număr de companii pe nivel de risc, aprilie–septembrie" : "Companies by risk level, April–September"}, host);
+  var iw = W - m.l - m.r, ih = H - m.t - m.b, max = 140;
+  function Y(v){ return m.t + ih - v / max * ih; }
+  [0,70,140].forEach(function(v){ el("line", {x1:m.l, x2:W - m.r, y1:Y(v), y2:Y(v), stroke:"var(--line)", "stroke-width":1}, svg); var tx = el("text", {x:m.l - 6, y:Y(v) + 4, "text-anchor":"end", fill:"var(--ink-3)", "font-size":10, "font-family":"var(--mono)"}, svg); tx.textContent = v; });
+  var bw = Math.min(38, iw / STACK.length * .55), step = iw / STACK.length;
+  STACK.forEach(function(r, i){
+    var x = m.l + step * i + (step - bw) / 2, y0 = Y(0);
+    var segs = [["ok",r[1]],["warn",r[2]],["bad",r[3]]];
+    segs.forEach(function(sg, j){
+      var h = sg[1] / max * ih, y = y0 - h;
+      var isTop = j === 2;
+      var gap = j > 0 ? 2 : 0;
+      var rect = el("path", {d: isTop ? roundTop(x, y, bw, h - gap, 3) : "M" + x + " " + y + " h" + bw + " v" + (h - gap) + " h" + (-bw) + " Z", fill:"var(--" + sg[0] + ")"}, svg);
+      rect.style.cursor = "default";
+      rect.addEventListener("mousemove", function(e){ showTip('<div class="t-m">' + STACKM[lang][i] + ' 2026</div><b>' + sg[1] + '</b> · ' + L(LV[sg[0]]), e.clientX, e.clientY); });
+      rect.addEventListener("mouseleave", hideTip);
+      y0 = y;
+    });
+    var tx = el("text", {x:x + bw / 2, y:H - 6, "text-anchor":"middle", fill:"var(--ink-3)", "font-size":10, "font-family":"var(--mono)"}, svg); tx.textContent = STACKM[lang][i];
+    if (i === STACK.length - 1){ var tt = el("text", {x:x + bw / 2, y:y0 - 6, "text-anchor":"middle", fill:"var(--ink)", "font-size":11, "font-weight":600, "font-family":"var(--mono)"}, svg); tt.textContent = r[1] + r[2] + r[3]; }
+  });
+  $("lg-stack").innerHTML = ["ok","warn","bad"].map(function(b){ return '<span><i style="background:var(--' + b + ')"></i>' + L(LV[b]) + '</span>'; }).join("");
+}
+function roundTop(x, y, w, h, r){ r = Math.min(r, h, w / 2); return "M" + x + " " + (y + h) + " V" + (y + r) + " Q" + x + " " + y + " " + (x + r) + " " + y + " H" + (x + w - r) + " Q" + (x + w) + " " + y + " " + (x + w) + " " + (y + r) + " V" + (y + h) + " Z"; }
+function drawExp(){
+  var host = $("ch-exp"); host.innerHTML = "";
+  var rows = [["ok",1860300,102],["warn",411500,19],["bad",138200,7]], max = 1860300;
+  host.innerHTML = '<div style="display:grid;gap:14px;margin-top:16px">' + rows.map(function(r){
+    var pct = r[1] / max * 100;
+    return '<div data-b="' + r[0] + '" style="display:grid;gap:6px"><div style="display:flex;justify-content:space-between;gap:10px;font-size:12px"><span style="display:inline-flex;align-items:center;gap:6px;color:var(--ink-2)"><i style="width:10px;height:10px;border-radius:3px;background:var(--' + r[0] + ')"></i>' + L(LV[r[0]]) + ' <span class="mono" style="color:var(--ink-3)">· ' + r[2] + '</span></span><b class="mono" style="font-weight:500">' + nf(r[1]) + '</b></div><div style="height:12px;background:var(--line);border-radius:0 4px 4px 0"><div style="height:100%;width:' + pct.toFixed(1) + '%;min-width:4px;background:var(--' + r[0] + ');border-radius:0 4px 4px 0"></div></div></div>';
+  }).join("") + '</div><p style="margin-top:16px;font-size:12px;color:var(--ink-3)">' + (lang === "ro" ? "Total 2.410.000 RON. Sumele restante le introduci tu sau le imporți." : "Total 2,410,000 RON. You enter or import the outstanding amounts.") + '</p>';
+  host.querySelectorAll("[data-b]").forEach(function(d){ d.addEventListener("mousemove", function(e){ var r = rows.filter(function(q){ return q[0] === d.getAttribute("data-b"); })[0]; showTip('<b>' + nf(r[1]) + ' RON</b> · ' + L(LV[r[0]]) + '<div class="t-m">' + r[2] + (lang === "ro" ? " companii · " : " companies · ") + nf(r[1] / 2410000 * 100, 1) + '%</div>', e.clientX, e.clientY); }); d.addEventListener("mouseleave", hideTip); });
+}
+function drawMovers(){
+  var list = ["stana","nera","valcan","oltet","lotru"].map(byId);
+  $("movers").innerHTML = list.map(function(c){
+    return '<li data-co="' + c.id + '" style="cursor:pointer"><div><b>' + esc(c.n) + '</b><small>' + L(c.ev) + '</small></div>' + spark(c.hist.slice(-12), 64, 22) + '<span class="d ' + (c.d < 0 ? "down" : "up") + '">' + (c.d > 0 ? "+" : c.d < 0 ? "−" : "") + Math.abs(c.d) + '</span></li>';
+  }).join("");
+}
+
+/* watchlist */
+var filter = "all";
+function drawChips(){
+  var f = [["all",{ro:"Toate",en:"All"},128],["bad",LV.bad,7],["warn",LV.warn,19],["ok",LV.ok,102]];
+  $("wl-chips").innerHTML = f.map(function(x){ return '<button type="button" class="fchip" data-f="' + x[0] + '" aria-pressed="' + (filter === x[0]) + '">' + L(x[1]) + ' <b>' + x[2] + '</b></button>'; }).join("");
+}
+function drawTable(){
+  var rows = CO.filter(function(c){ return filter === "all" || band(c.s) === filter; });
+  $("wl-body").innerHTML = rows.map(function(c){
+    var bd = band(c.s);
+    return '<tr data-co="' + c.id + '" tabindex="0"><td class="co"><b>' + esc(c.n) + '</b><small>RO ' + c.cui + '</small></td><td><div class="sc"><b>' + c.s + '</b>' + spark(c.hist.slice(-12), 72, 22) + '</div></td><td class="r mono ' + (c.d < 0 ? "down" : c.d > 0 ? "up" : "") + '">' + (c.d > 0 ? "+" : c.d < 0 ? "−" : "") + Math.abs(c.d) + '</td><td><span class="pill p-' + bd + '">' + L(LV[bd]) + '</span></td><td class="r mono">' + nf(c.exp) + '</td><td>' + L(c.ev) + '</td><td><span class="av" style="background:' + c.own[1] + ';width:24px;height:24px;font-size:10px">' + c.own[0] + '</span></td></tr>';
+  }).join("") + (filter === "all" ? '<tr style="cursor:default"><td colspan="7" style="color:var(--ink-3);font-size:12px">' + (lang === "ro" ? "+ încă 118 companii" : "+ 118 more companies") + '</td></tr>' : "");
+}
+
+/* company file */
+var coId = "stana";
+function drawCompany(){
+  var c = byId(coId), bd = band(c.s);
+  $("co-name").textContent = c.n;
+  $("co-meta").textContent = "RO " + c.cui + " · CAEN " + c.caen + " · " + (lang === "ro" ? "companie fictivă" : "fictional company");
+  $("co-score").textContent = c.s;
+  $("co-band").innerHTML = '<span class="pill p-' + bd + '">' + L(LV[bd]) + '</span>';
+  var reco = RECO[bd];
+  $("co-reco").className = "reco r-" + bd;
+  $("co-reco-t").textContent = L(reco[0]);
+  $("co-reco-s").textContent = L(reco[1]);
+  $("co-factors").innerHTML = FACT[bd].map(function(f){ return '<li>' + sevChip(f[0]) + '<span>' + esc(L(f[1])) + '</span><small>' + f[2] + '</small></li>'; }).join("");
+  var cs = c.id === "stana" ? CASES.stana : CASES[bd];
+  $("co-cases").innerHTML = cs.length ? cs.map(function(k){ return '<li><b>' + esc(L(k.t)) + '</b><small>' + esc(L(k.m)) + '</small></li>'; }).join("") : '<li style="color:var(--ink-3)">' + (lang === "ro" ? "Niciun dosar activ." : "No open cases.") + '</li>';
+  var off = 26;
+  lineChart($("ch-co"), c.hist, {
+    h:function(W){ return Math.round(Math.max(200, Math.min(300, W * .5))); },
+    label: c.n + (lang === "ro" ? ", scor pe 26 de săptămâni" : ", score over 26 weeks"),
+    date:function(i){ return wdate(i + off); }, events: c.id === "stana" ? EVENTS.filter(function(e){ return e.w >= off; }) : [], offset: off
+  });
+  drawFin(c.id === "stana" ? FIN.stana : FIN.def[bd]);
+}
+function drawFin(vals){
+  var host = $("ch-fin"); host.innerHTML = "";
+  var W = host.clientWidth || 300, H = 170, m = {l:4, r:4, t:22, b:22};
+  var svg = el("svg", {viewBox:"0 0 " + W + " " + H, height:H, class:"svgc", role:"img", "aria-label": lang === "ro" ? "Cifră de afaceri 2023–2025" : "Turnover 2023–2025"}, host);
+  var max = Math.max.apply(null, vals.filter(function(v){ return v != null; })) * 1.15, iw = W - m.l - m.r, ih = H - m.t - m.b;
+  var step = iw / 3, bw = Math.min(56, step * .5);
+  el("line", {x1:m.l, x2:W - m.r, y1:m.t + ih, y2:m.t + ih, stroke:"var(--line-2)"}, svg);
+  vals.forEach(function(v, i){
+    var x = m.l + step * i + (step - bw) / 2;
+    var lab = el("text", {x:x + bw / 2, y:H - 6, "text-anchor":"middle", fill:"var(--ink-3)", "font-size":10, "font-family":"var(--mono)"}, svg); lab.textContent = 2023 + i;
+    if (v == null){
+      el("rect", {x:x, y:m.t + ih - 40, width:bw, height:40, rx:4, fill:"none", stroke:"var(--bad)", "stroke-dasharray":"3 3"}, svg);
+      var t = el("text", {x:x + bw / 2, y:m.t + ih - 48, "text-anchor":"middle", fill:"var(--bad-t)", "font-size":11, "font-family":"var(--mono)"}, svg); t.textContent = lang === "ro" ? "nedepus" : "not filed";
+      return;
+    }
+    var h = v / max * ih;
+    el("path", {d:roundTop(x, m.t + ih - h, bw, h, 4), fill:"var(--accent)", "fill-opacity": i === vals.length - 1 || vals[i+1] == null ? 1 : .55}, svg);
+    var tv = el("text", {x:x + bw / 2, y:m.t + ih - h - 6, "text-anchor":"middle", fill:"var(--ink)", "font-size":11, "font-family":"var(--mono)"}, svg); tv.textContent = nf(v, 1);
+  });
+}
+
+/* alerts */
+function drawAlerts(){
+  var groups = [{ro:"Azi",en:"Today"},{ro:"Ieri",en:"Yesterday"},{ro:"Mai devreme",en:"Earlier"}];
+  var html = "", lastG = -1;
+  ALERTS.forEach(function(a, i){
+    if (a.g !== lastG){ html += '<li class="agroup">' + L(groups[a.g]) + '</li>'; lastG = a.g; }
+    var c = byId(a.co), done = !!doneSet[i];
+    html += '<li class="al' + (done ? " done" : "") + '">' + sevChip(a.s) + '<div><div class="al-t">' + esc(c.n) + ': ' + esc(L(a.t)) + '</div><div class="al-m">' + a.src + ' · ' + L(a.when) + '</div><div class="al-a"><svg class="ico"><use href="#i-arrow"/></svg><span>' + esc(L(a.a)) + '</span></div></div><div class="al-b"><button type="button" class="mini-btn" data-open="' + c.id + '">' + (lang === "ro" ? "Deschide dosarul" : "Open file") + '</button><button type="button" class="mini-btn" data-done="' + i + '" aria-pressed="' + done + '">' + (done ? (lang === "ro" ? "Redeschide" : "Reopen") : (lang === "ro" ? "Marchează rezolvat" : "Mark resolved")) + '</button></div></li>';
+  });
+  $("alerts").innerHTML = html;
+  var open = ALERTS.length - Object.keys(doneSet).filter(function(k){ return doneSet[k]; }).length;
+  var cnt = $("al-count"); cnt.textContent = open; cnt.classList.toggle("zero", open === 0);
+  $("al-sub").textContent = lang === "ro" ? open + (open === 1 ? " nerezolvată" : " nerezolvate") + " · scanarea de azi, 06:00" : open + " unresolved · today's 06:00 scan";
+}
+
+/* view switching */
+var view = "ov";
+function setView(v){
+  view = v;
+  ["ov","wl","co","al"].forEach(function(k){ $("v-" + k).hidden = k !== v; });
+  document.querySelectorAll(".tab").forEach(function(t){ t.setAttribute("aria-selected", t.getAttribute("data-view") === v); });
+  document.querySelectorAll(".side .sbtn[data-view], .mtabs button").forEach(function(b){ if (b.style.pointerEvents === "none") return; b.setAttribute("aria-current", b.getAttribute("data-view") === v); });
+  drawView();
+}
+function drawView(){
+  if (view === "ov"){ drawStack(); drawExp(); drawMovers(); }
+  if (view === "wl"){ drawChips(); drawTable(); }
+  if (view === "co"){ drawCompany(); }
+  if (view === "al"){ drawAlerts(); }
+}
+document.querySelectorAll(".tab, .side .sbtn, .mtabs button, [data-go]").forEach(function(b){
+  b.addEventListener("click", function(){ var v = b.getAttribute("data-view") || b.getAttribute("data-go"); if (v) setView(v); });
+});
+$("app").addEventListener("click", function(e){
+  var co = e.target.closest("[data-co]"); if (co){ coId = co.getAttribute("data-co"); setView("co"); return; }
+  var op = e.target.closest("[data-open]"); if (op){ coId = op.getAttribute("data-open"); setView("co"); return; }
+  var dn = e.target.closest("[data-done]"); if (dn){ var i = dn.getAttribute("data-done"); doneSet[i] = !doneSet[i]; drawAlerts(); return; }
+  var fc = e.target.closest("[data-f]"); if (fc){ filter = fc.getAttribute("data-f"); drawChips(); drawTable(); }
+});
+$("app").addEventListener("keydown", function(e){ if (e.key === "Enter"){ var co = e.target.closest("tr[data-co]"); if (co){ coId = co.getAttribute("data-co"); setView("co"); } } });
+
+/* bento bits */
+function drawBento(){
+  var h = [["22.09.2026",{ro:"Split TVA activat",en:"Split VAT applied"}],["17.08.2026",{ro:"Cerere de insolvență",en:"Insolvency petition"}],["20.07.2026",{ro:"Declarată inactivă",en:"Declared inactive"}],["05.01.2026",{ro:"TVA la încasare",en:"Cash-accounting VAT"}]];
+  $("hist").innerHTML = h.map(function(x){ return '<li><small>' + x[0] + '</small><span>' + esc(L(x[1])) + '</span></li>'; }).join("");
+  var v = [["2023",8.2,.41],["2024",9.4,.57],["2025",10.7,.66]], mx = 10.7;
+  $("bx-fin").innerHTML = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end;height:110px">' + v.map(function(r, i){ return '<div style="display:grid;gap:6px;justify-items:center;align-content:end;height:100%"><span class="mono" style="font-size:11px">' + nf(r[1], 1) + '</span><div style="width:100%;max-width:48px;height:' + (r[1] / mx * 70).toFixed(0) + 'px;background:var(--accent);opacity:' + (i === 2 ? 1 : .55) + ';border-radius:4px 4px 0 0"></div><span class="mono" style="font-size:10px;color:var(--ink-3)">' + r[0] + '</span></div>'; }).join("") + '</div><p class="mono" style="font-size:11px;color:var(--ink-3);margin-top:6px">' + (lang === "ro" ? "CA, mil. RON · exemplu" : "Turnover, RON m · example") + '</p>';
+}
+
+/* weights */
+var W8 = [[35,{ro:"Status legal",en:"Legal status"}],[22,{ro:"Status TVA",en:"VAT status"}],[12,{ro:"Infrastructură digitală",en:"Digital footprint"}],[10,{ro:"Analiză sintetică",en:"Data consistency"}],[9,{ro:"Formă juridică",en:"Legal form"}],[5,{ro:"Sediu și locație",en:"Registered office"}],[4,{ro:"Cod CAEN",en:"CAEN code"}],[3,{ro:"Autoritate fiscală",en:"Tax office"}]];
+var WCOL = ["#3B3FE4","#5155E8","#6A6DEC","#8386F0","#9C9EF3","#B4B6F6","#CACBF9","#DDDEFB"];
+function drawWeights(){
+  $("wstack").setAttribute("aria-label", W8.map(function(w){ return L(w[1]) + " " + w[0]; }).join(", "));
+  $("wstack").innerHTML = W8.map(function(w, i){ return '<div data-i="' + i + '" style="flex:' + w[0] + ';background:' + WCOL[i] + '"></div>'; }).join("");
+  $("wl2").innerHTML = W8.map(function(w, i){ return '<li data-i="' + i + '"><i style="background:' + WCOL[i] + '"></i><span>' + esc(L(w[1])) + '</span><b>' + w[0] + '</b></li>'; }).join("");
+}
+function wHover(e){
+  var t = e.target.closest("[data-i]"); var st = $("wstack");
+  st.querySelectorAll("div").forEach(function(d){ d.classList.remove("hl"); });
+  if (!t){ st.classList.remove("dim"); hideTip(); return; }
+  var i = +t.getAttribute("data-i"); st.classList.add("dim"); st.children[i].classList.add("hl");
+  if (t.parentNode.id === "wstack") showTip('<b>' + esc(L(W8[i][1])) + '</b> · ' + W8[i][0] + (lang === "ro" ? " puncte" : " points"), e.clientX, e.clientY);
+}
+["wstack","wl2"].forEach(function(id){ $(id).addEventListener("mousemove", wHover); $(id).addEventListener("mouseleave", function(){ $("wstack").classList.remove("dim"); $("wstack").querySelectorAll("div").forEach(function(d){ d.classList.remove("hl"); }); hideTip(); }); });
+
+/* calculator */
+function calc(){
+  var amt = +$("c-amt").value, mg = +$("c-mg").value, need = amt / (mg / 100);
+  $("o-amt").textContent = nf(amt) + " RON";
+  $("o-mg").textContent = mg + "%";
+  $("c-big").innerHTML = nf(need) + "<small>RON</small>";
+  var x = need / amt;
+  $("c-txt").textContent = lang === "ro"
+    ? "La o marjă de " + mg + "%, fiecare leu pierdut cere " + nf(x, x < 10 ? 1 : 0) + " lei de vânzări noi ca să fie recuperat."
+    : "At a " + mg + "% margin, every leu lost takes " + nf(x, x < 10 ? 1 : 0) + " lei of new revenue to win back.";
+  var wa = Math.max(1.5, amt / need * 100);
+  $("bar-a").style.width = wa + "%"; $("bar-a-t").textContent = nf(amt);
+  $("bar-b").style.width = "100%"; $("bar-b-t").textContent = nf(need);
+  $("c-foot").innerHTML = lang === "ro"
+    ? "Pentru comparație: <b>marketrisk PRO costă 990 RON pe an</b> și îți urmărește până la 250 de parteneri."
+    : "For comparison: <b>marketrisk PRO costs 990 RON a year</b> and watches up to 250 partners.";
+}
+$("c-amt").addEventListener("input", calc); $("c-mg").addEventListener("input", calc);
+
+/* pricing */
+var billing = "m";
+function renderPrices(){
+  document.querySelectorAll("[data-m]").forEach(function(b){ b.textContent = billing === "m" ? b.getAttribute("data-m") : b.getAttribute("data-y"); });
+  document.querySelectorAll("[data-per]").forEach(function(s){ s.textContent = billing === "m" ? (lang === "ro" ? "RON / lună" : "RON / month") : (lang === "ro" ? "RON / an" : "RON / year"); });
+  $("bill-m").setAttribute("aria-pressed", billing === "m"); $("bill-y").setAttribute("aria-pressed", billing === "y");
+}
+document.querySelectorAll("[data-bill]").forEach(function(b){ b.addEventListener("click", function(){ billing = b.getAttribute("data-bill"); renderPrices(); }); });
+
+/* cta trace */
+function drawTrace(){
+  var cv = $("cta-trace"), dpr = Math.min(2, devicePixelRatio || 1);
+  var w = cv.clientWidth, h = cv.clientHeight; if (!w || !h) return;
+  cv.width = w * dpr; cv.height = h * dpr;
+  var c = cv.getContext("2d"); c.scale(dpr, dpr); c.clearRect(0, 0, w, h);
+  c.strokeStyle = "rgba(163,165,255,.55)"; c.lineWidth = 1.5; c.beginPath();
+  for (var i = 0; i < SERIES.length; i++){ var x = i / (SERIES.length - 1) * w, y = h - SERIES[i] / 100 * h * .85; if (i) c.lineTo(x, y); else c.moveTo(x, y); }
+  c.stroke();
+  c.strokeStyle = "rgba(231,236,234,.08)"; c.lineWidth = 1;
+  for (var g = 1; g < 4; g++){ c.beginPath(); c.moveTo(0, h * g / 4); c.lineTo(w, h * g / 4); c.stroke(); }
+}
+
+/* language */
+function applyLang(){
+  document.documentElement.lang = lang;
+  var D = lang === "en" ? EN : RO;
+  document.querySelectorAll("[data-i18n]").forEach(function(e){ var k = e.getAttribute("data-i18n"); if (D[k] != null) e.innerHTML = D[k]; });
+  $("lang-ro").setAttribute("aria-pressed", lang === "ro"); $("lang-en").setAttribute("aria-pressed", lang === "en");
+  $("k2").textContent = lang === "ro" ? "2,41 mil." : "2.41M";
+  $("k3").textContent = nf(138200);
+  renderHeroEvents(); drawHero(); drawView(); drawBento(); drawWeights(); calc(); renderPrices();
+}
+document.querySelectorAll("[data-lang]").forEach(function(b){ b.addEventListener("click", function(){ lang = b.getAttribute("data-lang"); try { localStorage.setItem("mr-h4-lang", lang); } catch(e){} applyLang(); }); });
+
+var top = $("top");
+function onScroll(){ top.classList.toggle("scrolled", scrollY > 8); }
+addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+var rt; addEventListener("resize", function(){ clearTimeout(rt); rt = setTimeout(function(){ played = true; drawHero(); drawView(); drawTrace(); }, 120); });
+if (window.matchMedia){ matchMedia("(prefers-color-scheme: dark)").addEventListener && matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawTrace); }
+
+applyLang();
+drawTrace();
+})();
+</script>
