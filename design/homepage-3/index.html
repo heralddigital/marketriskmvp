@@ -1,0 +1,1005 @@
+<title>marketrisk Homepage 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F4F4EE;
+  --surface:#FFFFFF;
+  --bone:#DCDEC5;
+  --bone-soft:#E9EADB;
+  --green:#2F5232;
+  --green-2:#244228;
+  --pist:#8ACA74;
+  --pist-2:#73B95B;
+  --ink:#0B0F0C;
+  --ink-2:rgba(11,15,12,.70);
+  --ink-3:rgba(11,15,12,.52);
+  --line:rgba(11,15,12,.10);
+  --line-strong:rgba(11,15,12,.18);
+  --accent-text:#2F5232;
+  --panel:#2F5232;
+  --panel-deep:#244228;
+  --panel-ink:#FFFFFF;
+  --panel-ink-2:rgba(255,255,255,.72);
+  --panel-ink-3:rgba(255,255,255,.52);
+  --panel-line:rgba(220,222,197,.26);
+  --ok:#2F5232;
+  --ok-soft:rgba(47,82,50,.12);
+  --warn:#8A6516;
+  --warn-bar:#C99A34;
+  --warn-soft:rgba(183,138,42,.16);
+  --bad:#B23A3A;
+  --bad-soft:rgba(178,58,58,.12);
+  --focus:rgba(138,202,116,.55);
+  --btn-bg:#2F5232;
+  --btn-ink:#FFFFFF;
+  --btn-hover:#244228;
+  --seg-1:#244228;--seg-2:#2F5232;--seg-3:#4E7A45;--seg-4:#73B95B;--seg-5:#8ACA74;--seg-6:#B3D79F;--seg-7:#CBD6B2;--seg-8:#DCDEC5;
+  --shadow:0 2px 10px rgba(11,15,12,.10),0 18px 40px rgba(11,15,12,.12);
+  --ui:"Sora","Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.2,0,0,1);
+  --r:4px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#0E140F;--surface:#151D17;--bone:#2A3429;--bone-soft:#1B241C;
+    --ink:#E8EADB;--ink-2:rgba(232,234,219,.74);--ink-3:rgba(232,234,219,.54);
+    --line:rgba(232,234,219,.10);--line-strong:rgba(232,234,219,.20);
+    --accent-text:#8ACA74;
+    --panel:#1C3320;--panel-deep:#14261A;
+    --ok:#8ACA74;--ok-soft:rgba(138,202,116,.14);
+    --warn:#DDB05A;--warn-bar:#C99A34;--warn-soft:rgba(221,176,90,.14);
+    --bad:#E4867A;--bad-soft:rgba(228,134,122,.14);
+    --btn-bg:#8ACA74;--btn-ink:#0B0F0C;--btn-hover:#9CD688;
+    --seg-8:#3A4637;--seg-7:#55694E;
+    --shadow:0 2px 10px rgba(0,0,0,.35),0 18px 40px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#0E140F;--surface:#151D17;--bone:#2A3429;--bone-soft:#1B241C;
+  --ink:#E8EADB;--ink-2:rgba(232,234,219,.74);--ink-3:rgba(232,234,219,.54);
+  --line:rgba(232,234,219,.10);--line-strong:rgba(232,234,219,.20);
+  --accent-text:#8ACA74;
+  --panel:#1C3320;--panel-deep:#14261A;
+  --ok:#8ACA74;--ok-soft:rgba(138,202,116,.14);
+  --warn:#DDB05A;--warn-bar:#C99A34;--warn-soft:rgba(221,176,90,.14);
+  --bad:#E4867A;--bad-soft:rgba(228,134,122,.14);
+  --btn-bg:#8ACA74;--btn-ink:#0B0F0C;--btn-hover:#9CD688;
+  --seg-8:#3A4637;--seg-7:#55694E;
+  --shadow:0 2px 10px rgba(0,0,0,.35),0 18px 40px rgba(0,0,0,.35);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--paper);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:clamp(16px,4.5vw,64px)}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:600}
+p{margin:0}
+a{color:var(--accent-text)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.ico{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:var(--r)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:500 15px/1 var(--ui);padding:14px 20px;border-radius:var(--r);border:1px solid transparent;text-decoration:none;cursor:pointer;transition:background .18s var(--ease),transform .18s var(--ease),border-color .18s var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:none}
+.btn-primary{background:var(--btn-bg);color:var(--btn-ink)}
+.btn-primary:hover{background:var(--btn-hover)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn-ghost:hover{background:var(--surface)}
+.btn-pist{background:var(--pist);color:#0B0F0C}
+.btn-pist:hover{background:#9CD688}
+.btn-line-inv{background:transparent;color:var(--panel-ink);border-color:var(--panel-line)}
+.btn-line-inv:hover{background:rgba(255,255,255,.06)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid transparent;transition:border-color .18s var(--ease)}
+.top.scrolled{border-bottom-color:var(--line)}
+.top-in{display:flex;align-items:center;gap:32px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-size:20px;letter-spacing:-.02em}
+.brand .wm{font-weight:400}
+.brand .wm b{font-weight:700}
+.nav{display:flex;gap:28px;margin-left:8px}
+.nav a{color:var(--ink-2);text-decoration:none;font-size:14px}
+.nav a:hover{color:var(--ink)}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:12px}
+.lang{display:inline-flex;border:1px solid var(--line-strong);border-radius:var(--r);overflow:hidden}
+.lang button{font:500 12px/1 var(--mono);letter-spacing:.06em;padding:8px 10px;background:transparent;color:var(--ink-3);border:0;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.top .btn{padding:11px 16px;font-size:14px}
+.login{color:var(--ink-2);text-decoration:none;font-size:14px}
+
+/* hero */
+.hero{padding-block:20px 0}
+.hero-panel{position:relative;background:var(--panel);color:var(--panel-ink);border-radius:var(--r);overflow:hidden;padding:clamp(32px,6vw,80px) clamp(20px,5vw,72px) clamp(28px,4vw,56px)}
+.motif{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.motif rect,.motif path{fill:none;stroke:var(--panel-line);stroke-width:1}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,72px);align-items:start}
+.hero .eyebrow{color:var(--pist)}
+.hero h1{font-size:clamp(42px,5.6vw,76px);line-height:1;letter-spacing:-.038em;margin-top:22px;font-weight:600}
+.hero h1 em{font-style:normal;color:var(--pist)}
+.lead{margin-top:24px;font-size:clamp(17px,1.5vw,19px);line-height:1.6;color:var(--panel-ink-2);max-width:34em}
+
+.check{margin-top:36px;max-width:520px}
+.check label{display:block;font-size:13px;color:var(--panel-ink-2);margin-bottom:10px}
+.check-row{display:flex;gap:8px;background:var(--surface);border-radius:var(--r);padding:6px;border:1px solid transparent}
+.check-row:focus-within{border-color:var(--pist);box-shadow:0 0 0 3px rgba(138,202,116,.35)}
+.check-row .pre{display:flex;align-items:center;padding-left:12px;color:var(--ink-3);font:500 15px var(--mono)}
+.check-row input{flex:1;min-width:0;border:0;background:transparent;font:500 17px/1 var(--mono);letter-spacing:.04em;color:var(--ink);padding:12px 6px;outline:none}
+.check-row input::placeholder{color:var(--ink-3);opacity:.7}
+.check-row .btn{padding:12px 18px}
+.check-msg{min-height:24px;margin-top:10px;font-size:13px;color:var(--panel-ink-2)}
+.check-msg.err{color:#F3B3A8}
+.check-msg.ok{color:var(--pist)}
+.examples{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px}
+.examples span{font-size:13px;color:var(--panel-ink-3);margin-right:4px}
+.chip{font:500 12px/1 var(--mono);letter-spacing:.03em;padding:9px 10px;border-radius:var(--r);border:1px solid var(--panel-line);background:transparent;color:var(--panel-ink-2);cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .18s var(--ease),color .18s var(--ease)}
+.chip i{width:8px;height:8px;border-radius:2px;display:inline-block}
+.chip:hover{color:var(--panel-ink);background:rgba(255,255,255,.06)}
+.chip[aria-pressed="true"]{background:var(--panel-ink);color:#0B0F0C;border-color:var(--panel-ink)}
+.fine{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--panel-ink-3)}
+.fine span{display:inline-flex;align-items:center;gap:8px}
+.fine .ico{width:15px;height:15px;color:var(--pist)}
+
+/* dossier */
+.dossier{background:var(--surface);color:var(--ink);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.d-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--bone-soft)}
+.d-head .eyebrow{color:var(--ink-3)}
+.tag-demo{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;border-radius:var(--r);border:1px dashed var(--line-strong);color:var(--ink-3)}
+.d-body{padding:22px}
+.d-name{font-size:21px;letter-spacing:-.01em;font-weight:600;line-height:1.25}
+.d-meta{margin-top:8px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13px;color:var(--ink-2)}
+.d-meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+.d-meta dd{margin:0}
+.score{display:flex;align-items:flex-end;gap:16px;margin-top:22px}
+.score-num{font:600 76px/0.85 var(--ui);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.score-of{font:500 14px var(--mono);color:var(--ink-3);padding-bottom:6px}
+.level{margin-left:auto;margin-bottom:6px;font:600 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:8px 10px;border-radius:var(--r)}
+.lv-ok{background:var(--ok-soft);color:var(--ok)}
+.lv-warn{background:var(--warn-soft);color:var(--warn)}
+.lv-bad{background:var(--bad-soft);color:var(--bad)}
+.ruler{margin-top:18px;position:relative;padding-top:14px}
+.bands{display:flex;height:10px;border-radius:2px;overflow:hidden;gap:2px}
+.bands div{height:100%}
+.b-bad{flex:50;background:var(--bad);opacity:.85}
+.b-warn{flex:25;background:var(--warn-bar);opacity:.9}
+.b-ok{flex:25;background:var(--pist-2)}
+.marker{position:absolute;top:0;left:0;width:0;height:0;transition:left .7s var(--ease)}
+.marker::before{content:"";position:absolute;left:-6px;top:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid var(--ink)}
+.marker::after{content:"";position:absolute;left:-1px;top:10px;width:2px;height:16px;background:var(--ink)}
+.ticks{position:relative;height:18px;margin-top:6px;font:400 11px var(--mono);color:var(--ink-3)}
+.ticks span{position:absolute;transform:translateX(-50%)}
+.ticks span:first-child{transform:none}
+.ticks span:last-child{transform:translateX(-100%)}
+.factors{list-style:none;margin:22px 0 0;padding:0;border-top:1px solid var(--line)}
+.factors li{display:grid;grid-template-columns:10px 1fr auto;gap:12px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.factors .dot{width:8px;height:8px;border-radius:2px;transform:translateY(-1px)}
+.f-ok .dot{background:var(--pist-2)}.f-warn .dot{background:var(--warn-bar)}.f-bad .dot{background:var(--bad)}
+.factors small{font:400 11px var(--mono);letter-spacing:.04em;color:var(--ink-3);white-space:nowrap}
+.d-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;padding:12px 22px;border-top:1px solid var(--line);font:400 11px var(--mono);letter-spacing:.03em;color:var(--ink-3)}
+.swap{transition:opacity .22s var(--ease)}
+.swap.out{opacity:0}
+
+/* sources */
+.sources{padding-block:clamp(48px,6vw,80px) 0}
+.src-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:clamp(24px,5vw,72px);align-items:start}
+.src-grid h2{font-size:clamp(24px,2.4vw,30px);letter-spacing:-.02em;line-height:1.2}
+.src-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--line-strong)}
+.src{padding:18px 18px 4px 0}
+.src + .src{padding-left:18px;border-left:1px solid var(--line)}
+.src b{display:block;font:500 13px var(--mono);letter-spacing:.02em}
+.src p{margin-top:8px;font-size:14px;color:var(--ink-2);line-height:1.5}
+
+/* sections */
+.sec{padding-block:clamp(72px,9vw,128px) 0}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:end;margin-bottom:clamp(36px,5vw,56px)}
+.sec-head h2{font-size:clamp(32px,3.9vw,52px);line-height:1.04;letter-spacing:-.03em;margin-top:14px}
+.sec-head p{color:var(--ink-2);font-size:17px;max-width:32em}
+
+/* score section */
+.mrcs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(28px,5vw,72px)}
+.bandcards{display:grid;gap:0;border-top:1px solid var(--line-strong)}
+.bandcard{display:grid;grid-template-columns:124px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+.bandcard .range{white-space:nowrap;font:600 24px/1 var(--ui);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.bandcard .range small{display:block;margin-top:10px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.bandcard h3{font-size:17px;letter-spacing:-.01em}
+.bandcard p{margin-top:4px;color:var(--ink-2);font-size:15px}
+.bc-ok .range small{color:var(--ok)}.bc-warn .range small{color:var(--warn)}.bc-bad .range small{color:var(--bad)}
+.weights{background:var(--surface);border-radius:var(--r);padding:clamp(20px,3vw,32px);border:1px solid var(--line)}
+.weights h3{font-size:18px;letter-spacing:-.01em}
+.weights > p{margin-top:6px;color:var(--ink-2);font-size:14px}
+.stack{display:flex;height:44px;margin-top:24px;gap:2px}
+.stack div{height:100%;border-radius:2px;transition:filter .18s var(--ease),transform .18s var(--ease);cursor:default}
+.stack div:hover,.stack div.hl{filter:brightness(1.08);transform:translateY(-2px)}
+.scale{display:flex;justify-content:space-between;margin-top:8px;font:400 11px var(--mono);color:var(--ink-3)}
+.wlist{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
+.wlist li{display:grid;grid-template-columns:12px 1fr auto;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.wlist li i{width:10px;height:10px;border-radius:2px;display:block;transform:translateY(1px)}
+.wlist li b{font:500 13px var(--mono);font-variant-numeric:tabular-nums}
+.wlist li span small{display:block;color:var(--ink-3);font-size:12px;line-height:1.4;margin-top:2px}
+
+/* monitor */
+.monitor{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:56px 1fr;gap:8px 16px;padding:24px 0;border-top:1px solid var(--line-strong)}
+.steps li::before{content:counter(s,decimal-leading-zero);font:500 13px var(--mono);color:var(--accent-text);padding-top:4px}
+.steps h3{font-size:19px;letter-spacing:-.01em}
+.steps p{grid-column:2;color:var(--ink-2);font-size:15px}
+.signals{grid-column:2;display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.signals span{font:500 12px var(--mono);padding:6px 8px;border-radius:var(--r);background:var(--bone-soft);color:var(--ink-2)}
+.feed{background:var(--panel);color:var(--panel-ink);border-radius:var(--r);overflow:hidden;position:relative}
+.feed-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px;border-bottom:1px solid var(--panel-line)}
+.feed-head .eyebrow{color:var(--pist)}
+.live{display:inline-flex;align-items:center;gap:8px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--panel-ink-3)}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--pist);animation:pulse 2.4s var(--ease) infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.alerts{list-style:none;margin:0;padding:0}
+.alert{display:grid;grid-template-columns:3px 1fr;gap:0 16px;padding:16px 22px 16px 0;border-bottom:1px solid var(--panel-line)}
+.alert:last-child{border-bottom:0}
+.alert .sev{grid-row:1 / span 2;border-radius:0 2px 2px 0}
+.a-bad .sev{background:#E4867A}.a-warn .sev{background:#DDB05A}.a-ok .sev{background:var(--pist)}
+.alert .meta{display:flex;gap:10px;flex-wrap:wrap;font:400 11px var(--mono);letter-spacing:.04em;color:var(--panel-ink-3)}
+.alert .meta b{font-weight:500;color:var(--panel-ink-2)}
+.alert p{margin-top:4px;font-size:15px;line-height:1.45;color:var(--panel-ink)}
+.alert p strong{font-weight:600}
+.alert.enter{animation:enter .6s var(--ease)}
+@keyframes enter{from{background:rgba(138,202,116,.14)}to{background:transparent}}
+.feed-foot{padding:12px 22px;border-top:1px solid var(--panel-line);font:400 11px var(--mono);color:var(--panel-ink-3)}
+
+/* audience */
+.aud{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+.aud article{border-top:2px solid var(--ink);padding-top:22px}
+.aud .eyebrow{color:var(--accent-text)}
+.aud h3{margin-top:12px;font-size:22px;letter-spacing:-.02em;line-height:1.25}
+.aud p{margin-top:10px;color:var(--ink-2);font-size:15px}
+.aud ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.aud li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:14px}
+.aud li .ico{width:16px;height:16px;color:var(--accent-text);margin-top:3px}
+
+/* pricing */
+.bill{display:inline-flex;border:1px solid var(--line-strong);border-radius:var(--r);padding:3px;gap:3px;margin-top:22px}
+.bill button{font:500 13px/1 var(--ui);padding:10px 14px;border:0;border-radius:2px;background:transparent;color:var(--ink-2);cursor:pointer}
+.bill button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.bill small{font-family:var(--mono);font-size:11px;margin-left:6px;opacity:.8}
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:stretch}
+.plan{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px 22px}
+.plan h3{font-size:15px;font-weight:600;letter-spacing:.01em}
+.plan .desc{margin-top:6px;color:var(--ink-3);font-size:13px;min-height:2.8em;line-height:1.4}
+.price{margin-top:22px;display:flex;align-items:baseline;gap:8px}
+.price b{font:600 40px/1 var(--ui);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.price span{font:400 12px var(--mono);color:var(--ink-3)}
+.plan ul{list-style:none;margin:22px 0 26px;padding:18px 0 0;border-top:1px solid var(--line);display:grid;gap:10px;flex:1;align-content:start}
+.plan li{display:grid;grid-template-columns:16px 1fr;gap:10px;font-size:14px;line-height:1.45}
+.plan li .ico{width:15px;height:15px;color:var(--accent-text);margin-top:3px}
+.plan .btn{justify-content:center}
+.plan.pro{background:var(--panel);color:var(--panel-ink);border-color:var(--panel)}
+.plan.pro .desc,.plan.pro .price span{color:var(--panel-ink-3)}
+.plan.pro ul{border-top-color:var(--panel-line)}
+.plan.pro li .ico{color:var(--pist)}
+.plan-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.badge{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 7px;border-radius:var(--r);background:var(--pist);color:#0B0F0C}
+.plans-note{margin-top:18px;font-size:13px;color:var(--ink-3)}
+
+/* faq */
+.faq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:clamp(28px,5vw,72px)}
+.faq h2{font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-.03em;margin-top:14px}
+.qa{border-top:1px solid var(--line-strong)}
+.qa details{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:20px 0;font-size:17px;font-weight:500;letter-spacing:-.01em}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .ico{transition:transform .18s var(--ease);color:var(--ink-3);margin-top:4px}
+.qa details[open] summary .ico{transform:rotate(45deg)}
+.qa details p{padding:0 0 22px;color:var(--ink-2);max-width:40em;font-size:15px}
+
+/* cta */
+.cta{padding-block:clamp(72px,9vw,128px) 0}
+.cta-panel{position:relative;overflow:hidden;background:var(--panel);color:var(--panel-ink);border-radius:var(--r);padding:clamp(40px,6vw,88px) clamp(20px,5vw,72px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end}
+.cta-panel h2{position:relative;font-size:clamp(36px,5vw,64px);line-height:1;letter-spacing:-.035em}
+.cta-panel h2 em{font-style:normal;color:var(--pist)}
+.cta-side{position:relative}
+.cta-side p{color:var(--panel-ink-2);font-size:16px}
+.cta-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+
+/* footer */
+footer{padding-block:56px 40px;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--line)}
+.foot{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px}
+.foot p{margin-top:12px;color:var(--ink-3);font-size:13px;max-width:28em}
+.foot h4{margin:0;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.foot ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.foot a{color:var(--ink-2);text-decoration:none;font-size:14px}
+.foot a:hover{color:var(--ink)}
+.legal{margin-top:48px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font:400 12px var(--mono);color:var(--ink-3)}
+
+/* responsive */
+@media (max-width:1080px){
+  .plans{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .src-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .src:nth-child(3){padding-left:0;border-left:0}
+  .src:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:920px){
+  .nav,.login{display:none}
+  .hero-grid,.src-grid,.sec-head,.mrcs,.monitor,.faq,.cta-panel{grid-template-columns:minmax(0,1fr)}
+  .aud{grid-template-columns:minmax(0,1fr)}
+  .foot{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .top-in{gap:12px}
+  .top .btn{display:none}
+  .plans,.wlist{grid-template-columns:minmax(0,1fr)}
+  .src-list{grid-template-columns:minmax(0,1fr)}
+  .src,.src + .src{padding-left:0;border-left:0}
+  .src + .src{border-top:1px solid var(--line)}
+  .check-row{flex-wrap:wrap}
+  .check-row input{flex-basis:60%}
+  .check-row .btn{width:100%;justify-content:center}
+  .score-num{font-size:64px}
+  .bandcard{grid-template-columns:104px 1fr}
+  .bandcard .range{font-size:20px}
+  .foot{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></symbol>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#start" aria-label="marketrisk">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M16 2L6 6V14C6 20.5 10.5 26.5 16 30C21.5 26.5 26 20.5 26 14V6L16 2Z" fill="var(--accent-text)" fill-opacity=".14" stroke="var(--accent-text)" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M10 18.5L12.5 16L15 17.5L17.5 14.5L20 16L22 13.5" stroke="var(--pist-2)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="16" cy="10" r="1.6" fill="var(--accent-text)"/>
+      </svg>
+      <span class="wm">market<b>risk</b></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#scor" data-i18n="nav.score">Scorul</a>
+      <a href="#monitorizare" data-i18n="nav.monitor">Monitorizare</a>
+      <a href="#pentru-cine" data-i18n="nav.who">Pentru cine</a>
+      <a href="#preturi" data-i18n="nav.pricing">Prețuri</a>
+      <a href="#intrebari" data-i18n="nav.faq">Întrebări</a>
+    </nav>
+    <div class="top-actions">
+      <div class="lang" role="group" aria-label="Limba / Language">
+        <button type="button" id="lang-ro" data-lang="ro" aria-pressed="true">RO</button>
+        <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="login" href="#preturi" data-i18n="nav.login">Autentificare</a>
+      <a class="btn btn-primary" href="#preturi" data-i18n="nav.cta">Cont gratuit</a>
+    </div>
+  </div>
+</header>
+
+<main id="start">
+  <section class="hero wrap">
+    <div class="hero-panel">
+      <svg class="motif" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect x="610" y="-240" width="860" height="620" rx="36"/>
+        <rect x="700" y="-150" width="860" height="620" rx="36"/>
+        <rect x="-420" y="520" width="760" height="520" rx="36"/>
+        <path d="M-40 700 C 240 620, 420 760, 700 690"/>
+      </svg>
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow" data-i18n="hero.eyebrow">Monitorizare risc de credit · România</p>
+          <h1 data-i18n="hero.title">Știi cu cine <em>faci afaceri?</em></h1>
+          <p class="lead" data-i18n="hero.lead">Introdu CUI-ul unui client sau furnizor. marketrisk citește ANAF, Buletinul Procedurilor de Insolvență și dosarele din instanțe, îți dă un scor de la 0 la 100 și te anunță când ceva se schimbă.</p>
+
+          <form class="check" id="check" novalidate>
+            <label for="cui" data-i18n="hero.label">Verifică o companie după CUI</label>
+            <div class="check-row">
+              <span class="pre">RO</span>
+              <input id="cui" name="cui" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="14" placeholder="99000174" aria-describedby="check-msg">
+              <button class="btn btn-primary" type="submit"><svg class="ico"><use href="#i-search"/></svg><span data-i18n="hero.submit">Verifică</span></button>
+            </div>
+            <p class="check-msg" id="check-msg" role="status" aria-live="polite"></p>
+            <div class="examples">
+              <span data-i18n="hero.try">Exemple:</span>
+              <button type="button" class="chip" id="ex-a" data-ex="a" aria-pressed="true"><i style="background:var(--pist-2)"></i>RO 99000174</button>
+              <button type="button" class="chip" id="ex-b" data-ex="b" aria-pressed="false"><i style="background:var(--warn-bar)"></i>RO 99000310</button>
+              <button type="button" class="chip" id="ex-c" data-ex="c" aria-pressed="false"><i style="background:#E4867A"></i>RO 99000468</button>
+            </div>
+          </form>
+
+          <div class="fine">
+            <span><svg class="ico"><use href="#i-check"/></svg><span data-i18n="hero.f1">3 verificări gratuite pe lună</span></span>
+            <span><svg class="ico"><use href="#i-card"/></svg><span data-i18n="hero.f2">Fără card la înregistrare</span></span>
+            <span><svg class="ico"><use href="#i-shield"/></svg><span data-i18n="hero.f3">Date stocate în UE, conform GDPR</span></span>
+          </div>
+        </div>
+
+        <aside class="dossier" aria-labelledby="d-name">
+          <div class="d-head">
+            <span class="eyebrow" data-i18n="d.title">Dosar de risc</span>
+            <span class="tag-demo" data-i18n="d.demo">Companie fictivă · exemplu</span>
+          </div>
+          <div class="d-body swap" id="d-body">
+            <h2 class="d-name" id="d-name">Brâna Logistic SRL</h2>
+            <dl class="d-meta">
+              <dt>CUI</dt><dd class="mono" id="d-cui">RO 99000174</dd>
+              <dt>CAEN</dt><dd id="d-caen">4941 · Transporturi rutiere de mărfuri</dd>
+              <dt data-i18n="d.since">Din</dt><dd id="d-since">2016 · Brașov</dd>
+            </dl>
+            <div class="score">
+              <span class="score-num" id="d-score">86</span>
+              <span class="score-of">/ 100 MRCS</span>
+              <span class="level lv-ok" id="d-level">Risc scăzut</span>
+            </div>
+            <div class="ruler" aria-hidden="true">
+              <div class="marker" id="d-marker" style="left:86%"></div>
+              <div class="bands"><div class="b-bad"></div><div class="b-warn"></div><div class="b-ok"></div></div>
+              <div class="ticks"><span style="left:0">0</span><span style="left:50%">50</span><span style="left:75%">75</span><span style="left:100%">100</span></div>
+            </div>
+            <ul class="factors" id="d-factors"></ul>
+          </div>
+          <div class="d-foot">
+            <span id="d-src">ANAF · BPI · portal.just.ro · MFinanțe</span>
+            <span data-i18n="d.updated">Verificat azi, 06:00</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sources wrap" aria-labelledby="src-h">
+    <div class="src-grid">
+      <div>
+        <p class="eyebrow" data-i18n="src.eyebrow">Surse</p>
+        <h2 id="src-h" style="margin-top:12px" data-i18n="src.title">Citim direct din registrele publice, în fiecare dimineață.</h2>
+      </div>
+      <div class="src-list">
+        <div class="src"><b>ANAF</b><p data-i18n="src.anaf">Stare fiscală, înregistrare TVA, TVA la încasare, split TVA, RO e-Factura.</p></div>
+        <div class="src"><b>BPI</b><p data-i18n="src.bpi">Buletinul Procedurilor de Insolvență: cereri, deschideri, faliment.</p></div>
+        <div class="src"><b>portal.just.ro</b><p data-i18n="src.just">Dosare în instanță, părți, obiect și termene de judecată.</p></div>
+        <div class="src"><b>MFinanțe</b><p data-i18n="src.mf">Bilanțuri anuale: cifră de afaceri, profit, capitaluri, angajați.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="scor" aria-labelledby="scor-h">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-i18n="s.eyebrow">MarketRisk Credit Score</p>
+        <h2 id="scor-h" data-i18n="s.title">Un singur număr. Toate motivele la vedere.</h2>
+      </div>
+      <p data-i18n="s.lead">Scorul MRCS merge de la 0 la 100: cu cât e mai mare, cu atât partenerul e mai sigur. Fiecare factor apare în raport cu sursa lui, ca să poți explica o decizie de credit oricui ți-o cere.</p>
+    </div>
+    <div class="mrcs">
+      <div class="bandcards">
+        <div class="bandcard bc-ok"><div class="range">75–100<small data-i18n="s.okL">Scăzut</small></div><div><h3 data-i18n="s.okH">Poți lucra cu termene normale</h3><p data-i18n="s.okP">Companie activă, fiscal în regulă, fără semnale de insolvență.</p></div></div>
+        <div class="bandcard bc-warn"><div class="range">50–74<small data-i18n="s.warnL">Mediu</small></div><div><h3 data-i18n="s.warnH">Scurtează termenele, cere garanții</h3><p data-i18n="s.warnP">Semnale care merită urmărite: firmă tânără, TVA la încasare, litigii noi.</p></div></div>
+        <div class="bandcard bc-bad"><div class="range">0–49<small data-i18n="s.badL">Ridicat</small></div><div><h3 data-i18n="s.badH">Plată în avans sau deloc</h3><p data-i18n="s.badP">Inactivitate fiscală, split TVA sau o procedură de insolvență în curs.</p></div></div>
+      </div>
+      <div class="weights">
+        <h3 data-i18n="w.title">Ce intră în scor</h3>
+        <p data-i18n="w.lead">Ponderea fiecărei categorii din cele 100 de puncte.</p>
+        <div class="stack" id="stack" role="img" aria-label="Ponderi: Status legal 35, Status TVA 22, Infrastructură digitală 12, Analiză sintetică 10, Formă juridică 9, Sediu 5, Cod CAEN 4, Autoritate fiscală 3"></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+        <ul class="wlist" id="wlist"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="monitorizare" aria-labelledby="mon-h">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-i18n="m.eyebrow">Monitorizare</p>
+        <h2 id="mon-h" data-i18n="m.title">Afli înainte să rămână factura neplătită.</h2>
+      </div>
+      <p data-i18n="m.lead">Un raport îți spune cum stă o firmă azi. Watchlist-ul îți spune când se schimbă ceva, ca să ai timp să oprești livrările sau să recuperezi banii.</p>
+    </div>
+    <div class="monitor">
+      <ol class="steps">
+        <li><h3 data-i18n="m.s1">Adaugi companiile după CUI</h3><p data-i18n="m.s1p">Clienți, furnizori, subcontractori. Până la 250 de CUI-uri pe planul PRO, cu etichete și notițe.</p></li>
+        <li><h3 data-i18n="m.s2">Alegi ce semnale contează</h3><p data-i18n="m.s2p">Pornești doar alertele relevante pentru tine.</p>
+          <div class="signals"><span data-i18n="sig.1">insolvență</span><span data-i18n="sig.2">inactivitate fiscală</span><span data-i18n="sig.3">TVA la încasare</span><span data-i18n="sig.4">split TVA</span><span data-i18n="sig.5">dosare noi</span><span data-i18n="sig.6">bilanț nedepus</span></div></li>
+        <li><h3 data-i18n="m.s3">Primești alerta cu pasul următor</h3><p data-i18n="m.s3p">Pe email sau în aplicație: ce s-a schimbat, sursa oficială și ce să faci mai departe.</p></li>
+      </ol>
+      <div class="feed" aria-labelledby="feed-h">
+        <div class="feed-head">
+          <span class="eyebrow" id="feed-h" data-i18n="feed.title">Alerte · watchlist exemplu</span>
+          <span class="live"><i></i><span data-i18n="feed.live">Monitorizat zilnic</span></span>
+        </div>
+        <ul class="alerts" id="alerts"></ul>
+        <div class="feed-foot" data-i18n="feed.foot">Companii și evenimente fictive, cu rol ilustrativ.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="pentru-cine" aria-labelledby="who-h">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-i18n="w2.eyebrow">Pentru cine</p>
+        <h2 id="who-h" data-i18n="w2.title">Pentru oamenii care semnează termenele de plată.</h2>
+      </div>
+      <p data-i18n="w2.lead">Interfață calmă, verificări rapide, alerte clare. Fără training, fără consultanți.</p>
+    </div>
+    <div class="aud">
+      <article>
+        <p class="eyebrow" data-i18n="a1.e">Vânzări B2B · credit control</p>
+        <h3 data-i18n="a1.h">Dai marfă pe termen doar celor care pot plăti.</h3>
+        <ul>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="a1.1">Verifici bonitatea înainte de primul contract</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="a1.2">Ajustezi termenele după scor, nu după impresie</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="a1.3">Afli de insolvență înainte de următoarea livrare</span></li>
+        </ul>
+      </article>
+      <article>
+        <p class="eyebrow" data-i18n="a2.e">Achiziții · lanț de aprovizionare</p>
+        <h3 data-i18n="a2.h">Nu plătești avansuri unui furnizor pe ducă.</h3>
+        <ul>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="a2.1">Verifici furnizorii noi în câteva secunde</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="a2.2">Urmărești inactivitatea fiscală și split TVA</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="a2.3">Ai din timp un furnizor de rezervă</span></li>
+        </ul>
+      </article>
+      <article>
+        <p class="eyebrow" data-i18n="a3.e">Contabili · consultanți</p>
+        <h3 data-i18n="a3.h">Supraveghezi partenerii tuturor clienților tăi.</h3>
+        <ul>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="a3.1">Un watchlist per client, cu etichete</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="a3.2">Rapoarte PDF pentru dosare și audit</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="a3.3">Acces pentru echipă, cu permisiuni</span></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="preturi" aria-labelledby="pr-h">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-i18n="p.eyebrow">Prețuri</p>
+        <h2 id="pr-h" data-i18n="p.title">Plătești cât monitorizezi.</h2>
+      </div>
+      <div>
+        <p data-i18n="p.lead">Prețuri în lei, fără TVA. Poți schimba sau anula planul oricând.</p>
+        <div class="bill" role="group" aria-label="Facturare">
+          <button type="button" id="bill-m" data-bill="m" aria-pressed="true" data-i18n="p.monthly">Lunar</button>
+          <button type="button" id="bill-y" data-bill="y" aria-pressed="false"><span data-i18n="p.yearly">Anual</span><small data-i18n="p.save">2 luni gratuite</small></button>
+        </div>
+      </div>
+    </div>
+    <div class="plans">
+      <article class="plan">
+        <h3 data-i18n="p1.n">Gratuit</h3>
+        <p class="desc" data-i18n="p1.d">Pentru o verificare rapidă din când în când.</p>
+        <div class="price"><b>0</b><span>RON</span></div>
+        <ul>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p1.1">3 verificări CUI pe lună</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p1.2">Scor MRCS și factori</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p1.3">Notificări de bază pe email</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="#start" data-i18n="p1.c">Începe gratuit</a>
+      </article>
+      <article class="plan">
+        <h3>Starter</h3>
+        <p class="desc" data-i18n="p2.d">Pentru un portofoliu mic de clienți.</p>
+        <div class="price"><b data-price-m="39" data-price-y="390">39</b><span data-per>RON / lună</span></div>
+        <ul>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p2.1">20 verificări CUI pe lună</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p2.2">Watchlist de 10 companii</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p2.3">Alerte de insolvență, rezumat zilnic</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p2.4">5 rapoarte PDF pe lună</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p2.5">Până la 5 utilizatori</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="#start" data-i18n="p2.c">Alege Starter</a>
+      </article>
+      <article class="plan pro">
+        <div class="plan-top"><h3>PRO</h3><span class="badge" data-i18n="p3.b">Recomandat</span></div>
+        <p class="desc" data-i18n="p3.d">Pentru echipe B2B care vând pe termen.</p>
+        <div class="price"><b data-price-m="99" data-price-y="990">99</b><span data-per>RON / lună</span></div>
+        <ul>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p3.1">Verificări CUI nelimitate</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p3.2">Watchlist de 250 de companii</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p3.3">Alerte în timp real</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p3.4">Dosare în instanță și datorii fiscale</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p3.5">Rapoarte PDF nelimitate</span></li>
+        </ul>
+        <a class="btn btn-pist" href="#start" data-i18n="p3.c">Alege PRO</a>
+      </article>
+      <article class="plan">
+        <h3>Enterprise</h3>
+        <p class="desc" data-i18n="p4.d">Pentru volume mari și instituții financiare.</p>
+        <div class="price"><b style="font-size:30px" data-i18n="p4.p">La cerere</b></div>
+        <ul>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p4.1">Tot ce include PRO</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p4.2">Watchlist nelimitat</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p4.3">Acces API complet</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span data-i18n="p4.4">SLA și suport dedicat</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="#intrebari" data-i18n="p4.c">Discută cu noi</a>
+      </article>
+    </div>
+    <p class="plans-note" data-i18n="p.note">Anual: Starter 390 RON, PRO 990 RON. Echivalentul a 10 luni.</p>
+  </section>
+
+  <section class="sec wrap" id="intrebari" aria-labelledby="faq-h">
+    <div class="faq">
+      <div>
+        <p class="eyebrow" data-i18n="q.eyebrow">Întrebări</p>
+        <h2 id="faq-h" data-i18n="q.title">Ce ne întreabă clienții înainte să înceapă.</h2>
+      </div>
+      <div class="qa">
+        <details open><summary><span data-i18n="q1.q">De unde vin datele?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p data-i18n="q1.a">Din surse publice oficiale: ANAF pentru starea fiscală și TVA, Buletinul Procedurilor de Insolvență, portalul instanțelor (portal.just.ro) și bilanțurile publicate de Ministerul Finanțelor. Fiecare factor din raport arată sursa lui.</p></details>
+        <details><summary><span data-i18n="q2.q">Cât de repede aflu de o schimbare?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p data-i18n="q2.a">Pe PRO și Enterprise primești alerta la scurt timp după ce apare în registru. Pe Starter primești un rezumat zilnic pe email, iar pe planul gratuit notificări de bază.</p></details>
+        <details><summary><span data-i18n="q3.q">Cum e calculat scorul?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p data-i18n="q3.a">Scorul MRCS ponderează factori grupați în opt categorii, de la statusul legal și TVA până la calitatea datelor declarate. Rezultatul e un număr între 0 și 100, cu trei praguri: sub 50 risc ridicat, 50–74 mediu, 75 și peste risc scăzut.</p></details>
+        <details><summary><span data-i18n="q4.q">Cine îmi vede watchlist-ul?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p data-i18n="q4.a">Doar tu și colegii cărora le dai acces. Datele sunt criptate și stocate în centre de date din UE. Nu vindem și nu partajăm listele tale cu terți.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta wrap" aria-labelledby="cta-h">
+    <div class="cta-panel">
+      <svg class="motif" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect x="760" y="-180" width="700" height="520" rx="36"/>
+        <rect x="850" y="-100" width="700" height="520" rx="36"/>
+        <path d="M-60 470 C 260 400, 520 540, 820 460"/>
+      </svg>
+      <h2 id="cta-h" data-i18n="c.title">Verifică primul partener <em>azi.</em></h2>
+      <div class="cta-side">
+        <p data-i18n="c.lead">Cont gratuit, 3 verificări pe lună, fără card. Treci pe un plan plătit doar când vrei să monitorizezi.</p>
+        <div class="cta-actions">
+          <a class="btn btn-pist" href="#start"><span data-i18n="c.b1">Creează cont gratuit</span><svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-line-inv" href="#preturi" data-i18n="c.b2">Vezi planurile</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="foot">
+    <div>
+      <a class="brand" href="#start" aria-label="marketrisk"><span class="wm">market<b>risk</b></span></a>
+      <p data-i18n="f.about">Monitorizare a riscului de credit pentru companiile din România, din surse publice oficiale.</p>
+    </div>
+    <div><h4 data-i18n="f.h1">Produs</h4><ul><li><a href="#scor" data-i18n="nav.score">Scorul</a></li><li><a href="#monitorizare" data-i18n="nav.monitor">Monitorizare</a></li><li><a href="#preturi" data-i18n="nav.pricing">Prețuri</a></li></ul></div>
+    <div><h4 data-i18n="f.h2">Resurse</h4><ul><li><a href="#intrebari" data-i18n="nav.faq">Întrebări</a></li><li><a href="#start" data-i18n="f.docs">Documentație API</a></li><li><a href="#start">Blog</a></li></ul></div>
+    <div><h4 data-i18n="f.h3">Legal</h4><ul><li><a href="#start" data-i18n="f.terms">Termeni</a></li><li><a href="#start" data-i18n="f.privacy">Confidențialitate</a></li><li><a href="#start">GDPR</a></li></ul></div>
+  </div>
+  <div class="legal"><span>© 2026 marketrisk</span><span data-i18n="f.proto">Homepage 3 · prototip de design</span></div>
+</footer>
+
+<script>
+(function(){
+  var T = {
+    ro:{
+      "nav.score":"Scorul","nav.monitor":"Monitorizare","nav.who":"Pentru cine","nav.pricing":"Prețuri","nav.faq":"Întrebări","nav.login":"Autentificare","nav.cta":"Cont gratuit",
+      "hero.eyebrow":"Monitorizare risc de credit · România",
+      "hero.title":"Știi cu cine <em>faci afaceri?</em>",
+      "hero.lead":"Introdu CUI-ul unui client sau furnizor. marketrisk citește ANAF, Buletinul Procedurilor de Insolvență și dosarele din instanțe, îți dă un scor de la 0 la 100 și te anunță când ceva se schimbă.",
+      "hero.label":"Verifică o companie după CUI","hero.submit":"Verifică","hero.try":"Exemple:",
+      "hero.f1":"3 verificări gratuite pe lună","hero.f2":"Fără card la înregistrare","hero.f3":"Date stocate în UE, conform GDPR",
+      "d.title":"Dosar de risc","d.demo":"Companie fictivă · exemplu","d.since":"Din","d.updated":"Verificat azi, 06:00",
+      "src.eyebrow":"Surse","src.title":"Citim direct din registrele publice, în fiecare dimineață.",
+      "src.anaf":"Stare fiscală, înregistrare TVA, TVA la încasare, split TVA, RO e-Factura.",
+      "src.bpi":"Buletinul Procedurilor de Insolvență: cereri, deschideri, faliment.",
+      "src.just":"Dosare în instanță, părți, obiect și termene de judecată.",
+      "src.mf":"Bilanțuri anuale: cifră de afaceri, profit, capitaluri, angajați.",
+      "s.eyebrow":"MarketRisk Credit Score","s.title":"Un singur număr. Toate motivele la vedere.",
+      "s.lead":"Scorul MRCS merge de la 0 la 100: cu cât e mai mare, cu atât partenerul e mai sigur. Fiecare factor apare în raport cu sursa lui, ca să poți explica o decizie de credit oricui ți-o cere.",
+      "s.okL":"Scăzut","s.okH":"Poți lucra cu termene normale","s.okP":"Companie activă, fiscal în regulă, fără semnale de insolvență.",
+      "s.warnL":"Mediu","s.warnH":"Scurtează termenele, cere garanții","s.warnP":"Semnale care merită urmărite: firmă tânără, TVA la încasare, litigii noi.",
+      "s.badL":"Ridicat","s.badH":"Plată în avans sau deloc","s.badP":"Inactivitate fiscală, split TVA sau o procedură de insolvență în curs.",
+      "w.title":"Ce intră în scor","w.lead":"Ponderea fiecărei categorii din cele 100 de puncte.",
+      "m.eyebrow":"Monitorizare","m.title":"Afli înainte să rămână factura neplătită.",
+      "m.lead":"Un raport îți spune cum stă o firmă azi. Watchlist-ul îți spune când se schimbă ceva, ca să ai timp să oprești livrările sau să recuperezi banii.",
+      "m.s1":"Adaugi companiile după CUI","m.s1p":"Clienți, furnizori, subcontractori. Până la 250 de CUI-uri pe planul PRO, cu etichete și notițe.",
+      "m.s2":"Alegi ce semnale contează","m.s2p":"Pornești doar alertele relevante pentru tine.",
+      "m.s3":"Primești alerta cu pasul următor","m.s3p":"Pe email sau în aplicație: ce s-a schimbat, sursa oficială și ce să faci mai departe.",
+      "sig.1":"insolvență","sig.2":"inactivitate fiscală","sig.3":"TVA la încasare","sig.4":"split TVA","sig.5":"dosare noi","sig.6":"bilanț nedepus",
+      "feed.title":"Alerte · watchlist exemplu","feed.live":"Monitorizat zilnic","feed.foot":"Companii și evenimente fictive, cu rol ilustrativ.",
+      "w2.eyebrow":"Pentru cine","w2.title":"Pentru oamenii care semnează termenele de plată.","w2.lead":"Interfață calmă, verificări rapide, alerte clare. Fără training, fără consultanți.",
+      "a1.e":"Vânzări B2B · credit control","a1.h":"Dai marfă pe termen doar celor care pot plăti.","a1.1":"Verifici bonitatea înainte de primul contract","a1.2":"Ajustezi termenele după scor, nu după impresie","a1.3":"Afli de insolvență înainte de următoarea livrare",
+      "a2.e":"Achiziții · lanț de aprovizionare","a2.h":"Nu plătești avansuri unui furnizor pe ducă.","a2.1":"Verifici furnizorii noi în câteva secunde","a2.2":"Urmărești inactivitatea fiscală și split TVA","a2.3":"Ai din timp un furnizor de rezervă",
+      "a3.e":"Contabili · consultanți","a3.h":"Supraveghezi partenerii tuturor clienților tăi.","a3.1":"Un watchlist per client, cu etichete","a3.2":"Rapoarte PDF pentru dosare și audit","a3.3":"Acces pentru echipă, cu permisiuni",
+      "p.eyebrow":"Prețuri","p.title":"Plătești cât monitorizezi.","p.lead":"Prețuri în lei, fără TVA. Poți schimba sau anula planul oricând.","p.monthly":"Lunar","p.yearly":"Anual","p.save":"2 luni gratuite",
+      "p.note":"Anual: Starter 390 RON, PRO 990 RON. Echivalentul a 10 luni.",
+      "p1.n":"Gratuit","p1.d":"Pentru o verificare rapidă din când în când.","p1.1":"3 verificări CUI pe lună","p1.2":"Scor MRCS și factori","p1.3":"Notificări de bază pe email","p1.c":"Începe gratuit",
+      "p2.d":"Pentru un portofoliu mic de clienți.","p2.1":"20 verificări CUI pe lună","p2.2":"Watchlist de 10 companii","p2.3":"Alerte de insolvență, rezumat zilnic","p2.4":"5 rapoarte PDF pe lună","p2.5":"Până la 5 utilizatori","p2.c":"Alege Starter",
+      "p3.b":"Recomandat","p3.d":"Pentru echipe B2B care vând pe termen.","p3.1":"Verificări CUI nelimitate","p3.2":"Watchlist de 250 de companii","p3.3":"Alerte în timp real","p3.4":"Dosare în instanță și datorii fiscale","p3.5":"Rapoarte PDF nelimitate","p3.c":"Alege PRO",
+      "p4.d":"Pentru volume mari și instituții financiare.","p4.p":"La cerere","p4.1":"Tot ce include PRO","p4.2":"Watchlist nelimitat","p4.3":"Acces API complet","p4.4":"SLA și suport dedicat","p4.c":"Discută cu noi",
+      "q.eyebrow":"Întrebări","q.title":"Ce ne întreabă clienții înainte să înceapă.",
+      "q1.q":"De unde vin datele?","q1.a":"Din surse publice oficiale: ANAF pentru starea fiscală și TVA, Buletinul Procedurilor de Insolvență, portalul instanțelor (portal.just.ro) și bilanțurile publicate de Ministerul Finanțelor. Fiecare factor din raport arată sursa lui.",
+      "q2.q":"Cât de repede aflu de o schimbare?","q2.a":"Pe PRO și Enterprise primești alerta la scurt timp după ce apare în registru. Pe Starter primești un rezumat zilnic pe email, iar pe planul gratuit notificări de bază.",
+      "q3.q":"Cum e calculat scorul?","q3.a":"Scorul MRCS ponderează factori grupați în opt categorii, de la statusul legal și TVA până la calitatea datelor declarate. Rezultatul e un număr între 0 și 100, cu trei praguri: sub 50 risc ridicat, 50–74 mediu, 75 și peste risc scăzut.",
+      "q4.q":"Cine îmi vede watchlist-ul?","q4.a":"Doar tu și colegii cărora le dai acces. Datele sunt criptate și stocate în centre de date din UE. Nu vindem și nu partajăm listele tale cu terți.",
+      "c.title":"Verifică primul partener <em>azi.</em>","c.lead":"Cont gratuit, 3 verificări pe lună, fără card. Treci pe un plan plătit doar când vrei să monitorizezi.","c.b1":"Creează cont gratuit","c.b2":"Vezi planurile",
+      "f.about":"Monitorizare a riscului de credit pentru companiile din România, din surse publice oficiale.","f.h1":"Produs","f.h2":"Resurse","f.h3":"Legal","f.docs":"Documentație API","f.terms":"Termeni","f.privacy":"Confidențialitate","f.proto":"Homepage 3 · prototip de design",
+      perMonth:"RON / lună", perYear:"RON / an",
+      lvOk:"Risc scăzut", lvWarn:"Risc mediu", lvBad:"Risc ridicat",
+      fOk:"favorabil", fWarn:"atenție", fBad:"critic",
+      msgEmpty:"Scrie un CUI: între 2 și 10 cifre, cu sau fără RO.",
+      msgFormat:"Un CUI are între 2 și 10 cifre. Verifică numărul și încearcă din nou.",
+      msgCheck:"Cifra de control nu se potrivește. Probabil o cifră e greșită sau inversată.",
+      msgValid:"CUI valid. Raportul complet pentru RO {cui} e disponibil după ce îți faci cont gratuit.",
+      msgExample:"Exemplu încărcat: RO {cui}.",
+      when:["azi 06:02","azi 06:02","ieri 18:40","ieri 06:00","luni 06:00"]
+    },
+    en:{
+      "nav.score":"The score","nav.monitor":"Monitoring","nav.who":"Who it's for","nav.pricing":"Pricing","nav.faq":"FAQ","nav.login":"Log in","nav.cta":"Free account",
+      "hero.eyebrow":"Credit risk monitoring · Romania",
+      "hero.title":"Do you know who <em>you're dealing with?</em>",
+      "hero.lead":"Enter a client's or supplier's CUI. marketrisk reads ANAF, the Insolvency Proceedings Bulletin and court records, gives you a score from 0 to 100, and tells you when something changes.",
+      "hero.label":"Check a company by CUI (Romanian tax ID)","hero.submit":"Check","hero.try":"Examples:",
+      "hero.f1":"3 free checks a month","hero.f2":"No card to sign up","hero.f3":"Data stored in the EU, GDPR compliant",
+      "d.title":"Risk file","d.demo":"Fictional company · example","d.since":"Since","d.updated":"Checked today, 06:00",
+      "src.eyebrow":"Sources","src.title":"We read the public registers directly, every morning.",
+      "src.anaf":"Tax status, VAT registration, cash-accounting VAT, split VAT, RO e-Factura.",
+      "src.bpi":"Insolvency Proceedings Bulletin: petitions, openings, bankruptcy.",
+      "src.just":"Court cases, parties, subject matter and hearing dates.",
+      "src.mf":"Annual accounts: turnover, profit, equity, headcount.",
+      "s.eyebrow":"MarketRisk Credit Score","s.title":"One number. Every reason in plain sight.",
+      "s.lead":"The MRCS score runs from 0 to 100: the higher it is, the safer the partner. Every factor in the report shows its source, so you can explain a credit decision to anyone who asks.",
+      "s.okL":"Low","s.okH":"Trade on normal terms","s.okP":"Active company, tax affairs in order, no insolvency signals.",
+      "s.warnL":"Medium","s.warnH":"Shorten terms, ask for guarantees","s.warnP":"Signals worth watching: a young company, cash-accounting VAT, new lawsuits.",
+      "s.badL":"High","s.badH":"Payment up front, or walk away","s.badP":"Tax-inactive status, split VAT, or insolvency proceedings under way.",
+      "w.title":"What goes into the score","w.lead":"Each category's share of the 100 points.",
+      "m.eyebrow":"Monitoring","m.title":"Find out before the invoice goes unpaid.",
+      "m.lead":"A report tells you where a company stands today. The watchlist tells you when that changes, so you have time to stop deliveries or recover what you're owed.",
+      "m.s1":"Add companies by CUI","m.s1p":"Clients, suppliers, subcontractors. Up to 250 CUIs on the PRO plan, with tags and notes.",
+      "m.s2":"Choose the signals that matter","m.s2p":"Turn on only the alerts you care about.",
+      "m.s3":"Get the alert and the next step","m.s3p":"By email or in the app: what changed, the official source, and what to do next.",
+      "sig.1":"insolvency","sig.2":"tax-inactive","sig.3":"cash-accounting VAT","sig.4":"split VAT","sig.5":"new court cases","sig.6":"accounts not filed",
+      "feed.title":"Alerts · example watchlist","feed.live":"Checked daily","feed.foot":"Fictional companies and events, for illustration only.",
+      "w2.eyebrow":"Who it's for","w2.title":"For the people who sign off on payment terms.","w2.lead":"A calm interface, fast checks, clear alerts. No training, no consultants.",
+      "a1.e":"B2B sales · credit control","a1.h":"Extend credit only to customers who can pay.","a1.1":"Check creditworthiness before the first contract","a1.2":"Set terms by the score, not by gut feeling","a1.3":"Hear about insolvency before the next delivery",
+      "a2.e":"Procurement · supply chain","a2.h":"Stop paying deposits to a supplier on the way out.","a2.1":"Check new suppliers in seconds","a2.2":"Track tax-inactive status and split VAT","a2.3":"Line up a backup supplier in time",
+      "a3.e":"Accountants · advisers","a3.h":"Watch the partners of every client you serve.","a3.1":"One watchlist per client, with tags","a3.2":"PDF reports for files and audits","a3.3":"Team access with permissions",
+      "p.eyebrow":"Pricing","p.title":"Pay for what you monitor.","p.lead":"Prices in RON, excluding VAT. Change or cancel your plan at any time.","p.monthly":"Monthly","p.yearly":"Yearly","p.save":"2 months free",
+      "p.note":"Yearly: Starter 390 RON, PRO 990 RON. The price of 10 months.",
+      "p1.n":"Free","p1.d":"For a quick check now and then.","p1.1":"3 CUI checks a month","p1.2":"MRCS score and factors","p1.3":"Basic email notifications","p1.c":"Start free",
+      "p2.d":"For a small portfolio of clients.","p2.1":"20 CUI checks a month","p2.2":"Watchlist of 10 companies","p2.3":"Insolvency alerts, daily digest","p2.4":"5 PDF reports a month","p2.5":"Up to 5 users","p2.c":"Choose Starter",
+      "p3.b":"Recommended","p3.d":"For B2B teams that sell on credit.","p3.1":"Unlimited CUI checks","p3.2":"Watchlist of 250 companies","p3.3":"Real-time alerts","p3.4":"Court cases and tax debts","p3.5":"Unlimited PDF reports","p3.c":"Choose PRO",
+      "p4.d":"For high volumes and financial institutions.","p4.p":"On request","p4.1":"Everything in PRO","p4.2":"Unlimited watchlist","p4.3":"Full API access","p4.4":"SLA and dedicated support","p4.c":"Talk to us",
+      "q.eyebrow":"FAQ","q.title":"What clients ask us before they start.",
+      "q1.q":"Where does the data come from?","q1.a":"From official public sources: ANAF for tax status and VAT, the Insolvency Proceedings Bulletin, the courts portal (portal.just.ro) and the annual accounts published by the Ministry of Finance. Every factor in the report shows its source.",
+      "q2.q":"How quickly do I hear about a change?","q2.a":"On PRO and Enterprise the alert arrives shortly after the change appears in the register. Starter sends a daily email digest, and the free plan sends basic notifications.",
+      "q3.q":"How is the score calculated?","q3.a":"MRCS weighs factors grouped into eight categories, from legal and VAT status to the quality of the declared data. The result is a number between 0 and 100 with three thresholds: below 50 is high risk, 50–74 medium, 75 and above low.",
+      "q4.q":"Who can see my watchlist?","q4.a":"Only you and the colleagues you invite. Data is encrypted and stored in EU data centres. We never sell or share your lists with third parties.",
+      "c.title":"Check your first partner <em>today.</em>","c.lead":"Free account, 3 checks a month, no card. Move to a paid plan only when you want monitoring.","c.b1":"Create a free account","c.b2":"See the plans",
+      "f.about":"Credit risk monitoring for Romanian companies, built on official public sources.","f.h1":"Product","f.h2":"Resources","f.h3":"Legal","f.docs":"API docs","f.terms":"Terms","f.privacy":"Privacy","f.proto":"Homepage 3 · design prototype",
+      perMonth:"RON / month", perYear:"RON / year",
+      lvOk:"Low risk", lvWarn:"Medium risk", lvBad:"High risk",
+      fOk:"favourable", fWarn:"watch", fBad:"critical",
+      msgEmpty:"Type a CUI: 2 to 10 digits, with or without RO.",
+      msgFormat:"A CUI has 2 to 10 digits. Check the number and try again.",
+      msgCheck:"The check digit doesn't match. A digit is probably wrong or swapped.",
+      msgValid:"Valid CUI. The full report for RO {cui} is available once you create a free account.",
+      msgExample:"Example loaded: RO {cui}.",
+      when:["today 06:02","today 06:02","yesterday 18:40","yesterday 06:00","Monday 06:00"]
+    }
+  };
+
+  var CO = {
+    a:{cui:"99000174",name:"Brâna Logistic SRL",score:86,lv:"ok",
+       caen:{ro:"4941 · Transporturi rutiere de mărfuri",en:"4941 · Road freight transport"},
+       since:{ro:"2016 · Brașov",en:"2016 · Brașov"},
+       f:[["ok",{ro:"Activă, înregistrată în scopuri de TVA",en:"Active, VAT registered"},"ANAF"],
+          ["ok",{ro:"Înregistrată în RO e-Factura",en:"Registered in RO e-Factura"},"ANAF"],
+          ["ok",{ro:"Fără dosare active în instanță",en:"No open court cases"},"portal.just.ro"],
+          ["ok",{ro:"Bilanț 2025 depus, profit",en:"2025 accounts filed, profitable"},"MFinanțe"]]},
+    b:{cui:"99000310",name:"Vâlcan Mobila SRL",score:62,lv:"warn",
+       caen:{ro:"3109 · Fabricarea de mobilă n.c.a.",en:"3109 · Manufacture of other furniture"},
+       since:{ro:"2024 · Cluj",en:"2024 · Cluj"},
+       f:[["warn",{ro:"Aplică TVA la încasare",en:"Uses cash-accounting VAT"},"ANAF"],
+          ["warn",{ro:"Vechime sub 2 ani",en:"Less than 2 years old"},"ANAF"],
+          ["warn",{ro:"1 dosar activ: pretenții, Tribunalul Cluj",en:"1 open case: monetary claim, Cluj Tribunal"},"portal.just.ro"],
+          ["ok",{ro:"Activă, înregistrată în scopuri de TVA",en:"Active, VAT registered"},"ANAF"]]},
+    c:{cui:"99000468",name:"Stâna Agro Trading SRL",score:31,lv:"bad",
+       caen:{ro:"4621 · Comerț cu ridicata al cerealelor",en:"4621 · Wholesale of grain"},
+       since:{ro:"2013 · Ialomița",en:"2013 · Ialomița"},
+       f:[["bad",{ro:"Declarată inactivă fiscal",en:"Declared tax-inactive"},"ANAF"],
+          ["bad",{ro:"Cerere de deschidere a insolvenței",en:"Insolvency petition filed"},"BPI"],
+          ["warn",{ro:"Aplică split TVA",en:"Under split VAT"},"ANAF"],
+          ["warn",{ro:"Bilanț 2025 nedepus",en:"2025 accounts not filed"},"MFinanțe"]]}
+  };
+
+  var W = [
+    [35,{ro:"Status legal",en:"Legal status"},{ro:"înregistrare, vechime, inactivitate",en:"registration, age, inactivity"}],
+    [22,{ro:"Status TVA",en:"VAT status"},{ro:"TVA, TVA la încasare, split TVA",en:"VAT, cash-accounting, split VAT"}],
+    [12,{ro:"Infrastructură digitală",en:"Digital footprint"},{ro:"e-Factura, contact, IBAN declarat",en:"e-Factura, contact, declared IBAN"}],
+    [10,{ro:"Analiză sintetică",en:"Data consistency"},{ro:"completitudinea și coerența datelor",en:"completeness and coherence of data"}],
+    [9,{ro:"Formă juridică",en:"Legal form"},{ro:"tip societate, organizare",en:"company type, organisation"}],
+    [5,{ro:"Sediu și locație",en:"Registered office"},{ro:"adresă completă, cod poștal",en:"full address, postcode"}],
+    [4,{ro:"Cod CAEN",en:"CAEN code"},{ro:"riscul domeniului de activitate",en:"sector risk"}],
+    [3,{ro:"Autoritate fiscală",en:"Tax office"},{ro:"organul fiscal competent",en:"competent tax office"}]
+  ];
+
+  var AL = [
+    ["bad","BPI",{ro:"<strong>Stâna Agro Trading SRL</strong>: a fost publicată o cerere de deschidere a procedurii de insolvență. Oprește livrările pe termen.",en:"<strong>Stâna Agro Trading SRL</strong>: an insolvency petition was published. Stop deliveries on credit."}],
+    ["bad","ANAF",{ro:"<strong>Stâna Agro Trading SRL</strong>: declarată inactivă fiscal. Facturile emise de ea nu mai dau drept de deducere a TVA.",en:"<strong>Stâna Agro Trading SRL</strong>: declared tax-inactive. Its invoices no longer allow VAT deduction."}],
+    ["warn","portal.just.ro",{ro:"<strong>Vâlcan Mobila SRL</strong>: dosar nou, obiect pretenții, Tribunalul Cluj.",en:"<strong>Vâlcan Mobila SRL</strong>: new case, monetary claim, Cluj Tribunal."}],
+    ["warn","ANAF",{ro:"<strong>Vâlcan Mobila SRL</strong>: a intrat în sistemul TVA la încasare.",en:"<strong>Vâlcan Mobila SRL</strong>: moved to cash-accounting VAT."}],
+    ["ok","ANAF · BPI",{ro:"<strong>Brâna Logistic SRL</strong>: nicio schimbare în ultimele 30 de zile.",en:"<strong>Brâna Logistic SRL</strong>: no changes in the last 30 days."}]
+  ];
+
+  var lang = "ro", current = "a", billing = "m";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  try { var saved = localStorage.getItem("mr-h3-lang"); if (saved === "en" || saved === "ro") lang = saved; } catch(e){}
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  function applyLang(){
+    document.documentElement.lang = lang;
+    var d = T[lang];
+    document.querySelectorAll("[data-i18n]").forEach(function(el){
+      var k = el.getAttribute("data-i18n");
+      if (d[k] != null) el.innerHTML = d[k];
+    });
+    $("lang-ro").setAttribute("aria-pressed", lang === "ro");
+    $("lang-en").setAttribute("aria-pressed", lang === "en");
+    renderDossier(current, false);
+    renderWeights();
+    renderAlerts(false);
+    renderPrices();
+    $("check-msg").textContent = "";
+    $("check-msg").className = "check-msg";
+  }
+
+  var countTimer = null;
+  function countTo(el, from, to){
+    if (reduce || from === to){ el.textContent = to; return; }
+    var start = null, dur = 700;
+    cancelAnimationFrame(countTimer);
+    function step(ts){
+      if (!start) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (to - from) * e);
+      if (p < 1) countTimer = requestAnimationFrame(step);
+    }
+    countTimer = requestAnimationFrame(step);
+  }
+
+  function fillDossier(key){
+    var c = CO[key], d = T[lang];
+    $("d-name").textContent = c.name;
+    $("d-cui").textContent = "RO " + c.cui;
+    $("d-caen").textContent = c.caen[lang];
+    $("d-since").textContent = c.since[lang];
+    var lv = $("d-level");
+    lv.className = "level lv-" + c.lv;
+    lv.textContent = c.lv === "ok" ? d.lvOk : c.lv === "warn" ? d.lvWarn : d.lvBad;
+    $("d-marker").style.left = c.score + "%";
+    var names = {ok:d.fOk, warn:d.fWarn, bad:d.fBad};
+    $("d-factors").innerHTML = c.f.map(function(f){
+      return '<li class="f-' + f[0] + '"><span class="dot"></span><span>' + esc(f[1][lang]) + '</span><small>' + esc(f[2]) + ' · ' + names[f[0]] + '</small></li>';
+    }).join("");
+  }
+
+  function renderDossier(key, animate){
+    var prev = parseInt($("d-score").textContent, 10) || 0;
+    var body = $("d-body");
+    if (animate && !reduce){
+      body.classList.add("out");
+      setTimeout(function(){
+        fillDossier(key);
+        body.classList.remove("out");
+        countTo($("d-score"), prev, CO[key].score);
+      }, 180);
+    } else {
+      fillDossier(key);
+      $("d-score").textContent = CO[key].score;
+    }
+    ["a","b","c"].forEach(function(k){ $("ex-" + k).setAttribute("aria-pressed", k === key); });
+  }
+
+  function renderWeights(){
+    var segs = ["--seg-1","--seg-2","--seg-3","--seg-4","--seg-5","--seg-6","--seg-7","--seg-8"];
+    $("stack").innerHTML = W.map(function(w,i){
+      return '<div data-i="' + i + '" style="flex:' + w[0] + ';background:var(' + segs[i] + ')" title="' + esc(w[1][lang]) + ': ' + w[0] + '"></div>';
+    }).join("");
+    $("wlist").innerHTML = W.map(function(w,i){
+      return '<li data-i="' + i + '"><i style="background:var(' + segs[i] + ')"></i><span>' + esc(w[1][lang]) + '<small>' + esc(w[2][lang]) + '</small></span><b>' + w[0] + '</b></li>';
+    }).join("");
+  }
+
+  function renderAlerts(animate){
+    var when = T[lang].when;
+    $("alerts").innerHTML = AL.map(function(a,i){
+      return '<li class="alert a-' + a[0] + (animate && i === 0 ? " enter" : "") + '"><span class="sev"></span><div class="meta"><b>' + esc(a[1]) + '</b><span>' + esc(when[i]) + '</span></div><p>' + a[2][lang] + '</p></li>';
+    }).join("");
+  }
+
+  function renderPrices(){
+    var d = T[lang];
+    document.querySelectorAll("[data-price-m]").forEach(function(el){
+      el.textContent = billing === "m" ? el.getAttribute("data-price-m") : el.getAttribute("data-price-y");
+    });
+    document.querySelectorAll("[data-per]").forEach(function(el){
+      el.textContent = billing === "m" ? d.perMonth : d.perYear;
+    });
+    $("bill-m").setAttribute("aria-pressed", billing === "m");
+    $("bill-y").setAttribute("aria-pressed", billing === "y");
+  }
+
+  function cuiValid(n){
+    var key = "753217532";
+    var body = n.slice(0, -1), ctrl = parseInt(n.slice(-1), 10);
+    var k = key.slice(key.length - body.length), s = 0;
+    for (var i = 0; i < body.length; i++) s += parseInt(body[i], 10) * parseInt(k[i], 10);
+    var c = (s * 10) % 11; if (c === 10) c = 0;
+    return c === ctrl;
+  }
+
+  function msg(text, kind){
+    var m = $("check-msg");
+    m.textContent = text;
+    m.className = "check-msg" + (kind ? " " + kind : "");
+  }
+
+  $("check").addEventListener("submit", function(e){
+    e.preventDefault();
+    var d = T[lang];
+    var raw = $("cui").value.replace(/\s+/g,"").replace(/^ro/i,"");
+    if (!raw){ msg(d.msgEmpty, "err"); return; }
+    if (!/^\d{2,10}$/.test(raw)){ msg(d.msgFormat, "err"); return; }
+    if (!cuiValid(raw)){ msg(d.msgCheck, "err"); return; }
+    var hit = null;
+    Object.keys(CO).forEach(function(k){ if (CO[k].cui === raw) hit = k; });
+    if (hit){ current = hit; renderDossier(hit, true); msg(d.msgExample.replace("{cui}", raw), "ok"); }
+    else { msg(d.msgValid.replace("{cui}", raw), "ok"); }
+  });
+
+  document.querySelectorAll("[data-ex]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var k = b.getAttribute("data-ex");
+      if (k === current) return;
+      current = k;
+      $("cui").value = CO[k].cui;
+      msg("", "");
+      renderDossier(k, true);
+    });
+  });
+
+  document.querySelectorAll("[data-lang]").forEach(function(b){
+    b.addEventListener("click", function(){
+      lang = b.getAttribute("data-lang");
+      try { localStorage.setItem("mr-h3-lang", lang); } catch(e){}
+      applyLang();
+    });
+  });
+
+  document.querySelectorAll("[data-bill]").forEach(function(b){
+    b.addEventListener("click", function(){ billing = b.getAttribute("data-bill"); renderPrices(); });
+  });
+
+  function linkHover(e){
+    var t = e.target.closest("[data-i]");
+    document.querySelectorAll("#stack [data-i], #wlist [data-i]").forEach(function(el){ el.classList.remove("hl"); });
+    if (!t) return;
+    var s = document.querySelector('#stack [data-i="' + t.getAttribute("data-i") + '"]');
+    if (s) s.classList.add("hl");
+  }
+  $("wlist").addEventListener("mouseover", linkHover);
+  $("wlist").addEventListener("mouseleave", function(){ document.querySelectorAll("#stack .hl").forEach(function(el){ el.classList.remove("hl"); }); });
+
+  var top = $("top");
+  function onScroll(){ top.classList.toggle("scrolled", window.scrollY > 8); }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  applyLang();
+
+})();
+</script>
